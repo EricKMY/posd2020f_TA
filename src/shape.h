@@ -5,9 +5,9 @@ using namespace std;
 
 class Shape{
 	public:
-        virtual double getArea() const = 0;
-        virtual double getPerimeter() const = 0;
-        virtual string getType() const = 0;
+        virtual double area() const = 0;
+        virtual double perimeter() const = 0;
+        virtual string type() const = 0;
 };
 
 #endif

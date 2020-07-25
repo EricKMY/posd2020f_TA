@@ -8,7 +8,7 @@ class TwoDimensionalVector{
 	TwoDimensionalVector(int x, int y);
 	int getX();
 	int getY();
-	double getLength();
+	double length();
 	int dot(TwoDimensionalVector vector);
 	int cross(TwoDimensionalVector vector);
 	TwoDimensionalVector subtract(TwoDimensionalVector vector);
