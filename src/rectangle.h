@@ -1,10 +1,10 @@
 #ifndef RECTANGLE_H
 #define RECTANGLE_H
 
-#include "measurable.h"
+#include "shape.h"
 #include <vector>
 
-class Rectangle : Measurable{
+class Rectangle : Shape{
     public: 
 		Rectangle(double length, double width);
 };

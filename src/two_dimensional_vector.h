@@ -6,8 +6,9 @@ using namespace std;
 class TwoDimensionalVector{
 	public:
 	TwoDimensionalVector(int x, int y);
-	string toString();
-	double length();
+	int getX();
+	int getY();
+	double getLength();
 	int dot(TwoDimensionalVector vector);
 	int cross(TwoDimensionalVector vector);
 	TwoDimensionalVector subtract(TwoDimensionalVector vector);
