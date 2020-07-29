@@ -1,5 +1,4 @@
 #include <gtest/gtest.h>
-#include "../test/ut_convex_polygon.h"
 #include "../test/ut_ellipse.h"
 #include "../test/ut_rectangle.h"
 #include "../test/ut_triangle.h"
