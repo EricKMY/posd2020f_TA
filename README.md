@@ -1,3 +1,100 @@
-posd 2020 f
-Eric
-Alan
+# **Pattern Oriented Software Design 2020 Fall Assignment 2**  
+
+## **Notice**  
+* **Due on (Monday, June 22, 2020 23:59). <===fixme**  
+* **If your code fails to compile on jenkins server, you'll get no point for the assignment.**  
+
+## **Score**
+1. Usage of Iterator in vector: 10%.
+2. Unit tests written by yourself: 40%.
+3. Unit tests written by TA: 50%.
+
+## **Useful Reference**
+[std::vector](http://www.cplusplus.com/reference/vector/vector/)  
+[std::sort](http://www.cplusplus.com/reference/algorithm/sort/)  
+[Templates](http://www.cplusplus.com/doc/oldtutorial/templates/)  
+
+## **Requirement**  
+1. Implement class `Sort` in `sort.h`.  
+```
+class Sort{
+public:
+    Sort(vector<Shape*>* v): _v(v){}
+    void standardSort(Compare comp) {}
+    void customizeSort(Compare comp) {}
+};
+```
+* `Compare`: Should be able to accept `lambda`, `function`, and `object`.  
+* `standardSort()`: Implement function by using std::stable_sort.  
+* `customizeSort()`: Implement function WITHOUT using any sorting function from c/c++ library,  
+   you should write the sorting algorithm by youself. Also use `Iterator` of vector to control vector.   
+
+
+2. Implement the following function in `sort.h`.  
+
+```
+bool areaAscendingCompare(Shape *a, Shape *b) {};
+
+bool areaDescendingCompare(Shape *a, Shape *b) {};
+
+bool perimeterAscendingCompare(Shape *a, Shape *b) {};
+
+bool perimeterDescendingCompare(Shape *a, Shape *b) {};
+
+```
+* These function will be input `Compare` of `standardSort()` and `customizeSort()`.  
+  ex. standardSort(areaAscendingCompare).   
+
+
+3. Implement class `AscendingCompare` and `DecendingCompare` in `sort.h`.
+```
+class AscendingCompare{
+  public:
+    AscendingCompare(String attribute): _attribute(attribute) {}
+};
+
+class DecendingCompare{
+  public:
+    DecendingCompare(String attribute): _attribute(attribute) {}
+};
+```
+* `attribute`: is the attribute of shape you wanted to compare, meaning "area" and "perimeter".
+* These object will be input `Compare` of `standardSort()` and `customizeSort()`.  
+  ex. AscendingCompare ascendingCompare("area");  standardSort(ascendingCompare);  
+
+## **File Structure**
+This time your directory structure should be like:
+ - 學號_HW
+    - src
+
+      shape.h
+
+      ellipse.h
+
+      rectangle.h
+      
+      triangle.h
+            
+      two_dimensional_vector.h
+      
+      sort.h
+
+    - test
+
+      ut_shape.cpp
+      
+      ut_ellipse.h
+
+      ut_rectangle.h
+      
+      ut_triangle.h
+      
+      ut_two_dimensional_vector.h
+      
+      ut_sort.h
+
+    - bin
+
+      ut_all
+
+    - makefile
