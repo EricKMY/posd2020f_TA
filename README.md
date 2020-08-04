@@ -9,7 +9,7 @@
 2. Unit tests written by TA: 50%.
 
 ## **Useful Reference**
-Makefile[https://en.wikipedia.org/wiki/Makefile]
+[Makefile](https://en.wikipedia.org/wiki/Makefile)
 
 ## **Requirement**  
 1. Implement class `Shape`, `Ellipse`, `Rectangle`, `Triangle`, `Two Dimensional Vector`.  
