@@ -25,7 +25,7 @@ public:
 };
 ```
 * `Compare`: Should be able to accept `lambda`, `function`, and `object`.  
-* `standardSort()`: Implement function by using std::stable_sort.  
+* `standardSort()`: Implement function by using std::sort.  
 * `customizeSort()`: Implement function WITHOUT using any sorting function from c/c++ library,  
    you should write the sorting algorithm by youself. Also use `Iterator` of vector to control vector.   
 
@@ -42,7 +42,7 @@ bool perimeterAscendingCompare(Shape *a, Shape *b) {};
 bool perimeterDescendingCompare(Shape *a, Shape *b) {};
 
 ```
-* These function will be input `Compare` of `standardSort()` and `customizeSort()`.  
+* These function should be argument of `standardSort()` and `customizeSort()`.  
   ex. standardSort(areaAscendingCompare).   
 
 
@@ -50,16 +50,16 @@ bool perimeterDescendingCompare(Shape *a, Shape *b) {};
 ```
 class AscendingCompare{
   public:
-    AscendingCompare(String attribute): _attribute(attribute) {}
+    AscendingCompare(tring attribute): _attribute(attribute) {}
 };
 
 class DecendingCompare{
   public:
-    DecendingCompare(String attribute): _attribute(attribute) {}
+    DecendingCompare(string attribute): _attribute(attribute) {}
 };
 ```
-* `attribute`: is the attribute of shape you wanted to compare, meaning "area" and "perimeter".
-* These object will be input `Compare` of `standardSort()` and `customizeSort()`.  
+* `attribute`: is the attribute of shape you wanted to compare, meaning "area" and "perimeter".  
+* These object should be argument of `standardSort()` and `customizeSort()`.  
   ex. AscendingCompare ascendingCompare("area");  standardSort(ascendingCompare);  
 
 ## **File Structure**
