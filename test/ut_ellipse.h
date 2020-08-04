@@ -1,5 +1,7 @@
-#include "../src/ellipse.h"
+#ifndef UT_ELLIPSE_H
+#define UT_ELLIPSE_H
 
+#include "../src/ellipse.h"
 
 TEST(Ellipse, ConstructorNoException){
     ASSERT_NO_THROW(Ellipse(1, 1));
@@ -10,7 +12,7 @@ TEST(Ellipse, ExceptionForSemiMajorAxesIsZero){
         Ellipse(0, 1);
         FAIL();
     }catch(string e) {
-        ASSERT_EQ("this is not a ellipse!", e);
+        ASSERT_EQ("This is not a ellipse!", e);
     }
 }
 
@@ -19,7 +21,7 @@ TEST(Ellipse, ExceptionForSemiMinorAxesIsZero){
         Ellipse(1, 0);
         FAIL();
     }catch(string e) {
-        ASSERT_EQ("this is not a ellipse!", e);
+        ASSERT_EQ("This is not a ellipse!", e);
     }
 }
 
@@ -28,7 +30,7 @@ TEST(Ellipse, ExceptionForSemiMajorAxesLessThanZero){
         Ellipse(-1, 1);
         FAIL();
     }catch(string e) {
-        ASSERT_EQ("this is not a ellipse!", e);
+        ASSERT_EQ("This is not a ellipse!", e);
     }
 }
 
@@ -37,7 +39,7 @@ TEST(Ellipse, ExceptionForSemiMinorAxesLessThanZero){
         Ellipse(1, -1);
         FAIL();
     }catch(string e) {
-        ASSERT_EQ("this is not a ellipse!", e);
+        ASSERT_EQ("This is not a ellipse!", e);
     }
 }
 
@@ -69,3 +71,5 @@ TEST(Ellipse, Type){
     Shape* ellipse = new Ellipse(3, 4);
     ASSERT_EQ("ellipse", ellipse->type());
 }
+
+#endif

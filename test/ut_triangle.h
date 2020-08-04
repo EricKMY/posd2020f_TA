@@ -1,6 +1,7 @@
+#ifndef UT_TRIANGLE_H
+#define UT_TRIANGLE_H
+
 #include "../src/triangle.h"
-
-
 
 class TriangleTest: public testing::Test {
     protected:
@@ -25,7 +26,7 @@ TEST(Triangle, ExceptionForVectorLessThanThree){
         new Triangle(triangleExceptionVector);
         FAIL();
     }catch(string e) {
-        ASSERT_EQ("this is not a triangle!", e);
+        ASSERT_EQ("This is not a triangle!", e);
     }
 }
 
@@ -39,7 +40,7 @@ TEST(Triangle, ExceptionForVectorMoreThanThree){
         new Triangle(triangleExceptionVector);
         FAIL();
     }catch(string e) {
-        ASSERT_EQ("this is not a triangle!", e);
+        ASSERT_EQ("This is not a triangle!", e);
     }
 }
 
@@ -57,3 +58,5 @@ TEST_F(TriangleTest, Type){
     Shape* triangle = new Triangle(triangleVector);
     ASSERT_EQ("triangle", triangle->type());
 }
+
+#endif

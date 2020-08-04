@@ -11,7 +11,7 @@ class Rectangle : public Shape{
     public: 
 		Rectangle(double length, double width): _length(length), _width(width) {
       if(_length <= 0 || _width <= 0) {
-        throw string("this is not a rectangle!");
+        throw string("This is not a rectangle!");
       }
     }
 

@@ -1,3 +1,6 @@
+#ifndef UT_TWO_DIMENSIONAL_VECTOR_H
+#define UT_TWO_DIMENSIONAL_VECTOR_H
+
 #include "../src/two_dimensional_vector.h"
 
 TEST(TwoDimensionalVector, getXAndY){
@@ -39,3 +42,5 @@ TEST(TwoDimensionalVector, subtractCalculation){
     ASSERT_EQ(-6, v2->subtract(v1)->getX());
     ASSERT_EQ(0, v2->subtract(v1)->getY());
 }
+
+#endif

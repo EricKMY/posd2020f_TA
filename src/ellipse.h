@@ -1,13 +1,16 @@
 #ifndef ELLIPSE_H
 #define ELLIPSE_H
 #include <math.h>
+#include <string>
 #include "shape.h"
+
+using namespace std;
 
 class Ellipse : public Shape {
 	public:
 	Ellipse(double semiMajorAxes, double semiMinorAxes):_semiMajorAxes(semiMajorAxes),_semiMinorAxes(semiMinorAxes){
 		if(_semiMajorAxes <= 0 || _semiMinorAxes <= 0) {
-        	throw string("this is not a ellipse!");
+        	throw string("This is not a ellipse!");
       	}
 	}
 

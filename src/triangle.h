@@ -13,7 +13,7 @@ class Triangle : public Shape{
     public: 
 		Triangle(vector<TwoDimensionalVector*> vectors):_vectors(vectors){
       if(vectors.size() != 3) {
-        throw string("this is not a triangle!");
+        throw string("This is not a triangle!");
       }
     }
 
