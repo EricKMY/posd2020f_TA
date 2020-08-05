@@ -19,7 +19,7 @@
 ```
 class Sort{
 public:
-    Sort(vector<Shape*>* v): _v(v){}
+    Sort(vector<Shape*>* shapes): _shapes(shapes){}
     void standardSort(Compare comp) {}
     void customizeSort(Compare comp) {}
 };
