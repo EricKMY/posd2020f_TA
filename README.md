@@ -50,7 +50,7 @@ bool perimeterDescendingCompare(Shape *a, Shape *b) {};
 ```
 class AscendingCompare{
   public:
-    AscendingCompare(tring attribute): _attribute(attribute) {}
+    AscendingCompare(string attribute): _attribute(attribute) {}
 };
 
 class DecendingCompare{
@@ -60,7 +60,8 @@ class DecendingCompare{
 ```
 * `attribute`: is the attribute of shape you wanted to compare, meaning "area" and "perimeter".  
 * These object should be argument of `standardSort()` and `customizeSort()`.  
-  ex. AscendingCompare ascendingCompare("area");  standardSort(ascendingCompare);  
+  ex. AscendingCompare ascendingCompare = new AscendingCompare("area");  
+  standardSort(ascendingCompare);  
 
 ## **File Structure**
 This time your directory structure should be like:
