@@ -41,7 +41,7 @@ TEST_F(SortTest, StandardSortLambdaAreaAscending) {
 
     ASSERT_EQ(6, _shapeVector[0]->area());
     ASSERT_EQ(12, _shapeVector[1]->area());
-    ASSERT_NEAR(21.132, _shapeVector[2]->area(), 0.001);
+    ASSERT_NEAR(37.699, _shapeVector[2]->area(), 0.001);
 }
 
 TEST_F(SortTest, StandardSortLambdaAreaDecending) {
@@ -49,27 +49,27 @@ TEST_F(SortTest, StandardSortLambdaAreaDecending) {
         return a->area() > b->area(); 
     });
 
-    ASSERT_NEAR(21.132, _shapeVector[0]->area(), 0.001);
+    ASSERT_NEAR(37.699, _shapeVector[0]->area(), 0.001);
     ASSERT_EQ(12, _shapeVector[1]->area());
     ASSERT_EQ(6, _shapeVector[2]->area());
 }
 
 TEST_F(SortTest, StandardSortLambdaPerimeterAscending) {
     _sort->standardSort([](Shape* a, Shape* b) {
-        return a->area() < b->perimeter(); 
+        return a->perimeter() < b->perimeter(); 
     });
 
     ASSERT_EQ(12, _shapeVector[0]->perimeter());
     ASSERT_EQ(14, _shapeVector[1]->perimeter());
-    ASSERT_NEAR(37.699, _shapeVector[1]->perimeter(), 0.001);
+    ASSERT_NEAR(21.132, _shapeVector[2]->perimeter(), 0.001);
 }
 
 TEST_F(SortTest, StandardSortLambdaPerimeterDecending) {
     _sort->standardSort([](Shape* a, Shape* b) {
-        return a->area() > b->perimeter(); 
+        return a->perimeter() > b->perimeter(); 
     });
 
-    ASSERT_NEAR(37.699, _shapeVector[0]->perimeter(), 0.001);
+    ASSERT_NEAR(21.132, _shapeVector[0]->perimeter(), 0.001);
     ASSERT_EQ(14, _shapeVector[1]->perimeter());
     ASSERT_EQ(12, _shapeVector[2]->perimeter());
 }
@@ -79,29 +79,29 @@ TEST_F(SortTest, StandardSortFuncAreaAscending) {
 
     ASSERT_EQ(6, _shapeVector[0]->area());
     ASSERT_EQ(12, _shapeVector[1]->area());
-    ASSERT_NEAR(21.132, _shapeVector[2]->area(), 0.001);
+    ASSERT_NEAR(37.699, _shapeVector[2]->area(), 0.001);
 }
 
 TEST_F(SortTest, StandardSortFuncAreaDecending) {
-    _sort->standardSort(areaDecendingCompare);
+    _sort->standardSort(areaDescendingCompare);
 
-    ASSERT_NEAR(21.132, _shapeVector[0]->area(), 0.001);
+    ASSERT_NEAR(37.699, _shapeVector[0]->area(), 0.001);
     ASSERT_EQ(12, _shapeVector[1]->area());
     ASSERT_EQ(6, _shapeVector[2]->area());
 }
 
 TEST_F(SortTest, StandardSortFuncPerimeterAscending) {
-    _sort->standardSort(areaDecendingCompare);
+    _sort->standardSort(perimeterAscendingCompare);
 
     ASSERT_EQ(12, _shapeVector[0]->perimeter());
     ASSERT_EQ(14, _shapeVector[1]->perimeter());
-    ASSERT_NEAR(37.699, _shapeVector[1]->perimeter(), 0.001);
+    ASSERT_NEAR(21.132, _shapeVector[2]->perimeter(), 0.001);
 }
 
 TEST_F(SortTest, StandardSortFuncPerimeterDecending) {
-    _sort->standardSort(areaDecendingCompare);
+    _sort->standardSort(perimeterDescendingCompare);
 
-    ASSERT_NEAR(37.699, _shapeVector[0]->perimeter(), 0.001);
+    ASSERT_NEAR(21.132, _shapeVector[0]->perimeter(), 0.001);
     ASSERT_EQ(14, _shapeVector[1]->perimeter());
     ASSERT_EQ(12, _shapeVector[2]->perimeter());
 }
@@ -113,7 +113,7 @@ TEST_F(SortTest, StandardSortObjAreaAscending) {
 
     ASSERT_EQ(6, _shapeVector[0]->area());
     ASSERT_EQ(12, _shapeVector[1]->area());
-    ASSERT_NEAR(21.132, _shapeVector[2]->area(), 0.001);
+    ASSERT_NEAR(37.699, _shapeVector[2]->area(), 0.001);
 }
 
 TEST_F(SortTest, StandardSortObjAreaDecending) {
@@ -121,7 +121,7 @@ TEST_F(SortTest, StandardSortObjAreaDecending) {
     DecendingCompare decendingCompare("area");
     _sort->standardSort(decendingCompare);
 
-    ASSERT_NEAR(21.132, _shapeVector[0]->area(), 0.001);
+    ASSERT_NEAR(37.699, _shapeVector[0]->area(), 0.001);
     ASSERT_EQ(12, _shapeVector[1]->area());
     ASSERT_EQ(6, _shapeVector[2]->area());
 }
@@ -133,7 +133,7 @@ TEST_F(SortTest, StandardSortObjPerimeterAscending) {
 
     ASSERT_EQ(12, _shapeVector[0]->perimeter());
     ASSERT_EQ(14, _shapeVector[1]->perimeter());
-    ASSERT_NEAR(37.699, _shapeVector[1]->perimeter(), 0.001);
+    ASSERT_NEAR(21.132, _shapeVector[2]->perimeter(), 0.001);
 }
 
 TEST_F(SortTest, StandardSortObjPerimeterDecending) {
@@ -141,7 +141,7 @@ TEST_F(SortTest, StandardSortObjPerimeterDecending) {
     DecendingCompare decendingCompare("perimeter");
     _sort->standardSort(decendingCompare);
 
-    ASSERT_NEAR(37.699, _shapeVector[0]->perimeter(), 0.001);
+    ASSERT_NEAR(21.132, _shapeVector[0]->perimeter(), 0.001);
     ASSERT_EQ(14, _shapeVector[1]->perimeter());
     ASSERT_EQ(12, _shapeVector[2]->perimeter());
 }
@@ -154,7 +154,7 @@ TEST_F(SortTest, CustomSortLambdaAreaAscending) {
 
     ASSERT_EQ(6, _shapeVector[0]->area());
     ASSERT_EQ(12, _shapeVector[1]->area());
-    ASSERT_NEAR(21.132, _shapeVector[2]->area(), 0.001);
+    ASSERT_NEAR(37.699, _shapeVector[2]->area(), 0.001);
 }
 
 TEST_F(SortTest, CustomdSortLambdaAreaDecending) {
@@ -162,27 +162,27 @@ TEST_F(SortTest, CustomdSortLambdaAreaDecending) {
         return a->area() > b->area(); 
     });
 
-    ASSERT_NEAR(21.132, _shapeVector[0]->area(), 0.001);
+    ASSERT_NEAR(37.699, _shapeVector[0]->area(), 0.001);
     ASSERT_EQ(12, _shapeVector[1]->area());
     ASSERT_EQ(6, _shapeVector[2]->area());
 }
 
 TEST_F(SortTest, CustomSortLambdaPerimeterAscending) {
     _sort->customizeSort([](Shape* a, Shape* b) {
-        return a->area() < b->perimeter(); 
+        return a->perimeter() < b->perimeter(); 
     });
 
     ASSERT_EQ(12, _shapeVector[0]->perimeter());
     ASSERT_EQ(14, _shapeVector[1]->perimeter());
-    ASSERT_NEAR(37.699, _shapeVector[1]->perimeter(), 0.001);
+    ASSERT_NEAR(21.132, _shapeVector[2]->perimeter(), 0.001);
 }
 
 TEST_F(SortTest, CustomSortLambdaPerimeterDecending) {
     _sort->customizeSort([](Shape* a, Shape* b) {
-        return a->area() > b->perimeter(); 
+        return a->perimeter() > b->perimeter(); 
     });
 
-    ASSERT_NEAR(37.699, _shapeVector[0]->perimeter(), 0.001);
+    ASSERT_NEAR(21.132, _shapeVector[0]->perimeter(), 0.001);
     ASSERT_EQ(14, _shapeVector[1]->perimeter());
     ASSERT_EQ(12, _shapeVector[2]->perimeter());
 }
@@ -192,29 +192,29 @@ TEST_F(SortTest, CustomSortFuncAreaAscending) {
 
     ASSERT_EQ(6, _shapeVector[0]->area());
     ASSERT_EQ(12, _shapeVector[1]->area());
-    ASSERT_NEAR(21.132, _shapeVector[2]->area(), 0.001);
+    ASSERT_NEAR(37.699, _shapeVector[2]->area(), 0.001);
 }
 
 TEST_F(SortTest, CustomSortFuncAreaDecending) {
-    _sort->customizeSort(areaDecendingCompare);
+    _sort->customizeSort(areaDescendingCompare);
 
-    ASSERT_NEAR(21.132, _shapeVector[0]->area(), 0.001);
+    ASSERT_NEAR(37.699, _shapeVector[0]->area(), 0.001);
     ASSERT_EQ(12, _shapeVector[1]->area());
     ASSERT_EQ(6, _shapeVector[2]->area());
 }
 
 TEST_F(SortTest, CustomSortFuncPerimeterAscending) {
-    _sort->customizeSort(areaDecendingCompare);
+    _sort->customizeSort(perimeterAscendingCompare);
 
     ASSERT_EQ(12, _shapeVector[0]->perimeter());
     ASSERT_EQ(14, _shapeVector[1]->perimeter());
-    ASSERT_NEAR(37.699, _shapeVector[1]->perimeter(), 0.001);
+    ASSERT_NEAR(21.132, _shapeVector[2]->perimeter(), 0.001);
 }
 
 TEST_F(SortTest, CustomSortFuncPerimeterDecending) {
-    _sort->customizeSort(areaDecendingCompare);
+    _sort->customizeSort(perimeterDescendingCompare);
 
-    ASSERT_NEAR(37.699, _shapeVector[0]->perimeter(), 0.001);
+    ASSERT_NEAR(21.132, _shapeVector[0]->perimeter(), 0.001);
     ASSERT_EQ(14, _shapeVector[1]->perimeter());
     ASSERT_EQ(12, _shapeVector[2]->perimeter());
 }
@@ -226,7 +226,7 @@ TEST_F(SortTest, CustomSortObjAreaAscending) {
 
     ASSERT_EQ(6, _shapeVector[0]->area());
     ASSERT_EQ(12, _shapeVector[1]->area());
-    ASSERT_NEAR(21.132, _shapeVector[2]->area(), 0.001);
+    ASSERT_NEAR(37.699, _shapeVector[2]->area(), 0.001);
 }
 
 TEST_F(SortTest, CustomSortObjAreaDecending) {
@@ -234,7 +234,7 @@ TEST_F(SortTest, CustomSortObjAreaDecending) {
     DecendingCompare decendingCompare("area");
     _sort->customizeSort(decendingCompare);
 
-    ASSERT_NEAR(21.132, _shapeVector[0]->area(), 0.001);
+    ASSERT_NEAR(37.699, _shapeVector[0]->area(), 0.001);
     ASSERT_EQ(12, _shapeVector[1]->area());
     ASSERT_EQ(6, _shapeVector[2]->area());
 }
@@ -246,7 +246,7 @@ TEST_F(SortTest, CustomSortObjPerimeterAscending) {
 
     ASSERT_EQ(12, _shapeVector[0]->perimeter());
     ASSERT_EQ(14, _shapeVector[1]->perimeter());
-    ASSERT_NEAR(37.699, _shapeVector[1]->perimeter(), 0.001);
+    ASSERT_NEAR(21.132, _shapeVector[2]->perimeter(), 0.001);
 }
 
 TEST_F(SortTest, CustomSortObjPerimeterDecending) {
@@ -254,7 +254,7 @@ TEST_F(SortTest, CustomSortObjPerimeterDecending) {
     DecendingCompare decendingCompare("perimeter");
     _sort->customizeSort(decendingCompare);
 
-    ASSERT_NEAR(37.699, _shapeVector[0]->perimeter(), 0.001);
+    ASSERT_NEAR(21.132, _shapeVector[0]->perimeter(), 0.001);
     ASSERT_EQ(14, _shapeVector[1]->perimeter());
     ASSERT_EQ(12, _shapeVector[2]->perimeter());
 }
