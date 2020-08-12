@@ -3,27 +3,33 @@
 
 #include <vector>
 #include <string>
-#include <vector>
 #include "shape.h"
-#include "two_dimensional_vector.h"
 
 using namespace std;
 
 class Rectangle : public Shape{
-    public:
-		Rectangle(vector<TwoDimensionalVector*> vectors, string id):Shape(id),_vectors(vectors){}
+    public: 
+		Rectangle(double length, double width): _length(length), _width(width) {
+      if(_length <= 0 || _width <= 0) {
+        throw string("this is not a rectangle!");
+      }
+    }
 
-    double area() const { return 0; }
+    double area() const {
+      return _length * _width;
+    }
 
-    double perimeter() const { return 0; }
+    double perimeter() const {
+      return 2 * (_length + _width);
+    }
     
     string type() const {
       return "rectangle";
     }
 
     private:
-    vector<TwoDimensionalVector*> _vectors;
-
+    double _length;
+    double _width;
 };
 
 #endif

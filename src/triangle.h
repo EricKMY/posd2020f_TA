@@ -11,11 +11,14 @@ using namespace std;
 
 class Triangle : public Shape{
     public: 
-		Triangle(vector<TwoDimensionalVector*> vectors, string id):Shape(id),_vectors(vectors){
+		Triangle(vector<TwoDimensionalVector*> vectors):_vectors(vectors){
       if(vectors.size() != 3) {
         throw string("this is not a triangle!");
       }
-    }    
+    }
+
+    // Triangle(vector<int> t){}
+    
     
     double area() const {
       return fabs(
