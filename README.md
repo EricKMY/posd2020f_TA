@@ -15,18 +15,14 @@
 [C++ Regular Expressions](http://www.cplusplus.com/reference/regex/)
 
 ## **Requirement**  
-1. For this assigment, you will be sotring an input file and produce an output file,  
-   handle of the file through a new class called `Terminal`,  
-   and please used the sort funtion from class `Sort` to finish the sorting.  
-   For command `bin/sort input.txt shape_ouput.txt perimeter dec info`  
-   input.txt  
-   info_ouput.txt   
-   For command `bin/sort input.txt area_ouput.txt perimeter dec area`  
-   input.txt  
-   area_ouput.txt   
-   For command `bin/sort input.txt permiter_ouput.txt perimeter dec perimeter`  
-   input.txt  
-   permiter_ouput.txt   
+1. For this assigment, you will be sotring an input file and produce an output file, handle of the file through a new class called `Terminal`, and please used the sort funtion from class `Sort` to finish the sorting. The following are different output result by executing different command base on the same input file.
+   [input.txt](https://ssl-gitlab.csie.ntut.edu.tw/108598011/posd2020f_ta/blob/HW3/input.txt)<==FIXME urlchange  
+   comand: `bin/sort input.txt shape_ouput.txt perimeter dec info`  
+   result: [info_ouput.txt](https://ssl-gitlab.csie.ntut.edu.tw/108598011/posd2020f_ta/blob/HW3/info_output.txt)    
+   comand: `bin/sort input.txt area_ouput.txt perimeter dec area`  
+   result: [area_ouput.txt](https://ssl-gitlab.csie.ntut.edu.tw/108598011/posd2020f_ta/blob/HW3/area_output.txt)    
+   comand: `bin/sort input.txt permiter_ouput.txt perimeter dec perimeter`  
+   result: [permiter_ouput.txt](https://ssl-gitlab.csie.ntut.edu.tw/108598011/posd2020f_ta/blob/HW3/perimeter_output.txt)    
 
 1. Implement a `main` function in `main.cpp` to handle input from terminal.  
    The input will be as following example:  
@@ -47,8 +43,8 @@ public:
 }
 ```
 * The form of the input string should be `{Shape}`+`{feature to sort}`+`{Order}`+`{feature to show}`, if any of condition missing, the constructure should handle the exception by throwing std::string "invalid input".  
-  Valid: `Rectangle (3.7, 4.2)\nEllipse (3, 4) perimeter dec info`
-  Invalid: `Rectangle (3.7, 4.2)\nEllipse (3, 4) perimeter dec`
+  Valid: `Rectangle (3.7, 4.2)\nEllipse (3, 4) perimeter dec info`  
+  Invalid: `Rectangle (3.7, 4.2)\nEllipse (3, 4) perimeter dec`   
 
 
 3. Implement unit test in `ut_terminal.h` to test class`Terminal`.  
