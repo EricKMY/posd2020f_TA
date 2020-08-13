@@ -18,13 +18,13 @@
 1. For this assigment, you will be sotring an input file and produce an output file, handle of the file through a new class called `Terminal`, and please used the sort funtion from class `Sort` to finish the sorting. The following are different output result by executing different command base on the same input file.
    [input.txt](https://ssl-gitlab.csie.ntut.edu.tw/108598011/posd2020f_ta/blob/HW3/input.txt)<==FIXME urlchange  
    comand: `bin/sort input.txt shape_ouput.txt perimeter dec info`  
-   result: [info_ouput.txt](https://ssl-gitlab.csie.ntut.edu.tw/108598011/posd2020f_ta/blob/HW3/info_output.txt)    
+   result: [info_ouput.txt](https://ssl-gitlab.csie.ntut.edu.tw/108598011/posd2020f_ta/blob/HW3/info_output.txt)   
    comand: `bin/sort input.txt area_ouput.txt perimeter dec area`  
-   result: [area_ouput.txt](https://ssl-gitlab.csie.ntut.edu.tw/108598011/posd2020f_ta/blob/HW3/area_output.txt)    
+   result: [area_ouput.txt](https://ssl-gitlab.csie.ntut.edu.tw/108598011/posd2020f_ta/blob/HW3/area_output.txt)   
    comand: `bin/sort input.txt permiter_ouput.txt perimeter dec perimeter`  
-   result: [permiter_ouput.txt](https://ssl-gitlab.csie.ntut.edu.tw/108598011/posd2020f_ta/blob/HW3/perimeter_output.txt)    
+   result: [permiter_ouput.txt](https://ssl-gitlab.csie.ntut.edu.tw/108598011/posd2020f_ta/blob/HW3/perimeter_output.txt)   
 
-1. Implement a `main` function in `main.cpp` to handle input from terminal.  
+2. Implement a `main` function in `main.cpp` to handle input from terminal.  
    The input will be as following example:  
    `bin/sort input.txt output.txt perimeter dec area`  
    `argv[0]`: The path of binary file.  
@@ -34,7 +34,7 @@
    `argv[4]`: The 'dec' for decending, 'asc' for asceding.  
    `argv[5]`: The output format, which is "info", "area", "perimeter" as the example txt file shown.  
 
-2. Implement class `Terminal` in `terminal.h`.  
+3. Implement class `Terminal` in `terminal.h`.  
 ```
 class Terminal {
 public:
@@ -47,7 +47,7 @@ public:
   Invalid: `Rectangle (3.7, 4.2)\nEllipse (3, 4) perimeter dec`   
 
 
-3. Implement unit test in `ut_terminal.h` to test class`Terminal`.  
+4. Implement unit test in `ut_terminal.h` to test class`Terminal`.  
    The following is the example of unit test of Terminal.  
 ```
     Terminal* test1 = new Terminal("Rectangle (3.7, 4.2)\nEllipse (3, 4)\nTriangle ([0,-3], [-3,0], [0,-4]) perimeter dec info");
@@ -60,7 +60,7 @@ public:
     ASSERT_EQ("48.820\n15.540\n6.000", test3->showResult());
 ```
 
-4. Rules for the input string:  
+5. Rules for the input string:  
 * `{Shape}` will be in the form of `{Shape Type}` + `{SPACE}` + `{Argument}`.  
   The first letter of `{Shape Type}` should be capital.
   There must be at least one `{SPACE}` between `{Shape Type}` and `{Argument}`.  
@@ -108,6 +108,10 @@ public:
   ASSERT_EQ("Ellipse (3, 4)\nRectangle (3.7, 4.2)", test->showResult());
   ```
 
+* `{feature to sort}` `{Order}` `{feature to show}` should all be lower case and be split by at least one space `{SPACE}` with each other, no other character should be between. If invalid throw exception std::string "invald input".
+* `{feature to sort}` and `{feature to show}` should be `info` `perimeter` `area`, other than these three will be invalidn and throw exception std::string "invald input".
+* `{order}` should be other than these two will be invalidn and throw exception std::string "invald input".
+
 ## **File Structure**
 This time your directory structure should be like:
  - 學號_HW
@@ -124,6 +128,8 @@ This time your directory structure should be like:
       two_dimensional_vector.h
       
       sort.h
+      
+      terminal.h
 
     - test
 
@@ -138,6 +144,8 @@ This time your directory structure should be like:
       ut_two_dimensional_vector.h
       
       ut_sort.h
+      
+      ut_terminal.h
 
     - bin
 
