@@ -1,0 +1,5 @@
+Ellipse (3.7, 4.2)
+Ellipse (3, 4)
+Rectangle (3.7, 4.2)
+Rectangle (3, 4)
+Triangle ([0,-3], [-3,0], [0,-4])

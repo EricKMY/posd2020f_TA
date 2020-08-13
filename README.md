@@ -1,67 +1,116 @@
-# **Pattern Oriented Software Design 2020 Fall Assignment 2**  
+# HW3
+
+# **Pattern Oriented Software Design 2020 Fall Assignment 3**  
 
 ## **Notice**  
-* **Due on (Monday, June 22, 2020 23:59). <===fixme**  
+* **Due on (Monday, June 22, 2020 23:59). <===FIXME**  
 * **If your code fails to compile on jenkins server, you'll get no point for the assignment.**  
 
-## **Score**
+## **Score** <==FIXME
 1. Usage of Iterator in vector: 10%.
 2. Unit tests written by yourself: 40%.
 3. Unit tests written by TA: 50%.
 
 ## **Useful Reference**
-[std::vector](http://www.cplusplus.com/reference/vector/vector/)  
-[std::sort](http://www.cplusplus.com/reference/algorithm/sort/)  
-[Templates](http://www.cplusplus.com/doc/oldtutorial/templates/)  
+[C++ Regular Expressions](http://www.cplusplus.com/reference/regex/)
 
 ## **Requirement**  
-1. Implement class `Sort` in `sort.h`.  
+1. For this assigment, you will be sotring an input file and produce an output file,  
+   handle of the file through a new class called `Terminal`,  
+   and please used the sort funtion from class `Sort` to finish the sorting.  
+   For command `bin/sort input.txt shape_ouput.txt perimeter dec info`  
+   input.txt  
+   info_ouput.txt   
+   For command `bin/sort input.txt area_ouput.txt perimeter dec area`  
+   input.txt  
+   area_ouput.txt   
+   For command `bin/sort input.txt permiter_ouput.txt perimeter dec perimeter`  
+   input.txt  
+   permiter_ouput.txt   
+
+1. Implement a `main` function in `main.cpp` to handle input from terminal.  
+   The input will be as following example:  
+   `bin/sort input.txt output.txt perimeter dec area`  
+   `argv[0]`: The path of binary file.  
+   `argv[1]`: The full name of input file.  
+   `argv[2]`: The full name of output file.  
+   `argv[3]`: The attribute of shape that sorting basis on.  
+   `argv[4]`: The 'dec' for decending, 'asc' for asceding.  
+   `argv[5]`: The output format, which is "info", "area", "perimeter" as the example txt file shown.  
+
+2. Implement class `Terminal` in `terminal.h`.  
 ```
-class Sort{
+class Terminal {
 public:
-    Sort(vector<Shape*>* shapes): _shapes(shapes){}
-    void standardSort(Compare comp) {}
-    void customizeSort(Compare comp) {}
-};
+    Terminal(std::string input) {}
+    std::string showResult() {}
+}
 ```
-* `Compare`: Should be able to accept `lambda`, `function`, and `object`.  
-* `standardSort()`: Implement function by using std::sort.  
-* `customizeSort()`: Implement function WITHOUT using any sorting function from c/c++ library,  
-   you should write the sorting algorithm by youself. Also use `Iterator` of vector to control vector.   
+* The form of the input string should be `{Shape}`+`{feature to sort}`+`{Order}`+`{feature to show}`, if any of condition missing, the constructure should handle the exception by throwing std::string "invalid input".  
+  Valid: `Rectangle (3.7, 4.2)\nEllipse (3, 4) perimeter dec info`
+  Invalid: `Rectangle (3.7, 4.2)\nEllipse (3, 4) perimeter dec`
 
 
-2. Implement the following function in `sort.h`.  
-
+3. Implement unit test in `ut_terminal.h` to test class`Terminal`.  
+   The following is the example of unit test of Terminal.  
 ```
-bool areaAscendingCompare(Shape *a, Shape *b) {};
-
-bool areaDescendingCompare(Shape *a, Shape *b) {};
-
-bool perimeterAscendingCompare(Shape *a, Shape *b) {};
-
-bool perimeterDescendingCompare(Shape *a, Shape *b) {};
-
+    Terminal* test1 = new Terminal("Rectangle (3.7, 4.2)\nEllipse (3, 4)\nTriangle ([0,-3], [-3,0], [0,-4]) perimeter dec info");
+    ASSERT_EQ("Ellipse (3, 4)\nRectangle (3.7, 4.2)\nTriangle ([0,-3], [-3,0], [0,-4])", test1->showResult());
+    
+    Terminal* test2 = new Terminal("Rectangle (3.7, 4.2)\nEllipse (3, 4)\nTriangle ([0,-3], [-3,0], [0,-4]) perimeter dec perimeter");
+    ASSERT_EQ("24.389\n15.800\n12.000", test2->showResult());
+    
+    Terminal* test3= new Terminal("Rectangle (3.7, 4.2) Ellipse (3, 4) Triangle ([0,-3], [-3,0], [0,-4]) perimeter dec area");
+    ASSERT_EQ("48.820\n15.540\n6.000", test3->showResult());
 ```
-* These function should be argument of `standardSort()` and `customizeSort()`.  
-  ex. standardSort(areaAscendingCompare).   
 
-
-3. Implement class `AscendingCompare` and `DecendingCompare` in `sort.h`.
-```
-class AscendingCompare{
-  public:
-    AscendingCompare(string attribute): _attribute(attribute) {}
-};
-
-class DecendingCompare{
-  public:
-    DecendingCompare(string attribute): _attribute(attribute) {}
-};
-```
-* `attribute`: is the attribute of shape you wanted to compare, meaning "area" and "perimeter".  
-* These object should be argument of `standardSort()` and `customizeSort()`.  
-  ex. AscendingCompare ascendingCompare = new AscendingCompare("area");  
-  standardSort(ascendingCompare);  
+4. Rules for the input string:  
+* `{Shape}` will be in the form of `{Shape Type}` + `{SPACE}` + `{Argument}`.  
+  The first letter of `{Shape Type}` should be capital.
+  There must be at least one `{SPACE}` between `{Shape Type}` and `{Argument}`.  
+  The `{Argument}` must be wrapped by `()` and the number must be split by `,`, but the `{SPACE}` can be ignore.
+  Valid:  
+  ```
+  Ellipse (3, 4)
+  Ellipse     (3, 4)
+  Ellipse (3,4)
+  Ellipse (  3,4  )
+  ```
+  Invalid:  
+  ```
+  Ellipse(3, 4) 
+  ellipse (3, 4)
+  Elllllllipse (3, 4)
+  Ellipse(3!4)
+  Ellipse(3,@4)
+  Ellipse(3, 4_)
+  Ellipse @#(3, 4)
+  Ellipse(3, 4, 5)
+  ```
+* `{Shape}` connect each other with `\n` and no `{SPACE}` or any other character between.  
+  Valid:  
+  ```
+  Ellipse (3, 4) 
+  Rectangle (3.7, 4.2)\nEllipse (3, 4) 
+  ```
+  Invalid:  
+  ```
+  Rectangle (3.7, 4.2)\nEllipse (3, 4)\n
+  Rectangle (3.7, 4.2)  \n  Ellipse (3, 4)
+  Rectangle (3.7, 4.2)\n!@#$%Ellipse (3, 4) 
+  ```
+* If `{Shape}` is invalid, ignore the invalide `{Shape}` and sort the remaining.  
+  Example:  
+  ```
+  Terminal* test = new Terminal("Rectangle (3.7, 4.2)\nEllipse (3, 4)\nEllipse$%^&(30, 40) perimeter dec info");
+  ASSERT_EQ("Ellipse (3, 4)\nRectangle (3.7, 4.2)", test->showResult());
+  ```
+* If the connection between `{Shape}` is invalid, ignore the `{Shape}` with invalid connection and sort the remaining.  
+  Example:  
+  ```
+  Terminal* test = new Terminal("Rectangle (3.7, 4.2)\nEllipse (3, 4)\nEllipse$%^&(30, 40)@#$%\nRectangle (3, 4) perimeter dec info");
+  ASSERT_EQ("Ellipse (3, 4)\nRectangle (3.7, 4.2)", test->showResult());
+  ```
 
 ## **File Structure**
 This time your directory structure should be like:
@@ -97,5 +146,11 @@ This time your directory structure should be like:
     - bin
 
       ut_all
+      
+      sort
 
     - makefile
+    
+    - input.txt
+
+    - output.txt
