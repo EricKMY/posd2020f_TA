@@ -14,6 +14,8 @@ class Triangle : public Shape{
 		Triangle(vector<TwoDimensionalVector*> vectors):_vectors(vectors){
       if(vectors.size() != 3) {
         throw string("this is not a triangle!");
+      }else if(area() == 0) {
+        throw string("this is not a triangle!");
       }
     }
 
