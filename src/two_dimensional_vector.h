@@ -7,13 +7,13 @@ using namespace std;
 
 class TwoDimensionalVector{
 	public:
-	TwoDimensionalVector(int x, int y): _x(x), _y(y) {}
+	TwoDimensionalVector(double x, double y): _x(x), _y(y) {}
 
-	int getX() {
+	double getX() {
 		return _x;
 	}
 
-	int getY() {
+	double getY() {
 		return _y;
 	}
 
@@ -22,11 +22,11 @@ class TwoDimensionalVector{
 		return sqrt(pow(_x, 2) + pow(_y, 2));
 	}
 
-	int dot(TwoDimensionalVector* vector) {
+	double dot(TwoDimensionalVector* vector) {
 		return vector->getX() * _x + vector->getY() * _y;
 	}
 
-	int cross(TwoDimensionalVector* vector) {
+	double cross(TwoDimensionalVector* vector) {
 		return _x * vector->getY() - _y * vector->getX();
 	}
 
@@ -35,8 +35,8 @@ class TwoDimensionalVector{
 	}
 
 	private:
-	int _x;
-	int _y;
+	double _x;
+	double _y;
 };
 
 #endif

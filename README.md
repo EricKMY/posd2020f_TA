@@ -17,12 +17,12 @@
 ## **Requirement**  
 1. For this assigment, you will be sotring an input file and produce an output file, handle of the file through a new class called `Terminal`, and please used the sort funtion from class `Sort` to finish the sorting. The following are different output result by executing different command base on the same input file.
    [input.txt](https://ssl-gitlab.csie.ntut.edu.tw/108598011/posd2020f_ta/blob/HW3/input.txt)<==FIXME urlchange  
-   command: ```bin/sort input.txt shape_ouput.txt perimeter dec info```  
-   result: [info_ouput.txt](https://ssl-gitlab.csie.ntut.edu.tw/108598011/posd2020f_ta/blob/HW3/info_output.txt)   
-   command: ```bin/sort input.txt area_ouput.txt perimeter dec area```  
-   result: [area_ouput.txt](https://ssl-gitlab.csie.ntut.edu.tw/108598011/posd2020f_ta/blob/HW3/area_output.txt)   
-   command: ```bin/sort input.txt permiter_ouput.txt perimeter dec perimeter```  
-   result: [permiter_ouput.txt](https://ssl-gitlab.csie.ntut.edu.tw/108598011/posd2020f_ta/blob/HW3/perimeter_output.txt)   
+   command: ```bin/sort input.txt info_output.txt perimeter dec info```  
+   result: [info_output.txt](https://ssl-gitlab.csie.ntut.edu.tw/108598011/posd2020f_ta/blob/HW3/info_output.txt)   
+   command: ```bin/sort input.txt area_output.txt perimeter dec area```  
+   result: [area_output.txt](https://ssl-gitlab.csie.ntut.edu.tw/108598011/posd2020f_ta/blob/HW3/area_output.txt)   
+   command: ```bin/sort input.txt perimeter_output.txt perimeter dec perimeter```  
+   result: [perimeter_output.txt](https://ssl-gitlab.csie.ntut.edu.tw/108598011/posd2020f_ta/blob/HW3/perimeter_output.txt)   
 
 2. Implement a `main` function in `main.cpp` to handle input from terminal.  
    The input will be as following example:  

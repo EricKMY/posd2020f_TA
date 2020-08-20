@@ -37,11 +37,16 @@ class Triangle : public Shape{
            + sqrt(pow(_vectors[0]->getX() - _vectors[2]->getX(), 2) + pow(_vectors[0]->getY() - _vectors[2]->getY(), 2)) 
            + sqrt(pow(_vectors[2]->getX() - _vectors[1]->getX(), 2) + pow(_vectors[2]->getY() - _vectors[1]->getY(), 2));
     }
-    
-    string type() const {
-      return "triangle";
-    }
 
+    string info() const {
+      char result[100];
+      sprintf(result, "Triangle ([%.3f,%.3f], [%.3f,%.3f], [%.3f,%.3f])"
+      , _vectors[0]->getX(), _vectors[0]->getY()
+      , _vectors[1]->getX(), _vectors[1]->getY()
+      , _vectors[2]->getX(), _vectors[2]->getY());
+      
+      return result;
+    }
 
 
     private:

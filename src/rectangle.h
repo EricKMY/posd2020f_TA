@@ -23,8 +23,10 @@ class Rectangle : public Shape{
       return 2 * (_length + _width);
     }
     
-    string type() const {
-      return "rectangle";
+    string info() const {
+      char result[100];
+      sprintf(result, "Rectangle (%.3f, %.3f)", _length, _width);
+      return result;
     }
 
     private:

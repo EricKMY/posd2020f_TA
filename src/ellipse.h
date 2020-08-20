@@ -19,9 +19,11 @@ class Ellipse : public Shape {
 		return 2 * M_PI * _semiMinorAxes + 4 * (_semiMajorAxes - _semiMinorAxes);
 	}
 
-	string type() const {
-		return "ellipse";
-	}
+	string info() const {
+      char result[100];
+      sprintf(result, "Ellipse (%.3f, %.3f)", _semiMajorAxes, _semiMinorAxes);
+      return result;
+    }
 
 	private:
 	double _semiMajorAxes, _semiMinorAxes;
