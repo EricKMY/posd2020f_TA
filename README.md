@@ -13,22 +13,22 @@
 [std::vector](http://www.cplusplus.com/reference/vector/vector/)  
 [std::sort](http://www.cplusplus.com/reference/algorithm/sort/)  
 [Templates](http://www.cplusplus.com/doc/oldtutorial/templates/)  
+[QuickSort](https://en.wikipedia.org/wiki/Quicksort)  
 
 ## **Requirement**  
 1. Implement class `Sort` in `sort.h`.  
 ```
 class Sort{
 public:
-    Sort(vector<Shape*>* shapes): _shapes(shapes){}
+    Sort(std::vector<Shape*>* v) {}
     void standardSort(Compare comp) {}
     void customizeSort(Compare comp) {}
 };
 ```
-* `Compare`: Should be able to accept `lambda`, `function`, and `object`.  
+* `Compare`: Is a template parameter, should be able to accept `lambda`, `function`, and `object`.  
 * `standardSort()`: Implement function by using std::sort.  
-* `customizeSort()`: Implement function WITHOUT using any sorting function from c/c++ library,  
+* `customizeSort()`: Implement a quicksort function WITHOUT using any sorting function from c/c++ library,  
    you should write the sorting algorithm by youself. Also use `Iterator` of vector to control vector.   
-
 
 2. Implement the following function in `sort.h`.  
 
@@ -50,15 +50,15 @@ bool perimeterDescendingCompare(Shape *a, Shape *b) {};
 ```
 class AscendingCompare{
   public:
-    AscendingCompare(string attribute): _attribute(attribute) {}
+    AscendingCompare(std::string feature): _feature(feature) {}
 };
 
 class DecendingCompare{
   public:
-    DecendingCompare(string attribute): _attribute(attribute) {}
+    DecendingCompare(std::string feature): _feature(feature) {}
 };
 ```
-* `attribute`: is the attribute of shape you wanted to compare, meaning "area" and "perimeter".  
+* `feature`: is the feature of shape you wanted to compare, meaning "area" and "perimeter".  
 * These object should be argument of `standardSort()` and `customizeSort()`.  
   ex. AscendingCompare ascendingCompare = new AscendingCompare("area");  
   standardSort(ascendingCompare);  

@@ -13,16 +13,15 @@ class Sort{
     public:
     Sort(vector<Shape*>* v): _v(v){}
 
-    template <typename Compare>
+    template <class Compare>
     void standardSort(Compare comp) {
         std::sort(_v->begin(), _v->end(), comp);
     }
 
-    template <typename Compare>
+    template <class Compare>
     void customizeSort(Compare comp) {
-      quickSortOperator(_v->begin(), _v->end() - 1, comp);
+        quickSortOperator(_v->begin(), _v->end() - 1, comp);
     }
-
 
     typedef std::vector<Shape *>::iterator shapeIterator;
 

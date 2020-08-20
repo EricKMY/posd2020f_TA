@@ -1,6 +1,3 @@
-#ifndef UT_SORT_H
-#define UT_SORT_H
-
 #include <gtest/gtest.h>
 #include <string>
 #include <math.h>
@@ -11,17 +8,17 @@
 #include "../src/triangle.h"
 #include "../src/rectangle.h"
 #include "../src/ellipse.h"
-#include "../src/two_dimensional_vector.h"
+#include "../src/two_dimensional_coordinate.h"
 
 class SortTest: public testing::Test {
 protected:
     virtual void SetUp(){
         _rectangle = new Rectangle(3, 4);
         _ellipse = new Ellipse(3, 4);
-        vector<TwoDimensionalVector*> triangleVector;
-        triangleVector.push_back(new TwoDimensionalVector(0, 0));
-        triangleVector.push_back(new TwoDimensionalVector(3, 0));
-        triangleVector.push_back(new TwoDimensionalVector(0, 4));
+        vector<TwoDimensionalCoordinate*> triangleVector;
+        triangleVector.push_back(new TwoDimensionalCoordinate(0, 0));
+        triangleVector.push_back(new TwoDimensionalCoordinate(3, 0));
+        triangleVector.push_back(new TwoDimensionalCoordinate(0, 4));
         _triangle = new Triangle(triangleVector);
         Shape* _shapeArray[3] = {_triangle, _rectangle, _ellipse};
         _shapeVector.assign(_shapeArray, _shapeArray+3);
@@ -258,5 +255,3 @@ TEST_F(SortTest, CustomSortObjPerimeterDecending) {
     ASSERT_EQ(14, _shapeVector[1]->perimeter());
     ASSERT_EQ(12, _shapeVector[2]->perimeter());
 }
-
-#endif
