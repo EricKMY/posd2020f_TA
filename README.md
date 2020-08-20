@@ -1,5 +1,3 @@
-# HW1
-
 # **Pattern Oriented Software Design 2020 Fall Assignment 1**  
 
 ## **Notice**  
@@ -29,6 +27,7 @@ public:
 ```
 
 2. Implement `Rectangle` and functions inherit from `Shape`.  
+   Write correspond unit test for the class in file `ut_rectangle.h` under `test` folder.  
 ```
 class Rectangle: public Shape {
 public: 
@@ -53,6 +52,7 @@ public:
 ```
 
 3. Implement `Ellipse` and functions inherit from `Shape`.  
+   Write correspond unit test for the class in file `ut_ellipse.h` under `test` folder.  
 ```
 class Ellipse: public Shape{
 public: 
@@ -79,10 +79,11 @@ public:
 
 
 4. Implement `Triangle` and functions inherit from `Shape`.  
+   Write correspond unit test for the class in file `ut_triangle.h` under `test` folder.  
 ```
 class Triangle: public Shape{
 public: 
-    Triangle(vector<TwoDimensionalVector*> vectors) {
+    Triangle(vector<TwoDimensionalCoordinate*> vectors) {
         // If the triangle can't be successfully created,
         // handle the exception by throwing string "This is not a triangle!"
     }
@@ -101,22 +102,23 @@ public:
     }
 }
 ```
-4. Implement `TwoDimensionalVector`.  
+4. Implement `TwoDimensionalCoordinate`.  
 ```
-class TwoDimensionalVector{
+class TwoDimensionalCoordinate {
 public:
-	TwoDimensionalVector(double x, double y): _x(x), _y(y) {}
-	double getX() { // return value of x. }
-	double getY() { // return value of y. }
-	double length() { // reuturn length of the vector. }
-	double dot(TwoDimensionalVector* vector) { // reuturn dot with the input vector => self · input }
-	double cross(TwoDimensionalVector* vector) { // reuturn cross with the input vector => self X input }
-	TwoDimensionalVector* subtract(TwoDimensionalVector* vector) { // reuturn subtract with the input vector => self - input }
+    TwoDimensionalCoordinate(double x, double y):{}
+
+    double getX() {
+        // return x;
+	}
+
+	double getY() {
+		// return y;
+	}
 };
 ```
 
-2. Implement unit test for each concrete class with separate unit test file, which means we need `ut_ellipse.h`, `ut_rectangle.h`, `ut_triangle.h`, `ut_two_dimentional_vector.h` and put them all under the `test` folder.  
-3. Write the corresponding makefile to generate executable file which named `ut_all` under the `bin` folder.  
+5. Write correspond makefile to generate binary file for all ut file named `ut_all` under the `bin` folder.  
 
 ## **File Structure**
 This time your directory structure should be like:
@@ -131,7 +133,7 @@ This time your directory structure should be like:
       
       triangle.h
       
-      two_dimensional_vector.h
+      two_dimensional_coordinate.h
 
     - test
 
@@ -143,7 +145,7 @@ This time your directory structure should be like:
       
       ut_triangle.h
       
-      ut_two_dimensional_vector.h
+      ut_two_dimensional_coordinate.h
 
     - bin
 

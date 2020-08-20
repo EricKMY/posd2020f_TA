@@ -1,13 +1,14 @@
 #include "../src/triangle.h"
+#include "../src/two_dimensional_coordinate.h"
 
 class TriangleTest: public testing::Test {
     protected:
     void SetUp() {
-        triangleVector.push_back(new TwoDimensionalVector(0, 0));
-        triangleVector.push_back(new TwoDimensionalVector(3, 0));
-        triangleVector.push_back(new TwoDimensionalVector(0, 4));
+        triangleVector.push_back(new TwoDimensionalCoordinate(0, 0));
+        triangleVector.push_back(new TwoDimensionalCoordinate(3, 0));
+        triangleVector.push_back(new TwoDimensionalCoordinate(0, 4));
     }
-    vector<TwoDimensionalVector*> triangleVector;
+    vector<TwoDimensionalCoordinate*> triangleVector;
 };
 
 
@@ -16,9 +17,9 @@ TEST_F(TriangleTest, ConstructorNoException){
 }
 
 TEST(Triangle, ExceptionForVectorLessThanThree){
-    vector<TwoDimensionalVector*> triangleExceptionVector;
-    triangleExceptionVector.push_back(new TwoDimensionalVector(3, 0));
-    triangleExceptionVector.push_back(new TwoDimensionalVector(0, 4));
+    vector<TwoDimensionalCoordinate*> triangleExceptionVector;
+    triangleExceptionVector.push_back(new TwoDimensionalCoordinate(3, 0));
+    triangleExceptionVector.push_back(new TwoDimensionalCoordinate(0, 4));
     try {
         new Triangle(triangleExceptionVector);
         FAIL();
@@ -28,11 +29,11 @@ TEST(Triangle, ExceptionForVectorLessThanThree){
 }
 
 TEST(Triangle, ExceptionForVectorMoreThanThree){
-    vector<TwoDimensionalVector*> triangleExceptionVector;
-    triangleExceptionVector.push_back(new TwoDimensionalVector(3, 0));
-    triangleExceptionVector.push_back(new TwoDimensionalVector(0, 4));
-    triangleExceptionVector.push_back(new TwoDimensionalVector(-3, 0));
-    triangleExceptionVector.push_back(new TwoDimensionalVector(0, -4));
+    vector<TwoDimensionalCoordinate*> triangleExceptionVector;
+    triangleExceptionVector.push_back(new TwoDimensionalCoordinate(3, 0));
+    triangleExceptionVector.push_back(new TwoDimensionalCoordinate(0, 4));
+    triangleExceptionVector.push_back(new TwoDimensionalCoordinate(-3, 0));
+    triangleExceptionVector.push_back(new TwoDimensionalCoordinate(0, -4));
     try {
         new Triangle(triangleExceptionVector);
         FAIL();

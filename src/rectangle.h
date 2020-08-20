@@ -31,8 +31,7 @@ class Rectangle : public Shape{
     }
 
     private:
-    double _length;
-    double _width;
+    double _length, _width;
 };
 
 #endif

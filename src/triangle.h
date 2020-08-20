@@ -2,7 +2,7 @@
 #define TRIANGLE_H
 
 #include "shape.h"
-#include "two_dimensional_vector.h"
+#include "../src/two_dimensional_coordinate.h"
 #include <math.h>
 #include <vector>
 #include <string>
@@ -12,7 +12,7 @@ using namespace std;
 
 class Triangle : public Shape{
     public: 
-		Triangle(vector<TwoDimensionalVector*> vectors):_vectors(vectors){
+		Triangle(vector<TwoDimensionalCoordinate*> vectors):_vectors(vectors){
       if(vectors.size() != 3) {
         throw string("This is not a triangle!");
       }
@@ -44,7 +44,7 @@ class Triangle : public Shape{
     }
 
     private:
-    vector<TwoDimensionalVector*> _vectors;
+    vector<TwoDimensionalCoordinate*> _vectors;
 };
 
 #endif
