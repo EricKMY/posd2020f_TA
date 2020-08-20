@@ -40,7 +40,7 @@ public:
         // return the area of the Rectangle.
     }
     
-    double perimeter() {
+    double perimeter() const {
         // return the perimeter of the Rectangle.
     }
     
@@ -65,7 +65,7 @@ public:
         // return the area of the Ellipse.
     }
     
-    double perimeter() {
+    double perimeter() const {
         // return the perimeter of the Ellipse.
     }
     
@@ -83,7 +83,7 @@ public:
 ```
 class Triangle: public Shape{
 public: 
-    Triangle(vector<TwoDimensionalCoordinate*> vectors) {
+    Triangle(std::vector<TwoDimensionalCoordinate*> vectors) {
         // If the triangle can't be successfully created,
         // handle the exception by throwing string "This is not a triangle!"
     }
@@ -92,7 +92,7 @@ public:
         // return the area of the Triangle.
     }
     
-    double perimeter() {
+    double perimeter() const {
         // return the perimeter of the Triangle.
     }
     
@@ -145,8 +145,6 @@ This time your directory structure should be like:
       
       ut_triangle.h
       
-      ut_two_dimensional_coordinate.h
-
     - bin
 
       ut_all
