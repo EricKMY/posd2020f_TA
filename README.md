@@ -76,7 +76,7 @@ This time your directory structure should be like:
       
       triangle.h
             
-      two_dimensional_vector.h
+      two_dimensional_coordinate.h
       
       sort.h
 
@@ -89,9 +89,7 @@ This time your directory structure should be like:
       ut_rectangle.h
       
       ut_triangle.h
-      
-      ut_two_dimensional_vector.h
-      
+            
       ut_sort.h
 
     - bin
