@@ -37,8 +37,7 @@ class Sort{
     }
 
     template <typename Compare>
-    shapeIterator partition(shapeIterator left, shapeIterator right, Compare comp)
-    {
+    shapeIterator partition(shapeIterator left, shapeIterator right, Compare comp) {
         shapeIterator indexItr = left-1;
 
         shapeIterator visitItr = left;
@@ -80,15 +79,15 @@ bool perimeterDescendingCompare(Shape *a, Shape *b) {
 
 
 
-class AscendingCompare{
+class AscendingCompare {
   public:
-    AscendingCompare(string attribute): _attribute(attribute) {}
+    AscendingCompare(string feature): _feature(feature) {}
 
     bool operator()(Shape *a, Shape *b) {
-        if(_attribute == "area"){
+        if(_feature == "area"){
             return a->area() < b->area();
             
-        }else if(_attribute == "perimeter"){
+        }else if(_feature == "perimeter"){
             return a->perimeter() < b->perimeter();
 
         }
@@ -97,18 +96,18 @@ class AscendingCompare{
       }
 
   private:
-    string _attribute;
+    string _feature;
 };
 
-class DecendingCompare{
+class DescendingCompare {
   public:
-    DecendingCompare(string attribute): _attribute(attribute) {}
+    DescendingCompare(string feature): _feature(feature) {}
 
     bool operator()(Shape *a, Shape *b) {
-        if(_attribute == "area"){
+        if(_feature == "area"){
             return a->area() > b->area();
             
-        }else if(_attribute == "perimeter"){
+        }else if(_feature == "perimeter"){
             return a->perimeter() > b->perimeter();
 
         }
@@ -117,7 +116,7 @@ class DecendingCompare{
       }
 
   private:
-    string _attribute;
+    string _feature;
 };
 
 #endif

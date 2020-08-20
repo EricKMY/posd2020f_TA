@@ -46,16 +46,16 @@ bool perimeterDescendingCompare(Shape *a, Shape *b) {};
   ex. standardSort(areaAscendingCompare).   
 
 
-3. Implement class `AscendingCompare` and `DecendingCompare` in `sort.h`.
+3. Implement class `AscendingCompare` and `DescendingCompare` in `sort.h`.
 ```
 class AscendingCompare{
   public:
     AscendingCompare(std::string feature): _feature(feature) {}
 };
 
-class DecendingCompare{
+class DescendingCompare{
   public:
-    DecendingCompare(std::string feature): _feature(feature) {}
+    DescendingCompare(std::string feature): _feature(feature) {}
 };
 ```
 * `feature`: is the feature of shape you wanted to compare, meaning "area" and "perimeter".  

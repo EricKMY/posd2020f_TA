@@ -114,9 +114,9 @@ TEST_F(SortTest, StandardSortObjAreaAscending) {
 }
 
 TEST_F(SortTest, StandardSortObjAreaDecending) {
-    ASSERT_NO_THROW(DecendingCompare("area"));
-    DecendingCompare decendingCompare("area");
-    _sort->standardSort(decendingCompare);
+    ASSERT_NO_THROW(DescendingCompare("area"));
+    DescendingCompare descendingCompare("area");
+    _sort->standardSort(descendingCompare);
 
     ASSERT_NEAR(37.699, _shapeVector[0]->area(), 0.001);
     ASSERT_EQ(12, _shapeVector[1]->area());
@@ -134,9 +134,9 @@ TEST_F(SortTest, StandardSortObjPerimeterAscending) {
 }
 
 TEST_F(SortTest, StandardSortObjPerimeterDecending) {
-    ASSERT_NO_THROW(DecendingCompare("perimeter"));
-    DecendingCompare decendingCompare("perimeter");
-    _sort->standardSort(decendingCompare);
+    ASSERT_NO_THROW(DescendingCompare("perimeter"));
+    DescendingCompare descendingCompare("perimeter");
+    _sort->standardSort(descendingCompare);
 
     ASSERT_NEAR(21.132, _shapeVector[0]->perimeter(), 0.001);
     ASSERT_EQ(14, _shapeVector[1]->perimeter());
@@ -227,9 +227,9 @@ TEST_F(SortTest, CustomSortObjAreaAscending) {
 }
 
 TEST_F(SortTest, CustomSortObjAreaDecending) {
-    ASSERT_NO_THROW(DecendingCompare("area"));
-    DecendingCompare decendingCompare("area");
-    _sort->customizeSort(decendingCompare);
+    ASSERT_NO_THROW(DescendingCompare("area"));
+    DescendingCompare descendingCompare("area");
+    _sort->customizeSort(descendingCompare);
 
     ASSERT_NEAR(37.699, _shapeVector[0]->area(), 0.001);
     ASSERT_EQ(12, _shapeVector[1]->area());
@@ -247,9 +247,9 @@ TEST_F(SortTest, CustomSortObjPerimeterAscending) {
 }
 
 TEST_F(SortTest, CustomSortObjPerimeterDecending) {
-    ASSERT_NO_THROW(DecendingCompare("perimeter"));
-    DecendingCompare decendingCompare("perimeter");
-    _sort->customizeSort(decendingCompare);
+    ASSERT_NO_THROW(DescendingCompare("perimeter"));
+    DescendingCompare descendingCompare("perimeter");
+    _sort->customizeSort(descendingCompare);
 
     ASSERT_NEAR(21.132, _shapeVector[0]->perimeter(), 0.001);
     ASSERT_EQ(14, _shapeVector[1]->perimeter());
