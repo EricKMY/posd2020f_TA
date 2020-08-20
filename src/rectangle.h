@@ -3,6 +3,7 @@
 
 #include <vector>
 #include <string>
+#include <stdio.h>
 #include "shape.h"
 
 using namespace std;
@@ -23,8 +24,10 @@ class Rectangle : public Shape{
       return 2 * (_length + _width);
     }
     
-    string type() const {
-      return "rectangle";
+    string info() const {
+      char info[100];
+      sprintf(info, "Rectangle (%.3f, %.3f)", _length, _width);
+      return info;
     }
 
     private:

@@ -1,6 +1,3 @@
-#ifndef UT_ELLIPSE_H
-#define UT_ELLIPSE_H
-
 #include "../src/ellipse.h"
 
 TEST(Ellipse, ConstructorNoException){
@@ -69,7 +66,5 @@ TEST(Ellipse, PerimeterDouble){
 
 TEST(Ellipse, Type){
     Shape* ellipse = new Ellipse(3, 4);
-    ASSERT_EQ("ellipse", ellipse->type());
+    ASSERT_EQ("Ellipse (3.000, 4.000)", ellipse->info());
 }
-
-#endif

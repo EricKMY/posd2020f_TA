@@ -1,6 +1,3 @@
-#ifndef UT_TRIANGLE_H
-#define UT_TRIANGLE_H
-
 #include "../src/triangle.h"
 
 class TriangleTest: public testing::Test {
@@ -56,7 +53,5 @@ TEST_F(TriangleTest, Perimeter){
 
 TEST_F(TriangleTest, Type){
     Shape* triangle = new Triangle(triangleVector);
-    ASSERT_EQ("triangle", triangle->type());
+    ASSERT_EQ("Triangle ([0.000, 0.000], [3.000, 0.000], [0.000, 4.000])", triangle->info());
 }
-
-#endif

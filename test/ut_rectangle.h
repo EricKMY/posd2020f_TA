@@ -1,6 +1,3 @@
-#ifndef UT_RECTANGLE_H
-#define UT_RECTANGLE_H
-
 #include "../src/rectangle.h"
 
 TEST(Rectangle, ConstructorNoException){
@@ -65,7 +62,5 @@ TEST(Rectangle, PerimeterDouble){
 
 TEST(Rectangle, Type){
     Shape* rectangle = new Rectangle(3, 4);
-    ASSERT_EQ("rectangle", rectangle->type());
+    ASSERT_EQ("Rectangle (3.000, 4.000)", rectangle->info());
 }
-
-#endif

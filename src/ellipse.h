@@ -2,13 +2,14 @@
 #define ELLIPSE_H
 #include <math.h>
 #include <string>
+#include <stdio.h>
 #include "shape.h"
 
 using namespace std;
 
 class Ellipse : public Shape {
 	public:
-	Ellipse(double semiMajorAxes, double semiMinorAxes):_semiMajorAxes(semiMajorAxes),_semiMinorAxes(semiMinorAxes){
+	Ellipse(double semiMajorAxes, double semiMinorAxes):_semiMajorAxes(semiMajorAxes), _semiMinorAxes(semiMinorAxes){
 		if(_semiMajorAxes <= 0 || _semiMinorAxes <= 0) {
         	throw string("This is not a ellipse!");
       	}
@@ -22,8 +23,10 @@ class Ellipse : public Shape {
 		return 2 * M_PI * _semiMinorAxes + 4 * (_semiMajorAxes - _semiMinorAxes);
 	}
 
-	string type() const {
-		return "ellipse";
+	string info() const {
+		char info[100];
+		sprintf(info, "Ellipse (%.3f, %.3f)", _semiMajorAxes, _semiMinorAxes);
+		return info;
 	}
 
 	private:
