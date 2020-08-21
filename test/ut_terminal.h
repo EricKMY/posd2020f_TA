@@ -74,11 +74,7 @@ TEST(Terminal, InvalidInputTriangleException) {
 
 TEST(Terminal, InvalidInputNoFeatureToSort) {
     try {
-<<<<<<< HEAD
         Terminal("Ellipse (1, 2) des info");
-=======
-        Terminal("Ellipse (1, 2) dec info");
->>>>>>> 51f742c58efc697557a1bcd66fb16b5ef6879a0e
         FAIL();
     }catch(string e) {
         ASSERT_EQ("invalid input", e);
