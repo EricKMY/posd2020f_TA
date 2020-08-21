@@ -64,7 +64,7 @@ TEST(Ellipse, PerimeterDouble){
     ASSERT_NEAR(24.3893, ellipse->perimeter(), abs);
 }
 
-TEST(Ellipse, Type){
+TEST(Ellipse, Info){
     Shape* ellipse = new Ellipse(3, 4);
     ASSERT_EQ("Ellipse (3.000, 4.000)", ellipse->info());
 }

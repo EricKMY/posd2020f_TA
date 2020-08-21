@@ -65,7 +65,7 @@ TEST_F(TriangleTest, Perimeter){
     ASSERT_EQ(12, triangle->perimeter());
 }
 
-TEST_F(TriangleTest, Type){
+TEST_F(TriangleTest, Info){
     Shape* triangle = new Triangle(triangleVector);
     ASSERT_EQ("Triangle ([0.000, 0.000], [3.000, 0.000], [0.000, 4.000])", triangle->info());
 }
