@@ -3,6 +3,7 @@
 
 #include <vector>
 #include <string>
+#include <stdio.h>
 #include "shape.h"
 
 using namespace std;
@@ -11,7 +12,7 @@ class Rectangle : public Shape{
     public: 
 		Rectangle(double length, double width): _length(length), _width(width) {
       if(_length <= 0 || _width <= 0) {
-        throw string("this is not a rectangle!");
+        throw string("This is not a rectangle!");
       }
     }
 
@@ -23,13 +24,14 @@ class Rectangle : public Shape{
       return 2 * (_length + _width);
     }
     
-    string type() const {
-      return "rectangle";
+    string info() const {
+      char info[100];
+      sprintf(info, "Rectangle (%.3f, %.3f)", _length, _width);
+      return info;
     }
 
     private:
-    double _length;
-    double _width;
+    double _length, _width;
 };
 
 #endif

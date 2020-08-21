@@ -1,6 +1,3 @@
-#ifndef UT_SORT_H
-#define UT_SORT_H
-
 #include <gtest/gtest.h>
 #include <string>
 #include <math.h>
@@ -11,17 +8,17 @@
 #include "../src/triangle.h"
 #include "../src/rectangle.h"
 #include "../src/ellipse.h"
-#include "../src/two_dimensional_vector.h"
+#include "../src/two_dimensional_coordinate.h"
 
 class SortTest: public testing::Test {
 protected:
     virtual void SetUp(){
         _rectangle = new Rectangle(3, 4);
         _ellipse = new Ellipse(3, 4);
-        vector<TwoDimensionalVector*> triangleVector;
-        triangleVector.push_back(new TwoDimensionalVector(0, 0));
-        triangleVector.push_back(new TwoDimensionalVector(3, 0));
-        triangleVector.push_back(new TwoDimensionalVector(0, 4));
+        vector<TwoDimensionalCoordinate*> triangleVector;
+        triangleVector.push_back(new TwoDimensionalCoordinate(0, 0));
+        triangleVector.push_back(new TwoDimensionalCoordinate(3, 0));
+        triangleVector.push_back(new TwoDimensionalCoordinate(0, 4));
         _triangle = new Triangle(triangleVector);
         Shape* _shapeArray[3] = {_triangle, _rectangle, _ellipse};
         _shapeVector.assign(_shapeArray, _shapeArray+3);
@@ -36,7 +33,7 @@ protected:
 
 TEST_F(SortTest, StandardSortLambdaAreaAscending) {
     _sort->standardSort([](Shape* a, Shape* b) {
-        return a->area() < b->area(); 
+        return a->area() < b->area();
     });
 
     ASSERT_EQ(6, _shapeVector[0]->area());
@@ -117,9 +114,9 @@ TEST_F(SortTest, StandardSortObjAreaAscending) {
 }
 
 TEST_F(SortTest, StandardSortObjAreaDecending) {
-    ASSERT_NO_THROW(DecendingCompare("area"));
-    DecendingCompare decendingCompare("area");
-    _sort->standardSort(decendingCompare);
+    ASSERT_NO_THROW(DescendingCompare("area"));
+    DescendingCompare descendingCompare("area");
+    _sort->standardSort(descendingCompare);
 
     ASSERT_NEAR(37.699, _shapeVector[0]->area(), 0.001);
     ASSERT_EQ(12, _shapeVector[1]->area());
@@ -137,9 +134,9 @@ TEST_F(SortTest, StandardSortObjPerimeterAscending) {
 }
 
 TEST_F(SortTest, StandardSortObjPerimeterDecending) {
-    ASSERT_NO_THROW(DecendingCompare("perimeter"));
-    DecendingCompare decendingCompare("perimeter");
-    _sort->standardSort(decendingCompare);
+    ASSERT_NO_THROW(DescendingCompare("perimeter"));
+    DescendingCompare descendingCompare("perimeter");
+    _sort->standardSort(descendingCompare);
 
     ASSERT_NEAR(21.132, _shapeVector[0]->perimeter(), 0.001);
     ASSERT_EQ(14, _shapeVector[1]->perimeter());
@@ -230,9 +227,9 @@ TEST_F(SortTest, CustomSortObjAreaAscending) {
 }
 
 TEST_F(SortTest, CustomSortObjAreaDecending) {
-    ASSERT_NO_THROW(DecendingCompare("area"));
-    DecendingCompare decendingCompare("area");
-    _sort->customizeSort(decendingCompare);
+    ASSERT_NO_THROW(DescendingCompare("area"));
+    DescendingCompare descendingCompare("area");
+    _sort->customizeSort(descendingCompare);
 
     ASSERT_NEAR(37.699, _shapeVector[0]->area(), 0.001);
     ASSERT_EQ(12, _shapeVector[1]->area());
@@ -250,13 +247,11 @@ TEST_F(SortTest, CustomSortObjPerimeterAscending) {
 }
 
 TEST_F(SortTest, CustomSortObjPerimeterDecending) {
-    ASSERT_NO_THROW(DecendingCompare("perimeter"));
-    DecendingCompare decendingCompare("perimeter");
-    _sort->customizeSort(decendingCompare);
+    ASSERT_NO_THROW(DescendingCompare("perimeter"));
+    DescendingCompare descendingCompare("perimeter");
+    _sort->customizeSort(descendingCompare);
 
     ASSERT_NEAR(21.132, _shapeVector[0]->perimeter(), 0.001);
     ASSERT_EQ(14, _shapeVector[1]->perimeter());
     ASSERT_EQ(12, _shapeVector[2]->perimeter());
 }
-
-#endif

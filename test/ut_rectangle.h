@@ -9,7 +9,7 @@ TEST(Rectangle, ExceptionForLengthIsZero){
         Rectangle(0, 1);
         FAIL();
     }catch(string e) {
-        ASSERT_EQ("this is not a rectangle!", e);
+        ASSERT_EQ("This is not a rectangle!", e);
     }
 }
 
@@ -18,7 +18,7 @@ TEST(Rectangle, ExceptionForWidthIsZero){
         Rectangle(1, 0);
         FAIL();
     }catch(string e) {
-        ASSERT_EQ("this is not a rectangle!", e);
+        ASSERT_EQ("This is not a rectangle!", e);
     }
 }
 
@@ -27,7 +27,7 @@ TEST(Rectangle, ExceptionForLengthLessThanZero){
         Rectangle(-1, 1);
         FAIL();
     }catch(string e) {
-        ASSERT_EQ("this is not a rectangle!", e);
+        ASSERT_EQ("This is not a rectangle!", e);
     }
 }
 
@@ -36,7 +36,7 @@ TEST(Rectangle, ExceptionForWidthLessThanZero){
         Rectangle(1, -1);
         FAIL();
     }catch(string e) {
-        ASSERT_EQ("this is not a rectangle!", e);
+        ASSERT_EQ("This is not a rectangle!", e);
     }
 }
 
@@ -62,5 +62,5 @@ TEST(Rectangle, PerimeterDouble){
 
 TEST(Rectangle, Type){
     Shape* rectangle = new Rectangle(3, 4);
-    ASSERT_EQ("rectangle", rectangle->type());
+    ASSERT_EQ("Rectangle (3.000, 4.000)", rectangle->info());
 }
