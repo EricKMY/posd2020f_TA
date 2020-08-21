@@ -1,12 +1,12 @@
 #ifndef TRIANGLE_H
 #define TRIANGLE_H
 
-#include "shape.h"
-#include "../src/two_dimensional_coordinate.h"
 #include <math.h>
 #include <vector>
 #include <string>
 #include <stdio.h>
+#include "shape.h"
+#include "../src/two_dimensional_coordinate.h"
 
 using namespace std;
 
@@ -14,6 +14,8 @@ class Triangle : public Shape{
     public: 
 		Triangle(vector<TwoDimensionalCoordinate*> vectors):_vectors(vectors){
       if(vectors.size() != 3) {
+        throw string("This is not a triangle!");
+      }else if(area() <= 0) {
         throw string("This is not a triangle!");
       }
     }    

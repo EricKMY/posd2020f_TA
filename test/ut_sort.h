@@ -41,7 +41,7 @@ TEST_F(SortTest, StandardSortLambdaAreaAscending) {
     ASSERT_NEAR(37.699, _shapeVector[2]->area(), 0.001);
 }
 
-TEST_F(SortTest, StandardSortLambdaAreaDecending) {
+TEST_F(SortTest, StandardSortLambdaAreaDescending) {
     _sort->standardSort([](Shape* a, Shape* b) {
         return a->area() > b->area(); 
     });
@@ -61,7 +61,7 @@ TEST_F(SortTest, StandardSortLambdaPerimeterAscending) {
     ASSERT_NEAR(21.132, _shapeVector[2]->perimeter(), 0.001);
 }
 
-TEST_F(SortTest, StandardSortLambdaPerimeterDecending) {
+TEST_F(SortTest, StandardSortLambdaPerimeterDescending) {
     _sort->standardSort([](Shape* a, Shape* b) {
         return a->perimeter() > b->perimeter(); 
     });
@@ -79,7 +79,7 @@ TEST_F(SortTest, StandardSortFuncAreaAscending) {
     ASSERT_NEAR(37.699, _shapeVector[2]->area(), 0.001);
 }
 
-TEST_F(SortTest, StandardSortFuncAreaDecending) {
+TEST_F(SortTest, StandardSortFuncAreaDescending) {
     _sort->standardSort(areaDescendingCompare);
 
     ASSERT_NEAR(37.699, _shapeVector[0]->area(), 0.001);
@@ -95,7 +95,7 @@ TEST_F(SortTest, StandardSortFuncPerimeterAscending) {
     ASSERT_NEAR(21.132, _shapeVector[2]->perimeter(), 0.001);
 }
 
-TEST_F(SortTest, StandardSortFuncPerimeterDecending) {
+TEST_F(SortTest, StandardSortFuncPerimeterDescending) {
     _sort->standardSort(perimeterDescendingCompare);
 
     ASSERT_NEAR(21.132, _shapeVector[0]->perimeter(), 0.001);
@@ -113,7 +113,7 @@ TEST_F(SortTest, StandardSortObjAreaAscending) {
     ASSERT_NEAR(37.699, _shapeVector[2]->area(), 0.001);
 }
 
-TEST_F(SortTest, StandardSortObjAreaDecending) {
+TEST_F(SortTest, StandardSortObjAreaDescending) {
     ASSERT_NO_THROW(DescendingCompare("area"));
     DescendingCompare descendingCompare("area");
     _sort->standardSort(descendingCompare);
@@ -133,7 +133,7 @@ TEST_F(SortTest, StandardSortObjPerimeterAscending) {
     ASSERT_NEAR(21.132, _shapeVector[2]->perimeter(), 0.001);
 }
 
-TEST_F(SortTest, StandardSortObjPerimeterDecending) {
+TEST_F(SortTest, StandardSortObjPerimeterDescending) {
     ASSERT_NO_THROW(DescendingCompare("perimeter"));
     DescendingCompare descendingCompare("perimeter");
     _sort->standardSort(descendingCompare);
@@ -154,7 +154,7 @@ TEST_F(SortTest, CustomSortLambdaAreaAscending) {
     ASSERT_NEAR(37.699, _shapeVector[2]->area(), 0.001);
 }
 
-TEST_F(SortTest, CustomdSortLambdaAreaDecending) {
+TEST_F(SortTest, CustomdSortLambdaAreaDescending) {
     _sort->customizeSort([](Shape* a, Shape* b) {
         return a->area() > b->area(); 
     });
@@ -174,7 +174,7 @@ TEST_F(SortTest, CustomSortLambdaPerimeterAscending) {
     ASSERT_NEAR(21.132, _shapeVector[2]->perimeter(), 0.001);
 }
 
-TEST_F(SortTest, CustomSortLambdaPerimeterDecending) {
+TEST_F(SortTest, CustomSortLambdaPerimeterDescending) {
     _sort->customizeSort([](Shape* a, Shape* b) {
         return a->perimeter() > b->perimeter(); 
     });
@@ -192,7 +192,7 @@ TEST_F(SortTest, CustomSortFuncAreaAscending) {
     ASSERT_NEAR(37.699, _shapeVector[2]->area(), 0.001);
 }
 
-TEST_F(SortTest, CustomSortFuncAreaDecending) {
+TEST_F(SortTest, CustomSortFuncAreaDescending) {
     _sort->customizeSort(areaDescendingCompare);
 
     ASSERT_NEAR(37.699, _shapeVector[0]->area(), 0.001);
@@ -208,7 +208,7 @@ TEST_F(SortTest, CustomSortFuncPerimeterAscending) {
     ASSERT_NEAR(21.132, _shapeVector[2]->perimeter(), 0.001);
 }
 
-TEST_F(SortTest, CustomSortFuncPerimeterDecending) {
+TEST_F(SortTest, CustomSortFuncPerimeterDescending) {
     _sort->customizeSort(perimeterDescendingCompare);
 
     ASSERT_NEAR(21.132, _shapeVector[0]->perimeter(), 0.001);
@@ -226,7 +226,7 @@ TEST_F(SortTest, CustomSortObjAreaAscending) {
     ASSERT_NEAR(37.699, _shapeVector[2]->area(), 0.001);
 }
 
-TEST_F(SortTest, CustomSortObjAreaDecending) {
+TEST_F(SortTest, CustomSortObjAreaDescending) {
     ASSERT_NO_THROW(DescendingCompare("area"));
     DescendingCompare descendingCompare("area");
     _sort->customizeSort(descendingCompare);
@@ -246,7 +246,7 @@ TEST_F(SortTest, CustomSortObjPerimeterAscending) {
     ASSERT_NEAR(21.132, _shapeVector[2]->perimeter(), 0.001);
 }
 
-TEST_F(SortTest, CustomSortObjPerimeterDecending) {
+TEST_F(SortTest, CustomSortObjPerimeterDescending) {
     ASSERT_NO_THROW(DescendingCompare("perimeter"));
     DescendingCompare descendingCompare("perimeter");
     _sort->customizeSort(descendingCompare);
