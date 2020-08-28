@@ -10,20 +10,25 @@
 using namespace std;
 
 class Rectangle : public Shape{
-    public:
-		Rectangle(vector<TwoDimensionalVector*> vectors, string id):Shape(id),_vectors(vectors){}
+    public: 
+		Rectangle(double length, double width): _length(length), _width(width) {
+      if(_length <= 0 || _width <= 0) {
+        throw string("This is not a rectangle!");
+      }
+    }
 
     double area() const { return 0; }
 
     double perimeter() const { return 0; }
     
-    string type() const {
-      return "rectangle";
+    string info() const {
+      char info[100];
+      sprintf(info, "Rectangle (%.3f, %.3f)", _length, _width);
+      return info;
     }
 
     private:
-    vector<TwoDimensionalVector*> _vectors;
-
+    double _length, _width;
 };
 
 #endif
