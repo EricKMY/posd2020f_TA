@@ -12,7 +12,7 @@ using namespace std;
 
 class Triangle : public Shape{
     public: 
-		Triangle(vector<TwoDimensionalCoordinate*> vectors):_vectors(vectors){
+		Triangle(vector<TwoDimensionalCoordinate*> vectors): Shape("0"), _vectors(vectors){
       if(vectors.size() != 3) {
         throw string("This is not a triangle!");
       }else if(area() <= 0) {
