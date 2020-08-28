@@ -19,8 +19,6 @@ int main(int argc, char *argv[]) {
     
     }else cout << "Unable to open file";
 
-    cout << input_str << endl;
-
     input_str.append(" ");
     input_str.append(argv[3]);
     input_str.append(" ");
@@ -34,9 +32,9 @@ int main(int argc, char *argv[]) {
 
     }catch(std::string errorMessage){
         cout << errorMessage << endl;
+        return 0;
     }
- 
-    cout << terminal->showResult() << endl;
+
 
     ofstream output_file (argv[2]);
     if (output_file.is_open())

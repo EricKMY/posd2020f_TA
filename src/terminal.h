@@ -27,6 +27,7 @@ class Terminal {
         std::sregex_iterator words_end = std::sregex_iterator();
 
         std::string param_str;
+        
 
         for (std::sregex_iterator i = words_begin; i != words_end; ++i) {
             std::smatch match = *i;                                                 
@@ -67,7 +68,6 @@ class Terminal {
             throw string("invalid input");
         }
 
-        
 
 
         for(std::vector<string>::iterator str_it = _shape_str_vector.begin(); str_it != _shape_str_vector.end(); str_it++){
