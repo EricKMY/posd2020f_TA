@@ -13,7 +13,7 @@ class TriangleTest: public testing::Test {
 
 
 TEST_F(TriangleTest, ConstructorNoException){
-    ASSERT_NO_THROW(new Triangle(triangleVector));
+    ASSERT_NO_THROW(new Triangle("1", triangleVector););
 }
 
 TEST(Triangle, ExceptionForVectorLessThanThree){
@@ -21,7 +21,7 @@ TEST(Triangle, ExceptionForVectorLessThanThree){
     triangleExceptionVector.push_back(new TwoDimensionalCoordinate(3, 0));
     triangleExceptionVector.push_back(new TwoDimensionalCoordinate(0, 4));
     try {
-        new Triangle(triangleExceptionVector);
+        new Triangle("1", triangleExceptionVector);
         FAIL();
     }catch(string e) {
         ASSERT_EQ("This is not a triangle!", e);
@@ -35,7 +35,7 @@ TEST(Triangle, ExceptionForVectorMoreThanThree){
     triangleExceptionVector.push_back(new TwoDimensionalCoordinate(-3, 0));
     triangleExceptionVector.push_back(new TwoDimensionalCoordinate(0, -4));
     try {
-        new Triangle(triangleExceptionVector);
+        new Triangle("1", triangleExceptionVector);
         FAIL();
     }catch(string e) {
         ASSERT_EQ("This is not a triangle!", e);
@@ -48,7 +48,7 @@ TEST(Triangle, ExceptionForAreaIsZero){
     triangleExceptionVector.push_back(new TwoDimensionalCoordinate(0, 0));
     triangleExceptionVector.push_back(new TwoDimensionalCoordinate(-3, 0));
     try {
-        new Triangle(triangleExceptionVector);
+        new Triangle("1", triangleExceptionVector);
         FAIL();
     }catch(string e) {
         ASSERT_EQ("This is not a triangle!", e);
@@ -56,16 +56,46 @@ TEST(Triangle, ExceptionForAreaIsZero){
 }
 
 TEST_F(TriangleTest, Area){
-    Shape* triangle = new Triangle(triangleVector);
+    Shape* triangle = new Triangle("1", triangleVector);
     ASSERT_EQ(6, triangle->area());
 }
 
 TEST_F(TriangleTest, Perimeter){
-    Shape* triangle = new Triangle(triangleVector);
+    Shape* triangle = new Triangle("1", triangleVector);
     ASSERT_EQ(12, triangle->perimeter());
 }
 
 TEST_F(TriangleTest, Info){
-    Shape* triangle = new Triangle(triangleVector);
+    Shape* triangle = new Triangle("1", triangleVector);
     ASSERT_EQ("Triangle ([0.000, 0.000], [3.000, 0.000], [0.000, 4.000])", triangle->info());
+}
+
+
+TEST_F(TriangleTest, ExceptionForAddShape){
+    Shape* triangle = new Triangle("1", triangleVector);
+    try {
+        triangle->addShape(new Triangle("1", triangleVector));
+        FAIL();
+    }catch(string e) {
+        ASSERT_EQ("Only complex shape can add!", e);
+    }
+}
+
+TEST_F(TriangleTest, ExceptionForDeleteShape){
+    Shape* triangle = new Triangle("1", triangleVector);
+    try {
+        triangle->deleteShapeById("1");
+        FAIL();
+    }catch(string e) {
+        ASSERT_EQ("Only complex shape can delete!", e);
+    }
+}
+TEST_F(TriangleTest, ExceptionForGetShapeById){
+    Shape* triangle = new Triangle("1", triangleVector);
+    try {
+        triangle->getShapeById("1");
+        FAIL();
+    }catch(string e) {
+        ASSERT_EQ("Only complex shape can get!", e);
+    }
 }
