@@ -1,30 +1,44 @@
-#ifndef COMPLEX_SHAPE_H
-#define COMPLEX_SHAPE_H
+// #ifndef COMPLEX_SHAPE_H
+// #define COMPLEX_SHAPE_H
 
-#include <vector>
-#include <string>
-#include <vector>
-#include "shape.h"
+// #include <string>
+// #include <vector>
+// #include "shape.h"
 
-using namespace std;
+// using namespace std;
 
-class ComplexShape : public Shape{
-    public: 
-    ComplexShape(string id, vector<Shape*> shapes):Shape(id),_shapes(shapes){}
+// class ComplexShape : public Shape{
+//     public: 
+//     ComplexShape(string id, vector<Shape*> shapes): Shape(id), _shapes(shapes) {}
 
-    double area() const { return 0; }
+//     double area() const {
+//       double area = 0;
+//       for(_it = _shapes->begin(); _it != _shapes->end(); ++_it) {
+//         area += _it->area();
+//       }
+//       return area;
+//     }
 
-    double perimeter() const { return 0; }
+//     double perimeter() const {
+//       double perimeter = 0;
+//       for(_it = _shapes->begin(); _it != _shapes->end(); ++_it) {
+//         perimeter += _it->perimeter();
+//       }
+//       return perimeter;
+//     }
     
-    string info() const {
-      // char info[100];
-      // sprintf(info, "Ellipse (%.3f, %.3f)", _semiMajorAxes, _semiMinorAxes);
-      // return info;
-	  }
+//     string info() const {
+//       string info = "";
+//       for(_it = _shapes->begin(); _it != _shapes->end(); ++_it) {
+//         info += _it->info();
+//       }
+//       return info;
+//     }
 
-    private:
-    vector<Shape*> _shapes;
+//     private:
+//     vector<Shape*> _shapes;
+//     typedef vector<Shape*>::iterator _it;
 
-};
+// };
 
-#endif
+// #endif

@@ -1,33 +1,27 @@
 #ifndef SHAPE_H
 #define SHAPE_H
 
+#include <string>
+
 using namespace std;
 
 class Shape{
-	public:
-        Shape(string id):_id(id){}
+        public:
+        Shape(string id);
 
         virtual double area() const = 0;
+
         virtual double perimeter() const = 0;
+
         virtual string info() const = 0;
 
-        virtual void addChild(Shape *shape) {
-		throw string("Only complex shape can add!");
-	}
+        virtual void addShape(Shape *shape);
 
-	virtual Shape *getChild(int index){
-                throw string("Only complex shape can get!");
-	}
+        virtual void deleteShapeById(string id);
 
-        virtual Shape *findShape(string id){
-                throw string("Only complex shape can find!");
-        }
+        virtual Shape* getShapeById(string id);
 
-	virtual string listShape(){
-		throw string("Not a complex shape!");
-	}
-
-
+        virtual ~Shape();
 
         private:
         string _id;

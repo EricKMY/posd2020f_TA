@@ -1,25 +1,26 @@
 #ifndef RECTANGLE_H
 #define RECTANGLE_H
 
-#include <vector>
 #include <string>
-#include <vector>
-#include "shape.h"
-#include "two_dimensional_vector.h"
+// #include <vector>
+#include "./shape.h"
+// #include "two_dimensional_coordinate.h"
 
 using namespace std;
 
-class Rectangle : public Shape{
+class Rectangle : public Shape {
     public: 
-		Rectangle(double length, double width): _length(length), _width(width) {
+		Rectangle(double length, double width): Shape("0"), _length(length), _width(width) {
       if(_length <= 0 || _width <= 0) {
         throw string("This is not a rectangle!");
       }
     }
 
-    double area() const { return 0; }
+    double area() const {
+      return _length * _width;
+    }
 
-    double perimeter() const { return 0; }
+    double perimeter() const { return (_length + _width) * 2; }
     
     string info() const {
       char info[100];
