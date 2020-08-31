@@ -51,10 +51,19 @@ class ComplexShape : public Shape {
   }
 
   void deleteShapeById(string id) {
-    bool* isDeleted = new bool(false);
-    deleteShapeByIdImpl(id, isDeleted);
-    if(!(*isDeleted)) {
+    if(getShapeByIdImpl(id) == nullptr) {
       throw string("expected delete shape but shape not found");
+    };
+    vector<Shape*>::iterator it = _shapes->begin();
+    while(it != _shapes->end()) {
+      if((*it)->id() == id) {
+        _shapes->erase(it);
+        break;
+      }
+      try {
+        (*it)->deleteShapeById(id);
+      }catch(string e) {}
+      ++it;
     }
   }
 
@@ -67,21 +76,6 @@ class ComplexShape : public Shape {
 
   private:
   vector<Shape*>* _shapes;
-
-  void deleteShapeByIdImpl(string id, bool* isDeleted) {
-    vector<Shape*>::iterator it = _shapes->begin();
-    while(it != _shapes->end()) {
-      if((*it)->id() == id) {
-        _shapes->erase(it);
-        *isDeleted = true;
-        break;
-      }
-      try {
-        (*it)->deleteShapeById(id);
-      }catch(string e) {}
-      ++it;
-    }
-  }
 
   Shape* getShapeByIdImpl(string id) {
     vector<Shape*>::iterator it = _shapes->begin();
