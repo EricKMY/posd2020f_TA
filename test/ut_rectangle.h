@@ -1,6 +1,5 @@
 #include "../src/rectangle.h"
 
-
 TEST(Rectangle, ExceptionForLengthIsZero){
     try {
         Rectangle("1", 0, 1);
@@ -37,24 +36,6 @@ TEST(Rectangle, ExceptionForWidthLessThanZero){
     }
 }
 
-TEST(Rectangle, ExceptionForLengthLessThanZero){
-    try {
-        Rectangle("1", -1, 1);
-        FAIL();
-    }catch(string e) {
-        ASSERT_EQ("this is not a rectangle!", e);
-    }
-}
-
-TEST(Rectangle, ExceptionForWidthLessThanZero){
-    try {
-        Rectangle("1", 1, -1);
-        FAIL();
-    }catch(string e) {
-        ASSERT_EQ("this is not a rectangle!", e);
-    }
-}
-
 TEST(Rectangle, AreaInt){
     Shape* rectangle = new Rectangle("1", 3, 4);
     ASSERT_EQ(12, rectangle->area());
@@ -75,11 +56,6 @@ TEST(Rectangle, PerimeterDouble){
     ASSERT_EQ(15.8, rectangle->perimeter());
 }
 
-TEST(Rectangle, Type){
-    Shape* rectangle = new Rectangle("1", 3, 4);
-    ASSERT_EQ("rectangle", rectangle->type());
-}
-
 TEST(Rectangle, Info){
     Shape* rectangle = new Rectangle("1", 3, 4);
     ASSERT_EQ("Rectangle (3.000, 4.000)", rectangle->info());
@@ -91,7 +67,7 @@ TEST(Rectangle, ExceptionForAddShape){
         rectangle->addShape(new Rectangle("1", 3, 4));
         FAIL();
     }catch(string e) {
-        ASSERT_EQ("Only complex shape can add!", e);
+        ASSERT_EQ("Only complex shape can add shape!", e);
     }
 }
 
@@ -101,7 +77,7 @@ TEST(Rectangle, ExceptionForDeleteShape){
         rectangle->deleteShapeById("1");
         FAIL();
     }catch(string e) {
-        ASSERT_EQ("Only complex shape can delete!", e);
+        ASSERT_EQ("Only complex shape can delete shape!", e);
     }
 }
 
@@ -111,6 +87,6 @@ TEST(Rectangle, ExceptionForGetShapeById){
         rectangle->getShapeById("1");
         FAIL();
     }catch(string e) {
-        ASSERT_EQ("Only complex shape can get!", e);
+        ASSERT_EQ("Only complex shape can get shape!", e);
     }
 }

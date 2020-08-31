@@ -75,7 +75,7 @@ TEST(Ellipse, ExceptionForAddShape){
         ellipse->addShape(new Ellipse("1", 3, 4));
         FAIL();
     }catch(string e) {
-        ASSERT_EQ("Only complex shape can add!", e);
+        ASSERT_EQ("Only complex shape can add shape!", e);
     }
 }
 
@@ -85,7 +85,7 @@ TEST(Ellipse, ExceptionForDeleteShape){
         ellipse->deleteShapeById("1");
         FAIL();
     }catch(string e) {
-        ASSERT_EQ("Only complex shape can delete!", e);
+        ASSERT_EQ("Only complex shape can delete shape!", e);
     }
 }
 
@@ -95,6 +95,6 @@ TEST(Ellipse, ExceptionForGetShapeById){
         ellipse->getShapeById("1");
         FAIL();
     }catch(string e) {
-        ASSERT_EQ("Only complex shape can get!", e);
+        ASSERT_EQ("Only complex shape can get shape!", e);
     }
 }

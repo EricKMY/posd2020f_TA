@@ -10,7 +10,7 @@ using namespace std;
 
 class Rectangle : public Shape {
     public: 
-		Rectangle(double length, double width): Shape("0"), _length(length), _width(width) {
+		Rectangle(string id, double length, double width): Shape(id), _length(length), _width(width) {
       if(_length <= 0 || _width <= 0) {
         throw string("This is not a rectangle!");
       }

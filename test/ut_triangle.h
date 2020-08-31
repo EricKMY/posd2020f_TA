@@ -1,6 +1,8 @@
+#include <gtest/gtest.h>
 #include "../src/triangle.h"
 #include "../src/two_dimensional_coordinate.h"
 
+using namespace std;
 class TriangleTest: public testing::Test {
     protected:
     void SetUp() {
@@ -13,7 +15,7 @@ class TriangleTest: public testing::Test {
 
 
 TEST_F(TriangleTest, ConstructorNoException){
-    ASSERT_NO_THROW(new Triangle("1", triangleVector););
+    ASSERT_NO_THROW(Triangle("1", triangleVector););
 }
 
 TEST(Triangle, ExceptionForVectorLessThanThree){
@@ -21,7 +23,7 @@ TEST(Triangle, ExceptionForVectorLessThanThree){
     triangleExceptionVector.push_back(new TwoDimensionalCoordinate(3, 0));
     triangleExceptionVector.push_back(new TwoDimensionalCoordinate(0, 4));
     try {
-        new Triangle("1", triangleExceptionVector);
+        Triangle("1", triangleExceptionVector);
         FAIL();
     }catch(string e) {
         ASSERT_EQ("This is not a triangle!", e);
@@ -77,7 +79,7 @@ TEST_F(TriangleTest, ExceptionForAddShape){
         triangle->addShape(new Triangle("1", triangleVector));
         FAIL();
     }catch(string e) {
-        ASSERT_EQ("Only complex shape can add!", e);
+        ASSERT_EQ("Only complex shape can add shape!", e);
     }
 }
 
@@ -87,7 +89,7 @@ TEST_F(TriangleTest, ExceptionForDeleteShape){
         triangle->deleteShapeById("1");
         FAIL();
     }catch(string e) {
-        ASSERT_EQ("Only complex shape can delete!", e);
+        ASSERT_EQ("Only complex shape can delete shape!", e);
     }
 }
 TEST_F(TriangleTest, ExceptionForGetShapeById){
@@ -96,6 +98,6 @@ TEST_F(TriangleTest, ExceptionForGetShapeById){
         triangle->getShapeById("1");
         FAIL();
     }catch(string e) {
-        ASSERT_EQ("Only complex shape can get!", e);
+        ASSERT_EQ("Only complex shape can get shape!", e);
     }
 }

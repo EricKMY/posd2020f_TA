@@ -3,6 +3,10 @@
 using namespace std;
 
 Shape::Shape(string id): _id(id){}
+
+string Shape::id() const {
+    return _id;
+}
     
 void Shape::addShape(Shape *shape) {
     throw string("Only complex shape can add shape!");
