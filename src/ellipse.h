@@ -9,7 +9,7 @@ using namespace std;
 
 class Ellipse : public Shape {
 	public:
-	Ellipse(double semiMajorAxes, double semiMinorAxes): Shape("0"), _semiMajorAxes(semiMajorAxes), _semiMinorAxes(semiMinorAxes){
+	Ellipse(string id, double semiMajorAxes, double semiMinorAxes): Shape(id), _semiMajorAxes(semiMajorAxes), _semiMinorAxes(semiMinorAxes){
 		if(_semiMajorAxes <= 0 || _semiMinorAxes <= 0) {
         	throw string("This is not a ellipse!");
       	}

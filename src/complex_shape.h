@@ -1,44 +1,101 @@
-// #ifndef COMPLEX_SHAPE_H
-// #define COMPLEX_SHAPE_H
+#ifndef COMPLEX_SHAPE_H
+#define COMPLEX_SHAPE_H
 
-// #include <string>
-// #include <vector>
-// #include "shape.h"
+#include <string>
+#include <vector>
+#include "shape.h"
 
-// using namespace std;
+using namespace std;
 
-// class ComplexShape : public Shape{
-//     public: 
-//     ComplexShape(string id, vector<Shape*> shapes): Shape(id), _shapes(shapes) {}
+class ComplexShape : public Shape {
+  public: 
+  ComplexShape(string id, vector<Shape*>* shapes): Shape(id), _shapes(shapes) {
+    if(_shapes->empty()) {
+      throw string("This is not a complexShape shape!");
+    }
+  }
 
-//     double area() const {
-//       double area = 0;
-//       for(_it = _shapes->begin(); _it != _shapes->end(); ++_it) {
-//         area += _it->area();
-//       }
-//       return area;
-//     }
+  double area() const {
+    double area = 0;
+    vector<Shape*>::iterator it = _shapes->begin();
+    while(it != _shapes->end()) {
+      area += (*it)->area();
+      ++it;
+    }
+    return area;
+  }
 
-//     double perimeter() const {
-//       double perimeter = 0;
-//       for(_it = _shapes->begin(); _it != _shapes->end(); ++_it) {
-//         perimeter += _it->perimeter();
-//       }
-//       return perimeter;
-//     }
+  double perimeter() const {
+    double perimeter = 0;
+    vector<Shape*>::iterator it = _shapes->begin();
+    while(it != _shapes->end()) {
+      perimeter += (*it)->perimeter();
+      ++it;
+    }
+    return perimeter;
+  }
     
-//     string info() const {
-//       string info = "";
-//       for(_it = _shapes->begin(); _it != _shapes->end(); ++_it) {
-//         info += _it->info();
-//       }
-//       return info;
-//     }
+  string info() const {
+    string info = "Complex Shape {";
+    vector<Shape*>::iterator it = _shapes->begin();
+    while(it != _shapes->end()) {
+      info += (*it)->info() + "\n";
+      ++it;
+    }
+    info.erase(info.end()-1, info.end());
+    return info + "}";
+  }
 
-//     private:
-//     vector<Shape*> _shapes;
-//     typedef vector<Shape*>::iterator _it;
+  void addShape(Shape *shape) {
+    _shapes->push_back(shape);
+  }
 
-// };
+  void deleteShapeById(string id) {
+    bool* isDeleted = new bool();
+    deleteShapeByIdImpl(id, isDeleted);
+    if(!(*isDeleted)) {
+      throw string("expected delete shape but shape not found");
+    }
+  }
 
-// #endif
+  Shape* getShapeById(string id) {
+    if(getShapeByIdImpl(id) == nullptr) {
+      throw string("expected get shape but shape not found");
+    };
+    return getShapeByIdImpl(id);
+  }
+
+  private:
+  vector<Shape*>* _shapes;
+
+  void deleteShapeByIdImpl(string id, bool* isDeleted) {
+    vector<Shape*>::iterator it = _shapes->begin();
+    while(it != _shapes->end()) {
+      if((*it)->id() == id) {
+        _shapes->erase(it);
+        *isDeleted = true;
+        break;
+      }
+      try {
+        (*it)->deleteShapeById(id);
+      }catch(string e) {}
+      ++it;
+    }
+  }
+
+  Shape* getShapeByIdImpl(string id) {
+    vector<Shape*>::iterator it = _shapes->begin();
+    while(it != _shapes->end()) {
+      if((*it)->id() == id) {
+        return *it;
+      }
+      try {
+        return (*it)->getShapeById(id);
+      }catch(string e) {}
+      ++it;
+    }
+    return nullptr;
+  }
+};
+
+#endif
