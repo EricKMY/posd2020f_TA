@@ -17,30 +17,24 @@ class ComplexShape : public Shape {
 
   double area() const {
     double area = 0;
-    vector<Shape*>::iterator it = _shapes->begin();
-    while(it != _shapes->end()) {
+    for(vector<Shape*>::iterator it = _shapes->begin(); it != _shapes->end(); ++it) {
       area += (*it)->area();
-      ++it;
     }
     return area;
   }
 
   double perimeter() const {
     double perimeter = 0;
-    vector<Shape*>::iterator it = _shapes->begin();
-    while(it != _shapes->end()) {
+    for(vector<Shape*>::iterator it = _shapes->begin(); it != _shapes->end(); ++it) {
       perimeter += (*it)->perimeter();
-      ++it;
     }
     return perimeter;
   }
     
   string info() const {
     string info = "Complex Shape {";
-    vector<Shape*>::iterator it = _shapes->begin();
-    while(it != _shapes->end()) {
+    for(vector<Shape*>::iterator it = _shapes->begin(); it != _shapes->end(); ++it) {
       info += (*it)->info() + ", ";
-      ++it;
     }
     info.erase(info.end()-2, info.end());
     return info + "}";
@@ -54,8 +48,7 @@ class ComplexShape : public Shape {
     if(getShapeByIdImpl(id) == nullptr) {
       throw string("expected delete shape but shape not found");
     };
-    vector<Shape*>::iterator it = _shapes->begin();
-    while(it != _shapes->end()) {
+    for(vector<Shape*>::iterator it = _shapes->begin(); it != _shapes->end(); ++it) {
       if((*it)->id() == id) {
         _shapes->erase(it);
         break;
@@ -63,7 +56,6 @@ class ComplexShape : public Shape {
       try {
         (*it)->deleteShapeById(id);
       }catch(string e) {}
-      ++it;
     }
   }
 
@@ -78,15 +70,13 @@ class ComplexShape : public Shape {
   vector<Shape*>* _shapes;
 
   Shape* getShapeByIdImpl(string id) {
-    vector<Shape*>::iterator it = _shapes->begin();
-    while(it != _shapes->end()) {
+    for(vector<Shape*>::iterator it = _shapes->begin(); it != _shapes->end(); ++it) {
       if((*it)->id() == id) {
         return *it;
       }
       try {
         return (*it)->getShapeById(id);
       }catch(string e) {}
-      ++it;
     }
     return nullptr;
   }

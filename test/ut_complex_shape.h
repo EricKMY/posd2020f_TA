@@ -260,7 +260,7 @@ TEST_F(ComplexShapeTest, ExecptionForGetShapeById_lv3){
     }
 
     try {
-        complex_shape3->getShapeById("77");
+        complex_shape3->getShapeById("7123");
         FAIL();
     }catch(string e) {
         ASSERT_EQ("expected get shape but shape not found", e);
