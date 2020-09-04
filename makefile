@@ -20,8 +20,8 @@ directories:
 	mkdir -p $(OBJ)
 
 clean:
-	rm -rf $(BIN)
-	rm -rf $(OBJ)
+	rm -rf $(BIN)/*
+	rm -rf $(OBJ)/*
 
 run:
 	$(BIN)/ut_all
