@@ -7,7 +7,7 @@ LIB = -lgtest -lpthread
 CFLAGS = -std=c++11
 FERROE = -Wfatal-errors
 
-all:clean directories $(BIN)/ut_all run
+all:clean directories 
 
 $(BIN)/ut_all: $(TEST)/ut_main.cpp $(TEST)/ut_rectangle.h $(TEST)/ut_ellipse.h $(TEST)/ut_triangle.h $(TEST)/ut_complex_shape.h $(TEST)/ut_sort.h $(TEST)/ut_terminal.h $(OBJ)/shape.o $(SRC)/rectangle.h $(SRC)/ellipse.h $(SRC)/triangle.h $(SRC)/complex_shape.h $(SRC)/two_dimensional_coordinate.h $(SRC)/sort.h $(SRC)/terminal.h
 	$(CC) $(CFLAGS) ${FERROE} -o $@ $< $(OBJ)/* $(LIB)
