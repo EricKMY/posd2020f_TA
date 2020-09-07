@@ -45,41 +45,35 @@ class ComplexShape : public Shape {
   }
 
   void deleteShapeById(string id) {
-    if(getShapeByIdImpl(id) == nullptr) {
-      throw string("expected delete shape but shape not found");
-    };
     for(vector<Shape*>::iterator it = _shapes->begin(); it != _shapes->end(); ++it) {
       if((*it)->id() == id) {
         _shapes->erase(it);
-        break;
+        return;
       }
       try {
         (*it)->deleteShapeById(id);
+        return;
       }catch(string e) {}
     }
+    throw string("expected delete shape but shape not found");
   }
 
   Shape* getShapeById(string id) {
-    if(getShapeByIdImpl(id) == nullptr) {
-      throw string("expected get shape but shape not found");
-    };
-    return getShapeByIdImpl(id);
+    Shape *s = nullptr;
+    for(vector<Shape*>::iterator it = _shapes->begin(); it != _shapes->end(); ++it) {
+        if((*it)->id() == id) {
+          return *it;
+        }
+        try {
+          s = (*it)->getShapeById(id);
+          return s;
+        }catch(string e) {}
+    }
+    throw string("expected get shape but shape not found");
   }
 
   private:
   vector<Shape*>* _shapes;
-
-  Shape* getShapeByIdImpl(string id) {
-    for(vector<Shape*>::iterator it = _shapes->begin(); it != _shapes->end(); ++it) {
-      if((*it)->id() == id) {
-        return *it;
-      }
-      try {
-        return (*it)->getShapeById(id);
-      }catch(string e) {}
-    }
-    return nullptr;
-  }
 };
 
 #endif
