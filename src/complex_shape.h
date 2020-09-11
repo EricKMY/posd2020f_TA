@@ -59,14 +59,12 @@ class ComplexShape : public Shape {
   }
 
   Shape* getShapeById(string id) {
-    Shape *s = nullptr;
     for(vector<Shape*>::iterator it = _shapes->begin(); it != _shapes->end(); ++it) {
         if((*it)->id() == id) {
           return *it;
         }
         try {
-          s = (*it)->getShapeById(id);
-          return s;
+          return (*it)->getShapeById(id);
         }catch(string e) {}
     }
     throw string("expected get shape but shape not found");
