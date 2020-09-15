@@ -8,6 +8,40 @@
 using namespace std;
 
 class ComplexShape : public Shape {
+  class ComplexShapeIterator:public Iterator {
+    public:
+    ComplexShapeIterator(ComplexShape *s): _s(s) {}
+
+    void first() {
+      _current = _s->_shapes->begin();
+    }
+
+    Shape * currentItem() {
+      if(isDone()){
+        throw std::string("No current item!");
+      }else{
+        return *_current;
+      }
+    }
+
+    void next() {
+      if(isDone()){
+        throw std::string("Moving past the end!");
+      }else{
+        ++_current;
+      }
+    }
+
+    bool isDone() {
+      return _current == _s->_shapes->end();
+    }
+
+
+    private:
+    ComplexShape *_s;
+    vector<Shape*>::iterator _current;
+  };
+
   public: 
   ComplexShape(string id, vector<Shape*>* shapes): Shape(id), _shapes(shapes) {
     if(_shapes->empty()) {
@@ -68,6 +102,10 @@ class ComplexShape : public Shape {
         }catch(string e) {}
     }
     throw string("expected get shape but shape not found");
+  }
+
+  Iterator * createIterator() {
+    return new ComplexShapeIterator(this);
   }
 
   private:

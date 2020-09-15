@@ -3,6 +3,7 @@
 #include "../src/ellipse.h"
 #include "../src/rectangle.h"
 #include "../src/triangle.h"
+#include "../src/utility.h"
 
 using namespace std;
 
@@ -63,6 +64,16 @@ TEST_F(ComplexShapeTest, Info){
     ASSERT_EQ("Complex Shape {Ellipse (3.000, 4.000), Rectangle (3.000, 4.000), Triangle ([0.000, 0.000], [3.000, 0.000], [0.000, 4.000])}", complex_shape->info());
 }
 
+TEST_F(ComplexShapeTest, IteratorFirst){
+    Shape* complex_shape = new ComplexShape("4", shapes);
+    Iterator *it = complex_shape->createIterator();
+    it->first();
+    ASSERT_EQ("Ellipse (3.000, 4.000)", it->currentItem()->info());
+    it->next();
+    ASSERT_EQ("Rectangle (3.000, 4.000)", it->currentItem()->info());
+    it->next();
+    ASSERT_EQ("Triangle ([0.000, 0.000], [3.000, 0.000], [0.000, 4.000])", it->currentItem()->info());
+}
 
 TEST_F(ComplexShapeTest, AddShape) {
     shapes->clear();
@@ -101,6 +112,18 @@ TEST_F(ComplexShapeTest, GetShapeById){
     Shape* complex_shape = new ComplexShape("4", shapes);
     Shape *shape = complex_shape->getShapeById("3");
 
+
+    ASSERT_EQ("3", shape->id());
+    ASSERT_EQ(6, shape->area());
+    ASSERT_EQ(12, shape->perimeter());
+    ASSERT_EQ("Triangle ([0.000, 0.000], [3.000, 0.000], [0.000, 4.000])", shape->info());
+}
+
+TEST_F(ComplexShapeTest, UtilityGetShapeById){
+    Shape* complex_shape = new ComplexShape("4", shapes);
+
+    Utility *utility = new Utility();
+    Shape *shape = utility->getShapeById(complex_shape, "3");
 
     ASSERT_EQ("3", shape->id());
     ASSERT_EQ(6, shape->area());
@@ -229,7 +252,7 @@ TEST_F(ComplexShapeTest, ExecptionForDeleteShapeById_lv3){
 }
 
 TEST_F(ComplexShapeTest, ExecptionForGetShapeById_lv3){
-   Shape* complex_shape = new ComplexShape("4", shapes);
+    Shape* complex_shape = new ComplexShape("4", shapes);
 
     vector<Shape*> *shapes2 = new vector<Shape*>();
     shapes2->push_back(ellipse2);

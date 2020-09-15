@@ -2,6 +2,8 @@
 #define SHAPE_H
 
 #include <string>
+#include "iterator.h"
+#include "null_iterator.h"
 
 using namespace std;
 
@@ -22,6 +24,10 @@ class Shape{
         virtual void deleteShapeById(string id);
 
         virtual Shape* getShapeById(string id);
+        
+        virtual Iterator *createIterator() {
+                return new NullIterator();
+        }
 
         virtual ~Shape();
 

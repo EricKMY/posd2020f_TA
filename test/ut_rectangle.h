@@ -1,4 +1,5 @@
 #include "../src/rectangle.h"
+#include "../src/utility.h"
 
 TEST(Rectangle, ExceptionForLengthIsZero){
     try {
@@ -85,6 +86,56 @@ TEST(Rectangle, ExceptionForGetShapeById){
     Shape* rectangle = new Rectangle("1", 3, 4);
     try {
         rectangle->getShapeById("1");
+        FAIL();
+    }catch(string e) {
+        ASSERT_EQ("Only complex shape can get shape!", e);
+    }
+}
+
+TEST(Rectangle, ExceptionWhenIteratorFirst){
+    Shape* rectangle = new Rectangle("1", 3, 4);
+    Iterator *it = rectangle->createIterator();
+    try {
+        it->first();
+        FAIL();
+    }catch(string e) {
+        ASSERT_EQ("no child member!", e);
+    }
+}
+
+TEST(Rectangle, ExceptionWhenIteratorCurrentItem){
+    Shape* rectangle = new Rectangle("1", 3, 4);
+    Iterator *it = rectangle->createIterator();
+    try {
+        it->currentItem();
+        FAIL();
+    }catch(string e) {
+        ASSERT_EQ("no child member!", e);
+    }
+}
+
+TEST(Rectangle, ExceptionWhenIteratorNext){
+    Shape* rectangle = new Rectangle("1", 3, 4);
+    Iterator *it = rectangle->createIterator();
+    try {
+        it->next();
+        FAIL();
+    }catch(string e) {
+        ASSERT_EQ("no child member!", e);
+    }
+}
+
+TEST(Rectangle, IteratorIsDone){
+    Shape* rectangle = new Rectangle("1", 3, 4);
+    Iterator *it = rectangle->createIterator();
+    ASSERT_TRUE(it->isDone());
+}
+
+TEST(Rectangle, ExceptionForCallUtilityGetShapeById){
+    Shape* rectangle = new Rectangle("1", 3, 4);
+    Utility *utility = new Utility();
+    try {
+        utility->getShapeById(rectangle, "1");
         FAIL();
     }catch(string e) {
         ASSERT_EQ("Only complex shape can get shape!", e);

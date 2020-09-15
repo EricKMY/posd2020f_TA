@@ -1,6 +1,7 @@
 #include <gtest/gtest.h>
 #include "../src/triangle.h"
 #include "../src/two_dimensional_coordinate.h"
+#include "../src/utility.h"
 
 using namespace std;
 class TriangleTest: public testing::Test {
@@ -96,6 +97,57 @@ TEST_F(TriangleTest, ExceptionForGetShapeById){
     Shape* triangle = new Triangle("1", triangleVector);
     try {
         triangle->getShapeById("1");
+        FAIL();
+    }catch(string e) {
+        ASSERT_EQ("Only complex shape can get shape!", e);
+    }
+}
+
+
+TEST_F(TriangleTest, ExceptionWhenIteratorFirst){
+    Shape* triangle = new Triangle("1", triangleVector);
+    Iterator *it = triangle->createIterator();
+    try {
+        it->first();
+        FAIL();
+    }catch(string e) {
+        ASSERT_EQ("no child member!", e);
+    }
+}
+
+TEST_F(TriangleTest, ExceptionWhenIteratorCurrentItem){
+    Shape* triangle = new Triangle("1", triangleVector);
+    Iterator *it = triangle->createIterator();
+    try {
+        it->currentItem();
+        FAIL();
+    }catch(string e) {
+        ASSERT_EQ("no child member!", e);
+    }
+}
+
+TEST_F(TriangleTest, ExceptionWhenIteratorNext){
+    Shape* triangle = new Triangle("1", triangleVector);
+    Iterator *it = triangle->createIterator();
+    try {
+        it->next();
+        FAIL();
+    }catch(string e) {
+        ASSERT_EQ("no child member!", e);
+    }
+}
+
+TEST_F(TriangleTest, IteratorIsDone){
+    Shape* triangle = new Triangle("1", triangleVector);
+    Iterator *it = triangle->createIterator();
+    ASSERT_TRUE(it->isDone());
+}
+
+TEST_F(TriangleTest, ExceptionForCallUtilityGetShapeById){
+    Shape* triangle = new Triangle("1", triangleVector);
+    Utility *utility = new Utility();
+    try {
+        utility->getShapeById(triangle, "1");
         FAIL();
     }catch(string e) {
         ASSERT_EQ("Only complex shape can get shape!", e);

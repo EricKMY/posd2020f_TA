@@ -1,4 +1,5 @@
 #include "../src/ellipse.h"
+#include "../src/utility.h"
 
 TEST(Ellipse, ConstructorNoException){
     ASSERT_NO_THROW(Ellipse("1", 1, 1));
@@ -93,6 +94,57 @@ TEST(Ellipse, ExceptionForGetShapeById){
     Shape* ellipse = new Ellipse("1", 3, 4);
     try {
         ellipse->getShapeById("1");
+        FAIL();
+    }catch(string e) {
+        ASSERT_EQ("Only complex shape can get shape!", e);
+    }
+}
+
+
+TEST(Ellipse, ExceptionWhenIteratorFirst){
+    Shape* ellipse = new Ellipse("1", 3, 4);
+    Iterator *it = ellipse->createIterator();
+    try {
+        it->first();
+        FAIL();
+    }catch(string e) {
+        ASSERT_EQ("no child member!", e);
+    }
+}
+
+TEST(Ellipse, ExceptionWhenIteratorCurrentItem){
+    Shape* ellipse = new Ellipse("1", 3, 4);
+    Iterator *it = ellipse->createIterator();
+    try {
+        it->currentItem();
+        FAIL();
+    }catch(string e) {
+        ASSERT_EQ("no child member!", e);
+    }
+}
+
+TEST(Ellipse, ExceptionWhenIteratorNext){
+    Shape* ellipse = new Ellipse("1", 3, 4);
+    Iterator *it = ellipse->createIterator();
+    try {
+        it->next();
+        FAIL();
+    }catch(string e) {
+        ASSERT_EQ("no child member!", e);
+    }
+}
+
+TEST(Ellipse, IteratorIsDone){
+    Shape* ellipse = new Ellipse("1", 3, 4);
+    Iterator *it = ellipse->createIterator();
+    ASSERT_TRUE(it->isDone());
+}
+
+TEST(Ellipse, ExceptionForCallUtilityGetShapeById){
+    Shape* ellipse = new Ellipse("1", 3, 4);
+    Utility *utility = new Utility();
+    try {
+        utility->getShapeById(ellipse, "1");
         FAIL();
     }catch(string e) {
         ASSERT_EQ("Only complex shape can get shape!", e);
