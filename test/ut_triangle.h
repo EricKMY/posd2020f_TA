@@ -1,5 +1,6 @@
 #include "../src/triangle.h"
 #include "../src/two_dimensional_coordinate.h"
+using namespace std;
 
 class TriangleTest: public testing::Test {
     protected:
