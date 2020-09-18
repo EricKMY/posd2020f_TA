@@ -43,29 +43,29 @@ TEST(Ellipse, ExceptionForSemiMinorAxesLessThanZero){
 
 TEST(Ellipse, AreaInt){
     double abs = 0.001;
-    Shape* ellipse = new Ellipse(3, 4);
+    Shape* ellipse = new Ellipse(4, 3);
     ASSERT_NEAR(37.699, ellipse->area(), abs);
 }
 
 TEST(Ellipse, AreaDouble){
     double abs = 0.001;
-    Shape* ellipse = new Ellipse(3.7, 4.2);
+    Shape* ellipse = new Ellipse(4.2, 3.7);
     ASSERT_NEAR(48.820, ellipse->area(), abs);
 }
 
 TEST(Ellipse, PerimeterInt){
     double abs = 0.001;
-    Shape* ellipse = new Ellipse(3, 4);
-    ASSERT_NEAR(21.132, ellipse->perimeter(), abs);
+    Shape* ellipse = new Ellipse(4, 3);
+    ASSERT_NEAR(22.849, ellipse->perimeter(), abs);
 }
 
 TEST(Ellipse, PerimeterDouble){
     double abs = 0.001;
-    Shape* ellipse = new Ellipse(3.7, 4.2);
-    ASSERT_NEAR(24.389, ellipse->perimeter(), abs);
+    Shape* ellipse = new Ellipse(4.2, 3.7);
+    ASSERT_NEAR(25.247, ellipse->perimeter(), abs);
 }
 
 TEST(Ellipse, Type){
-    Shape* ellipse = new Ellipse(3, 4);
-    ASSERT_EQ("Ellipse (3.000, 4.000)", ellipse->info());
+    Shape* ellipse = new Ellipse(4, 3);
+    ASSERT_EQ("Ellipse (4.000, 3.000)", ellipse->info());
 }
