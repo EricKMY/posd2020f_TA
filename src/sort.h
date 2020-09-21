@@ -19,7 +19,7 @@ class Sort{
     }
 
     template <class Compare>
-    void customizeSort(Compare comp) {
+    void quickSort(Compare comp) {
         quickSortOperator(_v->begin(), _v->end() - 1, comp);
     }
 

@@ -145,7 +145,7 @@ TEST_F(SortTest, StandardSortObjPerimeterDecending) {
 
 
 TEST_F(SortTest, CustomSortLambdaAreaAscending) {
-    _sort->customizeSort([](Shape* a, Shape* b) {
+    _sort->quickSort([](Shape* a, Shape* b) {
         return a->area() < b->area(); 
     });
 
@@ -155,7 +155,7 @@ TEST_F(SortTest, CustomSortLambdaAreaAscending) {
 }
 
 TEST_F(SortTest, CustomdSortLambdaAreaDecending) {
-    _sort->customizeSort([](Shape* a, Shape* b) {
+    _sort->quickSort([](Shape* a, Shape* b) {
         return a->area() > b->area(); 
     });
 
@@ -165,7 +165,7 @@ TEST_F(SortTest, CustomdSortLambdaAreaDecending) {
 }
 
 TEST_F(SortTest, CustomSortLambdaPerimeterAscending) {
-    _sort->customizeSort([](Shape* a, Shape* b) {
+    _sort->quickSort([](Shape* a, Shape* b) {
         return a->perimeter() < b->perimeter(); 
     });
 
@@ -175,7 +175,7 @@ TEST_F(SortTest, CustomSortLambdaPerimeterAscending) {
 }
 
 TEST_F(SortTest, CustomSortLambdaPerimeterDecending) {
-    _sort->customizeSort([](Shape* a, Shape* b) {
+    _sort->quickSort([](Shape* a, Shape* b) {
         return a->perimeter() > b->perimeter(); 
     });
 
@@ -185,7 +185,7 @@ TEST_F(SortTest, CustomSortLambdaPerimeterDecending) {
 }
 
 TEST_F(SortTest, CustomSortFuncAreaAscending) {
-    _sort->customizeSort(areaAscendingCompare);
+    _sort->quickSort(areaAscendingCompare);
 
     ASSERT_EQ(6, _shapeVector[0]->area());
     ASSERT_EQ(12, _shapeVector[1]->area());
@@ -193,7 +193,7 @@ TEST_F(SortTest, CustomSortFuncAreaAscending) {
 }
 
 TEST_F(SortTest, CustomSortFuncAreaDecending) {
-    _sort->customizeSort(areaDescendingCompare);
+    _sort->quickSort(areaDescendingCompare);
 
     ASSERT_NEAR(37.699, _shapeVector[0]->area(), 0.001);
     ASSERT_EQ(12, _shapeVector[1]->area());
@@ -201,7 +201,7 @@ TEST_F(SortTest, CustomSortFuncAreaDecending) {
 }
 
 TEST_F(SortTest, CustomSortFuncPerimeterAscending) {
-    _sort->customizeSort(perimeterAscendingCompare);
+    _sort->quickSort(perimeterAscendingCompare);
 
     ASSERT_EQ(12, _shapeVector[0]->perimeter());
     ASSERT_EQ(14, _shapeVector[1]->perimeter());
@@ -209,7 +209,7 @@ TEST_F(SortTest, CustomSortFuncPerimeterAscending) {
 }
 
 TEST_F(SortTest, CustomSortFuncPerimeterDecending) {
-    _sort->customizeSort(perimeterDescendingCompare);
+    _sort->quickSort(perimeterDescendingCompare);
 
     ASSERT_NEAR(21.132, _shapeVector[0]->perimeter(), 0.001);
     ASSERT_EQ(14, _shapeVector[1]->perimeter());
@@ -219,7 +219,7 @@ TEST_F(SortTest, CustomSortFuncPerimeterDecending) {
 TEST_F(SortTest, CustomSortObjAreaAscending) {
     ASSERT_NO_THROW(AscendingCompare("area"));
     AscendingCompare ascendingCompare("area");
-    _sort->customizeSort(ascendingCompare);
+    _sort->quickSort(ascendingCompare);
 
     ASSERT_EQ(6, _shapeVector[0]->area());
     ASSERT_EQ(12, _shapeVector[1]->area());
@@ -229,7 +229,7 @@ TEST_F(SortTest, CustomSortObjAreaAscending) {
 TEST_F(SortTest, CustomSortObjAreaDecending) {
     ASSERT_NO_THROW(DescendingCompare("area"));
     DescendingCompare descendingCompare("area");
-    _sort->customizeSort(descendingCompare);
+    _sort->quickSort(descendingCompare);
 
     ASSERT_NEAR(37.699, _shapeVector[0]->area(), 0.001);
     ASSERT_EQ(12, _shapeVector[1]->area());
@@ -239,7 +239,7 @@ TEST_F(SortTest, CustomSortObjAreaDecending) {
 TEST_F(SortTest, CustomSortObjPerimeterAscending) {
     ASSERT_NO_THROW(AscendingCompare("perimeter"));
     AscendingCompare ascendingCompare("perimeter");
-    _sort->customizeSort(ascendingCompare);
+    _sort->quickSort(ascendingCompare);
 
     ASSERT_EQ(12, _shapeVector[0]->perimeter());
     ASSERT_EQ(14, _shapeVector[1]->perimeter());
@@ -249,7 +249,7 @@ TEST_F(SortTest, CustomSortObjPerimeterAscending) {
 TEST_F(SortTest, CustomSortObjPerimeterDecending) {
     ASSERT_NO_THROW(DescendingCompare("perimeter"));
     DescendingCompare descendingCompare("perimeter");
-    _sort->customizeSort(descendingCompare);
+    _sort->quickSort(descendingCompare);
 
     ASSERT_NEAR(21.132, _shapeVector[0]->perimeter(), 0.001);
     ASSERT_EQ(14, _shapeVector[1]->perimeter());
