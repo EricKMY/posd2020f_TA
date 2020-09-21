@@ -16,6 +16,10 @@ class Triangle : public Shape{
       if(vectors.size() != 3) {
         throw string("This is not a triangle!");
       }
+
+      if(area() <= 0) {
+        throw string("This is not a triangle!");
+      }
     }    
     
     double area() const {

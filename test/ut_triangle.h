@@ -42,6 +42,21 @@ TEST(Triangle, ExceptionForVectorMoreThanThree){
     }
 }
 
+
+TEST(Triangle, ExceptionForAreaIsZero){
+    vector<TwoDimensionalCoordinate*> triangleExceptionVector;
+    triangleExceptionVector.push_back(new TwoDimensionalCoordinate(0, 0));
+    triangleExceptionVector.push_back(new TwoDimensionalCoordinate(0, 0));
+    triangleExceptionVector.push_back(new TwoDimensionalCoordinate(0, 0));
+    try {
+        new Triangle(triangleExceptionVector);
+        FAIL();
+    }catch(string e) {
+        ASSERT_EQ("This is not a triangle!", e);
+    }
+}
+
+
 TEST_F(TriangleTest, Area){
     Shape* triangle = new Triangle(triangleVector);
     ASSERT_EQ(6, triangle->area());

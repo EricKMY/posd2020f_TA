@@ -1,8 +1,10 @@
 # **Pattern Oriented Software Design 2020 Fall Assignment 2**  
 
 ## **Notice**  
-* **Due on (Monday, June 22, 2020 23:59). <===fixme**  
+* **Due on (Monday, September 29, 2020 23:59).**  
 * **If your code fails to compile on jenkins server, you'll get no point for the assignment.**  
+* **For return type of double, should be assert to accuracy absolute = 0.001.**  
+* **For retrun string of number, should be in form of `%3f`. ex:"3.141", "2.000".**  
 
 ## **Score**
 1. Usage of Iterator in vector: 10%.
@@ -10,27 +12,31 @@
 3. Unit tests written by TA: 50%.
 
 ## **Useful Reference**
-[std::vector](http://www.cplusplus.com/reference/vector/vector/)  
-[std::sort](http://www.cplusplus.com/reference/algorithm/sort/)  
+[c++ vector](http://www.cplusplus.com/reference/vector/vector/)  
+[c++ sort](http://www.cplusplus.com/reference/algorithm/sort/)  
 [Templates](http://www.cplusplus.com/doc/oldtutorial/templates/)  
 [QuickSort](https://en.wikipedia.org/wiki/Quicksort)  
 
 ## **Requirement**  
-1. Implement class `Sort` in `sort.h`.  
+1. Modify exception handle of class `Ellipse`.  
+*  Change the exception string into "This is not an ellipse!"  
+*  Make sure semiMajorAxes >= semiMinorAxes.  
+
+2. Implement class `Sort` in `sort.h`.  
 ```
 class Sort{
 public:
-    Sort(std::vector<Shape*>* v) {}
+    Sort(std::vector<Shape*>* shapes) {}
     void standardSort(Compare comp) {}
     void quickSort(Compare comp) {}
 };
 ```
 * `Compare`: Is a template parameter, should be able to accept `lambda`, `function`, and `object`.  
 * `standardSort()`: Implement function by using std::sort.  
-* `quickSort()`: Implement a quicksort function WITHOUT using any sorting function from c/c++ library,  
+* `quickSort()`: Implement a quicksort function WITHOUT using any sorting function from c/c++ library,
    you should write the sorting algorithm by youself. Also use `Iterator` of vector to control vector.   
 
-2. Implement the following function in `sort.h`.  
+3. Implement the following public function in `sort.h`.  
 
 ```
 bool areaAscendingCompare(Shape *a, Shape *b) {};
@@ -42,11 +48,19 @@ bool perimeterAscendingCompare(Shape *a, Shape *b) {};
 bool perimeterDescendingCompare(Shape *a, Shape *b) {};
 
 ```
-* These function should be argument of `standardSort()` and `quickSort()`.  
-  ex. standardSort(areaAscendingCompare).   
+* The following is the example usage of compare funtion.  
+```
+    std::vector<Shape*> shapes;
+    shapes.push_back(new Rectangle(3, 4));
+    shapes.push_back(new Ellipse(4, 3));
+    Sort sort(&shapes);
+    sort.standardSort(areaAscendingCompare);
+    ASSERT_EQ(12, shapes[0]->area());
+    ASSERT_NEAR(37.699, shapes[1]->area(), 0.001);
+```
 
 
-3. Implement class `AscendingCompare` and `DescendingCompare` in `sort.h`.
+4. Implement class `AscendingCompare` and `DescendingCompare` in `sort.h`.
 ```
 class AscendingCompare{
   public:
@@ -59,41 +73,36 @@ class DescendingCompare{
 };
 ```
 * `feature`: is the feature of shape you wanted to compare, meaning "area" and "perimeter".  
-* These object should be argument of `standardSort()` and `quickSort()`.  
-  ex. AscendingCompare ascendingCompare = new AscendingCompare("area");  
-  standardSort(ascendingCompare);  
+* The following is the example usage of compare obj.  
+```
+    std::vector<Shape*> shapes;
+    shapes.push_back(new Rectangle(3, 4));
+    shapes.push_back(new Ellipse(4, 3));
+    Sort sort(&shapes);
+    sort.standardSort(AscendingCompare("area"));
+    ASSERT_EQ(12, shapes[0]->area());
+    ASSERT_NEAR(37.699, shapes[1]->area(), 0.001);
+```
 
 ## **File Structure**
 This time your directory structure should be like:
- - 學號_HW
-    - src
+```
+{學號}_hw
+    ├── bin
+    │   └── ut_main
+    ├── src
+    │   ├── shape.h
+    │   ├── ellipse.h
+    │   ├── rectangle.h
+    │   ├── triangle.h
+    │   ├── sort.h
+    │   └── two_dimensional_coordinate.h
+    ├── test
+    │   ├── ut_main.cpp
+    │   ├── ut_ellipse.h
+    │   ├── ut_rectangle.h
+    │   ├── ut_sort.h
+    │   └── ut_triangle.h
+    └── makefile
 
-      shape.h
-
-      ellipse.h
-
-      rectangle.h
-      
-      triangle.h
-            
-      two_dimensional_coordinate.h
-      
-      sort.h
-
-    - test
-
-      ut_shape.cpp
-      
-      ut_ellipse.h
-
-      ut_rectangle.h
-      
-      ut_triangle.h
-            
-      ut_sort.h
-
-    - bin
-
-      ut_all
-
-    - makefile
+```

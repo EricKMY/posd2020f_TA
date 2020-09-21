@@ -9,7 +9,7 @@ TEST(Ellipse, ExceptionForSemiMajorAxesIsZero){
         Ellipse(0, 1);
         FAIL();
     }catch(string e) {
-        ASSERT_EQ("This is not a ellipse!", e);
+        ASSERT_EQ("This is not an ellipse!", e);
     }
 }
 
@@ -18,7 +18,7 @@ TEST(Ellipse, ExceptionForSemiMinorAxesIsZero){
         Ellipse(1, 0);
         FAIL();
     }catch(string e) {
-        ASSERT_EQ("This is not a ellipse!", e);
+        ASSERT_EQ("This is not an ellipse!", e);
     }
 }
 
@@ -27,7 +27,7 @@ TEST(Ellipse, ExceptionForSemiMajorAxesLessThanZero){
         Ellipse(-1, 1);
         FAIL();
     }catch(string e) {
-        ASSERT_EQ("This is not a ellipse!", e);
+        ASSERT_EQ("This is not an ellipse!", e);
     }
 }
 
@@ -36,35 +36,44 @@ TEST(Ellipse, ExceptionForSemiMinorAxesLessThanZero){
         Ellipse(1, -1);
         FAIL();
     }catch(string e) {
-        ASSERT_EQ("This is not a ellipse!", e);
+        ASSERT_EQ("This is not an ellipse!", e);
+    }
+}
+
+TEST(Ellipse, ExceptionForSemiMajorAxesLessThanSemiMinorAxes){
+    try {
+        Ellipse(1, 2);
+        FAIL();
+    }catch(string e) {
+        ASSERT_EQ("This is not an ellipse!", e);
     }
 }
 
 TEST(Ellipse, AreaInt){
-    double abs = 0.0001;
-    Shape* ellipse = new Ellipse(3, 4);
+    double abs = 0.001;
+    Shape* ellipse = new Ellipse(4, 3);
     ASSERT_NEAR(37.6991, ellipse->area(), abs);
 }
 
 TEST(Ellipse, AreaDouble){
-    double abs = 0.0001;
-    Shape* ellipse = new Ellipse(3.7, 4.2);
-    ASSERT_NEAR(48.8203, ellipse->area(), abs);
+    double abs = 0.001;
+    Shape* ellipse = new Ellipse(4.2, 3.7);
+    ASSERT_NEAR(48.820, ellipse->area(), abs);
 }
 
 TEST(Ellipse, PerimeterInt){
-    double abs = 0.0001;
-    Shape* ellipse = new Ellipse(3, 4);
-    ASSERT_NEAR(21.1327, ellipse->perimeter(), abs);
+    double abs = 0.001;
+    Shape* ellipse = new Ellipse(4, 3);
+    ASSERT_NEAR(22.849, ellipse->perimeter(), abs);
 }
 
 TEST(Ellipse, PerimeterDouble){
-    double abs = 0.0001;
-    Shape* ellipse = new Ellipse(3.7, 4.2);
-    ASSERT_NEAR(24.3893, ellipse->perimeter(), abs);
+    double abs = 0.001;
+    Shape* ellipse = new Ellipse(4.2, 3.7);
+    ASSERT_NEAR(25.247, ellipse->perimeter(), abs);
 }
 
 TEST(Ellipse, Type){
-    Shape* ellipse = new Ellipse(3, 4);
-    ASSERT_EQ("Ellipse (3.000, 4.000)", ellipse->info());
+    Shape* ellipse = new Ellipse(4, 3);
+    ASSERT_EQ("Ellipse (4.000, 3.000)", ellipse->info());
 }

@@ -10,55 +10,49 @@
 using namespace std;
 
 class Sort{
-    public:
+public:
     Sort(vector<Shape*>* v): _v(v){}
 
     template <class Compare>
     void standardSort(Compare comp) {
-        std::sort(_v->begin(), _v->end(), comp);
+        sort(_v->begin(), _v->end(), comp);
     }
 
-    template <class Compare>
+    template <typename Compare>
     void quickSort(Compare comp) {
-        quickSortOperator(_v->begin(), _v->end() - 1, comp);
+        quick_sort(_v->begin(), (_v->end())-1, comp);
     }
 
-    typedef std::vector<Shape *>::iterator shapeIterator;
-
-    template <typename Compare>
-    void quickSortOperator(shapeIterator left, shapeIterator right, Compare comp)
-    {
-        if(std::distance(left,right)>=2)
-        {
-            shapeIterator pivot = partition(left, right, comp);
-            quickSortOperator(left, pivot - 1, comp); 
-            quickSortOperator(pivot + 1, right, comp);
-        }
-    }
-
-    template <typename Compare>
-    shapeIterator partition(shapeIterator left, shapeIterator right, Compare comp) {
-        shapeIterator indexItr = left-1;
-
-        shapeIterator visitItr = left;
-
-        while(visitItr < right)
-        {
-            if(comp(*visitItr, *right))
-            {
-                ++indexItr;
-                std::swap(*indexItr, *visitItr);
-            }
-            ++visitItr;
-        }
-
-        std::swap(*(indexItr + 1), *right); 
-
-        return ++indexItr;
-    }
-
-    private:
+private:
     vector<Shape*>* _v;
+
+    template <typename Compare>
+    void quick_sort(vector<Shape*>::iterator first, vector<Shape*>::iterator last, Compare comp) {
+    if(first < last) {
+        vector<Shape*>::iterator pivot = partition(first, last, comp);
+        quick_sort(first, pivot, comp);
+        quick_sort(pivot+1, last, comp);
+    }
+    }
+
+    template <typename Compare>
+    vector<Shape*>::iterator partition(vector<Shape*>::iterator first, vector<Shape*>::iterator last, Compare comp) {
+        vector<Shape*>::iterator pivot = first + (last - first) / 2;
+        vector<Shape*>::iterator i = first - 1;
+        vector<Shape*>::iterator j = last + 1;
+        while(true) {
+            do {
+                i++;
+            }while(comp(*i, *pivot));
+            do {
+                j--;
+            }while(comp(*pivot, *j));
+                if(i >= j) {
+                return j;
+            }
+            swap(*i, *j);
+        }
+    }
 };
 
 bool areaAscendingCompare(Shape *a, Shape *b) {
