@@ -3,9 +3,8 @@
 
 #include <string>
 #include <algorithm>
-#include <vector> 
 #include <functional>
-#include "./shape.h"
+#include "shape.h"
 
 using namespace std;
 

@@ -26,6 +26,16 @@ protected:
     vector<Shape*> _shapes;
 };
 
+TEST(Sort, Sample) {
+    vector<Shape*> shapes;
+    shapes.push_back(new Rectangle(3, 4));
+    shapes.push_back(new Ellipse(4, 3));
+    quickSort(shapes.begin(), shapes.end(), AscendingCompare("area"));
+
+    ASSERT_EQ(12, shapes[0]->area());
+    ASSERT_NEAR(37.699, shapes[1]->area(), 0.001);
+}
+
 TEST_F(SortTest, QuickSortLambdaAreaAscending) {
     quickSort(_shapes.begin(), _shapes.end(), [](Shape* a, Shape* b) {
         return a->area() < b->area(); 
@@ -99,9 +109,7 @@ TEST_F(SortTest, QuickSortFuncPerimeterDecending) {
 }
 
 TEST_F(SortTest, QuickSortObjAreaAscending) {
-    ASSERT_NO_THROW(AscendingCompare("area"));
-    AscendingCompare ascendingCompare("area");
-    quickSort(_shapes.begin(), _shapes.end(), ascendingCompare);
+    quickSort(_shapes.begin(), _shapes.end(), AscendingCompare("area"));
 
     ASSERT_EQ(6, _shapes[0]->area());
     ASSERT_EQ(12, _shapes[1]->area());
@@ -109,9 +117,7 @@ TEST_F(SortTest, QuickSortObjAreaAscending) {
 }
 
 TEST_F(SortTest, QuickSortObjAreaDecending) {
-    ASSERT_NO_THROW(DescendingCompare("area"));
-    DescendingCompare descendingCompare("area");
-    quickSort(_shapes.begin(), _shapes.end(), descendingCompare);
+    quickSort(_shapes.begin(), _shapes.end(), DescendingCompare("area"));
 
     ASSERT_NEAR(37.699, _shapes[0]->area(), 0.001);
     ASSERT_EQ(12, _shapes[1]->area());
@@ -119,9 +125,7 @@ TEST_F(SortTest, QuickSortObjAreaDecending) {
 }
 
 TEST_F(SortTest, QuickSortObjPerimeterAscending) {
-    ASSERT_NO_THROW(AscendingCompare("perimeter"));
-    AscendingCompare ascendingCompare("perimeter");
-    quickSort(_shapes.begin(), _shapes.end(), ascendingCompare);
+    quickSort(_shapes.begin(), _shapes.end(), AscendingCompare("perimeter"));
 
     ASSERT_EQ(12, _shapes[0]->perimeter());
     ASSERT_EQ(14, _shapes[1]->perimeter());
@@ -129,9 +133,7 @@ TEST_F(SortTest, QuickSortObjPerimeterAscending) {
 }
 
 TEST_F(SortTest, QuickSortObjPerimeterDecending) {
-    ASSERT_NO_THROW(DescendingCompare("perimeter"));
-    DescendingCompare descendingCompare("perimeter");
-    quickSort(_shapes.begin(), _shapes.end(), descendingCompare);
+    quickSort(_shapes.begin(), _shapes.end(), DescendingCompare("perimeter"));
 
     ASSERT_NEAR(22.849, _shapes[0]->perimeter(), 0.001);
     ASSERT_EQ(14, _shapes[1]->perimeter());
