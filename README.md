@@ -3,24 +3,25 @@
 ## **Notice**  
 * **Due on (Monday, September 29, 2020 23:59).**  
 * **If your code fails to compile on jenkins server, you'll get no point for the assignment.**  
-* **For return type of double, should be assert to accuracy absolute = 0.001.**  
-* **For retrun string of number, should be in form of `%3f`. ex:"3.141", "2.000".**  
+* **For retrun string of number, should be in form of `%3f`.**  
 
 ## **Score**
-1. Usage of Iterator in vector: 10%.
-2. Unit tests written by yourself: 40%.
-3. Unit tests written by TA: 50%.
+
+1. Unit tests written by yourself: 30%.  
+2. Unit tests written by TA: 50%.  
+3. Usage of `iterator` in vector: 10%.  
+4. Implementaion of `quickSort()`: 10%.  
 
 ## **Useful Reference**
-[c++ vector](http://www.cplusplus.com/reference/vector/vector/)  
-[c++ sort](http://www.cplusplus.com/reference/algorithm/sort/)  
-[Templates](http://www.cplusplus.com/doc/oldtutorial/templates/)  
+[C++ Vector](http://www.cplusplus.com/reference/vector/vector/)  
+[C++ Sort](http://www.cplusplus.com/reference/algorithm/sort/)  
+[C++ Function Templates](http://www.cplusplus.com/doc/oldtutorial/templates/)  
 [QuickSort](https://en.wikipedia.org/wiki/Quicksort)  
 
 ## **Requirement**  
 1. Modify exception handle of class `Ellipse`.  
 *  Change the exception string into "This is not an ellipse!"  
-*  Make sure semiMajorAxes >= semiMinorAxes.  
+*  Make sure semiMajorAxes >= semiMinorAxes, if not throw exception "This is not an ellipse!"  
 
 2. Implement class `Sort` in `sort.h`.  
 ```
@@ -33,8 +34,7 @@ public:
 ```
 * `Compare`: Is a template parameter, should be able to accept `lambda`, `function`, and `object`.  
 * `standardSort()`: Implement function by using std::sort.  
-* `quickSort()`: Implement a quicksort function WITHOUT using any sorting function from c/c++ library,
-   you should write the sorting algorithm by youself. Also use `Iterator` of vector to control vector.   
+* `quickSort()`: Implement a quicksort function WITHOUT using any sorting function from c/c++ library, you should write the sorting algorithm by youself. Also use `iterator` of vector to access elements.  
 
 3. Implement the following public function in `sort.h`.  
 
