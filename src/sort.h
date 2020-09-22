@@ -9,51 +9,38 @@
 
 using namespace std;
 
-class Sort{
-public:
-    Sort(vector<Shape*>* v): _v(v){}
+template <class RandomAccessIterator, class Compare>
+void quickSort(RandomAccessIterator first, RandomAccessIterator last, Compare comp) {
+    quickSortImpl(first, last-1, comp);
+}
 
-    template <class Compare>
-    void standardSort(Compare comp) {
-        sort(_v->begin(), _v->end(), comp);
-    }
-
-    template <typename Compare>
-    void quickSort(Compare comp) {
-        quick_sort(_v->begin(), (_v->end())-1, comp);
-    }
-
-private:
-    vector<Shape*>* _v;
-
-    template <typename Compare>
-    void quick_sort(vector<Shape*>::iterator first, vector<Shape*>::iterator last, Compare comp) {
+template <class RandomAccessIterator, class Compare>
+void quickSortImpl(RandomAccessIterator first, RandomAccessIterator last, Compare comp) {
     if(first < last) {
-        vector<Shape*>::iterator pivot = partition(first, last, comp);
-        quick_sort(first, pivot, comp);
-        quick_sort(pivot+1, last, comp);
+        RandomAccessIterator pivot = divide(first, last, comp);
+        quickSortImpl(first, pivot, comp);
+        quickSortImpl(pivot+1, last, comp);
     }
-    }
+}
 
-    template <typename Compare>
-    vector<Shape*>::iterator partition(vector<Shape*>::iterator first, vector<Shape*>::iterator last, Compare comp) {
-        vector<Shape*>::iterator pivot = first + (last - first) / 2;
-        vector<Shape*>::iterator i = first - 1;
-        vector<Shape*>::iterator j = last + 1;
-        while(true) {
-            do {
-                i++;
-            }while(comp(*i, *pivot));
-            do {
-                j--;
-            }while(comp(*pivot, *j));
-                if(i >= j) {
-                return j;
-            }
-            swap(*i, *j);
+template <class RandomAccessIterator, class Compare>
+RandomAccessIterator divide(RandomAccessIterator first, RandomAccessIterator last, Compare comp) {
+    RandomAccessIterator pivot = first + (last - first) / 2;
+    RandomAccessIterator i = first - 1;
+    RandomAccessIterator j = last + 1;
+    while(true) {
+        do {
+            i++;
+        }while(comp(*i, *pivot));
+        do {
+            j--;
+        }while(comp(*pivot, *j));
+            if(i >= j) {
+            return j;
         }
+        swap(*i, *j);
     }
-};
+}
 
 bool areaAscendingCompare(Shape *a, Shape *b) {
     return a->area() < b->area();
@@ -71,8 +58,6 @@ bool perimeterDescendingCompare(Shape *a, Shape *b) {
         return a->perimeter() > b->perimeter();
 };
 
-
-
 class AscendingCompare {
   public:
     AscendingCompare(string feature): _feature(feature) {}
@@ -85,10 +70,8 @@ class AscendingCompare {
             return a->perimeter() < b->perimeter();
 
         }
-
         return 0;
       }
-
   private:
     string _feature;
 };
@@ -103,12 +86,9 @@ class DescendingCompare {
             
         }else if(_feature == "perimeter"){
             return a->perimeter() > b->perimeter();
-
         }
-
         return 0;
       }
-
   private:
     string _feature;
 };
