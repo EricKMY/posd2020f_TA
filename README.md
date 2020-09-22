@@ -73,7 +73,7 @@ class DescendingCompare{
 };
 ```
 * `feature`: is the feature of shape you wanted to compare, meaning "area" and "perimeter".  
-* The following is the example usage of compare obj.  
+* The following is the example usage of compare object.  
 ```
     std::vector<Shape*> shapes;
     shapes.push_back(new Rectangle(3, 4));
