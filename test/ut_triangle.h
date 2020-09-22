@@ -157,6 +157,28 @@ TEST_F(TriangleTest, ExceptionForCallUtilityGetShapeById){
 TEST_F(TriangleTest, ExceptionForCallUtilityFilterShapeArea){
     Shape* triangle = new Triangle("1", triangleVector);
     Utility *utility = new Utility();
-    vector<Shape *> vector = utility->filterShapeByArea(triangle, 10, 1);
+    vector<Shape *> vector = utility->filterShapeByArea(triangle, 10, 1, [](Shape *shape, double upperbound, double lowerbound) {
+        return shape->area() <= upperbound && shape->area() >= lowerbound;
+    });
+
     ASSERT_EQ(6, vector[0]->area());
+}
+
+
+TEST_F(TriangleTest, ExceptionForCallUtilityFilterShapePerimeter){
+    Shape* triangle = new Triangle("1", triangleVector);
+    Utility *utility = new Utility();
+    vector<Shape *> vector = utility->filterShapeByArea(triangle, 12, 1, [](Shape *shape, double upperbound, double lowerbound) {
+        return shape->perimeter() <= upperbound && shape->perimeter() >= lowerbound;
+    });
+
+    ASSERT_EQ(6, vector[0]->area());
+
+
+    vector = utility->filterShapeByArea(triangle, "triangle", [](Shape *shape, string s) {
+        return s == "triangle";
+    });
+
+    ASSERT_EQ(6, vector[0]->area());
+
 }
