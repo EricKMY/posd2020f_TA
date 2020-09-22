@@ -153,3 +153,10 @@ TEST_F(TriangleTest, ExceptionForCallUtilityGetShapeById){
         ASSERT_EQ("Only complex shape can get shape!", e);
     }
 }
+
+TEST_F(TriangleTest, ExceptionForCallUtilityFilterShapeArea){
+    Shape* triangle = new Triangle("1", triangleVector);
+    Utility *utility = new Utility();
+    vector<Shape *> vector = utility->filterShapeByArea(triangle, 10, 1);
+    ASSERT_EQ(6, vector[0]->area());
+}
