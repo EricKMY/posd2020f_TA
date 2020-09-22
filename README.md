@@ -9,8 +9,8 @@
 
 1. Unit tests written by yourself: 30%.  
 2. Unit tests written by TA: 50%.  
-3. Usage of `iterator` in vector: 10%.  
-4. Implementaion of `quickSort()`: 10%.  
+3. Implementaion of `quickSort()`: 10%.  
+4. Use `iterator` to access element of vector: 10%.  
 
 ## **Useful Reference**
 [C++ Vector](http://www.cplusplus.com/reference/vector/vector/)  
@@ -34,7 +34,7 @@ public:
 ```
 * `Compare`: Is a template parameter, should be able to accept `lambda`, `function`, and `object`.  
 * `standardSort()`: Implement function by using std::sort.  
-* `quickSort()`: Implement a quicksort function WITHOUT using any sorting function from c/c++ library, you should write the sorting algorithm by youself. Also use `iterator` of vector to access elements.  
+* `quickSort()`: Implement a quicksort function WITHOUT using any sorting function from c/c++ library, you should write the sorting algorithm by youself.  
 
 3. Implement the following public function in `sort.h`.  
 
