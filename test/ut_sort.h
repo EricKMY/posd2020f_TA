@@ -26,16 +26,6 @@ protected:
     vector<Shape*> _shapes;
 };
 
-TEST(Sort, Sample) {
-    vector<Shape*> shapes;
-    shapes.push_back(new Rectangle(3, 4));
-    shapes.push_back(new Ellipse(4, 3));
-    quickSort(shapes.begin(), shapes.end(), AscendingCompare("area"));
-
-    ASSERT_EQ(12, shapes[0]->area());
-    ASSERT_NEAR(37.699, shapes[1]->area(), 0.001);
-}
-
 TEST_F(SortTest, QuickSortLambdaAreaAscending) {
     quickSort(_shapes.begin(), _shapes.end(), [](Shape* a, Shape* b) {
         return a->area() < b->area(); 

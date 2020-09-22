@@ -7,34 +7,28 @@
 
 ## **Score**
 
-1. Unit tests written by yourself: 30%.  
+1. Unit tests written by yourself: 35%.  
 2. Unit tests written by TA: 50%.  
-3. Implementaion of `quickSort()`: 10%.  
-4. Use `iterator` to access element of vector: 10%.  
+3. Implementaion of `quickSort()`: 15%.  
 
 ## **Useful Reference**
 [C++ Vector](http://www.cplusplus.com/reference/vector/vector/)  
 [C++ Sort](http://www.cplusplus.com/reference/algorithm/sort/)  
 [C++ Function Templates](http://www.cplusplus.com/doc/oldtutorial/templates/)  
-[QuickSort](https://en.wikipedia.org/wiki/Quicksort)  
+[QuickSort Wiki](https://en.wikipedia.org/wiki/Quicksort)  
 
 ## **Requirement**  
 1. Modify exception handle of class `Ellipse`.  
 *  Change the exception string into "This is not an ellipse!"  
 *  Make sure semiMajorAxes >= semiMinorAxes, if not throw exception "This is not an ellipse!"  
 
-2. Implement class `Sort` in `sort.h`.  
+2. Implement `quickSort()` in `sort.h` and write corresponding unit test in `ut_sort.h`.  
 ```
-class Sort{
-public:
-    Sort(std::vector<Shape*>* shapes) {}
-    void standardSort(Compare comp) {}
-    void quickSort(Compare comp) {}
-};
+void quickSort(RandomAccessIterator first, RandomAccessIterator last, Compare comp) {}
 ```
-* `Compare`: Is a template parameter, should be able to accept `lambda`, `function`, and `object`.  
-* `standardSort()`: Implement function by using std::sort.  
-* `quickSort()`: Implement a quicksort function WITHOUT using any sorting function from c/c++ library, you should write the sorting algorithm by youself.  
+* `Compare`:A template parameter, binary function that accepts two elements in the range as arguments, and returns a value convertible to bool. This can either be a function pointer or a function object. (You may reference [C++ Sort](http://www.cplusplus.com/reference/algorithm/sort/))  
+* `RandomAccessIterator`:A template parameter, random-access iterators to the initial and final positions of the sequence to be sorted. (You may reference [C++ Sort](http://www.cplusplus.com/reference/algorithm/sort/))  
+* `quickSort()`: Implement a quicksort function **WITHOUT using any sorting function from c/c++ library**, you should write the sorting algorithm by youself. (You may reference [QuickSort Wiki](https://en.wikipedia.org/wiki/Quicksort))  
 
 3. Implement the following public function in `sort.h`.  
 
@@ -53,8 +47,8 @@ bool perimeterDescendingCompare(Shape *a, Shape *b) {};
     std::vector<Shape*> shapes;
     shapes.push_back(new Rectangle(3, 4));
     shapes.push_back(new Ellipse(4, 3));
-    Sort sort(&shapes);
-    sort.standardSort(areaAscendingCompare);
+    quickSort(shapes.begin(), shapes.end(), areaAscendingCompare);
+
     ASSERT_EQ(12, shapes[0]->area());
     ASSERT_NEAR(37.699, shapes[1]->area(), 0.001);
 ```
@@ -73,13 +67,13 @@ class DescendingCompare{
 };
 ```
 * `feature`: is the feature of shape you wanted to compare, meaning "area" and "perimeter".  
-* The following is the example usage of compare object.  
+* The following is the example usage of compare obj.  
 ```
-    std::vector<Shape*> shapes;
+    vector<Shape*> shapes;
     shapes.push_back(new Rectangle(3, 4));
     shapes.push_back(new Ellipse(4, 3));
-    Sort sort(&shapes);
-    sort.standardSort(AscendingCompare("area"));
+    quickSort(shapes.begin(), shapes.end(), AscendingCompare("area"));
+
     ASSERT_EQ(12, shapes[0]->area());
     ASSERT_NEAR(37.699, shapes[1]->area(), 0.001);
 ```
@@ -104,5 +98,4 @@ This time your directory structure should be like:
     │   ├── ut_sort.h
     │   └── ut_triangle.h
     └── makefile
-
 ```
