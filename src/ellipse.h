@@ -8,15 +8,11 @@
 using namespace std;
 
 class Ellipse : public Shape {
-	public:
+public:
 	Ellipse(double semiMajorAxes, double semiMinorAxes):_semiMajorAxes(semiMajorAxes), _semiMinorAxes(semiMinorAxes){
-		if(_semiMajorAxes <= 0 || _semiMinorAxes <= 0) {
+		if(_semiMajorAxes <= 0 || _semiMinorAxes <= 0 || _semiMajorAxes < _semiMinorAxes) {
         	throw string("This is not an ellipse!");
       	}
-
-		if(_semiMajorAxes < _semiMinorAxes) {
-			throw string("This is not an ellipse!");
-		}
 	}
 
 	double area() const {
@@ -33,7 +29,7 @@ class Ellipse : public Shape {
 		return info;
 	}
 
-	private:
+private:
 	double _semiMajorAxes, _semiMinorAxes;
 };
 

@@ -12,9 +12,9 @@
 
 using namespace std;
 
-class SortTest: public testing::Test {
+class QuickSort: public ::testing::Test {
 protected:
-    virtual void SetUp(){
+    void SetUp() override {
         vector<TwoDimensionalCoordinate*> triangleVector;
         triangleVector.push_back(new TwoDimensionalCoordinate(0, 0));
         triangleVector.push_back(new TwoDimensionalCoordinate(3, 0));
@@ -26,106 +26,106 @@ protected:
     vector<Shape*> _shapes;
 };
 
-TEST_F(SortTest, QuickSortLambdaAreaAscending) {
+TEST_F(QuickSort, LambdaAreaAscending) {
     quickSort(_shapes.begin(), _shapes.end(), [](Shape* a, Shape* b) {
         return a->area() < b->area(); 
     });
 
-    ASSERT_EQ(6, _shapes[0]->area());
-    ASSERT_EQ(12, _shapes[1]->area());
-    ASSERT_NEAR(37.699, _shapes[2]->area(), 0.001);
+    EXPECT_EQ(6, _shapes[0]->area());
+    EXPECT_EQ(12, _shapes[1]->area());
+    EXPECT_NEAR(37.699, _shapes[2]->area(), 0.001);
 }
 
-TEST_F(SortTest, QuickSortLambdaAreaDecending) {
+TEST_F(QuickSort, LambdaAreaDecending) {
     quickSort(_shapes.begin(), _shapes.end(), [](Shape* a, Shape* b) {
         return a->area() > b->area(); 
     });
 
-    ASSERT_NEAR(37.699, _shapes[0]->area(), 0.001);
-    ASSERT_EQ(12, _shapes[1]->area());
-    ASSERT_EQ(6, _shapes[2]->area());
+    EXPECT_NEAR(37.699, _shapes[0]->area(), 0.001);
+    EXPECT_EQ(12, _shapes[1]->area());
+    EXPECT_EQ(6, _shapes[2]->area());
 }
 
-TEST_F(SortTest, QuickSortLambdaPerimeterAscending) {
+TEST_F(QuickSort, LambdaPerimeterAscending) {
     quickSort(_shapes.begin(), _shapes.end(), [](Shape* a, Shape* b) {
         return a->perimeter() < b->perimeter(); 
     });
 
-    ASSERT_EQ(12, _shapes[0]->perimeter());
-    ASSERT_EQ(14, _shapes[1]->perimeter());
-    ASSERT_NEAR(22.849, _shapes[2]->perimeter(), 0.001);
+    EXPECT_EQ(12, _shapes[0]->perimeter());
+    EXPECT_EQ(14, _shapes[1]->perimeter());
+    EXPECT_NEAR(22.849, _shapes[2]->perimeter(), 0.001);
 }
 
-TEST_F(SortTest, QuickSortLambdaPerimeterDecending) {
+TEST_F(QuickSort, LambdaPerimeterDecending) {
     quickSort(_shapes.begin(), _shapes.end(), [](Shape* a, Shape* b) {
         return a->perimeter() > b->perimeter(); 
     });
 
-    ASSERT_NEAR(22.849, _shapes[0]->perimeter(), 0.001);
-    ASSERT_EQ(14, _shapes[1]->perimeter());
-    ASSERT_EQ(12, _shapes[2]->perimeter());
+    EXPECT_NEAR(22.849, _shapes[0]->perimeter(), 0.001);
+    EXPECT_EQ(14, _shapes[1]->perimeter());
+    EXPECT_EQ(12, _shapes[2]->perimeter());
 }
 
-TEST_F(SortTest, QuickSortFuncAreaAscending) {
+TEST_F(QuickSort, FunctionAreaAscending) {
     quickSort(_shapes.begin(), _shapes.end(), areaAscendingCompare);
 
-    ASSERT_EQ(6, _shapes[0]->area());
-    ASSERT_EQ(12, _shapes[1]->area());
-    ASSERT_NEAR(37.699, _shapes[2]->area(), 0.001);
+    EXPECT_EQ(6, _shapes[0]->area());
+    EXPECT_EQ(12, _shapes[1]->area());
+    EXPECT_NEAR(37.699, _shapes[2]->area(), 0.001);
 }
 
-TEST_F(SortTest, QuickSortFuncAreaDecending) {
+TEST_F(QuickSort, FunctionAreaDecending) {
     quickSort(_shapes.begin(), _shapes.end(), areaDescendingCompare);
 
-    ASSERT_NEAR(37.699, _shapes[0]->area(), 0.001);
-    ASSERT_EQ(12, _shapes[1]->area());
-    ASSERT_EQ(6, _shapes[2]->area());
+    EXPECT_NEAR(37.699, _shapes[0]->area(), 0.001);
+    EXPECT_EQ(12, _shapes[1]->area());
+    EXPECT_EQ(6, _shapes[2]->area());
 }
 
-TEST_F(SortTest, QuickSortFuncPerimeterAscending) {
+TEST_F(QuickSort, FunctionPerimeterAscending) {
     quickSort(_shapes.begin(), _shapes.end(), perimeterAscendingCompare);
 
-    ASSERT_EQ(12, _shapes[0]->perimeter());
-    ASSERT_EQ(14, _shapes[1]->perimeter());
-    ASSERT_NEAR(22.849, _shapes[2]->perimeter(), 0.001);
+    EXPECT_EQ(12, _shapes[0]->perimeter());
+    EXPECT_EQ(14, _shapes[1]->perimeter());
+    EXPECT_NEAR(22.849, _shapes[2]->perimeter(), 0.001);
 }
 
-TEST_F(SortTest, QuickSortFuncPerimeterDecending) {
+TEST_F(QuickSort, FunctionPerimeterDecending) {
     quickSort(_shapes.begin(), _shapes.end(), perimeterDescendingCompare);
 
-    ASSERT_NEAR(22.849, _shapes[0]->perimeter(), 0.001);
-    ASSERT_EQ(14, _shapes[1]->perimeter());
-    ASSERT_EQ(12, _shapes[2]->perimeter());
+    EXPECT_NEAR(22.849, _shapes[0]->perimeter(), 0.001);
+    EXPECT_EQ(14, _shapes[1]->perimeter());
+    EXPECT_EQ(12, _shapes[2]->perimeter());
 }
 
-TEST_F(SortTest, QuickSortObjAreaAscending) {
+TEST_F(QuickSort, ObjectAreaAscending) {
     quickSort(_shapes.begin(), _shapes.end(), AscendingCompare("area"));
 
-    ASSERT_EQ(6, _shapes[0]->area());
-    ASSERT_EQ(12, _shapes[1]->area());
-    ASSERT_NEAR(37.699, _shapes[2]->area(), 0.001);
+    EXPECT_EQ(6, _shapes[0]->area());
+    EXPECT_EQ(12, _shapes[1]->area());
+    EXPECT_NEAR(37.699, _shapes[2]->area(), 0.001);
 }
 
-TEST_F(SortTest, QuickSortObjAreaDecending) {
+TEST_F(QuickSort, ObjectAreaDecending) {
     quickSort(_shapes.begin(), _shapes.end(), DescendingCompare("area"));
 
-    ASSERT_NEAR(37.699, _shapes[0]->area(), 0.001);
-    ASSERT_EQ(12, _shapes[1]->area());
-    ASSERT_EQ(6, _shapes[2]->area());
+    EXPECT_NEAR(37.699, _shapes[0]->area(), 0.001);
+    EXPECT_EQ(12, _shapes[1]->area());
+    EXPECT_EQ(6, _shapes[2]->area());
 }
 
-TEST_F(SortTest, QuickSortObjPerimeterAscending) {
+TEST_F(QuickSort, ObjectPerimeterAscending) {
     quickSort(_shapes.begin(), _shapes.end(), AscendingCompare("perimeter"));
 
-    ASSERT_EQ(12, _shapes[0]->perimeter());
-    ASSERT_EQ(14, _shapes[1]->perimeter());
-    ASSERT_NEAR(22.849, _shapes[2]->perimeter(), 0.001);
+    EXPECT_EQ(12, _shapes[0]->perimeter());
+    EXPECT_EQ(14, _shapes[1]->perimeter());
+    EXPECT_NEAR(22.849, _shapes[2]->perimeter(), 0.001);
 }
 
-TEST_F(SortTest, QuickSortObjPerimeterDecending) {
+TEST_F(QuickSort, ObjectPerimeterDecending) {
     quickSort(_shapes.begin(), _shapes.end(), DescendingCompare("perimeter"));
 
-    ASSERT_NEAR(22.849, _shapes[0]->perimeter(), 0.001);
-    ASSERT_EQ(14, _shapes[1]->perimeter());
-    ASSERT_EQ(12, _shapes[2]->perimeter());
+    EXPECT_NEAR(22.849, _shapes[0]->perimeter(), 0.001);
+    EXPECT_EQ(14, _shapes[1]->perimeter());
+    EXPECT_EQ(12, _shapes[2]->perimeter());
 }

@@ -7,9 +7,9 @@
 
 ## **Score**
 
-1. Unit tests written by yourself: 35%.  
+1. Unit tests written by yourself: 30%.  
 2. Unit tests written by TA: 50%.  
-3. Implementaion of `quickSort()`: 15%.  
+3. Implementaion of `quickSort()`: 20%.  
 
 ## **Useful Reference**
 [C++ Vector](http://www.cplusplus.com/reference/vector/vector/)  
@@ -27,7 +27,7 @@
 template <class RandomAccessIterator, class Compare>
 void quickSort(RandomAccessIterator first, RandomAccessIterator last, Compare comp) {}
 ```
-* `Compare`: Binary function that accepts two elements in the range as arguments, and returns a value convertible to bool. This can either be a function pointer or a function object. (You may reference [C++ Sort](http://www.cplusplus.com/reference/algorithm/sort/))  
+* `Compare`: Binary function that accepts two elements in the range as arguments, and returns a value convertible to bool. It should be able to accpet `Lambda Expressions`, `Funtion`, `Object` and you should write test that covers them. (You may reference [C++ Sort](http://www.cplusplus.com/reference/algorithm/sort/))  
 * `RandomAccessIterator`: Random-access iterators to the initial and final positions of the sequence to be sorted. (You may reference [C++ Sort](http://www.cplusplus.com/reference/algorithm/sort/))  
 * `quickSort()`: Implement a quicksort function **WITHOUT using any sorting function from c/c++ library**, you should write the sorting algorithm by youself. (You may reference [QuickSort Wiki](https://en.wikipedia.org/wiki/Quicksort))  
 
@@ -45,15 +45,8 @@ bool perimeterDescendingCompare(Shape *a, Shape *b) {};
 ```
 * The following is the example usage of compare funtion.  
 ```
-    std::vector<Shape*> shapes;
-    shapes.push_back(new Rectangle(3, 4));
-    shapes.push_back(new Ellipse(4, 3));
     quickSort(shapes.begin(), shapes.end(), areaAscendingCompare);
-
-    ASSERT_EQ(12, shapes[0]->area());
-    ASSERT_NEAR(37.699, shapes[1]->area(), 0.001);
 ```
-
 
 4. Implement class `AscendingCompare` and `DescendingCompare` in `sort.h`.
 ```
@@ -70,13 +63,7 @@ class DescendingCompare{
 * `feature`: is the feature of shape you wanted to compare, meaning "area" and "perimeter".  
 * The following is the example usage of compare obj.  
 ```
-    std::vector<Shape*> shapes;
-    shapes.push_back(new Rectangle(3, 4));
-    shapes.push_back(new Ellipse(4, 3));
     quickSort(shapes.begin(), shapes.end(), AscendingCompare("area"));
-
-    ASSERT_EQ(12, shapes[0]->area());
-    ASSERT_NEAR(37.699, shapes[1]->area(), 0.001);
 ```
 
 ## **File Structure**

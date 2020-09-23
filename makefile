@@ -1,26 +1,19 @@
 .PHONY: clean  
-CC = g++
-SRC = ./src
-BIN = ./bin
-OBJ = ./obj
-TEST = ./test
-LIB = -lgtest -lpthread
-CFLAGS = -std=c++11
-FERROE = -Wfatal-errors
+SRC = ./src/shape.h ./src/ellipse.h ./src/rectangle.h ./src/triangle.h ./src/two_dimensional_coordinate.h ./src/sort.h
+TEST = ./test/ut_ellipse.h ./test/ut_rectangle.h ./test/ut_triangle.h ./test/ut_sort.h
 
-all:directories $(BIN)/ut_main
+all:directories ./bin/ut_main
 
-$(BIN)/ut_main: $(TEST)/ut_main.cpp $(TEST)/ut_ellipse.h $(TEST)/ut_rectangle.h $(TEST)/ut_triangle.h $(TEST)/ut_sort.h  $(SRC)/ellipse.h $(SRC)/shape.h  $(SRC)/rectangle.h $(SRC)/triangle.h $(SRC)/two_dimensional_coordinate.h $(SRC)/sort.h
-	$(CC) $(CFLAGS) ${FERROE} -o $@ $< $(LIB)
-
+./bin/ut_main: ./test/ut_main.cpp $(TEST) $(SRC)
+	g++ -std=c++11 -Wfatal-errors -o $@ $< -lgtest -lpthread
 
 directories:
-	mkdir -p $(BIN)
-	mkdir -p $(OBJ)
+	mkdir -p ./bin
+	mkdir -p ./obj
 
 clean:
-	rm -rf $(BIN)
-	rm -rf $(OBJ)
+	rm -rf ./bin
+	rm -rf ./obj
 
 stat:
-	wc $(SRC)/* $(TEST)/*
+	wc ./src/* ./test/*

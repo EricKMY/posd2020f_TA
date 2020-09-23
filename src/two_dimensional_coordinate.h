@@ -7,11 +7,11 @@ public:
 
     double getX() {
         return _x;
-	}
+    }
 
-	double getY() {
-		return _y;
-	}
+    double getY() {
+        return _y;
+    }
 
 private:
     double _x, _y;

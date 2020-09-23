@@ -58,37 +58,36 @@ bool perimeterDescendingCompare(Shape *a, Shape *b) {
 };
 
 class AscendingCompare {
-  public:
+public:
     AscendingCompare(string feature): _feature(feature) {}
 
     bool operator()(Shape *a, Shape *b) {
-        if(_feature == "area"){
+        if(_feature == "area") {
             return a->area() < b->area();
-            
-        }else if(_feature == "perimeter"){
+        }
+        if(_feature == "perimeter") {
             return a->perimeter() < b->perimeter();
-
         }
         return 0;
-      }
-  private:
+        }
+private:
     string _feature;
 };
 
 class DescendingCompare {
-  public:
+public:
     DescendingCompare(string feature): _feature(feature) {}
 
     bool operator()(Shape *a, Shape *b) {
-        if(_feature == "area"){
+        if(_feature == "area") {
             return a->area() > b->area();
-            
-        }else if(_feature == "perimeter"){
+        }
+        if(_feature == "perimeter") {
             return a->perimeter() > b->perimeter();
         }
         return 0;
-      }
-  private:
+        }
+private:
     string _feature;
 };
 
