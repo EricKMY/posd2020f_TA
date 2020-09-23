@@ -20,7 +20,7 @@
 ## **Requirement**  
 1. Modify exception handling of class `Ellipse`.  
 *  Change the exception string into "This is not an ellipse!"  
-*  Make sure semiMajorAxes >= semiMinorAxes, if not throw exception "This is not an ellipse!" in constructor.   
+*  Make sure semiMajorAxes >= semiMinorAxes. If not, throw exception "This is not an ellipse!" in constructor.   
 
 2. Implement `quickSort()` in `sort.h` and write corresponding unit test in `ut_sort.h`.  
 ```
@@ -29,7 +29,7 @@ void quickSort(RandomAccessIterator first, RandomAccessIterator last, Compare co
 ```
 * `Compare`: Binary function that accepts two elements in the range as arguments, and returns a value convertible to bool. It should be able to accpet `Lambda Expressions`, `Funtion`, `Object` and you should write test that covers them. (You may reference [C++ Sort](http://www.cplusplus.com/reference/algorithm/sort/))  
 * `RandomAccessIterator`: Random-access iterators to the initial and final positions of the sequence to be sorted. (You may reference [C++ Sort](http://www.cplusplus.com/reference/algorithm/sort/))  
-* `quickSort()`: Implement a quicksort function **WITHOUT using any sorting function from c/c++ library**, you should write the sorting algorithm by youself. (You may reference [QuickSort Wiki](https://en.wikipedia.org/wiki/Quicksort))  
+* `quickSort()`: Implement a quicksort function **WITHOUT using any sorting function from c/c++ library**, you should write the sorting algorithm by yourself. (You may reference [QuickSort Wiki](https://en.wikipedia.org/wiki/Quicksort))  
 
 3. Implement the following public function in `sort.h`.  
 
