@@ -27,7 +27,7 @@ class Utility
         }
 
         template <class Compare>
-        vector<Shape*> filterShapeByArea(Shape *shape, double upperbound, double lowerbound, Compare comp) {
+        vector<Shape*> filterShape(Shape *shape, Compare comp) {
             vector<Shape*> results = {};
 
             Iterator *it = shape->createIterator();
@@ -35,45 +35,18 @@ class Utility
                 it->first();
             }catch(string e) {
 
-                if(comp(shape, upperbound, lowerbound)) {
+                if(comp(shape)) {
                     results.push_back(shape);
                 }
                 return results;
             }
 
-            if(comp(shape, upperbound, lowerbound)) {
+            if(comp(shape)) {
                 results.push_back(shape);
             }
 
             for(;!it->isDone(); it->next()){
-                vector<Shape*> _v = filterShapeByArea(it->currentItem(), upperbound, lowerbound, comp);
-                results.insert(results.end(), _v.begin(), _v.end());
-            }
-
-            return results;
-        }
-
-        template <class Compare>
-        vector<Shape*> filterShapeByArea(Shape *shape, string str, Compare comp) {
-            vector<Shape*> results = {};
-
-            Iterator *it = shape->createIterator();
-            try {
-                it->first();
-            }catch(string e) {
-
-                if(comp(shape, str)) {
-                    results.push_back(shape);
-                }
-                return results;
-            }
-
-            if(comp(shape, str)) {
-                results.push_back(shape);
-            }
-
-            for(;!it->isDone(); it->next()){
-                vector<Shape*> _v = filterShapeByArea(it->currentItem(), str, comp);
+                vector<Shape*> _v = filterShape(it->currentItem(), comp);
                 results.insert(results.end(), _v.begin(), _v.end());
             }
 
