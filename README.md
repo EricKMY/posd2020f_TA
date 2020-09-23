@@ -61,7 +61,7 @@ class DescendingCompare{
 };
 ```
 * `feature`: is the feature of shape you wanted to compare, meaning "area" and "perimeter".  
-* The following is the example usage of compare obj.  
+* The following is the example usage of compare object.  
 ```
     quickSort(shapes.begin(), shapes.end(), AscendingCompare("area"));
 ```
