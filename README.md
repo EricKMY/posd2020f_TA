@@ -3,7 +3,7 @@
 ## **Notice**  
 * **Due on (Monday, September 29, 2020 23:59).**  
 * **If your code fails to compile on jenkins server, you'll get no point for the assignment.**  
-* **For retrun string of number, should be in form of `%3f`.**  
+* **For return string of number, should be in form of `%3f`.**  
 
 ## **Score**
 
@@ -18,7 +18,7 @@
 [QuickSort Wiki](https://en.wikipedia.org/wiki/Quicksort)  
 
 ## **Requirement**  
-1. Modify exception handle of class `Ellipse`.  
+1. Modify exception handling of class `Ellipse`.  
 *  Change the exception string into "This is not an ellipse!"  
 *  Make sure semiMajorAxes >= semiMinorAxes, if not throw exception "This is not an ellipse!" in constructor.   
 
