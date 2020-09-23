@@ -60,7 +60,7 @@ TEST(Rectangle, PerimeterDouble){
     ASSERT_EQ(15.8, rectangle->perimeter());
 }
 
-TEST(Rectangle, Type){
+TEST(Rectangle, Info){
     Shape* rectangle = new Rectangle(3, 4);
     ASSERT_EQ("Rectangle (3.000, 4.000)", rectangle->info());
 }
