@@ -1,4 +1,5 @@
 #include "../src/ellipse.h"
+using namespace std;
 
 TEST(Ellipse, ConstructorNoException){
     ASSERT_NO_THROW(Ellipse(1, 1));
