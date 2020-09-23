@@ -14,7 +14,7 @@ using namespace std;
 
 class QuickSort: public ::testing::Test {
 protected:
-    void SetUp() override {
+    virtual void SetUp() {
         vector<TwoDimensionalCoordinate*> triangleVector;
         triangleVector.push_back(new TwoDimensionalCoordinate(0, 0));
         triangleVector.push_back(new TwoDimensionalCoordinate(3, 0));
