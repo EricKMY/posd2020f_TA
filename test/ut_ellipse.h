@@ -1,4 +1,5 @@
 #include "../src/ellipse.h"
+using namespace std;
 
 using namespace std;
 TEST(Ellipse, ConstructorNoException){
