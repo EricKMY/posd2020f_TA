@@ -1,16 +1,20 @@
 # **Pattern Oriented Software Design 2020 Fall Assignment 1**  
 
 ## **Notice**  
-* **Due on (Monday, June 22, 2020 23:59). <===fixme**  
+* **Due on (Tuesday, September 22, 2020 23:59).**  
 * **If your code fails to compile on jenkins server, you'll get no point for the assignment.**  
-* **For any output of double, it should be in the form of `%.3f`**  
+* **For return type of double, should be assert to accuracy `%3f`.**  
+* **For retrun string of number, should be in form of `%3f`. ex:"3.141", "2.000".**  
 
 ## **Score**
 1. Unit tests written by yourself: 50%.  
-2. Unit tests written by TA: 50%.  
+2. Unit tests written by TA: 50%.(-10 for each fail test)  
 
 ## **Useful Reference**
-[Makefile](https://en.wikipedia.org/wiki/Makefile)  
+[C++ Exception Handling](https://www.tutorialspoint.com/cplusplus/cpp_exceptions_handling.htm)  
+[Inheritance in C++](https://www.geeksforgeeks.org/inheritance-in-c/)  
+[Makefile Wiki](https://en.wikipedia.org/wiki/Makefile)  
+[Makefile Tutorial](https://ssl-gitlab.csie.ntut.edu.tw/posd2020f_hw/makefile_tutorial)  
 [Googletest Primer](https://github.com/google/googletest/blob/master/googletest/docs/primer.md)  
 
 ## **Requirement**  
@@ -33,6 +37,7 @@ class Rectangle: public Shape {
 public: 
     Rectangle(double length, double width) {
         // If the rectangle can't be successfully created,
+        // the parameters should fit to make an rectangle,
         // handle the exception by throwing string "This is not a rectangle!"
     }
     
@@ -49,6 +54,17 @@ public:
         // ex. Rectangle (3.712, 4.000)
     }
 }
+```
+* Example for exception handling:
+```
+    try {
+        Rectangle(0, 1); ==> the argument should > 0 or the rectangle can't be build.
+        FAIL();
+    }catch(string e) {
+        ASSERT_EQ("This is not a rectangle!", e);
+    }
+    
+    ASSERT_NO_THROW(Rectangle(1, 1));
 ```
 
 3. Implement `Ellipse` and functions inherit from `Shape`.  
@@ -118,38 +134,24 @@ public:
 };
 ```
 
-5. Write correspond makefile to generate binary file for all ut file named `ut_all` under the `bin` folder.  
+5. Write correspond makefile to generate binary file for all ut file named `ut_main` under the `bin` folder.  
 
 ## **File Structure**
 This time your directory structure should be like:
- - 學號_HW
-    - src
-
-      shape.h
-
-      ellipse.h
-
-      rectangle.h
-      
-      triangle.h
-      
-      two_dimensional_coordinate.h
-
-    - test
-
-      ut_shape.cpp
-      
-      ut_ellipse.h
-
-      ut_rectangle.h
-      
-      ut_triangle.h
-      
-    - bin
-
-      ut_all
-
-    - makefile
-  
-  xs
-    
+```
+{學號}_hw
+    ├── bin
+    │   └── ut_main
+    ├── src
+    │   ├── shape.h
+    │   ├── ellipse.h
+    │   ├── rectangle.h
+    │   ├── triangle.h
+    │   └── two_dimensional_vector.h
+    ├── test
+    │   ├── ut_main.cpp
+    │   ├── ut_ellipse.h
+    │   ├── ut_rectangle.h
+    │   └── ut_triangle.h
+    └── makefile
+```
