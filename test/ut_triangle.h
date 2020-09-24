@@ -1,5 +1,6 @@
 #include "../src/triangle.h"
 #include "../src/two_dimensional_coordinate.h"
+
 using namespace std;
 
 class TriangleTest: public testing::Test {
@@ -15,19 +16,6 @@ class TriangleTest: public testing::Test {
 
 TEST_F(TriangleTest, ConstructorNoException){
     ASSERT_NO_THROW(new Triangle(triangleVector));
-}
-
-TEST(Triangle, ExceptionForAreaIsZero){
-    vector<TwoDimensionalCoordinate*> triangleExceptionVector;
-    triangleExceptionVector.push_back(new TwoDimensionalCoordinate(0, 0));
-    triangleExceptionVector.push_back(new TwoDimensionalCoordinate(0, 0));
-    triangleExceptionVector.push_back(new TwoDimensionalCoordinate(0, 0));
-    try {
-        new Triangle(triangleExceptionVector);
-        FAIL();
-    }catch(string e) {
-        ASSERT_EQ("This is not a triangle!", e);
-    }
 }
 
 TEST(Triangle, ExceptionForVectorLessThanThree){
