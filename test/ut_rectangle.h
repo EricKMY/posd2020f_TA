@@ -1,4 +1,5 @@
 #include "../src/rectangle.h"
+using namespace std;
 
 TEST(Rectangle, ConstructorNoException){
     ASSERT_NO_THROW(Rectangle(1, 1));

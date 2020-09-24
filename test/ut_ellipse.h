@@ -1,5 +1,6 @@
 #include "../src/ellipse.h"
 
+using namespace std;
 TEST(Ellipse, ConstructorNoException){
     ASSERT_NO_THROW(Ellipse(1, 1));
 }
@@ -52,7 +53,7 @@ TEST(Ellipse, ExceptionForSemiMajorAxesLessThanSemiMinorAxes){
 TEST(Ellipse, AreaInt){
     double abs = 0.001;
     Shape* ellipse = new Ellipse(4, 3);
-    ASSERT_NEAR(37.6991, ellipse->area(), abs);
+    ASSERT_NEAR(37.699, ellipse->area(), abs);
 }
 
 TEST(Ellipse, AreaDouble){
