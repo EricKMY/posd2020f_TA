@@ -131,11 +131,10 @@ TEST(Rectangle, IteratorIsDone){
     ASSERT_TRUE(it->isDone());
 }
 
-TEST(Rectangle, ExceptionForCallUtilityGetShapeById){
+TEST(Rectangle, ExceptionForCallGetShapeById){
     Shape* rectangle = new Rectangle("1", 3, 4);
-    Utility *utility = new Utility();
     try {
-        utility->getShapeById(rectangle, "1");
+        getShapeById(rectangle, "1");
         FAIL();
     }catch(string e) {
         ASSERT_EQ("Only complex shape can get shape!", e);

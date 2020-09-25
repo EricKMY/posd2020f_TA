@@ -143,21 +143,19 @@ TEST_F(TriangleTest, IteratorIsDone){
     ASSERT_TRUE(it->isDone());
 }
 
-TEST_F(TriangleTest, ExceptionForCallUtilityGetShapeById){
+TEST_F(TriangleTest, ExceptionForCallGetShapeById){
     Shape* triangle = new Triangle("1", triangleVector);
-    Utility *utility = new Utility();
     try {
-        utility->getShapeById(triangle, "1");
+        getShapeById(triangle, "1");
         FAIL();
     }catch(string e) {
         ASSERT_EQ("Only complex shape can get shape!", e);
     }
 }
 
-TEST_F(TriangleTest, ExceptionForCallUtilityFilterShapeArea){
+TEST_F(TriangleTest, FilterShapeArea){
     Shape* triangle = new Triangle("1", triangleVector);
-    Utility *utility = new Utility();
-    vector<Shape *> vector = utility->filterShape(triangle, [](Shape *shape) {
+    vector<Shape *> vector = filterShape(triangle, [](Shape *shape) {
         return shape->area() <= 10 && shape->area() >= 1;
     });
 
@@ -165,17 +163,16 @@ TEST_F(TriangleTest, ExceptionForCallUtilityFilterShapeArea){
 }
 
 
-TEST_F(TriangleTest, ExceptionForCallUtilityFilterShapePerimeter){
+TEST_F(TriangleTest, FilterShapePerimeter){
     Shape* triangle = new Triangle("1", triangleVector);
-    Utility *utility = new Utility();
-    vector<Shape *> vector = utility->filterShape(triangle, [](Shape *shape) {
+    vector<Shape *> vector = filterShape(triangle, [](Shape *shape) {
         return shape->perimeter() <= 12 && shape->perimeter() >= 1;
     });
 
     ASSERT_EQ(6, vector[0]->area());
 
 
-    vector = utility->filterShape(triangle, [](Shape *shape) {
+    vector = filterShape(triangle, [](Shape *shape) {
         return "triangle" == "triangle";
     });
 

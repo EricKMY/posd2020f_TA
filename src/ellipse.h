@@ -10,9 +10,9 @@ using namespace std;
 class Ellipse : public Shape {
 	public:
 	Ellipse(string id, double semiMajorAxes, double semiMinorAxes): Shape(id), _semiMajorAxes(semiMajorAxes), _semiMinorAxes(semiMinorAxes){
-		if(_semiMajorAxes <= 0 || _semiMinorAxes <= 0) {
-        	throw string("This is not a ellipse!");
-      	}
+		if(_semiMajorAxes <= 0 || _semiMinorAxes <= 0 || _semiMajorAxes < _semiMinorAxes) {
+        	throw string("This is not an ellipse!");
+    	}
 	}
 
 	double area() const {
