@@ -10,10 +10,18 @@ using namespace std;
 class Ellipse : public Shape {
 	public:
 	Ellipse(string id, double semiMajorAxes, double semiMinorAxes): Shape(id), _semiMajorAxes(semiMajorAxes), _semiMinorAxes(semiMinorAxes){
-		if(_semiMajorAxes <= 0 || _semiMinorAxes <= 0) {
-        	throw string("This is not a ellipse!");
-      	}
+		checkShapeIsValid();
 	}
+
+	Ellipse(string id, double semiMajorAxes, double semiMinorAxes, string color): Shape(id, color), _semiMajorAxes(semiMajorAxes), _semiMinorAxes(semiMinorAxes){
+		checkShapeIsValid();
+	}
+
+    void checkShapeIsValid() {
+		if(_semiMajorAxes <= 0 || _semiMinorAxes <= 0 || _semiMajorAxes < _semiMinorAxes) {
+			throw string("This is not an ellipse!");
+		}
+    }
 
 	double area() const {
 		return _semiMajorAxes * _semiMinorAxes * M_PI;
@@ -27,6 +35,10 @@ class Ellipse : public Shape {
 		char info[100];
 		sprintf(info, "Ellipse (%.3f, %.3f)", _semiMajorAxes, _semiMinorAxes);
 		return info;
+	}
+
+	string type() const {
+		return "Ellipse";
 	}
 
 	private:

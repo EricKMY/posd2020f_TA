@@ -9,7 +9,7 @@ using namespace std;
 class ComplexShapeTest: public testing::Test {
     protected:
     void SetUp() {
-        ellipse = new Ellipse("1", 3, 4);
+        ellipse = new Ellipse("1", 4, 3);
         rectangle = new Rectangle("2", 3, 4);
         vector<TwoDimensionalCoordinate*> triangleVector;
         triangleVector.push_back(new TwoDimensionalCoordinate(0, 0));
@@ -22,7 +22,7 @@ class ComplexShapeTest: public testing::Test {
         shapes->push_back(triangle);
 
 
-        ellipse2 = new Ellipse("5", 3.7, 4.2);
+        ellipse2 = new Ellipse("5", 4.2, 3.7);
         rectangle2 = new Rectangle("6", 3.7, 4.2);
         triangle2 = new Triangle("7", triangleVector);
 
@@ -55,14 +55,28 @@ TEST_F(ComplexShapeTest, Area) {
 
 TEST_F(ComplexShapeTest, Perimeter){
     Shape* complex_shape = new ComplexShape("4", shapes);
-    ASSERT_NEAR(47.1327, complex_shape->perimeter(), 0.0001);
+    ASSERT_NEAR(48.849, complex_shape->perimeter(), 0.001);
 }
 
 TEST_F(ComplexShapeTest, Info){
     Shape* complex_shape = new ComplexShape("4", shapes);
-    ASSERT_EQ("Complex Shape {Ellipse (3.000, 4.000), Rectangle (3.000, 4.000), Triangle ([0.000, 0.000], [3.000, 0.000], [0.000, 4.000])}", complex_shape->info());
+    ASSERT_EQ("Complex Shape {Ellipse (4.000, 3.000), Rectangle (3.000, 4.000), Triangle ([0.000, 0.000], [3.000, 0.000], [0.000, 4.000])}", complex_shape->info());
 }
 
+TEST_F(ComplexShapeTest, ExceptionForColor){
+    Shape* complex_shape = new ComplexShape("4", shapes);
+    try {
+        complex_shape->color();
+        FAIL();
+    }catch(string e) {
+        ASSERT_EQ("complexShape can't have color", e);
+    }
+}
+
+TEST_F(ComplexShapeTest, Type){
+    Shape* complex_shape = new ComplexShape("4", shapes);
+    ASSERT_EQ("ComplexShape", complex_shape->type());
+}
 
 TEST_F(ComplexShapeTest, AddShape) {
     shapes->clear();
@@ -72,9 +86,9 @@ TEST_F(ComplexShapeTest, AddShape) {
     complex_shape->addShape(rectangle);
     complex_shape->addShape(triangle);
 
-    ASSERT_NEAR(55.6991, complex_shape->area(), 0.0001);
-    ASSERT_NEAR(47.1327, complex_shape->perimeter(), 0.0001);
-    ASSERT_EQ("Complex Shape {Ellipse (3.000, 4.000), Rectangle (3.000, 4.000), Triangle ([0.000, 0.000], [3.000, 0.000], [0.000, 4.000])}", complex_shape->info());
+    ASSERT_NEAR(55.699, complex_shape->area(), 0.001);
+    ASSERT_NEAR(48.849, complex_shape->perimeter(), 0.001);
+    ASSERT_EQ("Complex Shape {Ellipse (4.000, 3.000), Rectangle (3.000, 4.000), Triangle ([0.000, 0.000], [3.000, 0.000], [0.000, 4.000])}", complex_shape->info());
 }
 
 TEST_F(ComplexShapeTest, DeleteShapeById){
@@ -86,7 +100,7 @@ TEST_F(ComplexShapeTest, DeleteShapeById){
     ASSERT_EQ("Complex Shape {Rectangle (3.000, 4.000), Triangle ([0.000, 0.000], [3.000, 0.000], [0.000, 4.000])}", complex_shape->info());
 }
 
-TEST_F(ComplexShapeTest, ExecptionForDeleteShapeById){
+TEST_F(ComplexShapeTest, ExceptionForDeleteShapeById){
     Shape* complex_shape = new ComplexShape("4", shapes);
 
     try {
@@ -108,7 +122,7 @@ TEST_F(ComplexShapeTest, GetShapeById){
     ASSERT_EQ("Triangle ([0.000, 0.000], [3.000, 0.000], [0.000, 4.000])", shape->info());
 }
 
-TEST_F(ComplexShapeTest, ExecptionForGetShapeById){
+TEST_F(ComplexShapeTest, ExceptionForGetShapeById){
     Shape* complex_shape = new ComplexShape("4", shapes);
 
     try {
@@ -147,16 +161,16 @@ TEST_F(ComplexShapeTest, GetShapeById_lv3) {
     shape = complex_shape->getShapeById("8");
 
     ASSERT_EQ("8", shape->id());
-    ASSERT_NEAR(70.3603, shape->area(), 0.001); //ellipse 48.8203, triangle 6, rectangle 15.54
-    ASSERT_NEAR(52.1893, shape->perimeter(), 0.001);//ellipse 24.3893, triangle 12, rectangle 15.8
-    ASSERT_EQ("Complex Shape {Ellipse (3.700, 4.200), Complex Shape {Triangle ([0.000, 0.000], [3.000, 0.000], [0.000, 4.000]), Rectangle (3.700, 4.200)}}", shape->info());
+    ASSERT_NEAR(70.360, shape->area(), 0.001); //ellipse 48.8203, triangle 6, rectangle 15.54
+    ASSERT_NEAR(53.047, shape->perimeter(), 0.001);//ellipse 24.3893, triangle 12, rectangle 15.8
+    ASSERT_EQ("Complex Shape {Ellipse (4.200, 3.700), Complex Shape {Triangle ([0.000, 0.000], [3.000, 0.000], [0.000, 4.000]), Rectangle (3.700, 4.200)}}", shape->info());
 
     // shape = complex_shape->getShapeById("4");
 
     ASSERT_EQ("4", complex_shape->id());
-    ASSERT_NEAR(126.0594, complex_shape->area(), 0.001); //complexShape 55.6991, ellipse 48.8203, triangle 6, rectangle 15.54
-    ASSERT_NEAR(99.3220, complex_shape->perimeter(), 0.001);//complexShape 47.1327, ellipse 24.3893, triangle 12, rectangle 15.8
-    ASSERT_EQ("Complex Shape {Ellipse (3.000, 4.000), Rectangle (3.000, 4.000), Triangle ([0.000, 0.000], [3.000, 0.000], [0.000, 4.000]), Complex Shape {Ellipse (3.700, 4.200), Complex Shape {Triangle ([0.000, 0.000], [3.000, 0.000], [0.000, 4.000]), Rectangle (3.700, 4.200)}}}", complex_shape->info());
+    ASSERT_NEAR(126.059, complex_shape->area(), 0.001); //complexShape 55.6991, ellipse 48.8203, triangle 6, rectangle 15.54
+    ASSERT_NEAR(101.897, complex_shape->perimeter(), 0.001);//complexShape 47.1327, ellipse 24.3893, triangle 12, rectangle 15.8
+    ASSERT_EQ("Complex Shape {Ellipse (4.000, 3.000), Rectangle (3.000, 4.000), Triangle ([0.000, 0.000], [3.000, 0.000], [0.000, 4.000]), Complex Shape {Ellipse (4.200, 3.700), Complex Shape {Triangle ([0.000, 0.000], [3.000, 0.000], [0.000, 4.000]), Rectangle (3.700, 4.200)}}}", complex_shape->info());
 }
 
 TEST_F(ComplexShapeTest, DeleteShapeById_lv3){
@@ -178,18 +192,18 @@ TEST_F(ComplexShapeTest, DeleteShapeById_lv3){
     
     complex_shape->deleteShapeById("9");
 
-    ASSERT_NEAR(104.5194, complex_shape->area(), 0.001);
-    ASSERT_NEAR(71.5220, complex_shape->perimeter(), 0.001);
-    ASSERT_EQ("Complex Shape {Ellipse (3.000, 4.000), Rectangle (3.000, 4.000), Triangle ([0.000, 0.000], [3.000, 0.000], [0.000, 4.000]), Complex Shape {Ellipse (3.700, 4.200)}}", complex_shape->info());
+    ASSERT_NEAR(104.519, complex_shape->area(), 0.001);
+    ASSERT_NEAR(74.097, complex_shape->perimeter(), 0.001);
+    ASSERT_EQ("Complex Shape {Ellipse (4.000, 3.000), Rectangle (3.000, 4.000), Triangle ([0.000, 0.000], [3.000, 0.000], [0.000, 4.000]), Complex Shape {Ellipse (4.200, 3.700)}}", complex_shape->info());
 
     complex_shape->deleteShapeById("8");
 
-    ASSERT_NEAR(55.6991, complex_shape->area(), 0.001);
-    ASSERT_NEAR(47.1327, complex_shape->perimeter(), 0.001);
-    ASSERT_EQ("Complex Shape {Ellipse (3.000, 4.000), Rectangle (3.000, 4.000), Triangle ([0.000, 0.000], [3.000, 0.000], [0.000, 4.000])}", complex_shape->info());
+    ASSERT_NEAR(55.699, complex_shape->area(), 0.001);
+    ASSERT_NEAR(48.849, complex_shape->perimeter(), 0.001);
+    ASSERT_EQ("Complex Shape {Ellipse (4.000, 3.000), Rectangle (3.000, 4.000), Triangle ([0.000, 0.000], [3.000, 0.000], [0.000, 4.000])}", complex_shape->info());
 }
 
-TEST_F(ComplexShapeTest, ExecptionForDeleteShapeById_lv3){
+TEST_F(ComplexShapeTest, ExceptionForDeleteShapeById_lv3){
    Shape* complex_shape = new ComplexShape("4", shapes);
 
     vector<Shape*> *shapes2 = new vector<Shape*>();
@@ -228,8 +242,8 @@ TEST_F(ComplexShapeTest, ExecptionForDeleteShapeById_lv3){
     }
 }
 
-TEST_F(ComplexShapeTest, ExecptionForGetShapeById_lv3){
-   Shape* complex_shape = new ComplexShape("4", shapes);
+TEST_F(ComplexShapeTest, ExceptionForGetShapeById_lv3){
+    Shape* complex_shape = new ComplexShape("4", shapes);
 
     vector<Shape*> *shapes2 = new vector<Shape*>();
     shapes2->push_back(ellipse2);

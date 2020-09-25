@@ -10,10 +10,15 @@ using namespace std;
 class ComplexShape : public Shape {
   public: 
   ComplexShape(string id, vector<Shape*>* shapes): Shape(id), _shapes(shapes) {
+    checkShapeIsValid();
+  }
+
+  void checkShapeIsValid() {
     if(_shapes->empty()) {
       throw string("This is not a complexShape shape!");
     }
   }
+
 
   double area() const {
     double area = 0;
@@ -38,6 +43,14 @@ class ComplexShape : public Shape {
     }
     info.erase(info.end()-2, info.end());
     return info + "}";
+  }
+
+  string color() const {
+    throw string("complexShape can't have color");
+  }
+
+  string type() const {
+    return "ComplexShape";
   }
 
   void addShape(Shape *shape) {

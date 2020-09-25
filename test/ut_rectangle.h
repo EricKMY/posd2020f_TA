@@ -1,5 +1,7 @@
 #include "../src/rectangle.h"
 
+using namespace std;
+
 TEST(Rectangle, ExceptionForLengthIsZero){
     try {
         Rectangle("1", 0, 1);
@@ -59,6 +61,21 @@ TEST(Rectangle, PerimeterDouble){
 TEST(Rectangle, Info){
     Shape* rectangle = new Rectangle("1", 3, 4);
     ASSERT_EQ("Rectangle (3.000, 4.000)", rectangle->info());
+}
+
+TEST(Rectangle, DefaultColor){
+    Shape* rectangle = new Rectangle("1", 3, 4);
+    ASSERT_EQ("White", rectangle->color());
+}
+
+TEST(Rectangle, RedColor){
+    Shape* rectangle = new Rectangle("1", 3, 4, "Red");
+    ASSERT_EQ("Red", rectangle->color());
+}
+
+TEST(Rectangle, Type){
+    Shape* rectangle = new Rectangle("1", 3, 4);
+    ASSERT_EQ("Rectangle", rectangle->type());
 }
 
 TEST(Rectangle, ExceptionForAddShape){

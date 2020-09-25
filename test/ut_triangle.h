@@ -15,7 +15,7 @@ class TriangleTest: public testing::Test {
 
 
 TEST_F(TriangleTest, ConstructorNoException){
-    ASSERT_NO_THROW(Triangle("1", triangleVector););
+    ASSERT_NO_THROW(Triangle("1", triangleVector));
 }
 
 TEST(Triangle, ExceptionForVectorLessThanThree){
@@ -70,6 +70,21 @@ TEST_F(TriangleTest, Perimeter){
 TEST_F(TriangleTest, Info){
     Shape* triangle = new Triangle("1", triangleVector);
     ASSERT_EQ("Triangle ([0.000, 0.000], [3.000, 0.000], [0.000, 4.000])", triangle->info());
+}
+
+TEST_F(TriangleTest, DefaultColor){
+    Shape* triangle = new Triangle("1", triangleVector);
+    ASSERT_EQ("White", triangle->color());
+}
+
+TEST_F(TriangleTest, RedColor){
+    Shape* triangle = new Triangle("1", triangleVector, "Red");
+    ASSERT_EQ("Red", triangle->color());
+}
+
+TEST_F(TriangleTest, Type){
+    Shape* triangle = new Triangle("1", triangleVector);
+    ASSERT_EQ("Triangle", triangle->type());
 }
 
 

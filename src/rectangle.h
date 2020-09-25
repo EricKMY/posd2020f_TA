@@ -11,6 +11,14 @@ using namespace std;
 class Rectangle : public Shape {
     public: 
 		Rectangle(string id, double length, double width): Shape(id), _length(length), _width(width) {
+      checkShapeIsValid();
+    }
+
+    Rectangle(string id, double length, double width, string color): Shape(id, color), _length(length), _width(width) {
+      checkShapeIsValid();
+    }
+
+    void checkShapeIsValid() {
       if(_length <= 0 || _width <= 0) {
         throw string("This is not a rectangle!");
       }
@@ -28,7 +36,12 @@ class Rectangle : public Shape {
       return info;
     }
 
+    string type() const {
+      return "Rectangle";
+    }
+
     private:
+
     double _length, _width;
 };
 
