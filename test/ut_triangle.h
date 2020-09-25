@@ -16,7 +16,7 @@ class TriangleTest: public testing::Test {
 
 
 TEST_F(TriangleTest, ConstructorNoException){
-    ASSERT_NO_THROW(Triangle("1", triangleVector););
+    ASSERT_NO_THROW(Triangle("1", triangleVector));
 }
 
 TEST(Triangle, ExceptionForVectorLessThanThree){
@@ -71,6 +71,21 @@ TEST_F(TriangleTest, Perimeter){
 TEST_F(TriangleTest, Info){
     Shape* triangle = new Triangle("1", triangleVector);
     ASSERT_EQ("Triangle ([0.000, 0.000], [3.000, 0.000], [0.000, 4.000])", triangle->info());
+}
+
+TEST_F(TriangleTest, DefaultColor){
+    Shape* triangle = new Triangle("1", triangleVector);
+    ASSERT_EQ("White", triangle->color());
+}
+
+TEST_F(TriangleTest, RedColor){
+    Shape* triangle = new Triangle("1", triangleVector, "Red");
+    ASSERT_EQ("Red", triangle->color());
+}
+
+TEST_F(TriangleTest, Type){
+    Shape* triangle = new Triangle("1", triangleVector);
+    ASSERT_EQ("Triangle", triangle->type());
 }
 
 
@@ -155,27 +170,49 @@ TEST_F(TriangleTest, ExceptionForCallGetShapeById){
 
 TEST_F(TriangleTest, FilterShapeArea){
     Shape* triangle = new Triangle("1", triangleVector);
-    vector<Shape *> vector = filterShape(triangle, [](Shape *shape) {
-        return shape->area() <= 10 && shape->area() >= 1;
-    });
+    vector<Shape *> vector = filterShape(triangle, AreaFilter(12, 1));
 
     ASSERT_EQ(6, vector[0]->area());
+
+
+    vector = filterShape(triangle, AreaFilter(5, 1));
+
+    ASSERT_EQ(0, vector.size());
 }
 
 
 TEST_F(TriangleTest, FilterShapePerimeter){
     Shape* triangle = new Triangle("1", triangleVector);
-    vector<Shape *> vector = filterShape(triangle, [](Shape *shape) {
-        return shape->perimeter() <= 12 && shape->perimeter() >= 1;
-    });
+    vector<Shape *> vector = filterShape(triangle, PerimeterFilter(12, 1));
 
     ASSERT_EQ(6, vector[0]->area());
 
 
-    vector = filterShape(triangle, [](Shape *shape) {
-        return "triangle" == "triangle";
-    });
+    vector = filterShape(triangle, PerimeterFilter(5, 1));
 
-    ASSERT_EQ(6, vector[0]->area());
+    ASSERT_EQ(0, vector.size());
+}
 
+TEST_F(TriangleTest, FilterShapeByColor){
+    Shape* triangle = new Triangle("1", triangleVector);
+    vector<Shape *> vector = filterShape(triangle, ColorFilter("White"));
+
+    ASSERT_EQ("White", vector[0]->color());
+
+
+    vector = filterShape(triangle, ColorFilter("Red"));
+
+    ASSERT_EQ(0, vector.size());
+}
+
+TEST_F(TriangleTest, FilterShapeByType){
+    Shape* triangle = new Triangle("1", triangleVector);
+    vector<Shape *> vector = filterShape(triangle, TypeFilter("Triangle"));
+
+    ASSERT_EQ("Triangle", vector[0]->type());
+
+
+    vector = filterShape(triangle, TypeFilter("Rectangle"));
+
+    ASSERT_EQ(0, vector.size());
 }

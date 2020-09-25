@@ -64,6 +64,21 @@ TEST_F(ComplexShapeTest, Info){
     ASSERT_EQ("Complex Shape {Ellipse (4.000, 3.000), Rectangle (3.000, 4.000), Triangle ([0.000, 0.000], [3.000, 0.000], [0.000, 4.000])}", complex_shape->info());
 }
 
+TEST_F(ComplexShapeTest, ExceptionForColor){
+    Shape* complex_shape = new ComplexShape("4", shapes);
+    try {
+        complex_shape->color();
+        FAIL();
+    }catch(string e) {
+        ASSERT_EQ("complexShape can't have color", e);
+    }
+}
+
+TEST_F(ComplexShapeTest, Type){
+    Shape* complex_shape = new ComplexShape("4", shapes);
+    ASSERT_EQ("ComplexShape", complex_shape->type());
+}
+
 TEST_F(ComplexShapeTest, IteratorFirst){
     Shape* complex_shape = new ComplexShape("4", shapes);
     Iterator *it = complex_shape->createIterator();
@@ -97,7 +112,7 @@ TEST_F(ComplexShapeTest, DeleteShapeById){
     ASSERT_EQ("Complex Shape {Rectangle (3.000, 4.000), Triangle ([0.000, 0.000], [3.000, 0.000], [0.000, 4.000])}", complex_shape->info());
 }
 
-TEST_F(ComplexShapeTest, ExecptionForDeleteShapeById){
+TEST_F(ComplexShapeTest, ExceptionForDeleteShapeById){
     Shape* complex_shape = new ComplexShape("4", shapes);
 
     try {
@@ -130,7 +145,7 @@ TEST_F(ComplexShapeTest, UtilityGetShapeById){
     ASSERT_EQ("Triangle ([0.000, 0.000], [3.000, 0.000], [0.000, 4.000])", shape->info());
 }
 
-TEST_F(ComplexShapeTest, ExecptionForGetShapeById){
+TEST_F(ComplexShapeTest, ExceptionForGetShapeById){
     Shape* complex_shape = new ComplexShape("4", shapes);
 
     try {
@@ -211,7 +226,7 @@ TEST_F(ComplexShapeTest, DeleteShapeById_lv3){
     ASSERT_EQ("Complex Shape {Ellipse (4.000, 3.000), Rectangle (3.000, 4.000), Triangle ([0.000, 0.000], [3.000, 0.000], [0.000, 4.000])}", complex_shape->info());
 }
 
-TEST_F(ComplexShapeTest, ExecptionForDeleteShapeById_lv3){
+TEST_F(ComplexShapeTest, ExceptionForDeleteShapeById_lv3){
    Shape* complex_shape = new ComplexShape("4", shapes);
 
     vector<Shape*> *shapes2 = new vector<Shape*>();
@@ -250,7 +265,7 @@ TEST_F(ComplexShapeTest, ExecptionForDeleteShapeById_lv3){
     }
 }
 
-TEST_F(ComplexShapeTest, ExecptionForGetShapeById_lv3){
+TEST_F(ComplexShapeTest, ExceptionForGetShapeById_lv3){
     Shape* complex_shape = new ComplexShape("4", shapes);
 
     vector<Shape*> *shapes2 = new vector<Shape*>();

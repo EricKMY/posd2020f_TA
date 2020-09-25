@@ -12,13 +12,22 @@ using namespace std;
 
 class Triangle : public Shape{
     public: 
-		Triangle(string id, vector<TwoDimensionalCoordinate*> vectors): Shape(id), _vectors(vectors){
-      if(vectors.size() != 3) {
+
+    Triangle(string id, vector<TwoDimensionalCoordinate*> vectors): Shape(id), _vectors(vectors){
+        checkShapeIsValid();
+    }
+
+		Triangle(string id, vector<TwoDimensionalCoordinate*> vectors, string color): Shape(id, color), _vectors(vectors){
+        checkShapeIsValid();
+    }
+
+    void checkShapeIsValid() {
+      if(_vectors.size() != 3) {
         throw string("This is not a triangle!");
       }else if(area() <= 0) {
         throw string("This is not a triangle!");
       }
-    }    
+    }
     
     double area() const {
       return fabs(
@@ -43,6 +52,10 @@ class Triangle : public Shape{
                                 _vectors[1]->getX(), _vectors[1]->getY(),
                                 _vectors[2]->getX(), _vectors[2]->getY());
       return info;
+    }
+
+    string type() const {
+      return "Triangle";
     }
 
     private:

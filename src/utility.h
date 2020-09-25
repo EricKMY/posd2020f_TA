@@ -51,5 +51,54 @@ vector<Shape*> filterShape(Shape *shape, Compare comp) {
     return results;
 }
 
+class AreaFilter {
+    public:
+    AreaFilter(double upperBound, double lowerBound):_upperBound(upperBound),_lowerBound(lowerBound) {}
+
+    bool operator() (Shape *shape) {
+        return shape->area() <= _upperBound && shape->area() >= _lowerBound;
+    }
+
+    private:
+    double _upperBound;
+    double _lowerBound;
+};
+
+class PerimeterFilter {
+    public:
+    PerimeterFilter(double upperBound, double lowerBound):_upperBound(upperBound),_lowerBound(lowerBound) {}
+
+    bool operator() (Shape *shape) {
+        return shape->perimeter() <= _upperBound && shape->perimeter() >= _lowerBound;
+    }
+
+    private:
+    double _upperBound;
+    double _lowerBound;
+};
+
+class ColorFilter {
+    public:
+    ColorFilter(string color):_color(color) {}
+
+    bool operator() (Shape *shape) {
+        return shape->color() == _color;
+    }
+
+    private:
+    string _color;
+};
+
+class TypeFilter {
+    public:
+    TypeFilter(string type):_type(type) {}
+
+    bool operator() (Shape *shape) {
+        return shape->type() == _type;
+    }
+
+    private:
+    string _type;
+};
 
 #endif

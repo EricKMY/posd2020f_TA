@@ -1,6 +1,7 @@
 #include "../src/ellipse.h"
 #include "../src/utility.h"
 
+
 TEST(Ellipse, ConstructorNoException){
     ASSERT_NO_THROW(Ellipse("1", 1, 1));
 }
@@ -68,6 +69,21 @@ TEST(Ellipse, PerimeterDouble){
 TEST(Ellipse, Info){
     Shape* ellipse = new Ellipse("1", 4, 3);
     ASSERT_EQ("Ellipse (4.000, 3.000)", ellipse->info());
+}
+
+TEST(Ellipse, DefaultColor){
+    Shape* ellipse = new Ellipse("1", 4, 3);
+    ASSERT_EQ("White", ellipse->color());
+}
+
+TEST(Ellipse, RedColor){
+    Shape* ellipse = new Ellipse("1", 4, 3, "Red");
+    ASSERT_EQ("Red", ellipse->color());
+}
+
+TEST(Ellipse, Type){
+    Shape* ellipse = new Ellipse("1", 4, 3);
+    ASSERT_EQ("Ellipse", ellipse->type());
 }
 
 TEST(Ellipse, ExceptionForAddShape){
