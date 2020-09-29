@@ -84,11 +84,6 @@ TEST_F(CompoundShapeTest, ExceptionForColor){
     }
 }
 
-TEST_F(CompoundShapeTest, Type){
-    Shape* compoundShape = new CompoundShape("7", shapes);
-    ASSERT_EQ("Compound Shape", compoundShape->type());
-}
-
 TEST_F(CompoundShapeTest, AddShape) {
     shapes->clear();
     shapes->push_back(ellipse_1);

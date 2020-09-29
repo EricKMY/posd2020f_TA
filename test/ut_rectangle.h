@@ -73,11 +73,6 @@ TEST(Rectangle, RedColor){
     ASSERT_EQ("Red", rectangle->color());
 }
 
-TEST(Rectangle, Type){
-    Shape* rectangle = new Rectangle("1", 3, 4);
-    ASSERT_EQ("Rectangle", rectangle->type());
-}
-
 TEST(Rectangle, ExceptionForAddShape){
     Shape* rectangle = new Rectangle("1", 3, 4);
     try {

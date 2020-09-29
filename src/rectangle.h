@@ -30,10 +30,6 @@ public:
     return info;
   }
 
-  string type() const {
-    return "Rectangle";
-  }
-
 private:
   double _length, _width;
 

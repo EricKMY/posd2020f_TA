@@ -31,10 +31,6 @@ class Ellipse : public Shape {
 		return info;
 	}
 
-	string type() const {
-		return "Ellipse";
-	}
-
 private:
 	double _semiMajorAxes, _semiMinorAxes;
 

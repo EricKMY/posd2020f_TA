@@ -42,10 +42,6 @@ class CompoundShape : public Shape {
     throw string("Compound shape don't have single color");
   }
 
-  string type() const {
-    return "Compound Shape";
-  }
-
   void addShape(Shape *shape) {
     _shapes->push_back(shape);
   }

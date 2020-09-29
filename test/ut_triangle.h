@@ -83,12 +83,6 @@ TEST_F(TriangleTest, RedColor){
     ASSERT_EQ("Red", triangle->color());
 }
 
-TEST_F(TriangleTest, Type){
-    Shape* triangle = new Triangle("1", triangleVector);
-    ASSERT_EQ("Triangle", triangle->type());
-}
-
-
 TEST_F(TriangleTest, ExceptionForAddShape){
     Shape* triangle = new Triangle("1", triangleVector);
     try {

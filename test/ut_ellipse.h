@@ -80,11 +80,6 @@ TEST(Ellipse, RedColor){
     ASSERT_EQ("Red", ellipse->color());
 }
 
-TEST(Ellipse, Type){
-    Shape* ellipse = new Ellipse("1", 4, 3);
-    ASSERT_EQ("Ellipse", ellipse->type());
-}
-
 TEST(Ellipse, ExceptionForAddShape){
     Shape* ellipse = new Ellipse("1", 4, 3);
     try {
