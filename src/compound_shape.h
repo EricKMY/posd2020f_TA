@@ -77,7 +77,7 @@ private:
 
   void checkShapeIsValid() {
     if(_shapes->empty()) {
-      throw string("This is not a Compound shape shape!");
+      throw string("This is not a compound shape!");
     }
   }
 };

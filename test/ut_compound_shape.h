@@ -55,7 +55,7 @@ TEST(CompoundShape, ExceptionForEmptyShapes) {
         CompoundShape("7", nullShapes);
         FAIL();
     }catch(string e) {
-        ASSERT_EQ("This is not a Compound shape shape!", e);
+        ASSERT_EQ("This is not a compound shape!", e);
     }
 }
 
