@@ -17,12 +17,6 @@ class Ellipse : public Shape {
 		checkShapeIsValid();
 	}
 
-    void checkShapeIsValid() {
-		if(_semiMajorAxes <= 0 || _semiMinorAxes <= 0 || _semiMajorAxes < _semiMinorAxes) {
-			throw string("This is not an ellipse!");
-		}
-    }
-
 	double area() const {
 		return _semiMajorAxes * _semiMinorAxes * M_PI;
 	}
@@ -41,8 +35,14 @@ class Ellipse : public Shape {
 		return "Ellipse";
 	}
 
-	private:
+private:
 	double _semiMajorAxes, _semiMinorAxes;
+
+	void checkShapeIsValid() {
+		if(_semiMajorAxes <= 0 || _semiMinorAxes <= 0 || _semiMajorAxes < _semiMinorAxes) {
+			throw string("This is not an ellipse!");
+		}
+    }
 };
 
 #endif

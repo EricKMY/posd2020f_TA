@@ -1,49 +1,25 @@
-#include <iostream>
-#include <fstream> 
+#include <fstream>
+#include <string>
 #include "./terminal.h"
 
 using namespace std;
 
-int main(int argc, char *argv[]) {
-
-    string input_str, line_str;
-    ifstream input_file (argv[1]);
-
-    if (input_file.is_open())
-    {
-        while ( getline (input_file,line_str) )
-        {
-            input_str += line_str;
-        }
-        input_file.close();
-    
-    }else cout << "Unable to open file";
-
-    input_str.append(" ");
-    input_str.append(argv[3]);
-    input_str.append(" ");
-    input_str.append(argv[4]);
-    input_str.append(" ");
-    input_str.append(argv[5]);
-
-    Terminal * terminal;
-    try{
-        terminal = new Terminal(input_str);
-
-    }catch(std::string errorMessage){
-        cout << errorMessage << endl;
-        return 0;
-    }
-
-
-    ofstream output_file (argv[2]);
-    if (output_file.is_open())
-    {
-        output_file << terminal->showResult();
-        
-        output_file.close();
-    
-    }else cout << "Unable to open file";
-
-    return 0;
-}
+int main(int argc, char **argv) {
+      if(argc != 5) {return 0;}
+      string line = "";
+      string result = "";
+      ifstream inputfile(argv[1]);
+      ofstream outputfile(argv[2]);
+      if (inputfile.is_open() && outputfile.is_open()) {
+            while (getline(inputfile, line)){
+                  result += line + " ";
+            }
+            result += argv[3];
+            result += " ";
+            result += argv[4];
+            Terminal terminal(result);
+            outputfile << terminal.showResult();
+            inputfile.close();
+            outputfile.close();
+      }
+};

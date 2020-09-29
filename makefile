@@ -1,30 +1,25 @@
-CC = g++
-SRC = ./src
-BIN = ./bin
-OBJ = ./obj
-TEST = ./test
-LIB = -lgtest -lpthread
-CFLAGS = -std=c++11
-FERROE = -Wfatal-errors
+.PHONY: clean  
+SRC = src/shape.h src/ellipse.h src/rectangle.h src/triangle.h src/two_dimensional_coordinate.h src/compound_shape.h
+TEST = test/ut_ellipse.h test/ut_rectangle.h test/ut_triangle.h test/ut_compound_shape.h
 
-all:directories $(BIN)/ut_main
+all:directories bin/ut_main
 
-$(BIN)/ut_main: $(TEST)/ut_main.cpp $(TEST)/ut_rectangle.h $(TEST)/ut_ellipse.h $(TEST)/ut_triangle.h $(TEST)/ut_complex_shape.h $(OBJ)/shape.o $(SRC)/rectangle.h $(SRC)/ellipse.h $(SRC)/triangle.h $(SRC)/complex_shape.h $(SRC)/two_dimensional_coordinate.h
-	$(CC) $(CFLAGS) ${FERROE} -o $@ $< $(OBJ)/* $(LIB)
+bin/ut_main: test/ut_main.cpp $(TEST) obj/shape.o $(SRC)
+	g++ -std=c++11 -Wfatal-errors -o $@ $< obj/shape.o -lgtest -lpthread
 
-$(OBJ)/shape.o: $(SRC)/shape.cpp $(SRC)/shape.h
-	$(CC) $(CFLAGS) ${FERROE} -c $< -o $@
+obj/shape.o: src/shape.cpp src/shape.h
+	g++ -std=c++11 -Wfatal-errors -c $< -o $@
+
+bin/geo: src/main.cpp $(SRC)
+	g++ -std=c++11 -Wfatal-errors -o $@ $< -lgtest -lpthread
 
 directories:
-	mkdir -p $(BIN)
-	mkdir -p $(OBJ)
+	mkdir -p bin
+	mkdir -p obj
 
 clean:
-	rm -rf $(BIN)/*
-	rm -rf $(OBJ)/*
-
-run:
-	$(BIN)/ut_main
+	rm -rf bin
+	rm -rf obj
 
 stat:
-	wc $(SRC)/* $(TEST)/*
+	wc src/* test/*

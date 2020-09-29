@@ -84,7 +84,7 @@ TEST(Rectangle, ExceptionForAddShape){
         rectangle->addShape(new Rectangle("1", 3, 4));
         FAIL();
     }catch(string e) {
-        ASSERT_EQ("Only complex shape can add shape!", e);
+        ASSERT_EQ("Only Compound shape can add shape!", e);
     }
 }
 
@@ -94,7 +94,7 @@ TEST(Rectangle, ExceptionForDeleteShape){
         rectangle->deleteShapeById("1");
         FAIL();
     }catch(string e) {
-        ASSERT_EQ("Only complex shape can delete shape!", e);
+        ASSERT_EQ("Only Compound shape can delete shape!", e);
     }
 }
 
@@ -104,6 +104,6 @@ TEST(Rectangle, ExceptionForGetShapeById){
         rectangle->getShapeById("1");
         FAIL();
     }catch(string e) {
-        ASSERT_EQ("Only complex shape can get shape!", e);
+        ASSERT_EQ("Only Compound shape can get shape!", e);
     }
 }

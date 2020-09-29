@@ -6,7 +6,7 @@
 using namespace std;
 
 class Shape{
-        public:
+public:
         Shape(string id);
 
         Shape(string id, string color);
@@ -31,7 +31,7 @@ class Shape{
 
         virtual ~Shape();
 
-        private:
+private:
         string _id;
         string _color;
 };

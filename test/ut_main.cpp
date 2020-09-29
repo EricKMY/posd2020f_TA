@@ -1,5 +1,5 @@
 #include <gtest/gtest.h>
-#include "ut_complex_shape.h"
+#include "ut_compound_shape.h"
 #include "ut_rectangle.h"
 #include "ut_ellipse.h"
 #include "ut_triangle.h"

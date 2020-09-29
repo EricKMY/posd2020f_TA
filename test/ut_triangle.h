@@ -1,4 +1,5 @@
 #include <gtest/gtest.h>
+#include <vector>
 #include "../src/triangle.h"
 #include "../src/two_dimensional_coordinate.h"
 
@@ -94,7 +95,7 @@ TEST_F(TriangleTest, ExceptionForAddShape){
         triangle->addShape(new Triangle("1", triangleVector));
         FAIL();
     }catch(string e) {
-        ASSERT_EQ("Only complex shape can add shape!", e);
+        ASSERT_EQ("Only Compound shape can add shape!", e);
     }
 }
 
@@ -104,7 +105,7 @@ TEST_F(TriangleTest, ExceptionForDeleteShape){
         triangle->deleteShapeById("1");
         FAIL();
     }catch(string e) {
-        ASSERT_EQ("Only complex shape can delete shape!", e);
+        ASSERT_EQ("Only Compound shape can delete shape!", e);
     }
 }
 TEST_F(TriangleTest, ExceptionForGetShapeById){
@@ -113,6 +114,6 @@ TEST_F(TriangleTest, ExceptionForGetShapeById){
         triangle->getShapeById("1");
         FAIL();
     }catch(string e) {
-        ASSERT_EQ("Only complex shape can get shape!", e);
+        ASSERT_EQ("Only Compound shape can get shape!", e);
     }
 }
