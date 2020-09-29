@@ -1,7 +1,6 @@
 #include "../src/ellipse.h"
 #include "../src/utility.h"
 
-
 TEST(Ellipse, ConstructorNoException){
     ASSERT_NO_THROW(Ellipse("1", 1, 1));
 }
@@ -45,7 +44,7 @@ TEST(Ellipse, ExceptionForSemiMinorAxesLessThanZero){
 TEST(Ellipse, AreaInt){
     double abs = 0.001;
     Shape* ellipse = new Ellipse("1", 4, 3);
-    ASSERT_NEAR(37.6991, ellipse->area(), abs);
+    ASSERT_NEAR(37.699, ellipse->area(), abs);
 }
 
 TEST(Ellipse, AreaDouble){
@@ -113,55 +112,5 @@ TEST(Ellipse, ExceptionForGetShapeById){
         FAIL();
     }catch(string e) {
         ASSERT_EQ("Only Compound shape can get shape!", e);
-    }
-}
-
-
-TEST(Ellipse, ExceptionWhenIteratorFirst){
-    Shape* ellipse = new Ellipse("1", 4, 3);
-    Iterator *it = ellipse->createIterator();
-    try {
-        it->first();
-        FAIL();
-    }catch(string e) {
-        ASSERT_EQ("no child member!", e);
-    }
-}
-
-TEST(Ellipse, ExceptionWhenIteratorCurrentItem){
-    Shape* ellipse = new Ellipse("1", 4, 3);
-    Iterator *it = ellipse->createIterator();
-    try {
-        it->currentItem();
-        FAIL();
-    }catch(string e) {
-        ASSERT_EQ("no child member!", e);
-    }
-}
-
-TEST(Ellipse, ExceptionWhenIteratorNext){
-    Shape* ellipse = new Ellipse("1", 4, 3);
-    Iterator *it = ellipse->createIterator();
-    try {
-        it->next();
-        FAIL();
-    }catch(string e) {
-        ASSERT_EQ("no child member!", e);
-    }
-}
-
-TEST(Ellipse, IteratorIsDone){
-    Shape* ellipse = new Ellipse("1", 4, 3);
-    Iterator *it = ellipse->createIterator();
-    ASSERT_TRUE(it->isDone());
-}
-
-TEST(Ellipse, ExceptionForCallGetShapeById){
-    Shape* ellipse = new Ellipse("1", 4, 3);
-    try {
-        getShapeById(ellipse, "1");
-        FAIL();
-    }catch(string e) {
-        ASSERT_EQ("Only compound shape can get shape!", e);
     }
 }

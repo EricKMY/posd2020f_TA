@@ -119,45 +119,6 @@ TEST_F(TriangleTest, ExceptionForGetShapeById){
 }
 
 
-TEST_F(TriangleTest, ExceptionWhenIteratorFirst){
-    Shape* triangle = new Triangle("1", triangleVector);
-    Iterator *it = triangle->createIterator();
-    try {
-        it->first();
-        FAIL();
-    }catch(string e) {
-        ASSERT_EQ("no child member!", e);
-    }
-}
-
-TEST_F(TriangleTest, ExceptionWhenIteratorCurrentItem){
-    Shape* triangle = new Triangle("1", triangleVector);
-    Iterator *it = triangle->createIterator();
-    try {
-        it->currentItem();
-        FAIL();
-    }catch(string e) {
-        ASSERT_EQ("no child member!", e);
-    }
-}
-
-TEST_F(TriangleTest, ExceptionWhenIteratorNext){
-    Shape* triangle = new Triangle("1", triangleVector);
-    Iterator *it = triangle->createIterator();
-    try {
-        it->next();
-        FAIL();
-    }catch(string e) {
-        ASSERT_EQ("no child member!", e);
-    }
-}
-
-TEST_F(TriangleTest, IteratorIsDone){
-    Shape* triangle = new Triangle("1", triangleVector);
-    Iterator *it = triangle->createIterator();
-    ASSERT_TRUE(it->isDone());
-}
-
 TEST_F(TriangleTest, ExceptionForCallGetShapeById){
     Shape* triangle = new Triangle("1", triangleVector);
     try {
@@ -166,53 +127,4 @@ TEST_F(TriangleTest, ExceptionForCallGetShapeById){
     }catch(string e) {
         ASSERT_EQ("Only compound shape can get shape!", e);
     }
-}
-
-TEST_F(TriangleTest, FilterShapeArea){
-    Shape* triangle = new Triangle("1", triangleVector);
-    vector<Shape *> vector = filterShape(triangle, AreaFilter(12, 1));
-
-    ASSERT_EQ(6, vector[0]->area());
-
-
-    vector = filterShape(triangle, AreaFilter(5, 1));
-
-    ASSERT_EQ(0, vector.size());
-}
-
-
-TEST_F(TriangleTest, FilterShapePerimeter){
-    Shape* triangle = new Triangle("1", triangleVector);
-    vector<Shape *> vector = filterShape(triangle, PerimeterFilter(12, 1));
-
-    ASSERT_EQ(6, vector[0]->area());
-
-
-    vector = filterShape(triangle, PerimeterFilter(5, 1));
-
-    ASSERT_EQ(0, vector.size());
-}
-
-TEST_F(TriangleTest, FilterShapeByColor){
-    Shape* triangle = new Triangle("1", triangleVector);
-    vector<Shape *> vector = filterShape(triangle, ColorFilter("White"));
-
-    ASSERT_EQ("White", vector[0]->color());
-
-
-    vector = filterShape(triangle, ColorFilter("Red"));
-
-    ASSERT_EQ(0, vector.size());
-}
-
-TEST_F(TriangleTest, FilterShapeByType){
-    Shape* triangle = new Triangle("1", triangleVector);
-    vector<Shape *> vector = filterShape(triangle, TypeFilter("Triangle"));
-
-    ASSERT_EQ("Triangle", vector[0]->type());
-
-
-    vector = filterShape(triangle, TypeFilter("Rectangle"));
-
-    ASSERT_EQ(0, vector.size());
 }

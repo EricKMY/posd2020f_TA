@@ -6,15 +6,15 @@
 class NullIterator : public Iterator {
     public:
     void first() {
-        throw std::string("no child member!");
+        throw std::string("No child member!");
     }
 
     Shape* currentItem(){
-        throw std::string("no child member!");
+        throw std::string("No child member!");
     }
 
     void next() {
-        throw std::string("no child member!");
+        throw std::string("No child member!");
     }
     bool isDone(){
       return true;
