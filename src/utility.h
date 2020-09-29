@@ -1,6 +1,8 @@
 #ifndef UTILITY_H
 #define UTILITY_H
 
+#include <string>
+
 using namespace std;
 
 Shape* getShapeById(Shape* shape, string id) {
@@ -21,7 +23,7 @@ Shape* getShapeById(Shape* shape, string id) {
         }catch(string e) {}
         it->next();
     }
-    
+
     throw string("Expected get shape but shape not found");
 }
 
@@ -80,7 +82,11 @@ public:
     ColorFilter(string color): _color(color) {}
 
     bool operator() (Shape *shape) {
-        return shape->color() == _color;
+        try {
+            return shape->color() == _color;
+        }catch(string e) {}
+        
+        return false;
     }
 
 private:
