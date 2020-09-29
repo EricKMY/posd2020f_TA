@@ -55,7 +55,7 @@ TEST(CompoundShape, ExceptionForEmptyShapes) {
         CompoundShape("7", nullShapes);
         FAIL();
     }catch(string e) {
-        ASSERT_EQ("This is not a Compound shape shape!", e);
+        ASSERT_EQ("This is not a compound shape!", e);
     }
 }
 
@@ -72,6 +72,11 @@ TEST_F(CompoundShapeTest, Perimeter){
 TEST_F(CompoundShapeTest, Info){
     Shape* compoundShape = new CompoundShape("7", shapes);
     ASSERT_EQ("Compound Shape {Ellipse (4.000, 3.000), Rectangle (3.000, 4.000), Triangle ([0.000, 0.000], [3.000, 0.000], [0.000, 4.000])}", compoundShape->info());
+}
+
+TEST_F(CompoundShapeTest, Type){
+    Shape* compoundShape = new CompoundShape("7", shapes);
+    ASSERT_EQ("Compound Shape", compoundShape->type());
 }
 
 TEST_F(CompoundShapeTest, ExceptionForColor){

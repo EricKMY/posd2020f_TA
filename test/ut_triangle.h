@@ -74,6 +74,11 @@ TEST_F(TriangleTest, Info){
     ASSERT_EQ("Triangle ([0.000, 0.000], [3.000, 0.000], [0.000, 4.000])", triangle->info());
 }
 
+TEST_F(TriangleTest, Type){
+    Shape* triangle = new Triangle("1", triangleVector);
+    ASSERT_EQ("Triangle", triangle->type());
+}
+
 TEST_F(TriangleTest, DefaultColor){
     Shape* triangle = new Triangle("1", triangleVector);
     ASSERT_EQ("White", triangle->color());
@@ -159,7 +164,7 @@ TEST_F(TriangleTest, ExceptionForCallGetShapeById){
         getShapeById(triangle, "1");
         FAIL();
     }catch(string e) {
-        ASSERT_EQ("Only complex shape can get shape!", e);
+        ASSERT_EQ("Only compound shape can get shape!", e);
     }
 }
 

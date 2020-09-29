@@ -10,7 +10,7 @@ Shape* getShapeById(Shape* shape, string id) {
     try {
         it->first();
     }catch(string e) {
-        throw string("Only complex shape can get shape!");
+        throw string("Only compound shape can get shape!");
     }
 
     for(;!it->isDone(); it->next()){
@@ -21,7 +21,7 @@ Shape* getShapeById(Shape* shape, string id) {
             return getShapeById(it->currentItem(), id);
         }catch(string e) {}
     }
-    throw string("expected get shape but shape not found");
+    throw string("Expected get shape but shape not found");
 }
 
 template <class Compare>

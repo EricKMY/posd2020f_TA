@@ -46,6 +46,10 @@ public:
     return info;
   }
 
+  string type() const {
+		return "Triangle";
+	}
+
 private:
   vector<TwoDimensionalCoordinate*> _vectors;
 

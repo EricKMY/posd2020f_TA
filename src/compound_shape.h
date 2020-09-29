@@ -49,7 +49,7 @@ class CompoundShape : public Shape {
 
   void checkShapeIsValid() {
     if(_shapes->empty()) {
-      throw string("This is not a compound shape shape!");
+      throw string("This is not a compound shape!");
     }
   }
 

@@ -81,6 +81,11 @@ TEST(Ellipse, RedColor){
     ASSERT_EQ("Red", ellipse->color());
 }
 
+TEST(Ellipse, Type){
+    Shape* ellipse = new Ellipse("1", 4, 3);
+    ASSERT_EQ("Ellipse", ellipse->type());
+}
+
 TEST(Ellipse, ExceptionForAddShape){
     Shape* ellipse = new Ellipse("1", 4, 3);
     try {
@@ -157,6 +162,6 @@ TEST(Ellipse, ExceptionForCallGetShapeById){
         getShapeById(ellipse, "1");
         FAIL();
     }catch(string e) {
-        ASSERT_EQ("Only complex shape can get shape!", e);
+        ASSERT_EQ("Only compound shape can get shape!", e);
     }
 }

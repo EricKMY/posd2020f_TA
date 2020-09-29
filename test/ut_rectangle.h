@@ -64,6 +64,11 @@ TEST(Rectangle, Info){
     ASSERT_EQ("Rectangle (3.000, 4.000)", rectangle->info());
 }
 
+TEST(Rectangle, Type){
+    Shape* rectangle = new Rectangle("1", 3, 4);
+    ASSERT_EQ("Rectangle", rectangle->type());
+}
+
 TEST(Rectangle, DefaultColor){
     Shape* rectangle = new Rectangle("1", 3, 4);
     ASSERT_EQ("White", rectangle->color());
@@ -149,6 +154,6 @@ TEST(Rectangle, ExceptionForCallGetShapeById){
         getShapeById(rectangle, "1");
         FAIL();
     }catch(string e) {
-        ASSERT_EQ("Only complex shape can get shape!", e);
+        ASSERT_EQ("Only compound shape can get shape!", e);
     }
 }
