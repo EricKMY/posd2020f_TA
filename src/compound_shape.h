@@ -8,8 +8,8 @@
 using namespace std;
 
 class CompoundShape : public Shape {
-  class CompoundShapeIterator:public Iterator {
-    public:
+  class CompoundShapeIterator : public Iterator {
+  public:
     CompoundShapeIterator(CompoundShape *s): _s(s) {}
 
     void first() {
@@ -36,13 +36,12 @@ class CompoundShape : public Shape {
       return _current == _s->_shapes->end();
     }
 
-
-    private:
+  private:
     CompoundShape *_s;
     vector<Shape*>::iterator _current;
   };
 
-  public: 
+public: 
   CompoundShape(string id, vector<Shape*>* shapes): Shape(id), _shapes(shapes) {
     checkShapeIsValid();
   }
@@ -120,7 +119,7 @@ class CompoundShape : public Shape {
     return new CompoundShapeIterator(this);
   }
 
-  private:
+private:
   vector<Shape*>* _shapes;
 };
 
