@@ -8,7 +8,7 @@
 using namespace std;
 
 class Shape{
-        public:
+public:
         Shape(string id);
 
         Shape(string id, string color);
@@ -23,8 +23,6 @@ class Shape{
 
         virtual string info() const = 0;
 
-        virtual string type() const = 0;
-
         virtual void addShape(Shape *shape);
 
         virtual void deleteShapeById(string id);
@@ -37,7 +35,7 @@ class Shape{
 
         virtual ~Shape();
 
-        private:
+private:
         string _id;
         string _color;
 };

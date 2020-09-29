@@ -20,9 +20,9 @@
 class Shape {
 public:
     Shape(string id); // id should be globally unique
-    virtual void addShape(Shape *shape); // throw std::string "Only complex shape can add shape!"
-    virtual void deleteShapeById(std::string id); // throw std::string "Only complex shape can delete shape!"
-    virtual Shape* getShapeById(std::string id); // throw std::string "Only complex shape can get shape!"
+    virtual void addShape(Shape *shape); // throw std::string "Only Compound shape can add shape!"
+    virtual void deleteShapeById(std::string id); // throw std::string "Only Compound shape can delete shape!"
+    virtual Shape* getShapeById(std::string id); // throw std::string "Only Compound shape can get shape!"
 };
 ```
 2. Modify interface of `Ellipse`, `Rectangle`, `Triangle` into the following.  
@@ -33,9 +33,9 @@ Rectangle(std::string id, double length, double width)
 Triangle(std::string id, vector<TwoDimensionalCoordinate*> vectors)
 ```
 
-3. Implement `ComplexShape` class in `complex_shape.h` and the corresponding unit test in `ut_complex_shape.h`.  
+3. Implement `CompoundShape` class in `compoundShape.h` and the corresponding unit test in `ut_complex_shape.h`.  
 ```
-ComplexShape(string id, vector<Shape*>* shapes) {
+CompoundShape(string id, vector<Shape*>* shapes) {
 
         double area() const {
             // return sum of all containing shapes area.
@@ -46,24 +46,24 @@ ComplexShape(string id, vector<Shape*>* shapes) {
         }
     
         string info() const {
-            // return list of all containing shapes info with wrapped of "ComplexShape {}".
-            // ex."ComplexShape {[Rectangle (3.7, 4.2), Ellipse (3, 4), Triangle ([0,-3], [-3,0], [0,-4])]}"
+            // return list of all containing shapes info with wrapped of "CompoundShape {}".
+            // ex."CompoundShape {[Rectangle (3.7, 4.2), Ellipse (3, 4), Triangle ([0,-3], [-3,0], [0,-4])]}"
         }
         
         void addShape(Shape* shape) {
-            // add shape into complex shape.
+            // add shape into Compound shape.
         }
         
         void deleteShapeById(string id) {
             // search and delete a shape through id,
             // search all the containing shapes and the tree structure bellow,
-            // if no match of id, throw std::string "expected delete shape but shape not found"
+            // if no match of id, throw std::string "Expected delete shape but shape not found"
         }
         
         Shape* getShapeById(string id) {
             // search and return a shape through id,
             // search all the containing shapes and the tree structure bellow,
-            // if no match of id, throw std::string "expected get shape but shape not found"
+            // if no match of id, throw std::string "Expected get shape but shape not found"
         }
 }
 ```

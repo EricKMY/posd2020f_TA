@@ -7,10 +7,10 @@
 
 using namespace std;
 
-class ComplexShape : public Shape {
-  class ComplexShapeIterator:public Iterator {
+class CompoundShape : public Shape {
+  class CompoundShapeIterator:public Iterator {
     public:
-    ComplexShapeIterator(ComplexShape *s): _s(s) {}
+    CompoundShapeIterator(CompoundShape *s): _s(s) {}
 
     void first() {
       _current = _s->_shapes->begin();
@@ -38,18 +38,18 @@ class ComplexShape : public Shape {
 
 
     private:
-    ComplexShape *_s;
+    CompoundShape *_s;
     vector<Shape*>::iterator _current;
   };
 
   public: 
-  ComplexShape(string id, vector<Shape*>* shapes): Shape(id), _shapes(shapes) {
+  CompoundShape(string id, vector<Shape*>* shapes): Shape(id), _shapes(shapes) {
     checkShapeIsValid();
   }
 
   void checkShapeIsValid() {
     if(_shapes->empty()) {
-      throw string("This is not a complexShape shape!");
+      throw string("This is not a compound shape shape!");
     }
   }
 
@@ -70,7 +70,7 @@ class ComplexShape : public Shape {
   }
     
   string info() const {
-    string info = "Complex Shape {";
+    string info = "Compound Shape {";
     for(vector<Shape*>::iterator it = _shapes->begin(); it != _shapes->end(); ++it) {
       info += (*it)->info() + ", ";
     }
@@ -79,11 +79,11 @@ class ComplexShape : public Shape {
   }
 
   string color() const {
-    throw string("complexShape can't have color");
+    throw string("Compound shape don't have single color");
   }
 
   string type() const {
-    return "ComplexShape";
+    return "Compound Shape";
   }
 
   void addShape(Shape *shape) {
@@ -101,7 +101,7 @@ class ComplexShape : public Shape {
         return;
       }catch(string e) {}
     }
-    throw string("expected delete shape but shape not found");
+    throw string("Expected delete shape but shape not found");
   }
 
   Shape* getShapeById(string id) {
@@ -113,11 +113,11 @@ class ComplexShape : public Shape {
           return (*it)->getShapeById(id);
         }catch(string e) {}
     }
-    throw string("expected get shape but shape not found");
+    throw string("Expected get shape but shape not found");
   }
 
   Iterator * createIterator() {
-    return new ComplexShapeIterator(this);
+    return new CompoundShapeIterator(this);
   }
 
   private:
