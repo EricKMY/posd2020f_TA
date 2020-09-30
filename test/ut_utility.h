@@ -73,6 +73,15 @@ TEST_F(UtlilityTest, ExceptionForRectangleGetShapeById) {
     }
 }
 
+TEST_F(UtlilityTest, ExceptionForRectangleFilterShape) {
+    try {
+        filterShape(rectangle_2, AreaFilter(12, 1));
+        FAIL();
+    }catch(string e) {
+        ASSERT_EQ("Only compound shape can filter shape!", e);
+    }
+}
+
 TEST_F(UtlilityTest, ExceptionForEllipseGetShapeById) {
     try {
         getShapeById(ellipse_1, "1");
@@ -82,12 +91,30 @@ TEST_F(UtlilityTest, ExceptionForEllipseGetShapeById) {
     }
 }
 
+TEST_F(UtlilityTest, ExceptionForEllipseFilterShape) {
+    try {
+        filterShape(ellipse_1, PerimeterFilter(12, 1));
+        FAIL();
+    }catch(string e) {
+        ASSERT_EQ("Only compound shape can filter shape!", e);
+    }
+}
+
 TEST_F(UtlilityTest, ExceptionForTriangleGetShapeById) {
     try {
         getShapeById(triangle_3, "1");
         FAIL();
     }catch(string e) {
         ASSERT_EQ("Only compound shape can get shape!", e);
+    }
+}
+
+TEST_F(UtlilityTest, ExceptionForTriangleFilterShape) {
+    try {
+        filterShape(triangle_3, ColorFilter("Yellow"));
+        FAIL();
+    }catch(string e) {
+        ASSERT_EQ("Only compound shape can filter shape!", e);
     }
 }
 

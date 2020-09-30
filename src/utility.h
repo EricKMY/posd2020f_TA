@@ -32,18 +32,24 @@ vector<Shape*> filterShape(Shape *shape, Filter filter) {
     vector<Shape*> results = {};
     Iterator *it = shape->createIterator();
 
-    if(filter(shape)) {
-        results.push_back(shape);
-    }
-
     try {
         it->first();
     }catch(string e) {
-        return results;
+        //not a compound shape
+        throw string("Only compound shape can filter shape!");
     }
 
     while(!it->isDone()) {
-        vector<Shape*> shapes = filterShape(it->currentItem(), filter);
+        vector<Shape*> shapes = {};
+        Shape *currentShape = it->currentItem();
+        try {
+            shapes = filterShape(currentShape, filter);
+        }catch(string e) {
+            if(filter(currentShape)) {
+                shapes.push_back(currentShape);
+            }
+        }
+
         results.insert(results.end(), shapes.begin(), shapes.end());
         it->next();
     }
