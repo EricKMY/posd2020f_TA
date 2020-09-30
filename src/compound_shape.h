@@ -1,5 +1,5 @@
-#ifndef COMPLEX_SHAPE_H
-#define COMPLEX_SHAPE_H
+#ifndef COMPOUND_SHAPE_H
+#define COMPOUND_SHAPE_H
 
 #include <string>
 #include <vector>
@@ -9,7 +9,7 @@ using namespace std;
 
 class CompoundShape : public Shape {
   public: 
-  CompoundShape(string id, vector<Shape*>* shapes): Shape(id), _shapes(shapes) {
+  CompoundShape(string id, vector<Shape*>* shapes): Shape(id, "Transparent"), _shapes(shapes) {
     checkShapeIsValid();
   }
 
@@ -36,10 +36,6 @@ class CompoundShape : public Shape {
     }
     info.erase(info.end()-2, info.end());
     return info + "}";
-  }
-
-  string color() const {
-    throw string("Compound shape don't have single color");
   }
 
   void addShape(Shape *shape) {
