@@ -43,8 +43,8 @@ Ellipse(std::string id, double semiMajorAxes, double semiMinorAxes, std::string 
 Rectangle(std::string id, double length, double width)
 Rectangle(std::string id, double length, double width, std::string color)
 
-Triangle(std::string id, vector<TwoDimensionalCoordinate*> vectors)
-Triangle(std::string id, vector<TwoDimensionalCoordinate*> vectors, std::color)
+Triangle(std::string id, vector<TwoDimensionalCoordinate*> coordinates)
+Triangle(std::string id, vector<TwoDimensionalCoordinate*> coordinates, std::color)
 ```
 
 3. Implement `CompoundShape` class in `compound_shape.h` and the corresponding unit test in `ut_compound_shape.h`.  
