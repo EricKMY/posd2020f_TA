@@ -1,7 +1,7 @@
 # **Pattern Oriented Software Design 2020 Fall Assignment 4**  
 
 ## **Notice**  
-* **Due on Tuesday October 13 2020, 23:59.  
+* **Due on Tuesday October 13 2020, 23:59.**  
 * **If your code fails to compile on jenkins server, you'll get no point for the assignment.**  
 * **You should add unit test for each newly add requirment under corresponding ut_file.**  
 
