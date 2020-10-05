@@ -5,7 +5,7 @@
 * **If your code fails to compile on jenkins server, you'll get no point for the assignment.**  
 * **You should add unit test for each newly add requirment under corresponding ut_file.**  
 
-## **Score** <==FIXME
+## **Score**
 1. Usage of Iterator in vector: 10%.  
 2. Unit tests written by yourself: 40%.  
 3. Unit tests written by TA: 50%.  
