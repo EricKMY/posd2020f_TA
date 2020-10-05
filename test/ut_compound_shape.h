@@ -74,14 +74,9 @@ TEST_F(CompoundShapeTest, Info){
     ASSERT_EQ("Compound Shape {Ellipse (4.000, 3.000), Rectangle (3.000, 4.000), Triangle ([0.000, 0.000], [3.000, 0.000], [0.000, 4.000])}", compoundShape->info());
 }
 
-TEST_F(CompoundShapeTest, ExceptionForColor){
+TEST_F(CompoundShapeTest, Color){
     Shape* compoundShape = new CompoundShape("7", shapes);
-    try {
-        compoundShape->color();
-        FAIL();
-    }catch(string e) {
-        ASSERT_EQ("Compound shape don't have single color", e);
-    }
+    ASSERT_EQ("Transparent", compoundShape->color());
 }
 
 TEST_F(CompoundShapeTest, AddShape) {
