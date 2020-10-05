@@ -33,7 +33,7 @@ public:
 *  `id` should be globally unique.
 *  `color`: is input as "red", "blue", "yellow" etc.
 
-1. Modify interface of `Ellipse`, `Rectangle`, `Triangle` into the following.  
+2. Modify interface of `Ellipse`, `Rectangle`, `Triangle` into the following.  
    (Now you will have two interface for each of these three shapes.)
 
 ```
