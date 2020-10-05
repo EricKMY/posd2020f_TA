@@ -106,8 +106,7 @@ public:
 │   ├── ut_ellipse.h
 │   ├── ut_rectangle.h
 │   ├── ut_triangle.h
-│   ├── ut_compound_shape.h
-│   └── ut_two_dimensional_coordinate.h
+│   └── ut_compound_shape.h
 └── makefile
 
 ```
