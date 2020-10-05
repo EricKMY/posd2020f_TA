@@ -100,14 +100,14 @@ public:
 │   ├── rectangle.h
 │   ├── triangle.h
 │   ├── compound_shape.h
-│   └── two_dimensional_vector.h
+│   └── two_dimensional_coordinate.h
 ├── test
 │   ├── ut_main.cpp
 │   ├── ut_ellipse.h
 │   ├── ut_rectangle.h
 │   ├── ut_triangle.h
 │   ├── ut_compound_shape.h
-│   └── ut_two_dimensional_vector.h
+│   └── ut_two_dimensional_coordinate.h
 └── makefile
 
 ```
