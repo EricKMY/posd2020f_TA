@@ -165,21 +165,6 @@ TEST_F(IteratorTest, CompoundShapeIterateCurrentItem) {
     EXPECT_EQ("Ellipse (4.000, 3.000)", shape->info());
 }
 
-// TEST_F(IteratorTest, ExceptionForCompoundShapeIterateCurrentItemOutOfRange) {
-    // vector<Shape*>* nullShapes = new vector<Shape*>();
-    // compoundShape = new CompoundShape("4", nullShapes);
-
-    // Iterator *it = compoundShape->createIterator();
-
-    // ASSERT_NO_THROW(it->first());
-    // try {
-    //     it->currentItem();
-    //     FAIL();
-    // }catch(string e) {
-    //     EXPECT_EQ("No current item!", e);
-    // }
-// }
-
 TEST_F(IteratorTest, CompoundShapeIterateNext) {
     Iterator *it = compoundShape->createIterator();
 

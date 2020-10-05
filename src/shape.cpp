@@ -26,4 +26,8 @@ Shape* Shape::getShapeById(string id) {
     throw string("Only Compound shape can get shape!");
 }
 
+Iterator* Shape::createIterator() {
+    return new NullIterator();
+}
+
 Shape::~Shape() {}
