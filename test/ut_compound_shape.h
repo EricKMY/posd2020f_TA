@@ -76,7 +76,7 @@ TEST_F(CompoundShapeTest, Info){
 
 TEST_F(CompoundShapeTest, Color){
     Shape* compoundShape = new CompoundShape("7", shapes);
-    ASSERT_EQ("Transparent", compoundShape->color());
+    ASSERT_EQ("transparent", compoundShape->color());
 }
 
 TEST_F(CompoundShapeTest, AddShape) {

@@ -65,12 +65,12 @@ TEST(Rectangle, Info){
 
 TEST(Rectangle, DefaultColor){
     Shape* rectangle = new Rectangle("1", 3, 4);
-    ASSERT_EQ("White", rectangle->color());
+    ASSERT_EQ("white", rectangle->color());
 }
 
 TEST(Rectangle, RedColor){
-    Shape* rectangle = new Rectangle("1", 3, 4, "Red");
-    ASSERT_EQ("Red", rectangle->color());
+    Shape* rectangle = new Rectangle("1", 3, 4, "red");
+    ASSERT_EQ("red", rectangle->color());
 }
 
 TEST(Rectangle, ExceptionForAddShape){
@@ -79,7 +79,7 @@ TEST(Rectangle, ExceptionForAddShape){
         rectangle->addShape(new Rectangle("1", 3, 4));
         FAIL();
     }catch(string e) {
-        ASSERT_EQ("Only Compound shape can add shape!", e);
+        ASSERT_EQ("Only compound shape can add shape!", e);
     }
 }
 
@@ -89,7 +89,7 @@ TEST(Rectangle, ExceptionForDeleteShape){
         rectangle->deleteShapeById("1");
         FAIL();
     }catch(string e) {
-        ASSERT_EQ("Only Compound shape can delete shape!", e);
+        ASSERT_EQ("Only compound shape can delete shape!", e);
     }
 }
 
@@ -99,6 +99,6 @@ TEST(Rectangle, ExceptionForGetShapeById){
         rectangle->getShapeById("1");
         FAIL();
     }catch(string e) {
-        ASSERT_EQ("Only Compound shape can get shape!", e);
+        ASSERT_EQ("Only compound shape can get shape!", e);
     }
 }

@@ -9,7 +9,7 @@ using namespace std;
 
 class CompoundShape : public Shape {
   public: 
-  CompoundShape(string id, vector<Shape*>* shapes): Shape(id, "Transparent"), _shapes(shapes) {
+  CompoundShape(string id, vector<Shape*>* shapes): Shape(id, "transparent"), _shapes(shapes) {
     checkShapeIsValid();
   }
 
