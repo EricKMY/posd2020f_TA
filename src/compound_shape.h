@@ -1,5 +1,5 @@
-#ifndef COMPLEX_SHAPE_H
-#define COMPLEX_SHAPE_H
+#ifndef COMPOUND_SHAPE_H
+#define COMPOUND_SHAPE_H
 
 #include <string>
 #include <vector>
@@ -42,14 +42,8 @@ class CompoundShape : public Shape {
   };
 
 public: 
-  CompoundShape(string id, vector<Shape*>* shapes): Shape(id), _shapes(shapes) {
+  CompoundShape(string id, vector<Shape*>* shapes): Shape(id, "transparent"), _shapes(shapes) {
     checkShapeIsValid();
-  }
-
-  void checkShapeIsValid() {
-    if(_shapes->empty()) {
-      throw string("This is not a compound shape!");
-    }
   }
 
   double area() const {
@@ -75,10 +69,6 @@ public:
     }
     info.erase(info.end()-2, info.end());
     return info + "}";
-  }
-
-  string color() const {
-    throw string("Compound shape don't have single color");
   }
 
   string type() const {
@@ -121,6 +111,12 @@ public:
 
 private:
   vector<Shape*>* _shapes;
+
+  void checkShapeIsValid() {
+    if(_shapes->empty()) {
+      throw string("This is not a compound shape!");
+    }
+  }
 };
 
 #endif

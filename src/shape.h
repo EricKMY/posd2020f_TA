@@ -13,9 +13,9 @@ public:
 
         Shape(string id, string color);
 
-        virtual string id() const;
+        string id() const;
 
-        virtual string color() const;
+        string color() const;
 
         virtual double area() const = 0;
 

@@ -1,5 +1,6 @@
 #include "../src/ellipse.h"
-#include "../src/utility.h"
+
+using namespace std;
 
 TEST(Ellipse, ConstructorNoException){
     ASSERT_NO_THROW(Ellipse("1", 1, 1));
@@ -72,12 +73,12 @@ TEST(Ellipse, Info){
 
 TEST(Ellipse, DefaultColor){
     Shape* ellipse = new Ellipse("1", 4, 3);
-    ASSERT_EQ("White", ellipse->color());
+    ASSERT_EQ("white", ellipse->color());
 }
 
 TEST(Ellipse, RedColor){
-    Shape* ellipse = new Ellipse("1", 4, 3, "Red");
-    ASSERT_EQ("Red", ellipse->color());
+    Shape* ellipse = new Ellipse("1", 4, 3, "red");
+    ASSERT_EQ("red", ellipse->color());
 }
 
 TEST(Ellipse, Type){
@@ -91,7 +92,7 @@ TEST(Ellipse, ExceptionForAddShape){
         ellipse->addShape(new Ellipse("1", 4, 3));
         FAIL();
     }catch(string e) {
-        ASSERT_EQ("Only Compound shape can add shape!", e);
+        ASSERT_EQ("Only compound shape can add shape!", e);
     }
 }
 
@@ -101,7 +102,7 @@ TEST(Ellipse, ExceptionForDeleteShape){
         ellipse->deleteShapeById("1");
         FAIL();
     }catch(string e) {
-        ASSERT_EQ("Only Compound shape can delete shape!", e);
+        ASSERT_EQ("Only compound shape can delete shape!", e);
     }
 }
 
@@ -111,6 +112,6 @@ TEST(Ellipse, ExceptionForGetShapeById){
         ellipse->getShapeById("1");
         FAIL();
     }catch(string e) {
-        ASSERT_EQ("Only Compound shape can get shape!", e);
+        ASSERT_EQ("Only compound shape can get shape!", e);
     }
 }

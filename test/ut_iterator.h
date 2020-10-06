@@ -159,7 +159,7 @@ TEST_F(IteratorTest, CompoundShapeIterateCurrentItem) {
     Shape *shape = it->currentItem();
 
     EXPECT_EQ("1", shape->id());
-    EXPECT_EQ("White", shape->color());
+    EXPECT_EQ("white", shape->color());
     EXPECT_NEAR(37.699, shape->area(), 0.001);
     EXPECT_NEAR(22.849, shape->perimeter(), 0.001);
     EXPECT_EQ("Ellipse (4.000, 3.000)", shape->info());
@@ -174,7 +174,7 @@ TEST_F(IteratorTest, CompoundShapeIterateNext) {
     Shape *shape = it->currentItem();
 
     EXPECT_EQ("2", shape->id());
-    EXPECT_EQ("White", shape->color());
+    EXPECT_EQ("white", shape->color());
     EXPECT_NEAR(12, shape->area(), 0.001);
     EXPECT_NEAR(14, shape->perimeter(), 0.001);
     EXPECT_EQ("Rectangle (3.000, 4.000)", shape->info());
@@ -184,7 +184,7 @@ TEST_F(IteratorTest, CompoundShapeIterateNext) {
     shape = it->currentItem();
 
     EXPECT_EQ("3", shape->id());
-    EXPECT_EQ("White", shape->color());
+    EXPECT_EQ("white", shape->color());
     EXPECT_NEAR(6, shape->area(), 0.001);
     EXPECT_NEAR(12, shape->perimeter(), 0.001);
     EXPECT_EQ("Triangle ([0.000, 0.000], [3.000, 0.000], [0.000, 4.000])", shape->info());

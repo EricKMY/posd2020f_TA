@@ -13,36 +13,36 @@ using namespace std;
 class Triangle : public Shape{
 public: 
 
-  Triangle(string id, vector<TwoDimensionalCoordinate*> vectors): Shape(id), _vectors(vectors){
+  Triangle(string id, vector<TwoDimensionalCoordinate*> coordinates): Shape(id), _coordinates(coordinates){
       checkShapeIsValid();
   }
 
-  Triangle(string id, vector<TwoDimensionalCoordinate*> vectors, string color): Shape(id, color), _vectors(vectors){
+  Triangle(string id, vector<TwoDimensionalCoordinate*> coordinates, string color): Shape(id, color), _coordinates(coordinates){
       checkShapeIsValid();
   }
   
   double area() const {
     return fabs(
-            _vectors[0]->getX() * _vectors[1]->getY()
-              + _vectors[1]->getX() * _vectors[2]->getY() 
-              + _vectors[2]->getX() * _vectors[0]->getY() 
-              - _vectors[0]->getX() * _vectors[2]->getY() 
-              - _vectors[1]->getX() * _vectors[0]->getY() 
-              - _vectors[2]->getX() * _vectors[1]->getY()) / 2;
+            _coordinates[0]->getX() * _coordinates[1]->getY()
+              + _coordinates[1]->getX() * _coordinates[2]->getY() 
+              + _coordinates[2]->getX() * _coordinates[0]->getY() 
+              - _coordinates[0]->getX() * _coordinates[2]->getY() 
+              - _coordinates[1]->getX() * _coordinates[0]->getY() 
+              - _coordinates[2]->getX() * _coordinates[1]->getY()) / 2;
   }
 
   double perimeter() const {
-    return sqrt(pow(_vectors[0]->getX() - _vectors[1]->getX(), 2) + pow(_vectors[0]->getY() - _vectors[1]->getY(), 2))
-          + sqrt(pow(_vectors[0]->getX() - _vectors[2]->getX(), 2) + pow(_vectors[0]->getY() - _vectors[2]->getY(), 2)) 
-          + sqrt(pow(_vectors[2]->getX() - _vectors[1]->getX(), 2) + pow(_vectors[2]->getY() - _vectors[1]->getY(), 2));
+    return sqrt(pow(_coordinates[0]->getX() - _coordinates[1]->getX(), 2) + pow(_coordinates[0]->getY() - _coordinates[1]->getY(), 2))
+          + sqrt(pow(_coordinates[0]->getX() - _coordinates[2]->getX(), 2) + pow(_coordinates[0]->getY() - _coordinates[2]->getY(), 2)) 
+          + sqrt(pow(_coordinates[2]->getX() - _coordinates[1]->getX(), 2) + pow(_coordinates[2]->getY() - _coordinates[1]->getY(), 2));
   }
   
   string info() const {
     char info[100];
     sprintf(info, "Triangle ([%.3f, %.3f], [%.3f, %.3f], [%.3f, %.3f])",
-                              _vectors[0]->getX(), _vectors[0]->getY(),
-                              _vectors[1]->getX(), _vectors[1]->getY(),
-                              _vectors[2]->getX(), _vectors[2]->getY());
+                              _coordinates[0]->getX(), _coordinates[0]->getY(),
+                              _coordinates[1]->getX(), _coordinates[1]->getY(),
+                              _coordinates[2]->getX(), _coordinates[2]->getY());
     return info;
   }
 
@@ -51,10 +51,10 @@ public:
 	}
 
 private:
-  vector<TwoDimensionalCoordinate*> _vectors;
+  vector<TwoDimensionalCoordinate*> _coordinates;
 
   void checkShapeIsValid() {
-    if(_vectors.size() != 3) {
+    if(_coordinates.size() != 3) {
       throw string("This is not a triangle!");
     }else if(area() <= 0) {
       throw string("This is not a triangle!");
