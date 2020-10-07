@@ -2,18 +2,22 @@
 #define SHAPE_H
 
 #include <string>
+#include <vector>
 #include "iterator.h"
 #include "null_iterator.h"
+#include "two_dimensional_coordinate.h"
 
 using namespace std;
 
 class Shape{
 public:
-        Shape(string id);
+        Shape(string id, vector<TwoDimensionalCoordinate*> coordinates);
 
-        Shape(string id, string color);
+        Shape(string id, vector<TwoDimensionalCoordinate*> coordinates, string color);
 
         virtual string id() const;
+
+        virtual vector<TwoDimensionalCoordinate*> coordinates() const;
 
         virtual string color() const;
 
@@ -38,6 +42,7 @@ public:
 private:
         string _id;
         string _color;
+        vector<TwoDimensionalCoordinate*> _coordinates;
 };
 
 #endif

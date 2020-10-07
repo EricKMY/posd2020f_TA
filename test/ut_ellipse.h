@@ -1,116 +1,137 @@
+#define ABS 0.001
+
+#include <string>
+#include <vector>
 #include "../src/ellipse.h"
-#include "../src/utility.h"
 
-TEST(Ellipse, ConstructorNoException){
-    ASSERT_NO_THROW(Ellipse("1", 1, 1));
+using namespace std;
+
+class EllipseTest: public testing::Test {
+protected:
+    virtual void SetUp() {
+        coordinates.push_back(new TwoDimensionalCoordinate(0, 1));
+        ellipse = new Ellipse("1",coordinates, 4.2, 3.7);
+    }
+
+    virtual void TearDown() {
+        coordinates.clear();
+        delete ellipse;
+    }
+    Shape* ellipse;
+    vector<TwoDimensionalCoordinate*> coordinates;
+};
+
+TEST_F(EllipseTest, no_exception_constructor_with_default_color){
+    ASSERT_NO_THROW(Ellipse("1",coordinates, 1, 1));
 }
 
-TEST(Ellipse, ExceptionForSemiMajorAxesIsZero){
+TEST_F(EllipseTest, no_exception_constructor_with_custom_color){
+    ASSERT_NO_THROW(Ellipse("1",coordinates, 1, 1, "red"));
+}
+
+TEST_F(EllipseTest, exception_for_coordinate_less_than_one){
+    coordinates.push_back(new TwoDimensionalCoordinate(1, 1));
     try {
-        Ellipse("1", 0, 1);
+        Ellipse("1",vector<TwoDimensionalCoordinate*>(), 1, 1);
         FAIL();
     }catch(string e) {
         ASSERT_EQ("This is not an ellipse!", e);
     }
 }
 
-TEST(Ellipse, ExceptionForSemiMinorAxesIsZero){
+TEST_F(EllipseTest, exception_for_semi_major_axis_is_zero){
     try {
-        Ellipse("1", 1, 0);
+        Ellipse("1",coordinates, 0, 1);
         FAIL();
     }catch(string e) {
         ASSERT_EQ("This is not an ellipse!", e);
     }
 }
 
-TEST(Ellipse, ExceptionForSemiMajorAxesLessThanZero){
+TEST_F(EllipseTest, exception_for_semi_minor_axis_is_zero){
     try {
-        Ellipse("1", -1, 1);
+        Ellipse("1",coordinates, 1, 0);
         FAIL();
     }catch(string e) {
         ASSERT_EQ("This is not an ellipse!", e);
     }
 }
 
-TEST(Ellipse, ExceptionForSemiMinorAxesLessThanZero){
+TEST_F(EllipseTest, exception_for_semi_major_axis_less_than_zero){
     try {
-        Ellipse("1", 1, -1);
+        Ellipse("1",coordinates, -1, 1);
         FAIL();
     }catch(string e) {
         ASSERT_EQ("This is not an ellipse!", e);
     }
 }
 
-TEST(Ellipse, AreaInt){
-    double abs = 0.001;
-    Shape* ellipse = new Ellipse("1", 4, 3);
-    ASSERT_NEAR(37.699, ellipse->area(), abs);
+TEST_F(EllipseTest, exception_for_semi_minor_axis_less_than_zero){
+    try {
+        Ellipse("1",coordinates, 1, -1);
+        FAIL();
+    }catch(string e) {
+        ASSERT_EQ("This is not an ellipse!", e);
+    }
 }
 
-TEST(Ellipse, AreaDouble){
-    double abs = 0.001;
-    Shape* ellipse = new Ellipse("1", 4.2, 3.7);
-    ASSERT_NEAR(48.820, ellipse->area(), abs);
+TEST_F(EllipseTest, id){
+    ASSERT_EQ("1", ellipse->id());
 }
 
-TEST(Ellipse, PerimeterInt){
-    double abs = 0.001;
-    Shape* ellipse = new Ellipse("1", 4, 3);
-    ASSERT_NEAR(22.849, ellipse->perimeter(), abs);
+TEST_F(EllipseTest, coordinates){
+    EXPECT_EQ(0, ellipse->coordinates()[0]->getX());
+    EXPECT_EQ(1, ellipse->coordinates()[0]->getY());
 }
 
-TEST(Ellipse, PerimeterDouble){
-    double abs = 0.001;
-    Shape* ellipse = new Ellipse("1", 4.2, 3.7);
-    ASSERT_NEAR(25.247, ellipse->perimeter(), abs);
+TEST_F(EllipseTest, default_color){
+    ASSERT_EQ("white", ellipse->color());
 }
 
-TEST(Ellipse, Info){
-    Shape* ellipse = new Ellipse("1", 4, 3);
-    ASSERT_EQ("Ellipse (4.000, 3.000)", ellipse->info());
+TEST_F(EllipseTest, custom_color){
+    ellipse = new Ellipse("1",coordinates, 1, 1, "red");
+    ASSERT_EQ("red", ellipse->color());
 }
 
-TEST(Ellipse, DefaultColor){
-    Shape* ellipse = new Ellipse("1", 4, 3);
-    ASSERT_EQ("White", ellipse->color());
+TEST_F(EllipseTest, area){
+    ASSERT_NEAR(48.820, ellipse->area(), ABS);
 }
 
-TEST(Ellipse, RedColor){
-    Shape* ellipse = new Ellipse("1", 4, 3, "Red");
-    ASSERT_EQ("Red", ellipse->color());
+TEST_F(EllipseTest, perimeter){
+    ASSERT_NEAR(25.247, ellipse->perimeter(), ABS);
 }
 
-TEST(Ellipse, Type){
-    Shape* ellipse = new Ellipse("1", 4, 3);
+TEST_F(EllipseTest, info){
+    ASSERT_EQ("Ellipse ([0.000, 1.000], 4.200, 3.700)", ellipse->info());
+}
+
+TEST_F(EllipseTest, type){
     ASSERT_EQ("Ellipse", ellipse->type());
 }
 
-TEST(Ellipse, ExceptionForAddShape){
-    Shape* ellipse = new Ellipse("1", 4, 3);
+TEST_F(EllipseTest, exception_for_add_shape){
     try {
-        ellipse->addShape(new Ellipse("1", 4, 3));
+        ellipse->addShape(new Ellipse("0",coordinates, 1, 1, "red"));
         FAIL();
     }catch(string e) {
-        ASSERT_EQ("Only Compound shape can add shape!", e);
+        ASSERT_EQ("Only compound shape can add shape!", e);
     }
 }
 
-TEST(Ellipse, ExceptionForDeleteShape){
-    Shape* ellipse = new Ellipse("1", 4, 3);
+TEST_F(EllipseTest, exception_for_delete_shape){
     try {
         ellipse->deleteShapeById("1");
         FAIL();
     }catch(string e) {
-        ASSERT_EQ("Only Compound shape can delete shape!", e);
+        ASSERT_EQ("Only compound shape can delete shape!", e);
     }
 }
 
-TEST(Ellipse, ExceptionForGetShapeById){
-    Shape* ellipse = new Ellipse("1", 4, 3);
+TEST_F(EllipseTest, exception_for_get_shape_by_id){
     try {
         ellipse->getShapeById("1");
         FAIL();
     }catch(string e) {
-        ASSERT_EQ("Only Compound shape can get shape!", e);
+        ASSERT_EQ("Only compound shape can get shape!", e);
     }
 }

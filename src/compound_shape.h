@@ -42,7 +42,7 @@ class CompoundShape : public Shape {
   };
 
 public: 
-  CompoundShape(string id, vector<Shape*>* shapes): Shape(id), _shapes(shapes) {
+  CompoundShape(string id, vector<Shape*>* shapes): Shape(id, vector<TwoDimensionalCoordinate*>(), "transparent"), _shapes(shapes) {
     checkShapeIsValid();
   }
 

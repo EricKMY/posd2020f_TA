@@ -2,31 +2,36 @@
 #define RECTANGLE_H
 
 #include <string>
-#include "./shape.h"
+#include <vector>
+#include "shape.h"
 
 using namespace std;
 
 class Rectangle : public Shape {
 public: 
-  Rectangle(string id, double length, double width): Shape(id), _length(length), _width(width) {
+  Rectangle(string id, vector<TwoDimensionalCoordinate*> coordinates): Shape(id, coordinates) {
     checkShapeIsValid();
   }
 
-  Rectangle(string id, double length, double width, string color): Shape(id, color), _length(length), _width(width) {
+  Rectangle(string id, vector<TwoDimensionalCoordinate*> coordinates, string color): Shape(id, coordinates, color) {
     checkShapeIsValid();
   }
 
   double area() const {
-    return _length * _width;
+    return 0.0;
   }
 
   double perimeter() const {
-    return (_length + _width) * 2;
+    return 0.0;
   }
   
   string info() const {
     char info[100];
-    sprintf(info, "Rectangle (%.3f, %.3f)", _length, _width);
+    sprintf(info, "Rectangle ([(%.3f, %.3f), (%.3f, %.3f), (%.3f, %.3f), (%.3f, %.3f)])",
+                                      coordinates()[0]->getX(), coordinates()[0]->getY(),
+                                      coordinates()[1]->getX(), coordinates()[1]->getY(),
+                                      coordinates()[2]->getX(), coordinates()[2]->getY(),
+                                      coordinates()[3]->getX(), coordinates()[3]->getY());
     return info;
   }
 
@@ -34,11 +39,8 @@ public:
 		return "Rectangle";
 	}
 
-private:
-  double _length, _width;
-
   void checkShapeIsValid() {
-    if(_length <= 0 || _width <= 0) {
+    if(coordinates().size() != 4) {
       throw string("This is not a rectangle!");
     }
   }

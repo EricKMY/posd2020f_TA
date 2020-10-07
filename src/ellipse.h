@@ -9,11 +9,11 @@ using namespace std;
 
 class Ellipse : public Shape {
 	public:
-	Ellipse(string id, double semiMajorAxes, double semiMinorAxes): Shape(id), _semiMajorAxes(semiMajorAxes), _semiMinorAxes(semiMinorAxes){
+	Ellipse(string id, vector<TwoDimensionalCoordinate*> coordinates, double semiMajorAxes, double semiMinorAxes): Shape(id, coordinates), _semiMajorAxes(semiMajorAxes), _semiMinorAxes(semiMinorAxes){
 		checkShapeIsValid();
 	}
 
-	Ellipse(string id, double semiMajorAxes, double semiMinorAxes, string color): Shape(id, color), _semiMajorAxes(semiMajorAxes), _semiMinorAxes(semiMinorAxes){
+	Ellipse(string id, vector<TwoDimensionalCoordinate*> coordinates, double semiMajorAxes, double semiMinorAxes, string color): Shape(id, coordinates, color), _semiMajorAxes(semiMajorAxes), _semiMinorAxes(semiMinorAxes){
 		checkShapeIsValid();
 	}
 
@@ -27,7 +27,7 @@ class Ellipse : public Shape {
 
 	string info() const {
 		char info[100];
-		sprintf(info, "Ellipse (%.3f, %.3f)", _semiMajorAxes, _semiMinorAxes);
+		sprintf(info, "Ellipse ([%.3f, %.3f], %.3f, %.3f)", coordinates()[0]->getX(), coordinates()[0]->getY(), _semiMajorAxes, _semiMinorAxes);
 		return info;
 	}
 
@@ -39,7 +39,7 @@ private:
 	double _semiMajorAxes, _semiMinorAxes;
 
 	void checkShapeIsValid() {
-		if(_semiMajorAxes <= 0 || _semiMinorAxes <= 0 || _semiMajorAxes < _semiMinorAxes) {
+		if(coordinates().size() != 1 || _semiMajorAxes <= 0 || _semiMinorAxes <= 0 || _semiMajorAxes < _semiMinorAxes) {
 			throw string("This is not an ellipse!");
 		}
     }
