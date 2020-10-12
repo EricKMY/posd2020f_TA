@@ -1,3 +1,5 @@
+#define ABS 0.001
+
 #include <gtest/gtest.h>
 #include "../src/compound_shape.h"
 #include "../src/ellipse.h"
@@ -7,53 +9,48 @@
 
 using namespace std;
 
-class UtlilityTest: public testing::Test {
+class UtlilityTestSuite: public testing::Test {
     protected:
     virtual void SetUp() {
 
-        vector<TwoDimensionalCoordinate*> coordinates;
-        coordinates.push_back(new TwoDimensionalCoordinate(0, 0));
-        coordinates.push_back(new TwoDimensionalCoordinate(3, 0));
-        coordinates.push_back(new TwoDimensionalCoordinate(0, 4));
+        ellipse_1 = new Ellipse("1", 4.2, 3.7, "red");
+        rectangle_2 = new Rectangle("2", 2, 2, "blue");
 
-        ellipse_1 = new Ellipse("1", 4, 3, "Red");
-        rectangle_2 = new Rectangle("2", 3, 4, "Blue");
-        triangle_3 = new Triangle("3", coordinates, "Yellow");
+        vector<TwoDimensionalCoordinate*> triangle_3_coordinates;
+        triangle_3_coordinates.push_back(new TwoDimensionalCoordinate(0, 0));
+        triangle_3_coordinates.push_back(new TwoDimensionalCoordinate(0, -3));
+        triangle_3_coordinates.push_back(new TwoDimensionalCoordinate(-4, 0));
+        triangle_3 = new Triangle("3", triangle_3_coordinates, "yellow");
 
+        ellipse_4 = new Ellipse("4", 4.2, 3.7, "yellow");
+        rectangle_5 = new Rectangle("5", 2, 2, "blue");
+
+        vector<TwoDimensionalCoordinate*> triangle_6_coordinates;
+        triangle_6_coordinates.push_back(new TwoDimensionalCoordinate(0, 0));
+        triangle_6_coordinates.push_back(new TwoDimensionalCoordinate(0, -3));
+        triangle_6_coordinates.push_back(new TwoDimensionalCoordinate(-4, 0));
+        triangle_6 = new Triangle("6", triangle_6_coordinates, "red");
+
+        vector<Shape*> *shapes = new vector<Shape*>();
         shapes->push_back(ellipse_1);
         shapes->push_back(rectangle_2);
         shapes->push_back(triangle_3);
-
         compoundShape_7 = new CompoundShape("7", shapes);
-
-        ellipse_4 = new Ellipse("4", 4.2, 3.7, "Yellow");
-        rectangle_5 = new Rectangle("5", 3.7, 4.2, "Blue");
-        triangle_6 = new Triangle("6", coordinates, "Red");
 
         shapes = new vector<Shape*>();
         shapes->push_back(ellipse_4);
-        Shape* compoundShape_8 = new CompoundShape("8", shapes);
+        compoundShape_8 = new CompoundShape("8", shapes);
 
         shapes = new vector<Shape*>();
-        shapes->push_back(triangle_6);
         shapes->push_back(rectangle_5);
-        Shape* compoundShape_9 = new CompoundShape("9", shapes);
+        shapes->push_back(triangle_6);
+        compoundShape_9 = new CompoundShape("9", shapes);
 
         compoundShape_8->addShape(compoundShape_9);
         compoundShape_7->addShape(compoundShape_8);
     }
 
-    virtual void TearDown() {
-        shapes->clear();
-        delete ellipse_1;
-        delete rectangle_2;
-        delete triangle_3;
-        delete ellipse_4;
-        delete rectangle_5;
-        delete triangle_6;
-    }
-
-    vector<Shape*> *shapes = new vector<Shape*>();
+    virtual void TearDown() {}
 
     Shape* ellipse_1;
     Shape* rectangle_2;
@@ -62,9 +59,11 @@ class UtlilityTest: public testing::Test {
     Shape* rectangle_5;
     Shape* triangle_6;
     Shape* compoundShape_7;
+    Shape* compoundShape_8;
+    Shape* compoundShape_9;
 };
 
-TEST_F(UtlilityTest, ExceptionForRectangleGetShapeById) {
+TEST_F(UtlilityTestSuite, exception_for_rectangle_get_shape_by_id) {
     try {
         getShapeById(rectangle_2, "1");
         FAIL();
@@ -73,7 +72,7 @@ TEST_F(UtlilityTest, ExceptionForRectangleGetShapeById) {
     }
 }
 
-TEST_F(UtlilityTest, ExceptionForRectangleFilterShape) {
+TEST_F(UtlilityTestSuite, exception_for_rectangle_filter_shape) {
     try {
         filterShape(rectangle_2, AreaFilter(12, 1));
         FAIL();
@@ -82,7 +81,7 @@ TEST_F(UtlilityTest, ExceptionForRectangleFilterShape) {
     }
 }
 
-TEST_F(UtlilityTest, ExceptionForEllipseGetShapeById) {
+TEST_F(UtlilityTestSuite, exception_for_ellipse_get_shape_by_id) {
     try {
         getShapeById(ellipse_1, "1");
         FAIL();
@@ -91,16 +90,16 @@ TEST_F(UtlilityTest, ExceptionForEllipseGetShapeById) {
     }
 }
 
-TEST_F(UtlilityTest, ExceptionForEllipseFilterShape) {
+TEST_F(UtlilityTestSuite, exception_for_ellipse_filter_shape) {
     try {
-        filterShape(ellipse_1, PerimeterFilter(12, 1));
+        filterShape(rectangle_2, AreaFilter(12, 1));
         FAIL();
     }catch(string e) {
         ASSERT_EQ("Only compound shape can filter shape!", e);
     }
 }
 
-TEST_F(UtlilityTest, ExceptionForTriangleGetShapeById) {
+TEST_F(UtlilityTestSuite, exception_for_triangle_get_shape_by_id) {
     try {
         getShapeById(triangle_3, "1");
         FAIL();
@@ -109,7 +108,7 @@ TEST_F(UtlilityTest, ExceptionForTriangleGetShapeById) {
     }
 }
 
-TEST_F(UtlilityTest, ExceptionForTriangleFilterShape) {
+TEST_F(UtlilityTestSuite, exception_for_triangle_filter_shape) {
     try {
         filterShape(triangle_3, ColorFilter("Yellow"));
         FAIL();
@@ -118,89 +117,92 @@ TEST_F(UtlilityTest, ExceptionForTriangleFilterShape) {
     }
 }
 
-TEST_F(UtlilityTest, CompoundShapeGetShapeById) {
-    Shape *shape_1 = getShapeById(compoundShape_7, "1");
-    Shape *shape_2 = getShapeById(compoundShape_7, "2");
-    Shape *shape_3 = getShapeById(compoundShape_7, "3");
+TEST_F(UtlilityTestSuite, compound_shape_get_shape_by_id) {
+    Shape *shape = getShapeById(compoundShape_7, "1");
 
-    EXPECT_EQ("1", shape_1->id());
-    EXPECT_EQ("Red", shape_1->color());
-    EXPECT_NEAR(37.699, shape_1->area(), 0.001);
-    EXPECT_NEAR(22.849, shape_1->perimeter(), 0.001);
-    EXPECT_EQ("Ellipse (4.000, 3.000)", shape_1->info());
+    EXPECT_EQ("1", shape->id());
+    EXPECT_EQ("red", shape->color());
+    EXPECT_NEAR(48.820, shape->area(), ABS);
+    EXPECT_NEAR(25.247, shape->perimeter(), ABS);
+    EXPECT_EQ("Ellipse (4.200, 3.700)", shape->info());
+
+    shape = getShapeById(compoundShape_7, "2");
     
-    EXPECT_EQ("2", shape_2->id());
-    EXPECT_EQ("Blue", shape_2->color());
-    EXPECT_NEAR(12, shape_2->area(), 0.001);
-    EXPECT_NEAR(14, shape_2->perimeter(), 0.001);
-    EXPECT_EQ("Rectangle (3.000, 4.000)", shape_2->info());
+    EXPECT_EQ("2", shape->id());
+    EXPECT_EQ("blue", shape->color());
+    EXPECT_NEAR(4, shape->area(), ABS);
+    EXPECT_NEAR(8, shape->perimeter(), ABS);
+    EXPECT_EQ("Rectangle (2.000, 2.000)", shape->info());
 
-    EXPECT_EQ("3", shape_3->id());
-    EXPECT_EQ("Yellow", shape_3->color());
-    EXPECT_NEAR(6, shape_3->area(), 0.001);
-    EXPECT_NEAR(12, shape_3->perimeter(), 0.001);
-    EXPECT_EQ("Triangle ([0.000, 0.000], [3.000, 0.000], [0.000, 4.000])", shape_3->info());
+    shape = getShapeById(compoundShape_7, "3");
+
+    EXPECT_EQ("3", shape->id());
+    EXPECT_EQ("yellow", shape->color());
+    EXPECT_NEAR(6, shape->area(), ABS);
+    EXPECT_NEAR(12, shape->perimeter(), ABS);
+    EXPECT_EQ("Triangle ([0.000, 0.000], [0.000, -3.000], [-4.000, 0.000])", shape->info());
 }
 
-TEST_F(UtlilityTest, CompoundShapeFilterShapeArea) {
+TEST_F(UtlilityTestSuite, compound_shape_filter_shape_by_area) {
 
-    vector<Shape*> vector = filterShape(compoundShape_7, AreaFilter(12, 1));
+    vector<Shape*> vector = filterShape(compoundShape_7, AreaFilter(20, 5));
 
-    EXPECT_EQ(3, vector.size());
-
-    EXPECT_EQ("2", vector[0]->id());
-    EXPECT_EQ("Rectangle (3.000, 4.000)", vector[0]->info());
-    EXPECT_EQ(12, vector[0]->area());
-
-    EXPECT_EQ("3", vector[1]->id());
-    EXPECT_EQ("Triangle ([0.000, 0.000], [3.000, 0.000], [0.000, 4.000])", vector[1]->info());
-    EXPECT_EQ(6, vector[1]->area());
-    
-    EXPECT_EQ("6", vector[2]->id());
-    EXPECT_EQ("Triangle ([0.000, 0.000], [3.000, 0.000], [0.000, 4.000])", vector[2]->info());
-    EXPECT_EQ(6, vector[2]->area());
-}
-
-
-TEST_F(UtlilityTest, CompoundShapeFilterShapePerimeter) {
-    vector<Shape*> vector = filterShape(compoundShape_7, PerimeterFilter(12, 1));
-
-    EXPECT_EQ(2, vector.size());
+    ASSERT_EQ(3, vector.size());
 
     EXPECT_EQ("3", vector[0]->id());
-    EXPECT_EQ("Triangle ([0.000, 0.000], [3.000, 0.000], [0.000, 4.000])", vector[0]->info());
-    EXPECT_EQ(12, vector[0]->perimeter());
+    EXPECT_EQ("Triangle ([0.000, 0.000], [0.000, -3.000], [-4.000, 0.000])", vector[0]->info());
+    EXPECT_NEAR(6, vector[0]->area(), ABS);
 
-    EXPECT_EQ("6", vector[1]->id());
-    EXPECT_EQ("Triangle ([0.000, 0.000], [3.000, 0.000], [0.000, 4.000])", vector[1]->info());
-    EXPECT_EQ(12, vector[1]->perimeter());
+    EXPECT_EQ("9", vector[1]->id());
+    EXPECT_EQ("Compound Shape {Rectangle (2.000, 2.000), Triangle ([0.000, 0.000], [0.000, -3.000], [-4.000, 0.000])}", vector[1]->info());
+    EXPECT_NEAR(10, vector[1]->area(), ABS);
+    
+    EXPECT_EQ("6", vector[2]->id());
+    EXPECT_EQ("Triangle ([0.000, 0.000], [0.000, -3.000], [-4.000, 0.000])", vector[2]->info());
+    EXPECT_NEAR(6, vector[2]->area(), ABS);
 }
 
-TEST_F(UtlilityTest, CompoundShapeFilterShapeType) {
-    vector<Shape*> vector = filterShape(compoundShape_7, TypeFilter("Ellipse"));
+TEST_F(UtlilityTestSuite, compound_shape_filter_shape_by_perimeter) {
+    vector<Shape*> vector = filterShape(compoundShape_7, PerimeterFilter(30, 15));
 
-    EXPECT_EQ(2, vector.size());
+    ASSERT_EQ(3, vector.size());
 
     EXPECT_EQ("1", vector[0]->id());
-    EXPECT_EQ("Ellipse (4.000, 3.000)", vector[0]->info());
-    EXPECT_EQ("Red", vector[0]->color());
+    EXPECT_EQ("Ellipse (4.200, 3.700)", vector[0]->info());
+    EXPECT_NEAR(25.247, vector[0]->perimeter(), ABS);
 
     EXPECT_EQ("4", vector[1]->id());
     EXPECT_EQ("Ellipse (4.200, 3.700)", vector[1]->info());
-    EXPECT_EQ("Yellow", vector[1]->color());
+    EXPECT_NEAR(25.247, vector[1]->perimeter(), ABS);
+
+    EXPECT_EQ("9", vector[2]->id());
+    EXPECT_EQ("Compound Shape {Rectangle (2.000, 2.000), Triangle ([0.000, 0.000], [0.000, -3.000], [-4.000, 0.000])}", vector[2]->info());
+    EXPECT_NEAR(20, vector[2]->perimeter(), ABS);
 }
 
-TEST_F(UtlilityTest, CompoundShapeFilterShapeColor) {
+TEST_F(UtlilityTestSuite, compound_shape_filter_shape_by_type) {
+    vector<Shape*> vector = filterShape(compoundShape_7, TypeFilter("Rectangle"));
 
-    vector<Shape*> vector = filterShape(compoundShape_7, ColorFilter("Red"));
+    ASSERT_EQ(2, vector.size());
+
+    EXPECT_EQ("2", vector[0]->id());
+    EXPECT_EQ("Rectangle (2.000, 2.000)", vector[0]->info());
+
+    EXPECT_EQ("5", vector[1]->id());
+    EXPECT_EQ("Rectangle (2.000, 2.000)", vector[1]->info());
+}
+
+TEST_F(UtlilityTestSuite, compound_shape_filter_shape_by_color) {
+
+    vector<Shape*> vector = filterShape(compoundShape_7, ColorFilter("red"));
 
     EXPECT_EQ(2, vector.size());
 
     EXPECT_EQ("1", vector[0]->id());
-    EXPECT_EQ("Ellipse (4.000, 3.000)", vector[0]->info());
-    EXPECT_EQ("Red", vector[0]->color());
+    EXPECT_EQ("Ellipse (4.200, 3.700)", vector[0]->info());
+    EXPECT_EQ("red", vector[0]->color());
 
     EXPECT_EQ("6", vector[1]->id());
-    EXPECT_EQ("Triangle ([0.000, 0.000], [3.000, 0.000], [0.000, 4.000])", vector[1]->info());
-    EXPECT_EQ("Red", vector[1]->color());
+    EXPECT_EQ("Triangle ([0.000, 0.000], [0.000, -3.000], [-4.000, 0.000])", vector[1]->info());
+    EXPECT_EQ("red", vector[1]->color());
 }

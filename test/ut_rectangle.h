@@ -1,9 +1,31 @@
+#define ABS 0.001
+
+#include <string>
+#include <vector>
 #include "../src/rectangle.h"
-#include "../src/utility.h"
 
 using namespace std;
 
-TEST(Rectangle, ExceptionForLengthIsZero){
+class RectangleTestSuite: public testing::Test {
+protected:
+    virtual void SetUp() {
+        rectangle = new Rectangle("1", 2, 2);
+    }
+
+    virtual void TearDown() {}
+
+    Shape* rectangle;
+};
+
+TEST(Rectangle, no_exception_constructor_with_default_color){
+    ASSERT_NO_THROW(Rectangle("1", 2, 2));
+}
+
+TEST(Rectangle, no_exception_constructor_with_custom_color){
+    ASSERT_NO_THROW(Rectangle("1", 2, 2, "red"));
+}
+
+TEST(Rectangle, exception_for_length_is_zero){
     try {
         Rectangle("1", 0, 1);
         FAIL();
@@ -12,7 +34,7 @@ TEST(Rectangle, ExceptionForLengthIsZero){
     }
 }
 
-TEST(Rectangle, ExceptionForWidthIsZero){
+TEST(Rectangle, exception_for_width_is_zero){
     try {
         Rectangle("1", 1, 0);
         FAIL();
@@ -21,7 +43,7 @@ TEST(Rectangle, ExceptionForWidthIsZero){
     }
 }
 
-TEST(Rectangle, ExceptionForLengthLessThanZero){
+TEST(Rectangle, exception_for_length_less_than_zero){
     try {
         Rectangle("1", -1, 1);
         FAIL();
@@ -30,7 +52,7 @@ TEST(Rectangle, ExceptionForLengthLessThanZero){
     }
 }
 
-TEST(Rectangle, ExceptionForWidthLessThanZero){
+TEST(Rectangle, exception_for_width_less_than_zero){
     try {
         Rectangle("1", 1, -1);
         FAIL();
@@ -39,58 +61,46 @@ TEST(Rectangle, ExceptionForWidthLessThanZero){
     }
 }
 
-TEST(Rectangle, AreaInt){
-    Shape* rectangle = new Rectangle("1", 3, 4);
-    ASSERT_EQ(12, rectangle->area());
+TEST_F(RectangleTestSuite, id){
+    ASSERT_EQ("1", rectangle->id());
 }
 
-TEST(Rectangle, AreaDouble){
-    Shape* rectangle = new Rectangle("1", 3.7, 4.2);
-    ASSERT_DOUBLE_EQ(15.54, rectangle->area());
-}
 
-TEST(Rectangle, PerimeterInt){
-    Shape* rectangle = new Rectangle("1", 3, 4);
-    ASSERT_EQ(14, rectangle->perimeter());
-}
-
-TEST(Rectangle, PerimeterDouble){
-    Shape* rectangle = new Rectangle("1", 3.7, 4.2);
-    ASSERT_EQ(15.8, rectangle->perimeter());
-}
-
-TEST(Rectangle, Info){
-    Shape* rectangle = new Rectangle("1", 3, 4);
-    ASSERT_EQ("Rectangle (3.000, 4.000)", rectangle->info());
-}
-
-TEST(Rectangle, Type){
-    Shape* rectangle = new Rectangle("1", 3, 4);
-    ASSERT_EQ("Rectangle", rectangle->type());
-}
-
-TEST(Rectangle, DefaultColor){
-    Shape* rectangle = new Rectangle("1", 3, 4);
+TEST_F(RectangleTestSuite, default_color){
     ASSERT_EQ("white", rectangle->color());
 }
 
-TEST(Rectangle, RedColor){
-    Shape* rectangle = new Rectangle("1", 3, 4, "red");
+TEST_F(RectangleTestSuite, custom_color){
+    rectangle = new Rectangle("1", 2, 2, "red");
     ASSERT_EQ("red", rectangle->color());
 }
 
-TEST(Rectangle, ExceptionForAddShape){
-    Shape* rectangle = new Rectangle("1", 3, 4);
+TEST_F(RectangleTestSuite, area){
+    ASSERT_NEAR(4, rectangle->area(), ABS);
+}
+
+TEST_F(RectangleTestSuite, perimeter){
+    ASSERT_NEAR(8, rectangle->perimeter(), ABS);
+}
+
+TEST_F(RectangleTestSuite, info){
+    ASSERT_EQ("Rectangle (2.000, 2.000)", rectangle->info());
+}
+
+TEST_F(RectangleTestSuite, type){
+    ASSERT_EQ("Rectangle", rectangle->type());
+}
+
+TEST_F(RectangleTestSuite, exception_for_add_shape){
     try {
-        rectangle->addShape(new Rectangle("1", 3, 4));
+        rectangle->addShape(new Rectangle("0", 2, 2));
         FAIL();
     }catch(string e) {
         ASSERT_EQ("Only compound shape can add shape!", e);
     }
 }
 
-TEST(Rectangle, ExceptionForDeleteShape){
-    Shape* rectangle = new Rectangle("1", 3, 4);
+TEST_F(RectangleTestSuite, exception_for_delete_shape){
     try {
         rectangle->deleteShapeById("1");
         FAIL();
@@ -99,8 +109,7 @@ TEST(Rectangle, ExceptionForDeleteShape){
     }
 }
 
-TEST(Rectangle, ExceptionForGetShapeById){
-    Shape* rectangle = new Rectangle("1", 3, 4);
+TEST_F(RectangleTestSuite, exception_for_get_shape_by_id){
     try {
         rectangle->getShapeById("1");
         FAIL();

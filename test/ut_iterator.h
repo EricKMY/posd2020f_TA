@@ -1,3 +1,5 @@
+#define ABS 0.001
+
 #include <gtest/gtest.h>
 #include <vector>
 #include "../src/compound_shape.h"
@@ -5,7 +7,7 @@
 #include "../src/rectangle.h"
 #include "../src/triangle.h"
 
-class IteratorTest: public testing::Test {
+class IteratorTestSuite: public testing::Test {
     protected:
     virtual void SetUp() {
 
@@ -40,7 +42,7 @@ class IteratorTest: public testing::Test {
     Shape* compoundShape;
 };
 
-TEST_F(IteratorTest, ExceptionForRectangleIterateFirst){
+TEST_F(IteratorTestSuite, exception_for_rectangle_iterate_first){
     Iterator *it = rectangle->createIterator();
     try {
         it->first();
@@ -50,7 +52,7 @@ TEST_F(IteratorTest, ExceptionForRectangleIterateFirst){
     }
 }
 
-TEST_F(IteratorTest, ExceptionForRectangleIterateCurrentItem){
+TEST_F(IteratorTestSuite, exception_for_rectangle_iterate_current_item){
     Iterator *it = rectangle->createIterator();
     try {
         it->currentItem();
@@ -60,7 +62,7 @@ TEST_F(IteratorTest, ExceptionForRectangleIterateCurrentItem){
     }
 }
 
-TEST_F(IteratorTest, ExceptionForRectangleIterateNext){
+TEST_F(IteratorTestSuite, exception_for_rectangle_iterate_next){
     Iterator *it = rectangle->createIterator();
     try {
         it->next();
@@ -70,13 +72,13 @@ TEST_F(IteratorTest, ExceptionForRectangleIterateNext){
     }
 }
 
-TEST_F(IteratorTest, RectangleIterateIsDone){
+TEST_F(IteratorTestSuite, rectangle_iterate_is_done){
     Iterator *it = rectangle->createIterator();
     ASSERT_TRUE(it->isDone());
 }
 
 
-TEST_F(IteratorTest, ExceptionForEllipseIterateFirst){
+TEST_F(IteratorTestSuite, exception_for_ellipse_iterate_first){
     Iterator *it = ellipse->createIterator();
     try {
         it->first();
@@ -86,7 +88,7 @@ TEST_F(IteratorTest, ExceptionForEllipseIterateFirst){
     }
 }
 
-TEST_F(IteratorTest, ExceptionForEllipseIterateCurrentItem){
+TEST_F(IteratorTestSuite, exception_for_ellipse_iterate_current_item){
     Iterator *it = ellipse->createIterator();
     try {
         it->currentItem();
@@ -96,7 +98,7 @@ TEST_F(IteratorTest, ExceptionForEllipseIterateCurrentItem){
     }
 }
 
-TEST_F(IteratorTest, ExceptionForEllipseIterateNext){
+TEST_F(IteratorTestSuite, exception_for_ellipse_iterate_next){
     Iterator *it = ellipse->createIterator();
     try {
         it->next();
@@ -106,12 +108,12 @@ TEST_F(IteratorTest, ExceptionForEllipseIterateNext){
     }
 }
 
-TEST_F(IteratorTest, EllipseIterateIsDone){
+TEST_F(IteratorTestSuite, ellipse_iterate_is_done){
     Iterator *it = ellipse->createIterator();
     ASSERT_TRUE(it->isDone());
 }
 
-TEST_F(IteratorTest, ExceptionForTriangleIterateFirst){
+TEST_F(IteratorTestSuite, exception_for_triangle_iterate_first){
     Iterator *it = triangle->createIterator();
     try {
         it->first();
@@ -121,7 +123,7 @@ TEST_F(IteratorTest, ExceptionForTriangleIterateFirst){
     }
 }
 
-TEST_F(IteratorTest, ExceptionForTriangleIterateCurrentItem){
+TEST_F(IteratorTestSuite, exception_for_triangle_iterate_current_item){
     Iterator *it = triangle->createIterator();
     try {
         it->currentItem();
@@ -131,7 +133,7 @@ TEST_F(IteratorTest, ExceptionForTriangleIterateCurrentItem){
     }
 }
 
-TEST_F(IteratorTest, ExceptionForTriangleIterateNext){
+TEST_F(IteratorTestSuite, exception_for_triangle_iterate_next){
     Iterator *it = triangle->createIterator();
     try {
         it->next();
@@ -141,17 +143,17 @@ TEST_F(IteratorTest, ExceptionForTriangleIterateNext){
     }
 }
 
-TEST_F(IteratorTest, TriangleIterateIsDone){
+TEST_F(IteratorTestSuite, triangle_iterate_is_done){
     Iterator *it = triangle->createIterator();
     ASSERT_TRUE(it->isDone());
 }
 
-TEST_F(IteratorTest, CompoundShapeIterateFirst) {
+TEST_F(IteratorTestSuite, compound_shape_iterate_first) {
     Iterator *it = compoundShape->createIterator();
     ASSERT_NO_THROW(it->first());
 }
 
-TEST_F(IteratorTest, CompoundShapeIterateCurrentItem) {
+TEST_F(IteratorTestSuite, compound_shape_iterate_current_item) {
     Iterator *it = compoundShape->createIterator();
 
     it->first();
@@ -160,42 +162,42 @@ TEST_F(IteratorTest, CompoundShapeIterateCurrentItem) {
 
     EXPECT_EQ("1", shape->id());
     EXPECT_EQ("white", shape->color());
-    EXPECT_NEAR(37.699, shape->area(), 0.001);
-    EXPECT_NEAR(22.849, shape->perimeter(), 0.001);
+    EXPECT_NEAR(37.699, shape->area(), ABS);
+    EXPECT_NEAR(22.849, shape->perimeter(), ABS);
     EXPECT_EQ("Ellipse (4.000, 3.000)", shape->info());
 }
 
-TEST_F(IteratorTest, CompoundShapeIterateNext) {
+TEST_F(IteratorTestSuite, compound_shape_iterate_current_next) {
     Iterator *it = compoundShape->createIterator();
 
     it->first();
-    EXPECT_NO_THROW(it->next());
+    ASSERT_NO_THROW(it->next());
 
     Shape *shape = it->currentItem();
 
     EXPECT_EQ("2", shape->id());
     EXPECT_EQ("white", shape->color());
-    EXPECT_NEAR(12, shape->area(), 0.001);
-    EXPECT_NEAR(14, shape->perimeter(), 0.001);
+    EXPECT_NEAR(12, shape->area(), ABS);
+    EXPECT_NEAR(14, shape->perimeter(), ABS);
     EXPECT_EQ("Rectangle (3.000, 4.000)", shape->info());
 
-    EXPECT_NO_THROW(it->next());
+    ASSERT_NO_THROW(it->next());
 
     shape = it->currentItem();
 
     EXPECT_EQ("3", shape->id());
     EXPECT_EQ("white", shape->color());
-    EXPECT_NEAR(6, shape->area(), 0.001);
-    EXPECT_NEAR(12, shape->perimeter(), 0.001);
+    EXPECT_NEAR(6, shape->area(), ABS);
+    EXPECT_NEAR(12, shape->perimeter(), ABS);
     EXPECT_EQ("Triangle ([0.000, 0.000], [3.000, 0.000], [0.000, 4.000])", shape->info());
 }
 
-TEST_F(IteratorTest, ExceptionForCompoundShapeIterateNextOutOfRange) {
+TEST_F(IteratorTestSuite, exception_for_compound_shape_iterate_next_out_of_range) {
     Iterator *it = compoundShape->createIterator();
     it->first();
-    EXPECT_NO_THROW(it->next());
-    EXPECT_NO_THROW(it->next());
-    EXPECT_NO_THROW(it->next());
+    ASSERT_NO_THROW(it->next());
+    ASSERT_NO_THROW(it->next());
+    ASSERT_NO_THROW(it->next());
 
     try {
         it->next();
@@ -205,11 +207,11 @@ TEST_F(IteratorTest, ExceptionForCompoundShapeIterateNextOutOfRange) {
     }
 }
 
-TEST_F(IteratorTest, CompoundShapeIterateIsDone) {
+TEST_F(IteratorTestSuite, compound_shape_iterate_is_done) {
     Iterator *it = compoundShape->createIterator();
     it->first();
-    EXPECT_NO_THROW(it->next());
-    EXPECT_NO_THROW(it->next());
-    EXPECT_NO_THROW(it->next());
+    ASSERT_NO_THROW(it->next());
+    ASSERT_NO_THROW(it->next());
+    ASSERT_NO_THROW(it->next());
     EXPECT_TRUE(it->isDone());
 }
