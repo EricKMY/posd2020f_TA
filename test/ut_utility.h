@@ -7,7 +7,7 @@
 
 // using namespace std;
 
-// class UtlilityTest: public testing::Test {
+// class UtlilityTestSuite: public testing::Test {
 //     protected:
 //     virtual void SetUp() {
 
@@ -64,7 +64,7 @@
 //     Shape* compoundShape_7;
 // };
 
-// TEST_F(UtlilityTest, ExceptionForRectangleGetShapeById) {
+// TEST_F(UtlilityTestSuite, ExceptionForRectangleGetShapeById) {
 //     try {
 //         getShapeById(rectangle_2, "1");
 //         FAIL();
@@ -73,7 +73,7 @@
 //     }
 // }
 
-// TEST_F(UtlilityTest, ExceptionForRectangleFilterShape) {
+// TEST_F(UtlilityTestSuite, ExceptionForRectangleFilterShape) {
 //     try {
 //         filterShape(rectangle_2, AreaFilter(12, 1));
 //         FAIL();
@@ -82,7 +82,7 @@
 //     }
 // }
 
-// TEST_F(UtlilityTest, ExceptionForEllipseGetShapeById) {
+// TEST_F(UtlilityTestSuite, ExceptionForEllipseGetShapeById) {
 //     try {
 //         getShapeById(ellipse_1, "1");
 //         FAIL();
@@ -91,7 +91,7 @@
 //     }
 // }
 
-// TEST_F(UtlilityTest, ExceptionForEllipseFilterShape) {
+// TEST_F(UtlilityTestSuite, ExceptionForEllipseFilterShape) {
 //     try {
 //         filterShape(ellipse_1, PerimeterFilter(12, 1));
 //         FAIL();
@@ -100,7 +100,7 @@
 //     }
 // }
 
-// TEST_F(UtlilityTest, ExceptionForTriangleGetShapeById) {
+// TEST_F(UtlilityTestSuite, ExceptionForTriangleGetShapeById) {
 //     try {
 //         getShapeById(triangle_3, "1");
 //         FAIL();
@@ -109,7 +109,7 @@
 //     }
 // }
 
-// TEST_F(UtlilityTest, ExceptionForTriangleFilterShape) {
+// TEST_F(UtlilityTestSuite, ExceptionForTriangleFilterShape) {
 //     try {
 //         filterShape(triangle_3, ColorFilter("Yellow"));
 //         FAIL();
@@ -118,7 +118,7 @@
 //     }
 // }
 
-// TEST_F(UtlilityTest, CompoundShapeGetShapeById) {
+// TEST_F(UtlilityTestSuite, CompoundShapeGetShapeById) {
 //     Shape *shape_1 = getShapeById(compoundShape_7, "1");
 //     Shape *shape_2 = getShapeById(compoundShape_7, "2");
 //     Shape *shape_3 = getShapeById(compoundShape_7, "3");
@@ -142,7 +142,7 @@
 //     EXPECT_EQ("Triangle ([0.000, 0.000], [3.000, 0.000], [0.000, 4.000])", shape_3->info());
 // }
 
-// TEST_F(UtlilityTest, CompoundShapeFilterShapeArea) {
+// TEST_F(UtlilityTestSuite, CompoundShapeFilterShapeArea) {
 
 //     vector<Shape*> vector = filterShape(compoundShape_7, AreaFilter(12, 1));
 
@@ -162,7 +162,7 @@
 // }
 
 
-// TEST_F(UtlilityTest, CompoundShapeFilterShapePerimeter) {
+// TEST_F(UtlilityTestSuite, CompoundShapeFilterShapePerimeter) {
 //     vector<Shape*> vector = filterShape(compoundShape_7, PerimeterFilter(12, 1));
 
 //     EXPECT_EQ(2, vector.size());
@@ -176,7 +176,7 @@
 //     EXPECT_EQ(12, vector[1]->perimeter());
 // }
 
-// TEST_F(UtlilityTest, CompoundShapeFilterShapeType) {
+// TEST_F(UtlilityTestSuite, CompoundShapeFilterShapeType) {
 //     vector<Shape*> vector = filterShape(compoundShape_7, TypeFilter("Ellipse"));
 
 //     EXPECT_EQ(2, vector.size());
@@ -190,7 +190,7 @@
 //     EXPECT_EQ("Yellow", vector[1]->color());
 // }
 
-// TEST_F(UtlilityTest, CompoundShapeFilterShapeColor) {
+// TEST_F(UtlilityTestSuite, CompoundShapeFilterShapeColor) {
 
 //     vector<Shape*> vector = filterShape(compoundShape_7, ColorFilter("Red"));
 

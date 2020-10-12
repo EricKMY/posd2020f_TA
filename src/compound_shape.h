@@ -77,10 +77,6 @@ public:
     return info + "}";
   }
 
-  string color() const {
-    throw string("Compound shape don't have single color");
-  }
-
   string type() const {
     return "Compound Shape";
   }

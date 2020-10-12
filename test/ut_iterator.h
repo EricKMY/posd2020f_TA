@@ -1,215 +1,220 @@
-// #include <gtest/gtest.h>
-// #include <vector>
-// #include "../src/compound_shape.h"
-// #include "../src/ellipse.h"
-// #include "../src/rectangle.h"
-// #include "../src/triangle.h"
+#define ABS 0.001
 
-// class IteratorTest: public testing::Test {
-//     protected:
-//     virtual void SetUp() {
+#include <gtest/gtest.h>
+#include <vector>
+#include "../src/compound_shape.h"
+#include "../src/ellipse.h"
+#include "../src/rectangle.h"
+#include "../src/triangle.h"
 
-//         vector<TwoDimensionalCoordinate*> coordinates;
-//         coordinates.push_back(new TwoDimensionalCoordinate(0, 0));
-//         coordinates.push_back(new TwoDimensionalCoordinate(3, 0));
-//         coordinates.push_back(new TwoDimensionalCoordinate(0, 4));
+using namespace std;
 
-//         ellipse = new Ellipse("1", 4, 3);
-//         rectangle = new Rectangle("2", 3, 4);
-//         triangle = new Triangle("3", coordinates);
+class IteratorTestSuite: public testing::Test {
+    protected:
+    virtual void SetUp() {
 
-//         shapes->push_back(ellipse);
-//         shapes->push_back(rectangle);
-//         shapes->push_back(triangle);
+        vector<TwoDimensionalCoordinate*> ellipseCoordinates;
+        ellipseCoordinates.push_back(new TwoDimensionalCoordinate(0, 1));
+        ellipse = new Ellipse("1", ellipseCoordinates, 4.2, 3.7);
 
-//         compoundShape = new CompoundShape("4", shapes);
-//     }
+        vector<TwoDimensionalCoordinate*> rectangleCoordinates;
+        rectangleCoordinates.push_back(new TwoDimensionalCoordinate(1, 1));
+        rectangleCoordinates.push_back(new TwoDimensionalCoordinate(-1, 1));
+        rectangleCoordinates.push_back(new TwoDimensionalCoordinate(-1, -1));
+        rectangleCoordinates.push_back(new TwoDimensionalCoordinate(1, -1));
+        rectangle = new Rectangle("2", rectangleCoordinates);
 
-//     virtual void TearDown() {
-//         shapes->clear();
-//         delete ellipse;
-//         delete rectangle;
-//         delete triangle;
-//     }
+        vector<TwoDimensionalCoordinate*> triangleCoordinates;
+        triangleCoordinates.push_back(new TwoDimensionalCoordinate(0, 0));
+        triangleCoordinates.push_back(new TwoDimensionalCoordinate(0, -3));
+        triangleCoordinates.push_back(new TwoDimensionalCoordinate(-4, 0));
+        triangle = new Triangle("3", triangleCoordinates);
+        
+        vector<Shape*> *shapes = new vector<Shape*>();
+        shapes->push_back(ellipse);
+        shapes->push_back(rectangle);
+        shapes->push_back(triangle);
+        
+        compoundShape = new CompoundShape("4", shapes);
+    }
 
-//     vector<Shape*> *shapes = new vector<Shape*>();
+    virtual void TearDown() {}
 
-//     Shape* ellipse;
-//     Shape* rectangle;
-//     Shape* triangle;
-//     Shape* compoundShape;
-// };
+    Shape* ellipse;
+    Shape* rectangle;
+    Shape* triangle;
+    Shape* compoundShape;
+};
 
-// TEST_F(IteratorTest, ExceptionForRectangleIterateFirst){
-//     Iterator *it = rectangle->createIterator();
-//     try {
-//         it->first();
-//         FAIL();
-//     }catch(string e) {
-//         ASSERT_EQ("No child member!", e);
-//     }
-// }
+TEST_F(IteratorTestSuite, exception_for_rectangle_iterate_first){
+    Iterator *it = rectangle->createIterator();
+    try {
+        it->first();
+        FAIL();
+    }catch(string e) {
+        ASSERT_EQ("No child member!", e);
+    }
+}
 
-// TEST_F(IteratorTest, ExceptionForRectangleIterateCurrentItem){
-//     Iterator *it = rectangle->createIterator();
-//     try {
-//         it->currentItem();
-//         FAIL();
-//     }catch(string e) {
-//         ASSERT_EQ("No child member!", e);
-//     }
-// }
+TEST_F(IteratorTestSuite, exception_for_rectangle_iterate_current_item){
+    Iterator *it = rectangle->createIterator();
+    try {
+        it->currentItem();
+        FAIL();
+    }catch(string e) {
+        ASSERT_EQ("No child member!", e);
+    }
+}
 
-// TEST_F(IteratorTest, ExceptionForRectangleIterateNext){
-//     Iterator *it = rectangle->createIterator();
-//     try {
-//         it->next();
-//         FAIL();
-//     }catch(string e) {
-//         ASSERT_EQ("No child member!", e);
-//     }
-// }
+TEST_F(IteratorTestSuite, exception_for_rectangle_iterate_current_next){
+    Iterator *it = rectangle->createIterator();
+    try {
+        it->next();
+        FAIL();
+    }catch(string e) {
+        ASSERT_EQ("No child member!", e);
+    }
+}
 
-// TEST_F(IteratorTest, RectangleIterateIsDone){
-//     Iterator *it = rectangle->createIterator();
-//     ASSERT_TRUE(it->isDone());
-// }
+TEST_F(IteratorTestSuite, rectangle_iterate_is_done){
+    Iterator *it = rectangle->createIterator();
+    ASSERT_TRUE(it->isDone());
+}
 
+TEST_F(IteratorTestSuite, exception_for_ellipse_iterate_first){
+    Iterator *it = ellipse->createIterator();
+    try {
+        it->first();
+        FAIL();
+    }catch(string e) {
+        ASSERT_EQ("No child member!", e);
+    }
+}
 
-// TEST_F(IteratorTest, ExceptionForEllipseIterateFirst){
-//     Iterator *it = ellipse->createIterator();
-//     try {
-//         it->first();
-//         FAIL();
-//     }catch(string e) {
-//         ASSERT_EQ("No child member!", e);
-//     }
-// }
+TEST_F(IteratorTestSuite, exception_for_ellipse_iterate_current_item){
+    Iterator *it = ellipse->createIterator();
+    try {
+        it->currentItem();
+        FAIL();
+    }catch(string e) {
+        ASSERT_EQ("No child member!", e);
+    }
+}
 
-// TEST_F(IteratorTest, ExceptionForEllipseIterateCurrentItem){
-//     Iterator *it = ellipse->createIterator();
-//     try {
-//         it->currentItem();
-//         FAIL();
-//     }catch(string e) {
-//         ASSERT_EQ("No child member!", e);
-//     }
-// }
+TEST_F(IteratorTestSuite, exception_for_ellipse_iterate_next){
+    Iterator *it = ellipse->createIterator();
+    try {
+        it->next();
+        FAIL();
+    }catch(string e) {
+        ASSERT_EQ("No child member!", e);
+    }
+}
 
-// TEST_F(IteratorTest, ExceptionForEllipseIterateNext){
-//     Iterator *it = ellipse->createIterator();
-//     try {
-//         it->next();
-//         FAIL();
-//     }catch(string e) {
-//         ASSERT_EQ("No child member!", e);
-//     }
-// }
+TEST_F(IteratorTestSuite, ellipse_iterate_is_done){
+    Iterator *it = ellipse->createIterator();
+    ASSERT_TRUE(it->isDone());
+}
 
-// TEST_F(IteratorTest, EllipseIterateIsDone){
-//     Iterator *it = ellipse->createIterator();
-//     ASSERT_TRUE(it->isDone());
-// }
+TEST_F(IteratorTestSuite, exception_for_triangle_iterate_first){
+    Iterator *it = triangle->createIterator();
+    try {
+        it->first();
+        FAIL();
+    }catch(string e) {
+        ASSERT_EQ("No child member!", e);
+    }
+}
 
-// TEST_F(IteratorTest, ExceptionForTriangleIterateFirst){
-//     Iterator *it = triangle->createIterator();
-//     try {
-//         it->first();
-//         FAIL();
-//     }catch(string e) {
-//         ASSERT_EQ("No child member!", e);
-//     }
-// }
+TEST_F(IteratorTestSuite, exception_for_triangle_iterate_current_item){
+    Iterator *it = triangle->createIterator();
+    try {
+        it->currentItem();
+        FAIL();
+    }catch(string e) {
+        ASSERT_EQ("No child member!", e);
+    }
+}
 
-// TEST_F(IteratorTest, ExceptionForTriangleIterateCurrentItem){
-//     Iterator *it = triangle->createIterator();
-//     try {
-//         it->currentItem();
-//         FAIL();
-//     }catch(string e) {
-//         ASSERT_EQ("No child member!", e);
-//     }
-// }
+TEST_F(IteratorTestSuite, exception_for_triangle_iterate_next){
+    Iterator *it = triangle->createIterator();
+    try {
+        it->next();
+        FAIL();
+    }catch(string e) {
+        ASSERT_EQ("No child member!", e);
+    }
+}
 
-// TEST_F(IteratorTest, ExceptionForTriangleIterateNext){
-//     Iterator *it = triangle->createIterator();
-//     try {
-//         it->next();
-//         FAIL();
-//     }catch(string e) {
-//         ASSERT_EQ("No child member!", e);
-//     }
-// }
+TEST_F(IteratorTestSuite, triangle_iterate_is_done){
+    Iterator *it = triangle->createIterator();
+    ASSERT_TRUE(it->isDone());
+}
 
-// TEST_F(IteratorTest, TriangleIterateIsDone){
-//     Iterator *it = triangle->createIterator();
-//     ASSERT_TRUE(it->isDone());
-// }
+TEST_F(IteratorTestSuite, compound_shape_iterate_first) {
+    Iterator *it = compoundShape->createIterator();
+    ASSERT_NO_THROW(it->first());
+}
 
-// TEST_F(IteratorTest, CompoundShapeIterateFirst) {
-//     Iterator *it = compoundShape->createIterator();
-//     ASSERT_NO_THROW(it->first());
-// }
+TEST_F(IteratorTestSuite, compound_shape_iterate_current_item) {
+    Iterator *it = compoundShape->createIterator();
 
-// TEST_F(IteratorTest, CompoundShapeIterateCurrentItem) {
-//     Iterator *it = compoundShape->createIterator();
+    it->first();
 
-//     it->first();
+    Shape *shape = it->currentItem();
 
-//     Shape *shape = it->currentItem();
+    EXPECT_EQ("1", shape->id());
+    EXPECT_EQ("white", shape->color());
+    EXPECT_NEAR(48.820, shape->area(), ABS);
+    EXPECT_NEAR(25.247, shape->perimeter(), ABS);
+    EXPECT_EQ("Ellipse ([0.000, 1.000], 4.200, 3.700)", shape->info());
+}
 
-//     EXPECT_EQ("1", shape->id());
-//     EXPECT_EQ("White", shape->color());
-//     EXPECT_NEAR(37.699, shape->area(), 0.001);
-//     EXPECT_NEAR(22.849, shape->perimeter(), 0.001);
-//     EXPECT_EQ("Ellipse (4.000, 3.000)", shape->info());
-// }
+TEST_F(IteratorTestSuite, compound_shape_iterate_next) {
+    Iterator *it = compoundShape->createIterator();
 
-// TEST_F(IteratorTest, CompoundShapeIterateNext) {
-//     Iterator *it = compoundShape->createIterator();
+    it->first();
+    ASSERT_NO_THROW(it->next());
 
-//     it->first();
-//     EXPECT_NO_THROW(it->next());
+    Shape *shape = it->currentItem();
 
-//     Shape *shape = it->currentItem();
+    EXPECT_EQ("2", shape->id());
+    EXPECT_EQ("white", shape->color());
+    EXPECT_NEAR(4, shape->area(), ABS);
+    EXPECT_NEAR(8, shape->perimeter(), ABS);
+    EXPECT_EQ("Rectangle ([1.000, 1.000], [-1.000, 1.000], [-1.000, -1.000], [1.000, -1.000])", shape->info());
 
-//     EXPECT_EQ("2", shape->id());
-//     EXPECT_EQ("White", shape->color());
-//     EXPECT_NEAR(12, shape->area(), 0.001);
-//     EXPECT_NEAR(14, shape->perimeter(), 0.001);
-//     EXPECT_EQ("Rectangle (3.000, 4.000)", shape->info());
+    ASSERT_NO_THROW(it->next());
 
-//     EXPECT_NO_THROW(it->next());
+    shape = it->currentItem();
 
-//     shape = it->currentItem();
+    EXPECT_EQ("3", shape->id());
+    EXPECT_EQ("white", shape->color());
+    EXPECT_NEAR(6, shape->area(), ABS);
+    EXPECT_NEAR(12, shape->perimeter(), ABS);
+    EXPECT_EQ("Triangle ([0.000, 0.000], [0.000, -3.000], [-4.000, 0.000])", shape->info());
+}
 
-//     EXPECT_EQ("3", shape->id());
-//     EXPECT_EQ("White", shape->color());
-//     EXPECT_NEAR(6, shape->area(), 0.001);
-//     EXPECT_NEAR(12, shape->perimeter(), 0.001);
-//     EXPECT_EQ("Triangle ([0.000, 0.000], [3.000, 0.000], [0.000, 4.000])", shape->info());
-// }
+TEST_F(IteratorTestSuite, exception_for_compound_shape_iterate_next_out_of_range) {
+    Iterator *it = compoundShape->createIterator();
+    it->first();
+    ASSERT_NO_THROW(it->next());
+    ASSERT_NO_THROW(it->next());
+    ASSERT_NO_THROW(it->next());
 
-// TEST_F(IteratorTest, ExceptionForCompoundShapeIterateNextOutOfRange) {
-//     Iterator *it = compoundShape->createIterator();
-//     it->first();
-//     EXPECT_NO_THROW(it->next());
-//     EXPECT_NO_THROW(it->next());
-//     EXPECT_NO_THROW(it->next());
+    try {
+        it->next();
+        FAIL();
+    }catch(string e) {
+        ASSERT_EQ("Moving past the end!", e);
+    }
+}
 
-//     try {
-//         it->next();
-//         FAIL();
-//     }catch(string e) {
-//         EXPECT_EQ("Moving past the end!", e);
-//     }
-// }
-
-// TEST_F(IteratorTest, CompoundShapeIterateIsDone) {
-//     Iterator *it = compoundShape->createIterator();
-//     it->first();
-//     EXPECT_NO_THROW(it->next());
-//     EXPECT_NO_THROW(it->next());
-//     EXPECT_NO_THROW(it->next());
-//     EXPECT_TRUE(it->isDone());
-// }
+TEST_F(IteratorTestSuite, compound_shape_iterate_is_done) {
+    Iterator *it = compoundShape->createIterator();
+    it->first();
+    ASSERT_NO_THROW(it->next());
+    ASSERT_NO_THROW(it->next());
+    ASSERT_NO_THROW(it->next());
+    ASSERT_TRUE(it->isDone());
+}

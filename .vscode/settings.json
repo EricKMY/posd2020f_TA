@@ -12,6 +12,7 @@
         "regex": "cpp",
         "chrono": "cpp",
         "*.tcc": "cpp",
-        "system_error": "cpp"
+        "system_error": "cpp",
+        "__split_buffer": "cpp"
     }
 }

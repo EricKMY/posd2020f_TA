@@ -1,130 +1,123 @@
-// #include <gtest/gtest.h>
-// #include <vector>
-// #include "../src/triangle.h"
-// #include "../src/two_dimensional_coordinate.h"
-// #include "../src/utility.h"
+#define ABS 0.001
 
-// using namespace std;
-// class TriangleTest: public testing::Test {
-//     protected:
-//     void SetUp() {
-//         triangleVector.push_back(new TwoDimensionalCoordinate(0, 0));
-//         triangleVector.push_back(new TwoDimensionalCoordinate(3, 0));
-//         triangleVector.push_back(new TwoDimensionalCoordinate(0, 4));
-//     }
-//     vector<TwoDimensionalCoordinate*> triangleVector;
-// };
+#include <string>
+#include <vector>
+#include "../src/triangle.h"
 
+using namespace std;
 
-// TEST_F(TriangleTest, ConstructorNoException){
-//     ASSERT_NO_THROW(Triangle("1", triangleVector));
-// }
+class TriangleTestSuite: public testing::Test {
+protected:
+    virtual void SetUp() {
+        coordinates.push_back(new TwoDimensionalCoordinate(0, 0));
+        coordinates.push_back(new TwoDimensionalCoordinate(0, -3));
+        coordinates.push_back(new TwoDimensionalCoordinate(-4, 0));
 
-// TEST(Triangle, ExceptionForVectorLessThanThree){
-//     vector<TwoDimensionalCoordinate*> triangleExceptionVector;
-//     triangleExceptionVector.push_back(new TwoDimensionalCoordinate(3, 0));
-//     triangleExceptionVector.push_back(new TwoDimensionalCoordinate(0, 4));
-//     try {
-//         Triangle("1", triangleExceptionVector);
-//         FAIL();
-//     }catch(string e) {
-//         ASSERT_EQ("This is not a triangle!", e);
-//     }
-// }
+        triangle = new Triangle("1", coordinates);
+    }
 
-// TEST(Triangle, ExceptionForVectorMoreThanThree){
-//     vector<TwoDimensionalCoordinate*> triangleExceptionVector;
-//     triangleExceptionVector.push_back(new TwoDimensionalCoordinate(3, 0));
-//     triangleExceptionVector.push_back(new TwoDimensionalCoordinate(0, 4));
-//     triangleExceptionVector.push_back(new TwoDimensionalCoordinate(-3, 0));
-//     triangleExceptionVector.push_back(new TwoDimensionalCoordinate(0, -4));
-//     try {
-//         new Triangle("1", triangleExceptionVector);
-//         FAIL();
-//     }catch(string e) {
-//         ASSERT_EQ("This is not a triangle!", e);
-//     }
-// }
+    virtual void TearDown() {}
 
-// TEST(Triangle, ExceptionForAreaIsZero){
-//     vector<TwoDimensionalCoordinate*> triangleExceptionVector;
-//     triangleExceptionVector.push_back(new TwoDimensionalCoordinate(0, 0));
-//     triangleExceptionVector.push_back(new TwoDimensionalCoordinate(0, 0));
-//     triangleExceptionVector.push_back(new TwoDimensionalCoordinate(-3, 0));
-//     try {
-//         new Triangle("1", triangleExceptionVector);
-//         FAIL();
-//     }catch(string e) {
-//         ASSERT_EQ("This is not a triangle!", e);
-//     }
-// }
+    Shape* triangle;
+    vector<TwoDimensionalCoordinate*> coordinates;
+};
 
-// TEST_F(TriangleTest, Area){
-//     Shape* triangle = new Triangle("1", triangleVector);
-//     ASSERT_EQ(6, triangle->area());
-// }
+TEST(Triangle, no_exception_constructor_with_default_color){
+    vector<TwoDimensionalCoordinate*> coordinates;
+    coordinates.push_back(new TwoDimensionalCoordinate(0, 0));
+    coordinates.push_back(new TwoDimensionalCoordinate(0, -3));
+    coordinates.push_back(new TwoDimensionalCoordinate(-4, 0));
 
-// TEST_F(TriangleTest, Perimeter){
-//     Shape* triangle = new Triangle("1", triangleVector);
-//     ASSERT_EQ(12, triangle->perimeter());
-// }
+    ASSERT_NO_THROW(Triangle("1", coordinates));
+}
 
-// TEST_F(TriangleTest, Info){
-//     Shape* triangle = new Triangle("1", triangleVector);
-//     ASSERT_EQ("Triangle ([0.000, 0.000], [3.000, 0.000], [0.000, 4.000])", triangle->info());
-// }
+TEST_F(TriangleTestSuite, no_exception_constructor_with_custom_color){
+    ASSERT_NO_THROW(Triangle("1",coordinates, "red"));
+}
 
-// TEST_F(TriangleTest, Type){
-//     Shape* triangle = new Triangle("1", triangleVector);
-//     ASSERT_EQ("Triangle", triangle->type());
-// }
+TEST_F(TriangleTestSuite, exception_for_coordinate_less_than_three){
+    coordinates.pop_back();
+    try {
+        Triangle("1", coordinates);
+        FAIL();
+    }catch(string e) {
+        ASSERT_EQ("This is not a triangle!", e);
+    }
+}
 
-// TEST_F(TriangleTest, DefaultColor){
-//     Shape* triangle = new Triangle("1", triangleVector);
-//     ASSERT_EQ("White", triangle->color());
-// }
+TEST_F(TriangleTestSuite, exception_for_coordinate_more_than_three){
+    coordinates.push_back(new TwoDimensionalCoordinate(1, 1));
+    try {
+        Triangle("1", coordinates);
+        FAIL();
+    }catch(string e) {
+        ASSERT_EQ("This is not a triangle!", e);
+    }
+}
 
-// TEST_F(TriangleTest, RedColor){
-//     Shape* triangle = new Triangle("1", triangleVector, "Red");
-//     ASSERT_EQ("Red", triangle->color());
-// }
+TEST_F(TriangleTestSuite, id){
+    ASSERT_EQ("1", triangle->id());
+}
 
-// TEST_F(TriangleTest, ExceptionForAddShape){
-//     Shape* triangle = new Triangle("1", triangleVector);
-//     try {
-//         triangle->addShape(new Triangle("1", triangleVector));
-//         FAIL();
-//     }catch(string e) {
-//         ASSERT_EQ("Only compound shape can add shape!", e);
-//     }
-// }
+TEST_F(TriangleTestSuite, coordinates){
+    EXPECT_EQ(0, triangle->coordinates()[0]->getX());
+    EXPECT_EQ(0, triangle->coordinates()[0]->getY());
 
-// TEST_F(TriangleTest, ExceptionForDeleteShape){
-//     Shape* triangle = new Triangle("1", triangleVector);
-//     try {
-//         triangle->deleteShapeById("1");
-//         FAIL();
-//     }catch(string e) {
-//         ASSERT_EQ("Only Compound shape can delete shape!", e);
-//     }
-// }
-// TEST_F(TriangleTest, ExceptionForGetShapeById){
-//     Shape* triangle = new Triangle("1", triangleVector);
-//     try {
-//         triangle->getShapeById("1");
-//         FAIL();
-//     }catch(string e) {
-//         ASSERT_EQ("Only compound shape can add shape!", e);
-//     }
-// }
+    EXPECT_EQ(0, triangle->coordinates()[1]->getX());
+    EXPECT_EQ(-3, triangle->coordinates()[1]->getY());
 
+    EXPECT_EQ(-4, triangle->coordinates()[2]->getX());
+    EXPECT_EQ(0, triangle->coordinates()[2]->getY());
+}
 
-// TEST_F(TriangleTest, ExceptionForCallGetShapeById){
-//     Shape* triangle = new Triangle("1", triangleVector);
-//     try {
-//         getShapeById(triangle, "1");
-//         FAIL();
-//     }catch(string e) {
-//         ASSERT_EQ("Only compound shape can get shape!", e);
-//     }
-// }
+TEST_F(TriangleTestSuite, default_color){
+    ASSERT_EQ("white", triangle->color());
+}
+
+TEST_F(TriangleTestSuite, custom_color){
+    triangle = new Triangle("1",coordinates, "red");
+    ASSERT_EQ("red", triangle->color());
+}
+
+TEST_F(TriangleTestSuite, area){
+    ASSERT_NEAR(6, triangle->area(), ABS);
+}
+
+TEST_F(TriangleTestSuite, perimeter){
+    ASSERT_NEAR(12, triangle->perimeter(), ABS);
+}
+
+TEST_F(TriangleTestSuite, info){
+    ASSERT_EQ("Triangle ([0.000, 0.000], [0.000, -3.000], [-4.000, 0.000])", triangle->info());
+}
+
+TEST_F(TriangleTestSuite, type){
+    ASSERT_EQ("Triangle", triangle->type());
+}
+
+TEST_F(TriangleTestSuite, exception_for_add_shape){
+    try {
+        triangle->addShape(new Triangle("0",coordinates));
+        FAIL();
+    }catch(string e) {
+        ASSERT_EQ("Only compound shape can add shape!", e);
+    }
+}
+
+TEST_F(TriangleTestSuite, exception_for_delete_shape){
+    try {
+        triangle->deleteShapeById("1");
+        FAIL();
+    }catch(string e) {
+        ASSERT_EQ("Only compound shape can delete shape!", e);
+    }
+}
+
+TEST_F(TriangleTestSuite, exception_for_get_shape_by_id){
+    try {
+        triangle->getShapeById("1");
+        FAIL();
+    }catch(string e) {
+        ASSERT_EQ("Only compound shape can get shape!", e);
+    }
+}

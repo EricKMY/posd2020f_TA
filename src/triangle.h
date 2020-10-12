@@ -21,27 +21,26 @@ public:
   }
   
   double area() const {
-    return fabs(
-            _coordinates[0]->getX() * _coordinates[1]->getY()
-              + _coordinates[1]->getX() * _coordinates[2]->getY() 
-              + _coordinates[2]->getX() * _coordinates[0]->getY() 
-              - _coordinates[0]->getX() * _coordinates[2]->getY() 
-              - _coordinates[1]->getX() * _coordinates[0]->getY() 
-              - _coordinates[2]->getX() * _coordinates[1]->getY()) / 2;
+    return fabs(coordinates()[0]->getX() * coordinates()[1]->getY()
+              + coordinates()[1]->getX() * coordinates()[2]->getY() 
+              + coordinates()[2]->getX() * coordinates()[0]->getY() 
+              - coordinates()[0]->getX() * coordinates()[2]->getY() 
+              - coordinates()[1]->getX() * coordinates()[0]->getY() 
+              - coordinates()[2]->getX() * coordinates()[1]->getY()) / 2;
   }
 
   double perimeter() const {
-    return sqrt(pow(_coordinates[0]->getX() - _coordinates[1]->getX(), 2) + pow(_coordinates[0]->getY() - _coordinates[1]->getY(), 2))
-          + sqrt(pow(_coordinates[0]->getX() - _coordinates[2]->getX(), 2) + pow(_coordinates[0]->getY() - _coordinates[2]->getY(), 2)) 
-          + sqrt(pow(_coordinates[2]->getX() - _coordinates[1]->getX(), 2) + pow(_coordinates[2]->getY() - _coordinates[1]->getY(), 2));
+    return  sqrt(pow(coordinates()[0]->getX() - coordinates()[1]->getX(), 2) + pow(coordinates()[0]->getY() - coordinates()[1]->getY(), 2))
+          + sqrt(pow(coordinates()[1]->getX() - coordinates()[2]->getX(), 2) + pow(coordinates()[1]->getY() - coordinates()[2]->getY(), 2)) 
+          + sqrt(pow(coordinates()[2]->getX() - coordinates()[0]->getX(), 2) + pow(coordinates()[2]->getY() - coordinates()[0]->getY(), 2));
   }
   
   string info() const {
     char info[100];
     sprintf(info, "Triangle ([%.3f, %.3f], [%.3f, %.3f], [%.3f, %.3f])",
-                              _coordinates[0]->getX(), _coordinates[0]->getY(),
-                              _coordinates[1]->getX(), _coordinates[1]->getY(),
-                              _coordinates[2]->getX(), _coordinates[2]->getY());
+                              coordinates()[0]->getX(), coordinates()[0]->getY(),
+                              coordinates()[1]->getX(), coordinates()[1]->getY(),
+                              coordinates()[2]->getX(), coordinates()[2]->getY());
     return info;
   }
 
@@ -50,10 +49,8 @@ public:
 	}
 
 private:
-  vector<TwoDimensionalCoordinate*> _coordinates;
-
   void checkShapeIsValid() {
-    if(_coordinates.size() != 3) {
+    if(coordinates().size() != 3) {
       throw string("This is not a triangle!");
     }else if(area() <= 0) {
       throw string("This is not a triangle!");
