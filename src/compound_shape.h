@@ -115,6 +115,10 @@ public:
     return new CompoundShapeIterator(this);
   }
 
+  void accept(Visitor* visitor) {
+		visitor->visit(this);
+	}
+
 private:
   vector<Shape*>* _shapes;
 };

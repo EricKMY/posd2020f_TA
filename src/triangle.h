@@ -48,6 +48,10 @@ public:
 		return "Triangle";
 	}
 
+  void accept(Visitor* visitor) {
+		visitor->visit(this);
+	}
+
 private:
   void checkShapeIsValid() {
     if(coordinates().size() != 3) {

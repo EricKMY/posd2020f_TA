@@ -6,6 +6,7 @@
 #include "iterator.h"
 #include "null_iterator.h"
 #include "two_dimensional_coordinate.h"
+#include "visitor.h"
 
 using namespace std;
 
@@ -29,13 +30,17 @@ public:
     
         virtual string type() const = 0;
 
-        virtual void addShape(Shape *shape);
+        // virtual void move(double x, double y) = 0;
+
+        virtual void accept(Visitor* v) = 0;
+
+        virtual void addShape(Shape* shape);
 
         virtual void deleteShapeById(string id);
 
         virtual Shape* getShapeById(string id);
         
-        virtual Iterator *createIterator();
+        virtual Iterator* createIterator();
 
         virtual ~Shape();
 

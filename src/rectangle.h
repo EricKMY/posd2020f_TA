@@ -51,6 +51,10 @@ public:
 		return "Rectangle";
 	}
 
+  void accept(Visitor* visitor) {
+		visitor->visit(this);
+	}
+
 private:
   void checkShapeIsValid() {
     if(coordinates().size() != 4) {
