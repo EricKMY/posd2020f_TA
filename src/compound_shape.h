@@ -4,43 +4,11 @@
 #include <string>
 #include <vector>
 #include "shape.h"
+#include "shape_iterator.h"
 
 using namespace std;
 
 class CompoundShape : public Shape {
-  class CompoundShapeIterator : public Iterator {
-  public:
-    CompoundShapeIterator(CompoundShape *s): _s(s) {}
-
-    void first() {
-      _current = _s->_shapes->begin();
-    }
-
-    Shape * currentItem() {
-      if(isDone()){
-        throw std::string("No current item!");
-      }else{
-        return *_current;
-      }
-    }
-
-    void next() {
-      if(isDone()){
-        throw std::string("Moving past the end!");
-      }else{
-        ++_current;
-      }
-    }
-
-    bool isDone() {
-      return _current == _s->_shapes->end();
-    }
-
-  private:
-    CompoundShape *_s;
-    vector<Shape*>::iterator _current;
-  };
-
 public: 
   CompoundShape(string id, vector<Shape*>* shapes): Shape(id, "transparent"), _shapes(shapes) {
     checkShapeIsValid();
@@ -88,7 +56,9 @@ public:
       try {
         (*it)->deleteShapeById(id);
         return;
-      }catch(string e) {}
+      }catch(string e) {
+        continue;
+      }
     }
     throw string("Expected delete shape but shape not found");
   }
@@ -100,13 +70,15 @@ public:
         }
         try {
           return (*it)->getShapeById(id);
-        }catch(string e) {}
+        }catch(string e) {
+          continue;
+        }
     }
     throw string("Expected get shape but shape not found");
   }
 
   Iterator * createIterator() {
-    return new CompoundShapeIterator(this);
+    return new ShapeIterator<vector<Shape*>::iterator>(_shapes->begin(), _shapes->end());
   }
 
 private:

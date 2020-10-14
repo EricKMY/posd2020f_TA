@@ -2,8 +2,8 @@
 #define SHAPE_H
 
 #include <string>
-#include "iterator.h"
-#include "null_iterator.h"
+
+class Iterator;
 
 using namespace std;
 

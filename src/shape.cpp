@@ -1,3 +1,4 @@
+#include "null_iterator.h"
 #include "shape.h"
 
 using namespace std;

@@ -2,11 +2,14 @@
 #define UTILITY_H
 
 #include <string>
+#include <vector>
+#include "iterator.h"
+#include "shape.h"
 
 using namespace std;
 
 Shape* getShapeById(Shape* shape, string id) {
-    Iterator *it = shape->createIterator();
+    Iterator* it = shape->createIterator();
 
     try {
         it->first();
@@ -30,7 +33,7 @@ Shape* getShapeById(Shape* shape, string id) {
 template <class Filter>
 vector<Shape*> filterShape(Shape *shape, Filter filter) {
     vector<Shape*> results = {};
-    Iterator *it = shape->createIterator();
+    Iterator* it = shape->createIterator();
 
     try {
         it->first();

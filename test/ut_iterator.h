@@ -43,7 +43,7 @@ class IteratorTestSuite: public testing::Test {
 };
 
 TEST_F(IteratorTestSuite, exception_for_rectangle_iterate_first){
-    Iterator *it = rectangle->createIterator();
+    Iterator* it = rectangle->createIterator();
     try {
         it->first();
         FAIL();
@@ -53,7 +53,7 @@ TEST_F(IteratorTestSuite, exception_for_rectangle_iterate_first){
 }
 
 TEST_F(IteratorTestSuite, exception_for_rectangle_iterate_current_item){
-    Iterator *it = rectangle->createIterator();
+    Iterator* it = rectangle->createIterator();
     try {
         it->currentItem();
         FAIL();
@@ -63,7 +63,7 @@ TEST_F(IteratorTestSuite, exception_for_rectangle_iterate_current_item){
 }
 
 TEST_F(IteratorTestSuite, exception_for_rectangle_iterate_next){
-    Iterator *it = rectangle->createIterator();
+    Iterator* it = rectangle->createIterator();
     try {
         it->next();
         FAIL();
@@ -73,13 +73,13 @@ TEST_F(IteratorTestSuite, exception_for_rectangle_iterate_next){
 }
 
 TEST_F(IteratorTestSuite, rectangle_iterate_is_done){
-    Iterator *it = rectangle->createIterator();
+    Iterator* it = rectangle->createIterator();
     ASSERT_TRUE(it->isDone());
 }
 
 
 TEST_F(IteratorTestSuite, exception_for_ellipse_iterate_first){
-    Iterator *it = ellipse->createIterator();
+    Iterator* it = ellipse->createIterator();
     try {
         it->first();
         FAIL();
@@ -89,7 +89,7 @@ TEST_F(IteratorTestSuite, exception_for_ellipse_iterate_first){
 }
 
 TEST_F(IteratorTestSuite, exception_for_ellipse_iterate_current_item){
-    Iterator *it = ellipse->createIterator();
+    Iterator* it = ellipse->createIterator();
     try {
         it->currentItem();
         FAIL();
@@ -99,7 +99,7 @@ TEST_F(IteratorTestSuite, exception_for_ellipse_iterate_current_item){
 }
 
 TEST_F(IteratorTestSuite, exception_for_ellipse_iterate_next){
-    Iterator *it = ellipse->createIterator();
+    Iterator* it = ellipse->createIterator();
     try {
         it->next();
         FAIL();
@@ -109,12 +109,12 @@ TEST_F(IteratorTestSuite, exception_for_ellipse_iterate_next){
 }
 
 TEST_F(IteratorTestSuite, ellipse_iterate_is_done){
-    Iterator *it = ellipse->createIterator();
+    Iterator* it = ellipse->createIterator();
     ASSERT_TRUE(it->isDone());
 }
 
 TEST_F(IteratorTestSuite, exception_for_triangle_iterate_first){
-    Iterator *it = triangle->createIterator();
+    Iterator* it = triangle->createIterator();
     try {
         it->first();
         FAIL();
@@ -124,7 +124,7 @@ TEST_F(IteratorTestSuite, exception_for_triangle_iterate_first){
 }
 
 TEST_F(IteratorTestSuite, exception_for_triangle_iterate_current_item){
-    Iterator *it = triangle->createIterator();
+    Iterator* it = triangle->createIterator();
     try {
         it->currentItem();
         FAIL();
@@ -134,7 +134,7 @@ TEST_F(IteratorTestSuite, exception_for_triangle_iterate_current_item){
 }
 
 TEST_F(IteratorTestSuite, exception_for_triangle_iterate_next){
-    Iterator *it = triangle->createIterator();
+    Iterator* it = triangle->createIterator();
     try {
         it->next();
         FAIL();
@@ -144,17 +144,17 @@ TEST_F(IteratorTestSuite, exception_for_triangle_iterate_next){
 }
 
 TEST_F(IteratorTestSuite, triangle_iterate_is_done){
-    Iterator *it = triangle->createIterator();
+    Iterator* it = triangle->createIterator();
     ASSERT_TRUE(it->isDone());
 }
 
 TEST_F(IteratorTestSuite, compound_shape_iterate_first) {
-    Iterator *it = compoundShape->createIterator();
+    Iterator* it = compoundShape->createIterator();
     ASSERT_NO_THROW(it->first());
 }
 
 TEST_F(IteratorTestSuite, compound_shape_iterate_current_item) {
-    Iterator *it = compoundShape->createIterator();
+    Iterator* it = compoundShape->createIterator();
 
     it->first();
 
@@ -168,7 +168,7 @@ TEST_F(IteratorTestSuite, compound_shape_iterate_current_item) {
 }
 
 TEST_F(IteratorTestSuite, compound_shape_iterate_current_next) {
-    Iterator *it = compoundShape->createIterator();
+    Iterator* it = compoundShape->createIterator();
 
     it->first();
     ASSERT_NO_THROW(it->next());
@@ -193,8 +193,7 @@ TEST_F(IteratorTestSuite, compound_shape_iterate_current_next) {
 }
 
 TEST_F(IteratorTestSuite, exception_for_compound_shape_iterate_next_out_of_range) {
-    Iterator *it = compoundShape->createIterator();
-    it->first();
+    Iterator* it = compoundShape->createIterator();
     ASSERT_NO_THROW(it->next());
     ASSERT_NO_THROW(it->next());
     ASSERT_NO_THROW(it->next());
@@ -208,8 +207,7 @@ TEST_F(IteratorTestSuite, exception_for_compound_shape_iterate_next_out_of_range
 }
 
 TEST_F(IteratorTestSuite, compound_shape_iterate_is_done) {
-    Iterator *it = compoundShape->createIterator();
-    it->first();
+    Iterator* it = compoundShape->createIterator();
     ASSERT_NO_THROW(it->next());
     ASSERT_NO_THROW(it->next());
     ASSERT_NO_THROW(it->next());
