@@ -1,18 +1,19 @@
 #ifndef RECTANGLE_H
 #define RECTANGLE_H
 
-#include <vector>
 #include <string>
-#include <stdio.h>
-#include "shape.h"
+#include "./shape.h"
 
 using namespace std;
+
 class Rectangle : public Shape {
 public: 
-  Rectangle(double length, double width): _length(length), _width(width) {
-    if(_length <= 0 || _width <= 0) {
-      throw string("This is not a rectangle!");
-    }
+  Rectangle(string id, double length, double width): Shape(id), _length(length), _width(width) {
+    checkShapeIsValid();
+  }
+
+  Rectangle(string id, double length, double width, string color): Shape(id, color), _length(length), _width(width) {
+    checkShapeIsValid();
   }
 
   double area() const {
@@ -20,7 +21,7 @@ public:
   }
 
   double perimeter() const {
-    return 2 * (_length + _width);
+    return (_length + _width) * 2;
   }
   
   string info() const {
@@ -29,8 +30,18 @@ public:
     return info;
   }
 
+  string type() const {
+		return "Rectangle";
+	}
+
 private:
   double _length, _width;
+
+  void checkShapeIsValid() {
+    if(_length <= 0 || _width <= 0) {
+      throw string("This is not a rectangle!");
+    }
+  }
 };
 
 #endif

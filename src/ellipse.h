@@ -9,11 +9,13 @@
 using namespace std;
 
 class Ellipse : public Shape {
-public:
-	Ellipse(double semiMajorAxes, double semiMinorAxes):_semiMajorAxes(semiMajorAxes), _semiMinorAxes(semiMinorAxes){
-		if(_semiMajorAxes <= 0 || _semiMinorAxes <= 0 || _semiMajorAxes < _semiMinorAxes) {
-        	throw string("This is not an ellipse!");
-      	}
+	public:
+	Ellipse(string id, double semiMajorAxes, double semiMinorAxes): Shape(id), _semiMajorAxes(semiMajorAxes), _semiMinorAxes(semiMinorAxes){
+		checkShapeIsValid();
+	}
+
+	Ellipse(string id, double semiMajorAxes, double semiMinorAxes, string color): Shape(id, color), _semiMajorAxes(semiMajorAxes), _semiMinorAxes(semiMinorAxes){
+		checkShapeIsValid();
 	}
 
 	double area() const {
@@ -30,8 +32,18 @@ public:
 		return info;
 	}
 
+	string type() const {
+		return "Ellipse";
+	}
+
 private:
 	double _semiMajorAxes, _semiMinorAxes;
+
+	void checkShapeIsValid() {
+		if(_semiMajorAxes <= 0 || _semiMinorAxes <= 0 || _semiMajorAxes < _semiMinorAxes) {
+			throw string("This is not an ellipse!");
+		}
+    }
 };
 
 #endif

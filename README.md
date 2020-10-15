@@ -1,89 +1,177 @@
-# **Pattern Oriented Software Design 2020 Fall Assignment 2**  
+# **Pattern Oriented Software Design 2020 Fall Assignment 5**  
 
 ## **Notice**  
-* **Due on (Monday, September 29, 2020 23:59).**  
+* **Due on Tuesday October 27 2020, 23:59.**  
 * **If your code fails to compile on jenkins server, you'll get no point for the assignment.**  
-* **For return string of number, should be in form of `%3f`.**  
+* **You should add unit test for each requirment under corresponding ut_file.**  
+* **DO NOT use any Type Checking or Dynamic Type that would violet OCP to implement Composite pattern and Iterator pattern, -40 point if you do so.**  
 
-## **Score**
+## **Score**  
+1. Source Code(Implementation + unit test): 40%.  
+2. Unit tests written by TA: 60%.  
 
-1. Unit tests written by yourself: 30%.  
-2. Unit tests written by TA: 50%.  
-3. Implementaion of `quickSort()`: 20%.  
-
-## **Useful Reference**
-[C++ Vector](http://www.cplusplus.com/reference/vector/vector/)  
-[C++ Sort](http://www.cplusplus.com/reference/algorithm/sort/)  
-[C++ Function Templates](http://www.cplusplus.com/doc/oldtutorial/templates/)  
-[QuickSort Wiki](https://en.wikipedia.org/wiki/Quicksort)  
+## **Useful Reference**  
+[Composite Pattern](https://refactoring.guru/design-patterns/composite)  
+[Iterator Pattern](https://refactoring.guru/design-patterns/iterator)  
+[std::deque](http://www.cplusplus.com/reference/deque/deque/)  
+[Deque vs Vector in C++ STL](https://www.geeksforgeeks.org/deque-vs-vector-in-c-stl/)  
 
 ## **Requirement**  
-1. Modify exception handling of class `Ellipse`.  
-*  Change the exception string into "This is not an ellipse!"  
-*  Make sure semiMajorAxes >= semiMinorAxes. If not, throw exception "This is not an ellipse!" in constructor.   
+1. Replace all `std::vector<type>` into `std::deque<type>`.  
 
-2. Implement `quickSort()` in `sort.h` and write corresponding unit test in `ut_sort.h`.  
+2. Add the following function in `Shape`, `shape.h` should remain as pure interface, add the implementations in `shape.cpp`.  
 ```
-template <class RandomAccessIterator, class Compare>
-void quickSort(RandomAccessIterator first, RandomAccessIterator last, Compare comp) {}
+class Shape {
+    virtual std::string type() const = 0;
+    virtual Iterator* createIterator() const;
+}
 ```
-* `Compare`: Binary function that accepts two elements in the range as arguments, and returns a value convertible to bool. It should be able to accpet `Lambda Expressions`, `Funtion`, `Object` and you should write test that covers them. (You may reference [C++ Sort](http://www.cplusplus.com/reference/algorithm/sort/))  
-* `RandomAccessIterator`: Random-access iterators to the initial and final positions of the sequence to be sorted. (You may reference [C++ Sort](http://www.cplusplus.com/reference/algorithm/sort/))  
-* `quickSort()`: Implement a quicksort function **WITHOUT using any sorting function from c/c++ library**, you should write the sorting algorithm by yourself. (You may reference [QuickSort Wiki](https://en.wikipedia.org/wiki/Quicksort))  
+* `type()`: type of shape is "Ellipse", "Rectangle", "Triangle", "Compound Shape".  
 
-3. Implement the following public function in `sort.h`.  
-
+3. Implement `Iterator` class interface in `iterator.h`.  
 ```
-bool areaAscendingCompare(Shape *a, Shape *b) {};
-
-bool areaDescendingCompare(Shape *a, Shape *b) {};
-
-bool perimeterAscendingCompare(Shape *a, Shape *b) {};
-
-bool perimeterDescendingCompare(Shape *a, Shape *b) {};
-
-```
-* The following is the example usage of compare funtion.  
-```
-    quickSort(shapes.begin(), shapes.end(), areaAscendingCompare);
-```
-
-4. Implement class `AscendingCompare` and `DescendingCompare` in `sort.h`.
-```
-class AscendingCompare{
-  public:
-    AscendingCompare(std::string feature): _feature(feature) {}
-};
-
-class DescendingCompare{
-  public:
-    DescendingCompare(std::string feature): _feature(feature) {}
+class Iterator {
+public:
+    virtual void first() = 0;
+    virtual void next() = 0;
+    virtual bool isDone() = 0;
+    virtual Shape* currentItem() = 0;
 };
 ```
-* `feature`: is the feature of shape you wanted to compare, meaning "area" and "perimeter".  
-* The following is the example usage of compare object.  
+
+4. Implement `NullIterator` class in `null_iterator.h` and the corresponding unit test in `ut_iterator.h`.  
 ```
-    quickSort(shapes.begin(), shapes.end(), AscendingCompare("area"));
+class NullIterator : public Iterator {
+public:
+    void first() {
+        // throw std::string "No child member!"
+    }
+
+    void next() {
+        // throw std::string "No child member!"
+    }
+    
+    bool isDone(){
+      // return true
+    }
+    
+    Shape* currentItem(){
+        // throw std::string "No child member!"
+    }
+};
 ```
 
-## **File Structure**
-This time your directory structure should be like:
+5. Implement `ShapeIterator` class in `shape_iterator.h` and the corresponding unit test in `ut_iterator.h`.  
 ```
-{學號}_hw
-    ├── bin
-    │   └── ut_main
-    ├── src
-    │   ├── shape.h
-    │   ├── ellipse.h
-    │   ├── rectangle.h
-    │   ├── triangle.h
-    │   ├── sort.h
-    │   └── two_dimensional_coordinate.h
-    ├── test
-    │   ├── ut_main.cpp
-    │   ├── ut_ellipse.h
-    │   ├── ut_rectangle.h
-    │   ├── ut_sort.h
-    │   └── ut_triangle.h
-    └── makefile
+class ShapeIterator : public Iterator {
+public:
+    ShapeIterator(RandomAccessIterator begin, RandomAccessIterator end) {
+        // initialize iterator.
+    }
+    
+    void first() {
+        // initialize iterator.
+    }
+    
+    void next() {
+        // move iterator to next position,
+        // throw std::string "Moving past the end!" when iterator move over the range of the structure.
+    }
+    
+    bool isDone(){
+      // return true when iterator reach the end of the structure.
+    }
+    
+    Shape* currentItem(){
+        // return the shape iterator currently point to.
+    }
+};
+```
+
+6. Implement following function in `utility.h` and the corresponding unit test in `ut_utility.h`.  
+```
+Shape* getShapeById(Shape* shape, std::string id) {}
+
+template <class Filter>
+std::deque<Shape*> filterShape(Shape *shape, Filter filter) {}
+```
+* `getShapeById()`: Return a shape under the input shape tree sturctur that matches the id.  
+  Example:  
+```
+  getShapeById(compoundShape_0, 2);
+  
+  CompoundShape(id:0)
+  │
+  ├── CompoundShape(id:1)
+  │    │
+  │    └── Triangle(id:2) <=== return this
+  │
+  ├── Ellipse(id:3)
+  │
+  └── Rectangle(id:4)
+```
+* `getShapeById()`: Should throw std::string "Only compound shape can get shape!" when the input shape is not iterable.  
+* `getShapeById()`: Should throw std::string "Expected get shape but shape not found" when no shape found with the given id.   
+
+* `filterShape()`: Return the shapes under the input shape tree sturctur that match the given filter.  
+* `filterShape()`: Should throw std::string "Only compound shape can filter shape!" when the input shape is not iterable.  
+
+7. Implement following class in `utility.h` and the corresponding unit test in `ut_utility.h`.  
+```
+class AreaFilter {
+    AreaFilter(double upperBound, double lowerBound) {}
+};
+
+class PerimeterFilter {
+    PerimeterFilter(double upperBound, double lowerBound) {}
+};
+
+class ColorFilter {
+    ColorFilter(std::string color) {}
+};
+
+class TypeFilter {
+    TypeFilter(std::string type) {}
+};
+```
+* Example usage of `filterShape()` with the filter class:  
+```
+filterShape(compoundShape_0, AreaFilter(10, 5);
+// retrun shapes area 10 >= and 5 <=, but don't include compoundShape_0 itself.
+
+filterShape(compoundShape_0, PerimeterFilter(10, 5);
+// retrun shapes perimeter 10 >= and 5 <=, but don't include compoundShape_0 itself.
+
+filterShape(compoundShape_0, ColorFilter("white");
+// retrun shapes that match "white", but don't include compoundShape_0 itself.
+
+filterShape(compoundShape_0, TypeFilter("Compound Shape");
+// retrun shapes that match "Compound Shape", but don't include compoundShape_0 itself.
+```
+
+#### File structure:  
+```
+├── bin
+│   └── ut_main
+├── src
+│   ├── shape.h
+│   ├── shape.cpp
+│   ├── ellipse.h
+│   ├── rectangle.h
+│   ├── triangle.h
+│   ├── compound_shape.h
+│   ├── iterator.h
+│   ├── null_iterator.h
+│   ├── utility.h
+│   └── two_dimensional_coordinate.h
+├── test
+│   ├── ut_main.cpp
+│   ├── ut_ellipse.h
+│   ├── ut_rectangle.h
+│   ├── ut_triangle.h
+│   ├── ut_iterator.h
+│   ├── ut_utility.h
+│   └── ut_compound_shape.h
+└── makefile
+
 ```
