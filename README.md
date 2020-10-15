@@ -15,9 +15,7 @@
 [Iterator Pattern](https://refactoring.guru/design-patterns/iterator)  
 [Open–closed principle](http://joelabrahamsson.com/a-simple-example-of-the-openclosed-principle/)  
 [std::deque](http://www.cplusplus.com/reference/deque/deque/)  
-[std::list](http://www.cplusplus.com/reference/list/list/)  
 [Deque vs Vector](https://www.geeksforgeeks.org/deque-vs-vector-in-c-stl/)  
-[List vs Vector](https://www.geeksforgeeks.org/difference-between-vector-and-list/)  
 
 ## **Requirement**  
 1. Add the following function in `Shape`, `shape.h` should remain as pure interface, add the implementations in `shape.cpp`.  
@@ -29,10 +27,9 @@ class Shape {
 ```
 * `type()`: type of shape is "Ellipse", "Rectangle", "Triangle", "Compound Shape".  
 
-2. Add the following function in `CompoundShape`, and modify the constructor as follow.  
+2. Add the following function in `CompoundShape`  
 ```
 class CompoundShape {
-    CompoundShape(std::string id, std::list<Shape*>* shapes) {}
     Iterator* createIterator() const; // return ShapeIterator
 }
 ```
@@ -105,8 +102,9 @@ Shape* getShapeById(Shape* shape, std::string id) {
     //throw std::string "Only compound shape can get shape!" when the input shape is not iterable.
     //throw std::string "Expected get shape but shape not found" when no shape found with the given id.
 }
-
-Example: 
+```
+* Example usage of `getShapeById()`:  
+```
  getShapeById(compoundShape_0, 2);
   
   CompoundShape(id:0)
