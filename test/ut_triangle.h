@@ -96,8 +96,4 @@ TEST_F(TriangleTestSuite, exception_for_delete_shape){
     }catch(string e) {
         ASSERT_EQ("Only compound shape can delete shape!", e);
     }
-        FAIL();
-    }catch(string e) {
-        ASSERT_EQ("Only compound shape can get shape!", e);
-    }
 }
