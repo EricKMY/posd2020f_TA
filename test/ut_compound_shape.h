@@ -2,7 +2,7 @@
 
 #include <gtest/gtest.h>
 #include <vector>
-#include <list>
+#include <vector>
 #include "../src/compound_shape.h"
 #include "../src/ellipse.h"
 #include "../src/rectangle.h"
@@ -41,7 +41,7 @@ protected:
 
     virtual void TearDown() {}
 
-    list<Shape*> *shapes = new list<Shape*>();
+    vector<Shape*> *shapes = new vector<Shape*>();
     Shape* ellipse_1;
     Shape* rectangle_2;
     Shape* triangle_3;
@@ -57,7 +57,7 @@ TEST(CompoundShape, no_exception_for_constructor) {
     coordinates.push_back(new TwoDimensionalCoordinate(3, 0));
     coordinates.push_back(new TwoDimensionalCoordinate(0, 4));
 
-    list<Shape*> *shapes = new list<Shape*>();
+    vector<Shape*> *shapes = new vector<Shape*>();
 
     shapes->push_back(new Ellipse("1", 4, 3));
     shapes->push_back(new Rectangle("2", 3, 4));
@@ -68,7 +68,7 @@ TEST(CompoundShape, no_exception_for_constructor) {
 
 TEST(CompoundShape, exception_for_constructor_with_empty_shapes) {
     try {
-        CompoundShape("7", new list<Shape*>());
+        CompoundShape("7", new vector<Shape*>());
         FAIL();
     }catch(string e) {
         ASSERT_EQ("This is not a compound shape!", e);
@@ -140,11 +140,11 @@ TEST_F(CompoundShapeTestSuite, exception_for_get_shape_by_id){
 }
 
 TEST_F(CompoundShapeTestSuite, get_shape_by_id_level_3_tree_structure) {
-    shapes = new list<Shape*>();
+    shapes = new vector<Shape*>();
     shapes->push_back(ellipse_4);
     Shape* compoundShape_8 = new CompoundShape("8", shapes);
 
-    shapes = new list<Shape*>();
+    shapes = new vector<Shape*>();
     shapes->push_back(triangle_6);
     shapes->push_back(rectangle_5);
     Shape* compoundShape_9 = new CompoundShape("9", shapes);
@@ -176,11 +176,11 @@ TEST_F(CompoundShapeTestSuite, get_shape_by_id_level_3_tree_structure) {
 }
 
 TEST_F(CompoundShapeTestSuite, delete_shape_by_id_level_3_tree_structure){
-    shapes = new list<Shape*>();
+    shapes = new vector<Shape*>();
     shapes->push_back(ellipse_4);
     Shape* compoundShape_8 = new CompoundShape("8", shapes);
 
-    shapes = new list<Shape*>();
+    shapes = new vector<Shape*>();
     shapes->push_back(triangle_6);
     shapes->push_back(rectangle_5);
     Shape* compoundShape_9 = new CompoundShape("9", shapes);
@@ -204,11 +204,11 @@ TEST_F(CompoundShapeTestSuite, delete_shape_by_id_level_3_tree_structure){
 }
 
 TEST_F(CompoundShapeTestSuite, exception_for_get_shape_by_id_tree_structure){
-    shapes = new list<Shape*>();
+    shapes = new vector<Shape*>();
     shapes->push_back(ellipse_4);
     Shape* compoundShape_8 = new CompoundShape("8", shapes);
 
-    shapes = new list<Shape*>();
+    shapes = new vector<Shape*>();
     shapes->push_back(triangle_6);
     shapes->push_back(rectangle_5);
     Shape* compoundShape_9 = new CompoundShape("9", shapes);
@@ -241,11 +241,11 @@ TEST_F(CompoundShapeTestSuite, exception_for_get_shape_by_id_tree_structure){
 }
 
 TEST_F(CompoundShapeTestSuite, exception_for_delete_shape_by_id_tree_structure){
-    shapes = new list<Shape*>();
+    shapes = new vector<Shape*>();
     shapes->push_back(ellipse_4);
     Shape* compoundShape_8 = new CompoundShape("8", shapes);
 
-    shapes = new list<Shape*>();
+    shapes = new vector<Shape*>();
     shapes->push_back(triangle_6);
     shapes->push_back(rectangle_5);
     Shape* compoundShape_9 = new CompoundShape("9", shapes);

@@ -2,7 +2,7 @@
 
 #include <gtest/gtest.h>
 #include <vector>
-#include <list>
+#include <vector>
 #include "../src/compound_shape.h"
 #include "../src/ellipse.h"
 #include "../src/rectangle.h"
@@ -35,7 +35,7 @@ class IteratorTestSuite: public testing::Test {
         delete triangle;
     }
 
-    list<Shape*> *shapes = new list<Shape*>();
+    vector<Shape*> *shapes = new vector<Shape*>();
 
     Shape* ellipse;
     Shape* rectangle;

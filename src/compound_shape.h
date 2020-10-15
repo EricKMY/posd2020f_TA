@@ -2,7 +2,7 @@
 #define COMPOUND_SHAPE_H
 
 #include <string>
-#include <list>
+#include <vector>
 #include "shape.h"
 #include "shape_iterator.h"
 
@@ -10,13 +10,13 @@ using namespace std;
 
 class CompoundShape : public Shape {
 public: 
-  CompoundShape(string id, list<Shape*>* shapes): Shape(id, "transparent"), _shapes(shapes) {
+  CompoundShape(string id, vector<Shape*>* shapes): Shape(id, "transparent"), _shapes(shapes) {
     checkShapeIsValid();
   }
 
   double area() const {
     double area = 0;
-    for(list<Shape*>::iterator it = _shapes->begin(); it != _shapes->end(); ++it) {
+    for(vector<Shape*>::iterator it = _shapes->begin(); it != _shapes->end(); ++it) {
       area += (*it)->area();
     }
     return area;
@@ -24,7 +24,7 @@ public:
 
   double perimeter() const {
     double perimeter = 0;
-    for(list<Shape*>::iterator it = _shapes->begin(); it != _shapes->end(); ++it) {
+    for(vector<Shape*>::iterator it = _shapes->begin(); it != _shapes->end(); ++it) {
       perimeter += (*it)->perimeter();
     }
     return perimeter;
@@ -32,7 +32,7 @@ public:
     
   string info() const {
     string info = "Compound Shape {";
-    for(list<Shape*>::iterator it = _shapes->begin(); it != _shapes->end(); ++it) {
+    for(vector<Shape*>::iterator it = _shapes->begin(); it != _shapes->end(); ++it) {
       info += (*it)->info() + ", ";
     }
     info.erase(info.end()-2, info.end());
@@ -48,7 +48,7 @@ public:
   }
 
   void deleteShapeById(string id) const {
-    for(list<Shape*>::iterator it = _shapes->begin(); it != _shapes->end(); ++it) {
+    for(vector<Shape*>::iterator it = _shapes->begin(); it != _shapes->end(); ++it) {
       if((*it)->id() == id) {
         _shapes->erase(it);
         return;
@@ -64,7 +64,7 @@ public:
   }
 
   Shape* getShapeById(string id) const {
-    for(list<Shape*>::iterator it = _shapes->begin(); it != _shapes->end(); ++it) {
+    for(vector<Shape*>::iterator it = _shapes->begin(); it != _shapes->end(); ++it) {
         if((*it)->id() == id) {
           return *it;
         }
@@ -78,11 +78,11 @@ public:
   }
 
   Iterator * createIterator() const {
-    return new ShapeIterator<list<Shape*>::iterator>(_shapes->begin(), _shapes->end());
+    return new ShapeIterator<vector<Shape*>::iterator>(_shapes->begin(), _shapes->end());
   }
 
 private:
-  list<Shape*>* _shapes;
+  vector<Shape*>* _shapes;
 
   void checkShapeIsValid() {
     if(_shapes->empty()) {

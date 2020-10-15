@@ -15,9 +15,7 @@
 [Iterator Pattern](https://refactoring.guru/design-patterns/iterator)  
 [Open–closed principle](http://joelabrahamsson.com/a-simple-example-of-the-openclosed-principle/)  
 [std::deque](http://www.cplusplus.com/reference/deque/deque/)  
-[std::list](http://www.cplusplus.com/reference/list/list/)  
 [Deque vs Vector](https://www.geeksforgeeks.org/deque-vs-vector-in-c-stl/)  
-[List vs Vector](https://www.geeksforgeeks.org/difference-between-vector-and-list/)  
 
 ## **Requirement**  
 1. Add the following function in `Shape`, `shape.h` should remain as pure interface, add the implementations in `shape.cpp`.  
@@ -32,7 +30,6 @@ class Shape {
 2. Add the following function in `CompoundShape`, and modify the constructor as follow.  
 ```
 class CompoundShape {
-    CompoundShape(std::string id, std::list<Shape*>* shapes) {}
     Iterator* createIterator() const; // return ShapeIterator
 }
 ```
