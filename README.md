@@ -1,5 +1,3 @@
-# HW5
-
 # **Pattern Oriented Software Design 2020 Fall Assignment 5**  
 
 ## **Notice**  
