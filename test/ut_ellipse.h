@@ -1,7 +1,7 @@
 #define ABS 0.001
 
 #include <string>
-#include <deque>
+#include <vector>
 #include "../src/ellipse.h"
 
 using namespace std;

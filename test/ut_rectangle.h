@@ -1,7 +1,7 @@
 #define ABS 0.001
 
 #include <string>
-#include <deque>
+#include <vector>
 #include "../src/rectangle.h"
 
 using namespace std;

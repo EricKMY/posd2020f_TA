@@ -1,7 +1,7 @@
 #define ABS 0.001
 
 #include <string>
-#include <deque>
+#include <vector>
 #include "../src/triangle.h"
 
 using namespace std;
@@ -19,11 +19,11 @@ protected:
     virtual void TearDown() {}
 
     Shape* triangle;
-    deque<TwoDimensionalCoordinate*> coordinates;
+    vector<TwoDimensionalCoordinate*> coordinates;
 };
 
 TEST(Triangle, no_exception_constructor){
-    deque<TwoDimensionalCoordinate*> coordinates;
+    vector<TwoDimensionalCoordinate*> coordinates;
     coordinates.push_back(new TwoDimensionalCoordinate(0, 0));
     coordinates.push_back(new TwoDimensionalCoordinate(0, -3));
     coordinates.push_back(new TwoDimensionalCoordinate(-4, 0));

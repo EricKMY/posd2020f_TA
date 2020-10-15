@@ -13,22 +13,31 @@
 ## **Useful Reference**  
 [Composite Pattern](https://refactoring.guru/design-patterns/composite)  
 [Iterator Pattern](https://refactoring.guru/design-patterns/iterator)  
+[Open–closed principle](http://joelabrahamsson.com/a-simple-example-of-the-openclosed-principle/)  
 [std::deque](http://www.cplusplus.com/reference/deque/deque/)  
-[Deque vs Vector in C++ STL](https://www.geeksforgeeks.org/deque-vs-vector-in-c-stl/)  
+[std::list](http://www.cplusplus.com/reference/list/list/)  
+[Deque vs Vector](https://www.geeksforgeeks.org/deque-vs-vector-in-c-stl/)  
+[List vs Vector](https://www.geeksforgeeks.org/difference-between-vector-and-list/)  
 
 ## **Requirement**  
-1. Replace all `std::vector<type>` into `std::deque<type>`.  
-
-2. Add the following function in `Shape`, `shape.h` should remain as pure interface, add the implementations in `shape.cpp`.  
+1. Add the following function in `Shape`, `shape.h` should remain as pure interface, add the implementations in `shape.cpp`.  
 ```
 class Shape {
     virtual std::string type() const = 0;
-    virtual Iterator* createIterator() const;
+    virtual Iterator* createIterator() const; // return NullIterator
 }
 ```
 * `type()`: type of shape is "Ellipse", "Rectangle", "Triangle", "Compound Shape".  
 
-3. Implement `Iterator` class interface in `iterator.h`.  
+2. Add the following function in `CompoundShape`, and modify the constructor as follow.  
+```
+class CompoundShape {
+    CompoundShape(std::string id, std::list<Shape*>* shapes) {}
+    Iterator* createIterator() const; // return ShapeIterator
+}
+```
+
+2. Implement `Iterator` class interface in `iterator.h`.  
 ```
 class Iterator {
 public:
@@ -39,7 +48,7 @@ public:
 };
 ```
 
-4. Implement `NullIterator` class in `null_iterator.h` and the corresponding unit test in `ut_iterator.h`.  
+3. Implement `NullIterator` class in `null_iterator.h` and the corresponding unit test in `ut_iterator.h`.  
 ```
 class NullIterator : public Iterator {
 public:
