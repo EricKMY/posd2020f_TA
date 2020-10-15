@@ -1,70 +1,103 @@
+# HW5
+
 # **Pattern Oriented Software Design 2020 Fall Assignment 5**  
 
 ## **Notice**  
-* **Due on Tuesday October 20 2020, 23:59.**  
+* **Due on Tuesday October 27 2020, 23:59.**  
 * **If your code fails to compile on jenkins server, you'll get no point for the assignment.**  
 * **You should add unit test for each requirment under corresponding ut_file.**  
+* **DO NOT use any Type Checking or Dynamic Type that would violet OCP to implement Composite pattern and Iterator pattern, -40 point if you do so.**  
 
 ## **Score**  
-1. Usage of Iterator in vector: 10%.  
-2. Unit tests written by yourself: 40%.  
-3. Unit tests written by TA: 50%.  
+1. Source Code(Implementation + unit test): 40%.  
+2. Unit tests written by TA: 60%.  
 
 ## **Useful Reference**  
 [Composite Pattern](https://en.wikipedia.org/wiki/Composite_pattern)  
-[Iterator Pattern](https://en.wikipedia.org/wiki/Iterator_pattern)   
+[Iterator Pattern](https://en.wikipedia.org/wiki/Iterator_pattern)  
+[std::deque](http://www.cplusplus.com/reference/deque/deque/)  
+[Deque vs Vector in C++ STL](https://www.geeksforgeeks.org/deque-vs-vector-in-c-stl/)  
 
 ## **Requirement**  
-1. Add the following function in `Shape`, add the implementations in `shape.cpp` if needed.  
+1. Replace all `std::vector<type>` into `std::deque<type>`.  
+
+2. Add the following function in `Shape`, `shape.h` should remain as pure interface, add the implementations in `shape.cpp`.  
 ```
 class Shape {
-    virtual string type() const = 0;
-    virtual Iterator *createIterator() {}
+    virtual std::string type() const = 0;
+    virtual Iterator* createIterator() const;
 }
 ```
-* `type()`: type of shape is "Ellipse", "Rectangle", "Triangle", "Compound Shape".
+* `type()`: type of shape is "Ellipse", "Rectangle", "Triangle", "Compound Shape".  
 
-2. Implement `Iterator` class in `iterator.h` and the corresponding unit test in `ut_iterator.h`.  
+3. Implement `Iterator` class interface in `iterator.h`.  
 ```
 class Iterator {
 public:
     virtual void first() = 0;
-    virtual Shape* currentItem() = 0;
     virtual void next() = 0;
     virtual bool isDone() = 0;
+    virtual Shape* currentItem() = 0;
 };
 ```
 
-3. Implement `NullIterator` class in `null_iterator.h`.  
+4. Implement `NullIterator` class in `null_iterator.h` and the corresponding unit test in `ut_iterator.h`.  
 ```
 class NullIterator : public Iterator {
-    public:
+public:
     void first() {
-        // throw std::string "No child member!"
-    }
-
-    Shape* currentItem(){
         // throw std::string "No child member!"
     }
 
     void next() {
         // throw std::string "No child member!"
     }
+    
     bool isDone(){
       // return true
+    }
+    
+    Shape* currentItem(){
+        // throw std::string "No child member!"
     }
 };
 ```
 
-4. Implement following function in `utility.h` and the corresponding unit test in `ut_utility.h`.  
-   **DO NOT use any Type Checking to implement the following function.**
+5. Implement `ShapeIterator` class in `shape_iterator.h` and the corresponding unit test in `ut_iterator.h`.  
 ```
-Shape* getShapeById(Shape* shape, string id) {}
+class ShapeIterator : public Iterator {
+public:
+    ShapeIterator(RandomAccessIterator begin, RandomAccessIterator end) {
+        // initialize iterator.
+    }
+    
+    void first() {
+        // initialize iterator.
+    }
+    
+    void next() {
+        // move iterator to next position,
+        // throw std::string "Moving past the end!" when iterator move over the range of the structure.
+    }
+    
+    bool isDone(){
+      // return true when iterator reach the end of the structure.
+    }
+    
+    Shape* currentItem(){
+        // return the shape iterator currently point to.
+    }
+};
+```
+
+6. Implement following function in `utility.h` and the corresponding unit test in `ut_utility.h`.  
+```
+Shape* getShapeById(Shape* shape, std::string id) {}
 
 template <class Filter>
-vector<Shape*> filterShape(Shape *shape, Filter filter) {}
+std::deque<Shape*> filterShape(Shape *shape, Filter filter) {}
 ```
-* `getShapeById()`: Return the shape under the input shape tree sturctur that matches the id.  
+* `getShapeById()`: Return a shape under the input shape tree sturctur that matches the id.  
   Example:  
 ```
   getShapeById(compoundShape_0, 2);
@@ -80,12 +113,12 @@ vector<Shape*> filterShape(Shape *shape, Filter filter) {}
   └── Rectangle(id:4)
 ```
 * `getShapeById()`: Should throw std::string "Only compound shape can get shape!" when the input shape is not iterable.  
-* `getShapeById()`: Should throw std::string "Expected get shape but shape not found" when no shpe found with the given id.   
+* `getShapeById()`: Should throw std::string "Expected get shape but shape not found" when no shape found with the given id.   
 
 * `filterShape()`: Return the shapes under the input shape tree sturctur that match the given filter.  
-* `filterShape()`: Should throw std::string "Only compound shape can get shape!" when the input shape is not iterable.  
+* `filterShape()`: Should throw std::string "Only compound shape can filter shape!" when the input shape is not iterable.  
 
-5. Implement following class in `utility.h` and the corresponding unit test in `ut_utility.h`.  
+7. Implement following class in `utility.h` and the corresponding unit test in `ut_utility.h`.  
 ```
 class AreaFilter {
     AreaFilter(double upperBound, double lowerBound) {}
@@ -118,10 +151,10 @@ filterShape(compoundShape_0, TypeFilter("Compound Shape");
 // retrun shapes that match "Compound Shape", but don't include compoundShape_0 itself.
 ```
 
-#### File structure:
+#### File structure:  
 ```
 ├── bin
-│   └── ut_all
+│   └── ut_main
 ├── src
 │   ├── shape.h
 │   ├── shape.cpp

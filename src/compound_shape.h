@@ -2,7 +2,7 @@
 #define COMPOUND_SHAPE_H
 
 #include <string>
-#include <vector>
+#include <deque>
 #include "shape.h"
 #include "shape_iterator.h"
 
@@ -10,13 +10,13 @@ using namespace std;
 
 class CompoundShape : public Shape {
 public: 
-  CompoundShape(string id, vector<Shape*>* shapes): Shape(id, "transparent"), _shapes(shapes) {
+  CompoundShape(string id, deque<Shape*>* shapes): Shape(id, "transparent"), _shapes(shapes) {
     checkShapeIsValid();
   }
 
   double area() const {
     double area = 0;
-    for(vector<Shape*>::iterator it = _shapes->begin(); it != _shapes->end(); ++it) {
+    for(deque<Shape*>::iterator it = _shapes->begin(); it != _shapes->end(); ++it) {
       area += (*it)->area();
     }
     return area;
@@ -24,7 +24,7 @@ public:
 
   double perimeter() const {
     double perimeter = 0;
-    for(vector<Shape*>::iterator it = _shapes->begin(); it != _shapes->end(); ++it) {
+    for(deque<Shape*>::iterator it = _shapes->begin(); it != _shapes->end(); ++it) {
       perimeter += (*it)->perimeter();
     }
     return perimeter;
@@ -32,7 +32,7 @@ public:
     
   string info() const {
     string info = "Compound Shape {";
-    for(vector<Shape*>::iterator it = _shapes->begin(); it != _shapes->end(); ++it) {
+    for(deque<Shape*>::iterator it = _shapes->begin(); it != _shapes->end(); ++it) {
       info += (*it)->info() + ", ";
     }
     info.erase(info.end()-2, info.end());
@@ -43,12 +43,12 @@ public:
     return "Compound Shape";
   }
 
-  void addShape(Shape *shape) {
+  void addShape(Shape *shape) const {
     _shapes->push_back(shape);
   }
 
-  void deleteShapeById(string id) {
-    for(vector<Shape*>::iterator it = _shapes->begin(); it != _shapes->end(); ++it) {
+  void deleteShapeById(string id) const {
+    for(deque<Shape*>::iterator it = _shapes->begin(); it != _shapes->end(); ++it) {
       if((*it)->id() == id) {
         _shapes->erase(it);
         return;
@@ -63,8 +63,8 @@ public:
     throw string("Expected delete shape but shape not found");
   }
 
-  Shape* getShapeById(string id) {
-    for(vector<Shape*>::iterator it = _shapes->begin(); it != _shapes->end(); ++it) {
+  Shape* getShapeById(string id) const {
+    for(deque<Shape*>::iterator it = _shapes->begin(); it != _shapes->end(); ++it) {
         if((*it)->id() == id) {
           return *it;
         }
@@ -77,12 +77,12 @@ public:
     throw string("Expected get shape but shape not found");
   }
 
-  Iterator * createIterator() {
-    return new ShapeIterator<vector<Shape*>::iterator>(_shapes->begin(), _shapes->end());
+  Iterator * createIterator() const {
+    return new ShapeIterator<deque<Shape*>::iterator>(_shapes->begin(), _shapes->end());
   }
 
 private:
-  vector<Shape*>* _shapes;
+  deque<Shape*>* _shapes;
 
   void checkShapeIsValid() {
     if(_shapes->empty()) {

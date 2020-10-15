@@ -25,13 +25,13 @@ public:
     
         virtual string type() const = 0;
 
-        virtual void addShape(Shape *shape);
+        virtual void addShape(Shape *shape) const;
 
-        virtual void deleteShapeById(string id);
+        virtual void deleteShapeById(string id) const;
 
-        virtual Shape* getShapeById(string id);
+        virtual Shape* getShapeById(string id) const;
         
-        virtual Iterator *createIterator();
+        virtual Iterator *createIterator() const;
 
         virtual ~Shape();
 

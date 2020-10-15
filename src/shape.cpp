@@ -15,19 +15,19 @@ string Shape::color() const {
     return _color;
 }
     
-void Shape::addShape(Shape *shape) {
+void Shape::addShape(Shape *shape) const {
     throw string("Only compound shape can add shape!");
 }
 
-void Shape::deleteShapeById(string id) {
+void Shape::deleteShapeById(string id) const {
     throw string("Only compound shape can delete shape!");
 }
 
-Shape* Shape::getShapeById(string id) {
+Shape* Shape::getShapeById(string id) const {
     throw string("Only compound shape can get shape!");
 }
 
-Iterator* Shape::createIterator() {
+Iterator* Shape::createIterator() const {
     return new NullIterator();
 }
 

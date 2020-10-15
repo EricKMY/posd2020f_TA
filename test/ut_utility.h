@@ -16,7 +16,7 @@ class UtlilityTestSuite: public testing::Test {
         ellipse_1 = new Ellipse("1", 4.2, 3.7, "red");
         rectangle_2 = new Rectangle("2", 2, 2, "blue");
 
-        vector<TwoDimensionalCoordinate*> triangle_3_coordinates;
+        deque<TwoDimensionalCoordinate*> triangle_3_coordinates;
         triangle_3_coordinates.push_back(new TwoDimensionalCoordinate(0, 0));
         triangle_3_coordinates.push_back(new TwoDimensionalCoordinate(0, -3));
         triangle_3_coordinates.push_back(new TwoDimensionalCoordinate(-4, 0));
@@ -25,23 +25,23 @@ class UtlilityTestSuite: public testing::Test {
         ellipse_4 = new Ellipse("4", 4.2, 3.7, "yellow");
         rectangle_5 = new Rectangle("5", 2, 2, "blue");
 
-        vector<TwoDimensionalCoordinate*> triangle_6_coordinates;
+        deque<TwoDimensionalCoordinate*> triangle_6_coordinates;
         triangle_6_coordinates.push_back(new TwoDimensionalCoordinate(0, 0));
         triangle_6_coordinates.push_back(new TwoDimensionalCoordinate(0, -3));
         triangle_6_coordinates.push_back(new TwoDimensionalCoordinate(-4, 0));
         triangle_6 = new Triangle("6", triangle_6_coordinates, "red");
 
-        vector<Shape*> *shapes = new vector<Shape*>();
+        deque<Shape*> *shapes = new deque<Shape*>();
         shapes->push_back(ellipse_1);
         shapes->push_back(rectangle_2);
         shapes->push_back(triangle_3);
         compoundShape_7 = new CompoundShape("7", shapes);
 
-        shapes = new vector<Shape*>();
+        shapes = new deque<Shape*>();
         shapes->push_back(ellipse_4);
         compoundShape_8 = new CompoundShape("8", shapes);
 
-        shapes = new vector<Shape*>();
+        shapes = new deque<Shape*>();
         shapes->push_back(rectangle_5);
         shapes->push_back(triangle_6);
         compoundShape_9 = new CompoundShape("9", shapes);
@@ -145,64 +145,64 @@ TEST_F(UtlilityTestSuite, compound_shape_get_shape_by_id) {
 
 TEST_F(UtlilityTestSuite, compound_shape_filter_shape_by_area) {
 
-    vector<Shape*> vector = filterShape(compoundShape_7, AreaFilter(20, 5));
+    deque<Shape*> deque = filterShape(compoundShape_7, AreaFilter(20, 5));
 
-    ASSERT_EQ(3, vector.size());
+    ASSERT_EQ(3, deque.size());
 
-    EXPECT_EQ("3", vector[0]->id());
-    EXPECT_EQ("Triangle ([0.000, 0.000], [0.000, -3.000], [-4.000, 0.000])", vector[0]->info());
-    EXPECT_NEAR(6, vector[0]->area(), ABS);
+    EXPECT_EQ("3", deque[0]->id());
+    EXPECT_EQ("Triangle ([0.000, 0.000], [0.000, -3.000], [-4.000, 0.000])", deque[0]->info());
+    EXPECT_NEAR(6, deque[0]->area(), ABS);
 
-    EXPECT_EQ("9", vector[1]->id());
-    EXPECT_EQ("Compound Shape {Rectangle (2.000, 2.000), Triangle ([0.000, 0.000], [0.000, -3.000], [-4.000, 0.000])}", vector[1]->info());
-    EXPECT_NEAR(10, vector[1]->area(), ABS);
+    EXPECT_EQ("9", deque[1]->id());
+    EXPECT_EQ("Compound Shape {Rectangle (2.000, 2.000), Triangle ([0.000, 0.000], [0.000, -3.000], [-4.000, 0.000])}", deque[1]->info());
+    EXPECT_NEAR(10, deque[1]->area(), ABS);
     
-    EXPECT_EQ("6", vector[2]->id());
-    EXPECT_EQ("Triangle ([0.000, 0.000], [0.000, -3.000], [-4.000, 0.000])", vector[2]->info());
-    EXPECT_NEAR(6, vector[2]->area(), ABS);
+    EXPECT_EQ("6", deque[2]->id());
+    EXPECT_EQ("Triangle ([0.000, 0.000], [0.000, -3.000], [-4.000, 0.000])", deque[2]->info());
+    EXPECT_NEAR(6, deque[2]->area(), ABS);
 }
 
 TEST_F(UtlilityTestSuite, compound_shape_filter_shape_by_perimeter) {
-    vector<Shape*> vector = filterShape(compoundShape_7, PerimeterFilter(30, 15));
+    deque<Shape*> deque = filterShape(compoundShape_7, PerimeterFilter(30, 15));
 
-    ASSERT_EQ(3, vector.size());
+    ASSERT_EQ(3, deque.size());
 
-    EXPECT_EQ("1", vector[0]->id());
-    EXPECT_EQ("Ellipse (4.200, 3.700)", vector[0]->info());
-    EXPECT_NEAR(25.247, vector[0]->perimeter(), ABS);
+    EXPECT_EQ("1", deque[0]->id());
+    EXPECT_EQ("Ellipse (4.200, 3.700)", deque[0]->info());
+    EXPECT_NEAR(25.247, deque[0]->perimeter(), ABS);
 
-    EXPECT_EQ("4", vector[1]->id());
-    EXPECT_EQ("Ellipse (4.200, 3.700)", vector[1]->info());
-    EXPECT_NEAR(25.247, vector[1]->perimeter(), ABS);
+    EXPECT_EQ("4", deque[1]->id());
+    EXPECT_EQ("Ellipse (4.200, 3.700)", deque[1]->info());
+    EXPECT_NEAR(25.247, deque[1]->perimeter(), ABS);
 
-    EXPECT_EQ("9", vector[2]->id());
-    EXPECT_EQ("Compound Shape {Rectangle (2.000, 2.000), Triangle ([0.000, 0.000], [0.000, -3.000], [-4.000, 0.000])}", vector[2]->info());
-    EXPECT_NEAR(20, vector[2]->perimeter(), ABS);
+    EXPECT_EQ("9", deque[2]->id());
+    EXPECT_EQ("Compound Shape {Rectangle (2.000, 2.000), Triangle ([0.000, 0.000], [0.000, -3.000], [-4.000, 0.000])}", deque[2]->info());
+    EXPECT_NEAR(20, deque[2]->perimeter(), ABS);
 }
 
 TEST_F(UtlilityTestSuite, compound_shape_filter_shape_by_type) {
-    vector<Shape*> vector = filterShape(compoundShape_7, TypeFilter("Rectangle"));
+    deque<Shape*> deque = filterShape(compoundShape_7, TypeFilter("Rectangle"));
 
-    ASSERT_EQ(2, vector.size());
+    ASSERT_EQ(2, deque.size());
 
-    EXPECT_EQ("2", vector[0]->id());
-    EXPECT_EQ("Rectangle (2.000, 2.000)", vector[0]->info());
+    EXPECT_EQ("2", deque[0]->id());
+    EXPECT_EQ("Rectangle (2.000, 2.000)", deque[0]->info());
 
-    EXPECT_EQ("5", vector[1]->id());
-    EXPECT_EQ("Rectangle (2.000, 2.000)", vector[1]->info());
+    EXPECT_EQ("5", deque[1]->id());
+    EXPECT_EQ("Rectangle (2.000, 2.000)", deque[1]->info());
 }
 
 TEST_F(UtlilityTestSuite, compound_shape_filter_shape_by_color) {
 
-    vector<Shape*> vector = filterShape(compoundShape_7, ColorFilter("red"));
+    deque<Shape*> deque = filterShape(compoundShape_7, ColorFilter("red"));
 
-    EXPECT_EQ(2, vector.size());
+    EXPECT_EQ(2, deque.size());
 
-    EXPECT_EQ("1", vector[0]->id());
-    EXPECT_EQ("Ellipse (4.200, 3.700)", vector[0]->info());
-    EXPECT_EQ("red", vector[0]->color());
+    EXPECT_EQ("1", deque[0]->id());
+    EXPECT_EQ("Ellipse (4.200, 3.700)", deque[0]->info());
+    EXPECT_EQ("red", deque[0]->color());
 
-    EXPECT_EQ("6", vector[1]->id());
-    EXPECT_EQ("Triangle ([0.000, 0.000], [0.000, -3.000], [-4.000, 0.000])", vector[1]->info());
-    EXPECT_EQ("red", vector[1]->color());
+    EXPECT_EQ("6", deque[1]->id());
+    EXPECT_EQ("Triangle ([0.000, 0.000], [0.000, -3.000], [-4.000, 0.000])", deque[1]->info());
+    EXPECT_EQ("red", deque[1]->color());
 }

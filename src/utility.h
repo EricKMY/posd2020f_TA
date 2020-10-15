@@ -2,7 +2,7 @@
 #define UTILITY_H
 
 #include <string>
-#include <vector>
+#include <deque>
 #include "iterator.h"
 #include "shape.h"
 
@@ -31,8 +31,8 @@ Shape* getShapeById(Shape* shape, string id) {
 }
 
 template <class Filter>
-vector<Shape*> filterShape(Shape *shape, Filter filter) {
-    vector<Shape*> results = {};
+deque<Shape*> filterShape(Shape *shape, Filter filter) {
+    deque<Shape*> results = {};
     Iterator* it = shape->createIterator();
 
     try {
@@ -42,7 +42,7 @@ vector<Shape*> filterShape(Shape *shape, Filter filter) {
     }
 
     while(!it->isDone()) {
-        vector<Shape*> shapes = {};
+        deque<Shape*> shapes = {};
         if(filter(it->currentItem())) {
             results.push_back(it->currentItem());
         }

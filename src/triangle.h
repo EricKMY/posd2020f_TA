@@ -2,7 +2,7 @@
 #define TRIANGLE_H
 
 #include <math.h>
-#include <vector>
+#include <deque>
 #include <string>
 #include <stdio.h>
 #include "shape.h"
@@ -13,11 +13,11 @@ using namespace std;
 class Triangle : public Shape{
 public: 
 
-  Triangle(string id, vector<TwoDimensionalCoordinate*> coordinates): Shape(id), _coordinates(coordinates){
+  Triangle(string id, deque<TwoDimensionalCoordinate*> coordinates): Shape(id), _coordinates(coordinates){
       checkShapeIsValid();
   }
 
-  Triangle(string id, vector<TwoDimensionalCoordinate*> coordinates, string color): Shape(id, color), _coordinates(coordinates){
+  Triangle(string id, deque<TwoDimensionalCoordinate*> coordinates, string color): Shape(id, color), _coordinates(coordinates){
       checkShapeIsValid();
   }
   
@@ -51,7 +51,7 @@ public:
 	}
 
 private:
-  vector<TwoDimensionalCoordinate*> _coordinates;
+  deque<TwoDimensionalCoordinate*> _coordinates;
 
   void checkShapeIsValid() {
     if(_coordinates.size() != 3) {

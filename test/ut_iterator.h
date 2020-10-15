@@ -1,7 +1,7 @@
 #define ABS 0.001
 
 #include <gtest/gtest.h>
-#include <vector>
+#include <deque>
 #include "../src/compound_shape.h"
 #include "../src/ellipse.h"
 #include "../src/rectangle.h"
@@ -11,7 +11,7 @@ class IteratorTestSuite: public testing::Test {
     protected:
     virtual void SetUp() {
 
-        vector<TwoDimensionalCoordinate*> coordinates;
+        deque<TwoDimensionalCoordinate*> coordinates;
         coordinates.push_back(new TwoDimensionalCoordinate(0, 0));
         coordinates.push_back(new TwoDimensionalCoordinate(3, 0));
         coordinates.push_back(new TwoDimensionalCoordinate(0, 4));
@@ -34,7 +34,7 @@ class IteratorTestSuite: public testing::Test {
         delete triangle;
     }
 
-    vector<Shape*> *shapes = new vector<Shape*>();
+    deque<Shape*> *shapes = new deque<Shape*>();
 
     Shape* ellipse;
     Shape* rectangle;
@@ -169,8 +169,6 @@ TEST_F(IteratorTestSuite, compound_shape_iterate_current_item) {
 
 TEST_F(IteratorTestSuite, compound_shape_iterate_current_next) {
     Iterator* it = compoundShape->createIterator();
-
-    it->first();
     ASSERT_NO_THROW(it->next());
 
     Shape *shape = it->currentItem();
