@@ -13,8 +13,8 @@
 2. Unit tests written by TA: 60%.  
 
 ## **Useful Reference**  
-[Composite Pattern](https://en.wikipedia.org/wiki/Composite_pattern)  
-[Iterator Pattern](https://en.wikipedia.org/wiki/Iterator_pattern)  
+[Composite Pattern](https://refactoring.guru/design-patterns/composite)  
+[Iterator Pattern](https://refactoring.guru/design-patterns/iterator)  
 [std::deque](http://www.cplusplus.com/reference/deque/deque/)  
 [Deque vs Vector in C++ STL](https://www.geeksforgeeks.org/deque-vs-vector-in-c-stl/)  
 
