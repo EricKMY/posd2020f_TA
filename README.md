@@ -21,14 +21,40 @@
 [Deque vs Vector](https://www.geeksforgeeks.org/deque-vs-vector-in-c-stl/)  
 
 ## **Requirement**  
-1. Add the following function in `Shape`, `shape.h` should remain as pure interface, add the implementations in `shape.cpp`.  
+1. Add `type()` and `createIterator()` in `Shape`, `shape.h` should remain as pure interface, add the implementations in `shape.cpp`.  
+   Your `Shape` interface should be same as following.  
 ```
 class Shape {
-    virtual std::string type() const = 0;
-    virtual Iterator* createIterator() const; // return NullIterator
+public:
+        Shape(std::string id);
+
+        Shape(std::string id, std::string color);
+
+        std::string id() const;
+
+        std::string color() const;
+
+        virtual double area() const = 0;
+
+        virtual double perimeter() const = 0;
+  
+        virtual std::string info() const = 0;
+    
+        virtual std::string type() const = 0;
+
+        virtual void addShape(Shape *shape) const;
+
+        virtual void deleteShapeById(std::string id) const;
+
+        virtual Shape* getShapeById(std::string id) const;
+        
+        virtual Iterator* createIterator() const;
+
+        virtual ~Shape();
 }
 ```
 * `type()`: type of shape is "Ellipse", "Rectangle", "Triangle", "Compound Shape".  
+* `createIterator()`: return "NullIterator".  
 
 2. Add the following function in `CompoundShape` and modify the constructor as following.  
 ```
