@@ -31,7 +31,7 @@ public:
 
         virtual Shape* getShapeById(string id) const;
         
-        virtual Iterator *createIterator() const;
+        virtual Iterator* createIterator() const;
 
         virtual ~Shape();
 

@@ -18,22 +18,22 @@ public:
         _current = _begin;
     }
 
-    Shape* currentItem(){
-        if(isDone()){
-            throw string("No current item!");
-        }
-        return *_current;
-    }
-
     void next() {
-        if(isDone()){
+        if(isDone()) {
             throw string("Moving past the end!");
         }
         ++_current;
     }
 
-    bool isDone(){
+    bool isDone() {
       return _current == _end;
+    }
+
+    Shape* currentItem() {
+        if(isDone()){
+            throw string("No current item!");
+        }
+        return *_current;
     }
 
 private:

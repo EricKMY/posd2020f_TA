@@ -12,16 +12,16 @@ public:
         throw string("No child member!");
     }
 
-    Shape* currentItem(){
-        throw string("No child member!");
-    }
-
     void next() {
         throw string("No child member!");
     }
 
-    bool isDone(){
+    bool isDone() {
       return true;
+    }
+
+    Shape* currentItem() {
+        throw string("No child member!");
     }
 };
 
