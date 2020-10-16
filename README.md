@@ -119,7 +119,7 @@ Shape* getShapeById(Shape* shape, std::string id) {
   │
   └── Rectangle(id:4)
 
-  id will be unique, so there will only be one shape to be return.
+  id will be unique, so there will only be one shape to return.
 ```
 7. Implement following funtion and class in `utility.h` and the corresponding unit test in `ut_utility.h`.  
 ```
