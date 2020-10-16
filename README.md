@@ -63,7 +63,9 @@ private:
 ```
 class CompoundShape {
     CompoundShape(std::string id, std::list<Shape*>* shapes) {}
-    Iterator* createIterator() const; // return ShapeIterator
+    Iterator* createIterator() const {
+        // return ShapeIterator
+    }
 }
 ```
 
