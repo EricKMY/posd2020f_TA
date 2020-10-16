@@ -109,7 +109,7 @@ Shape* getShapeById(Shape* shape, std::string id) {
 ```
  getShapeById(compoundShape_0, 2);
   
-  CompoundShape(id:0)
+  CompoundShape(id:0) <=== will never return compoundShape_0 itself
   │
   ├── CompoundShape(id:1)
   │    │
