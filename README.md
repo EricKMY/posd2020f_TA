@@ -13,6 +13,7 @@
 ## **Useful Reference**  
 [Composite Pattern](https://refactoring.guru/design-patterns/composite)  
 [Iterator Pattern](https://refactoring.guru/design-patterns/iterator)  
+[Factory Pattern](https://refactoring.guru/design-patterns/factory-method) 
 [Open–closed principle](http://joelabrahamsson.com/a-simple-example-of-the-openclosed-principle/)  
 [std::deque](http://www.cplusplus.com/reference/deque/deque/)  
 [Deque vs Vector](https://www.geeksforgeeks.org/deque-vs-vector-in-c-stl/)  
