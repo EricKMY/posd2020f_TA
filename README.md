@@ -92,11 +92,11 @@ public:
         // throw std::string "No child member!"
     }
     
-    bool isDone(){
+    bool isDone() {
       // return true
     }
     
-    Shape* currentItem(){
+    Shape* currentItem() {
         // throw std::string "No child member!"
     }
 };
@@ -119,12 +119,12 @@ public:
         // throw std::string "Moving past the end!" when iterator move over the range of the structure.
     }
     
-    bool isDone(){
+    bool isDone() {
       // return true when iterator reach the end of the structure.
     }
     
-    Shape* currentItem(){
-        // return the shape iterator currently point at.
+    Shape* currentItem() {
+        // return the shape that iterator currently point at.
     }
 };
 ```
