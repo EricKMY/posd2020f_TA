@@ -90,7 +90,7 @@ public:
     }
     
     Shape* currentItem(){
-        // return the shape iterator currently point to.
+        // return the shape iterator currently point at.
     }
 };
 ```
@@ -98,10 +98,11 @@ public:
 6. Implement following function in `utility.h` and the corresponding unit test in `ut_utility.h`.  
 ```
 Shape* getShapeById(Shape* shape, std::string id) {
-    //access the shape with iterator pattern.
-    //Return a shape under the input shape tree sturctur that matches the id.
-    //throw std::string "Only compound shape can get shape!" when the input shape is not iterable.
-    //throw std::string "Expected get shape but shape not found" when no shape found with the given id.
+    // access the shape with iterator pattern.
+    // DO NOT use Type Checking or Dynamic Type that would violate OCP to implement the function.
+    // return a shape under the input shape tree sturctur that matches the id.
+    // throw std::string "Only compound shape can get shape!" when the input shape is not iterable.
+    // throw std::string "Expected get shape but shape not found" when no shape found with the given id.
 }
 ```
 * Example usage of `getShapeById()`:  
@@ -123,8 +124,9 @@ Shape* getShapeById(Shape* shape, std::string id) {
 template <class Filter>
 std::deque<Shape*> filterShape(Shape *shape, Filter filter) {
     // access the shape with iterator pattern.
-    // Return the shapes under the input shape tree sturctur that match the given filter.
-    // Should throw std::string "Only compound shape can filter shape!" when the input shape is not iterable.
+    // DO NOT use Type Checking or Dynamic Type that would violate OCP to implement the function.
+    // return the shapes under the input shape tree sturctur that match the given filter.
+    // throw std::string "Only compound shape can filter shape!" when the input shape is not iterable.
 }
 
 class AreaFilter {
