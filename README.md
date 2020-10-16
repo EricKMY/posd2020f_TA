@@ -54,7 +54,7 @@ public:
 
 private:
         std::string _id, _color;
-}
+};
 ```
 * `type()`: type of shape is "Ellipse", "Rectangle", "Triangle", "Compound Shape".  
 * `createIterator()`: return "NullIterator".  
