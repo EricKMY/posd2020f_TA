@@ -118,6 +118,8 @@ Shape* getShapeById(Shape* shape, std::string id) {
   ├── Ellipse(id:3)
   │
   └── Rectangle(id:4)
+
+  id will be unique, so there will only be one shape to be return.
 ```
 7. Implement following funtion and class in `utility.h` and the corresponding unit test in `ut_utility.h`.  
 ```
@@ -148,16 +150,16 @@ class TypeFilter {
 * Example usage of `filterShape()` with the filter class:  
 ```
 filterShape(compoundShape_0, AreaFilter(10, 5);
-// retrun shapes area 10 >= and 5 <=, but don't include compoundShape_0 itself.
+// retrun shapes that area in range of 10 >= && 5 <=, but don't include compoundShape_0 itself.
 
 filterShape(compoundShape_0, PerimeterFilter(10, 5);
-// retrun shapes perimeter 10 >= and 5 <=, but don't include compoundShape_0 itself.
+// retrun shapes that perimeter in range 10 >= && 5 <=, but don't include compoundShape_0 itself.
 
 filterShape(compoundShape_0, ColorFilter("white");
-// retrun shapes that match "white", but don't include compoundShape_0 itself.
+// retrun shapes that color match "white", but don't include compoundShape_0 itself.
 
 filterShape(compoundShape_0, TypeFilter("Compound Shape");
-// retrun shapes that match "Compound Shape", but don't include compoundShape_0 itself.
+// retrun shapes that type match "Compound Shape", but don't include compoundShape_0 itself.
 ```
 
 #### File structure:  
