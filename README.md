@@ -4,7 +4,7 @@
 * **Due on Tuesday October 27 2020, 23:59.**  
 * **If your code fails to compile on jenkins server, you'll get no point for the assignment.**  
 * **You should add unit test for each requirment under corresponding ut_file.**  
-* **DO NOT use any Type Checking or Dynamic Type that would violet OCP to implement Composite pattern and Iterator pattern, -40 point if you do so.**  
+* **DO NOT use any Type Checking or Dynamic Type that would violate OCP to implement Composite pattern and Iterator pattern, -40 point if you do so.**  
 
 ## **Score**  
 1. Source Code(Implementation + unit test): 40%.  
