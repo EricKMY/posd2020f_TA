@@ -1,7 +1,7 @@
 #define ABS 0.001
 
 #include <gtest/gtest.h>
-#include <vector>
+#include <list>
 #include <vector>
 #include "../src/compound_shape.h"
 #include "../src/ellipse.h"
@@ -33,17 +33,17 @@ class UtlilityTestSuite: public testing::Test {
         triangle_6_coordinates.push_back(new TwoDimensionalCoordinate(-4, 0));
         triangle_6 = new Triangle("6", triangle_6_coordinates, "red");
 
-        vector<Shape*> *shapes = new vector<Shape*>();
+        list<Shape*> *shapes = new list<Shape*>();
         shapes->push_back(ellipse_1);
         shapes->push_back(rectangle_2);
         shapes->push_back(triangle_3);
         compoundShape_7 = new CompoundShape("7", shapes);
 
-        shapes = new vector<Shape*>();
+        shapes = new list<Shape*>();
         shapes->push_back(ellipse_4);
         compoundShape_8 = new CompoundShape("8", shapes);
 
-        shapes = new vector<Shape*>();
+        shapes = new list<Shape*>();
         shapes->push_back(rectangle_5);
         shapes->push_back(triangle_6);
         compoundShape_9 = new CompoundShape("9", shapes);

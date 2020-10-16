@@ -15,7 +15,9 @@
 [Iterator Pattern](https://refactoring.guru/design-patterns/iterator)  
 [Factory Pattern](https://refactoring.guru/design-patterns/factory-method)  
 [Open–closed principle](http://joelabrahamsson.com/a-simple-example-of-the-openclosed-principle/)  
+[std::list](http://www.cplusplus.com/reference/list/list/)  
 [std::deque](http://www.cplusplus.com/reference/deque/deque/)  
+[List vs Vector](https://www.geeksforgeeks.org/difference-between-vector-and-list/)  
 [Deque vs Vector](https://www.geeksforgeeks.org/deque-vs-vector-in-c-stl/)  
 
 ## **Requirement**  
@@ -28,9 +30,10 @@ class Shape {
 ```
 * `type()`: type of shape is "Ellipse", "Rectangle", "Triangle", "Compound Shape".  
 
-2. Add the following function in `CompoundShape`  
+2. Add the following function in `CompoundShape` and modify the constructor as following.  
 ```
 class CompoundShape {
+    CompoundShape(std::string id, std::list<Shape*>* shapes) {}
     Iterator* createIterator() const; // return ShapeIterator
 }
 ```

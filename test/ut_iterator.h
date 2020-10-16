@@ -1,7 +1,7 @@
 #define ABS 0.001
 
 #include <gtest/gtest.h>
-#include <vector>
+#include <list>
 #include <vector>
 #include "../src/compound_shape.h"
 #include "../src/ellipse.h"
@@ -35,7 +35,7 @@ class IteratorTestSuite: public testing::Test {
         delete triangle;
     }
 
-    vector<Shape*> *shapes = new vector<Shape*>();
+    list<Shape*> *shapes = new list<Shape*>();
 
     Shape* ellipse;
     Shape* rectangle;
