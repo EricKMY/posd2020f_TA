@@ -35,7 +35,7 @@ class CompoundShape {
 }
 ```
 
-2. Implement `Iterator` class interface in `iterator.h`.  
+3. Implement `Iterator` class interface in `iterator.h`.  
 ```
 class Iterator {
 public:
@@ -46,7 +46,7 @@ public:
 };
 ```
 
-3. Implement `NullIterator` class in `null_iterator.h` and the corresponding unit test in `ut_iterator.h`.  
+4. Implement `NullIterator` class in `null_iterator.h` and the corresponding unit test in `ut_iterator.h`.  
 ```
 class NullIterator : public Iterator {
 public:
