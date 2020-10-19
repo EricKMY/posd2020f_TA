@@ -19,6 +19,7 @@
 [std::deque](http://www.cplusplus.com/reference/deque/deque/)  
 [List vs Vector](https://www.geeksforgeeks.org/difference-between-vector-and-list/)  
 [Deque vs Vector](https://www.geeksforgeeks.org/deque-vs-vector-in-c-stl/)  
+[Const vs Regular iterators](https://www.geeksforgeeks.org/const-vs-regular-iterators-in-c-with-examples/)  
 
 ## **Requirement**  
 1. Add `type()` and `createIterator()` in `Shape`, `shape.h` should remain as pure interface, add the implementations in `shape.cpp`.  
@@ -42,9 +43,9 @@ public:
     
         virtual std::string type() const = 0;
 
-        virtual void addShape(Shape *shape) const;
+        virtual void addShape(Shape *shape) ;
 
-        virtual void deleteShapeById(std::string id) const;
+        virtual void deleteShapeById(std::string id) ;
 
         virtual Shape* getShapeById(std::string id) const;
         
@@ -59,10 +60,10 @@ private:
 * `type()`: type of shape is "Ellipse", "Rectangle", "Triangle", "Compound Shape".  
 * `createIterator()`: return "NullIterator".  
 
-2. Add the following function in `CompoundShape` and modify the constructor as following.  
+2. Add the following function in `CompoundShape` and modify (Not overloading) the constructor as following.  
 ```
 class CompoundShape {
-    CompoundShape(std::string id, std::list<Shape*>* shapes) {}
+    CompoundShape(std::string id, std::list<Shape*> shapes) {}
     Iterator* createIterator() const {
         // return ShapeIterator
     }
