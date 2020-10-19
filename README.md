@@ -43,7 +43,7 @@ public:
     
         virtual std::string type() const = 0;
 
-        virtual void addShape(Shape *shape) ;
+        virtual void addShape(Shape* shape) ;
 
         virtual void deleteShapeById(std::string id) ;
 
