@@ -21,21 +21,16 @@ class IteratorTestSuite: public testing::Test {
         rectangle = new Rectangle("2", 3, 4);
         triangle = new Triangle("3", coordinates);
 
-        shapes->push_back(ellipse);
-        shapes->push_back(rectangle);
-        shapes->push_back(triangle);
+        shapes.push_back(ellipse);
+        shapes.push_back(rectangle);
+        shapes.push_back(triangle);
 
         compoundShape = new CompoundShape("4", shapes);
     }
 
-    virtual void TearDown() {
-        shapes->clear();
-        delete ellipse;
-        delete rectangle;
-        delete triangle;
-    }
+    virtual void TearDown() {}
 
-    list<Shape*> *shapes = new list<Shape*>();
+    list<Shape*> shapes = {};
 
     Shape* ellipse;
     Shape* rectangle;

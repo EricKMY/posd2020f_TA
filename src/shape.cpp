@@ -15,11 +15,11 @@ string Shape::color() const {
     return _color;
 }
     
-void Shape::addShape(Shape *shape) const {
+void Shape::addShape(Shape *shape) {
     throw string("Only compound shape can add shape!");
 }
 
-void Shape::deleteShapeById(string id) const {
+void Shape::deleteShapeById(string id) {
     throw string("Only compound shape can delete shape!");
 }
 

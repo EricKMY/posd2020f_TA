@@ -10,13 +10,13 @@ using namespace std;
 
 class CompoundShape : public Shape {
 public: 
-  CompoundShape(string id, list<Shape*>* shapes): Shape(id, "transparent"), _shapes(shapes) {
+  CompoundShape(string id, list<Shape*> shapes): Shape(id, "transparent"), _shapes(shapes) {
     checkShapeIsValid();
   }
 
   double area() const {
     double area = 0;
-    for(list<Shape*>::iterator it = _shapes->begin(); it != _shapes->end(); ++it) {
+    for(list<Shape*>::const_iterator it = _shapes.begin(); it != _shapes.end(); ++it) {
       area += (*it)->area();
     }
     return area;
@@ -24,7 +24,7 @@ public:
 
   double perimeter() const {
     double perimeter = 0;
-    for(list<Shape*>::iterator it = _shapes->begin(); it != _shapes->end(); ++it) {
+    for(list<Shape*>::const_iterator it = _shapes.begin(); it != _shapes.end(); ++it) {
       perimeter += (*it)->perimeter();
     }
     return perimeter;
@@ -32,7 +32,7 @@ public:
     
   string info() const {
     string info = "Compound Shape {";
-    for(list<Shape*>::iterator it = _shapes->begin(); it != _shapes->end(); ++it) {
+    for(list<Shape*>::const_iterator it = _shapes.begin(); it != _shapes.end(); ++it) {
       info += (*it)->info() + ", ";
     }
     info.erase(info.end()-2, info.end());
@@ -43,14 +43,14 @@ public:
     return "Compound Shape";
   }
 
-  void addShape(Shape *shape) const {
-    _shapes->push_back(shape);
+  void addShape(Shape *shape) {
+    _shapes.push_back(shape);
   }
 
-  void deleteShapeById(string id) const {
-    for(list<Shape*>::iterator it = _shapes->begin(); it != _shapes->end(); ++it) {
+  void deleteShapeById(string id) {
+    for(list<Shape*>::iterator it = _shapes.begin(); it != _shapes.end(); ++it) {
       if((*it)->id() == id) {
-        _shapes->erase(it);
+        _shapes.erase(it);
         return;
       }
       try {
@@ -64,7 +64,7 @@ public:
   }
 
   Shape* getShapeById(string id) const {
-    for(list<Shape*>::iterator it = _shapes->begin(); it != _shapes->end(); ++it) {
+    for(list<Shape*>::const_iterator it = _shapes.begin(); it != _shapes.end(); ++it) {
         if((*it)->id() == id) {
           return *it;
         }
@@ -78,14 +78,14 @@ public:
   }
 
   Iterator * createIterator() const {
-    return new ShapeIterator<list<Shape*>::iterator>(_shapes->begin(), _shapes->end());
+    return new ShapeIterator<list<Shape*>::const_iterator>(_shapes.begin(), _shapes.end());
   }
 
 private:
-  list<Shape*>* _shapes;
+  list<Shape*> _shapes;
 
   void checkShapeIsValid() {
-    if(_shapes->empty()) {
+    if(_shapes.empty()) {
       throw string("This is not a compound shape!");
     }
   }

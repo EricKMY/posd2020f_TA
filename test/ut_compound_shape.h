@@ -24,9 +24,9 @@ protected:
         rectangle_2 = new Rectangle("2", 3, 4);
         triangle_3 = new Triangle("3", coordinates_1);
 
-        shapes->push_back(ellipse_1);
-        shapes->push_back(rectangle_2);
-        shapes->push_back(triangle_3);
+        shapes.push_back(ellipse_1);
+        shapes.push_back(rectangle_2);
+        shapes.push_back(triangle_3);
         compoundShape_7 = new CompoundShape("7", shapes);
 
         vector<TwoDimensionalCoordinate*> coordinates_2;
@@ -41,7 +41,7 @@ protected:
 
     virtual void TearDown() {}
 
-    list<Shape*> *shapes = new list<Shape*>();
+    list<Shape*> shapes = {};
     Shape* ellipse_1;
     Shape* rectangle_2;
     Shape* triangle_3;
@@ -57,18 +57,18 @@ TEST(CompoundShape, no_exception_for_constructor) {
     coordinates.push_back(new TwoDimensionalCoordinate(3, 0));
     coordinates.push_back(new TwoDimensionalCoordinate(0, 4));
 
-    list<Shape*> *shapes = new list<Shape*>();
+    list<Shape*> shapes = {};
 
-    shapes->push_back(new Ellipse("1", 4, 3));
-    shapes->push_back(new Rectangle("2", 3, 4));
-    shapes->push_back(new Triangle("3", coordinates));
+    shapes.push_back(new Ellipse("1", 4, 3));
+    shapes.push_back(new Rectangle("2", 3, 4));
+    shapes.push_back(new Triangle("3", coordinates));
 
     ASSERT_NO_THROW(CompoundShape("4", shapes));
 }
 
 TEST(CompoundShape, exception_for_constructor_with_empty_shapes) {
     try {
-        CompoundShape("7", new list<Shape*>());
+        CompoundShape("7", {});
         FAIL();
     }catch(string e) {
         ASSERT_EQ("This is not a compound shape!", e);
@@ -92,8 +92,8 @@ TEST_F(CompoundShapeTestSuite, color){
 }
 
 TEST_F(CompoundShapeTestSuite, add_shape) {
-    shapes->clear();
-    shapes->push_back(ellipse_1);
+    shapes.clear();
+    shapes.push_back(ellipse_1);
 
     compoundShape_7 = new CompoundShape("7", shapes);
     compoundShape_7->addShape(rectangle_2);
@@ -140,13 +140,13 @@ TEST_F(CompoundShapeTestSuite, exception_for_get_shape_by_id){
 }
 
 TEST_F(CompoundShapeTestSuite, get_shape_by_id_level_3_tree_structure) {
-    shapes = new list<Shape*>();
-    shapes->push_back(ellipse_4);
+    shapes = {};
+    shapes.push_back(ellipse_4);
     Shape* compoundShape_8 = new CompoundShape("8", shapes);
 
-    shapes = new list<Shape*>();
-    shapes->push_back(triangle_6);
-    shapes->push_back(rectangle_5);
+    shapes = {};
+    shapes.push_back(triangle_6);
+    shapes.push_back(rectangle_5);
     Shape* compoundShape_9 = new CompoundShape("9", shapes);
 
     compoundShape_8->addShape(compoundShape_9);
@@ -176,13 +176,13 @@ TEST_F(CompoundShapeTestSuite, get_shape_by_id_level_3_tree_structure) {
 }
 
 TEST_F(CompoundShapeTestSuite, delete_shape_by_id_level_3_tree_structure){
-    shapes = new list<Shape*>();
-    shapes->push_back(ellipse_4);
+    shapes = {};
+    shapes.push_back(ellipse_4);
     Shape* compoundShape_8 = new CompoundShape("8", shapes);
 
-    shapes = new list<Shape*>();
-    shapes->push_back(triangle_6);
-    shapes->push_back(rectangle_5);
+    shapes = {};
+    shapes.push_back(triangle_6);
+    shapes.push_back(rectangle_5);
     Shape* compoundShape_9 = new CompoundShape("9", shapes);
 
     compoundShape_8->addShape(compoundShape_9);
@@ -204,13 +204,13 @@ TEST_F(CompoundShapeTestSuite, delete_shape_by_id_level_3_tree_structure){
 }
 
 TEST_F(CompoundShapeTestSuite, exception_for_get_shape_by_id_tree_structure){
-    shapes = new list<Shape*>();
-    shapes->push_back(ellipse_4);
+    shapes = {};
+    shapes.push_back(ellipse_4);
     Shape* compoundShape_8 = new CompoundShape("8", shapes);
 
-    shapes = new list<Shape*>();
-    shapes->push_back(triangle_6);
-    shapes->push_back(rectangle_5);
+    shapes = {};
+    shapes.push_back(triangle_6);
+    shapes.push_back(rectangle_5);
     Shape* compoundShape_9 = new CompoundShape("9", shapes);
 
     compoundShape_8->addShape(compoundShape_9);
@@ -241,13 +241,13 @@ TEST_F(CompoundShapeTestSuite, exception_for_get_shape_by_id_tree_structure){
 }
 
 TEST_F(CompoundShapeTestSuite, exception_for_delete_shape_by_id_tree_structure){
-    shapes = new list<Shape*>();
-    shapes->push_back(ellipse_4);
+    shapes = {};
+    shapes.push_back(ellipse_4);
     Shape* compoundShape_8 = new CompoundShape("8", shapes);
 
-    shapes = new list<Shape*>();
-    shapes->push_back(triangle_6);
-    shapes->push_back(rectangle_5);
+    shapes.clear();
+    shapes.push_back(triangle_6);
+    shapes.push_back(rectangle_5);
     Shape* compoundShape_9 = new CompoundShape("9", shapes);
 
     compoundShape_8->addShape(compoundShape_9);
