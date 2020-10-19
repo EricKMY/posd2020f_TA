@@ -61,7 +61,7 @@ class AreaFilter {
 public:
     AreaFilter(double upperBound, double lowerBound): _upperBound(upperBound), _lowerBound(lowerBound) {}
 
-    bool operator() (Shape *shape) {
+    bool operator() (Shape *shape) const {
         return shape->area() <= _upperBound && shape->area() >= _lowerBound;
     }
 
@@ -74,7 +74,7 @@ class PerimeterFilter {
 public:
     PerimeterFilter(double upperBound, double lowerBound): _upperBound(upperBound), _lowerBound(lowerBound) {}
 
-    bool operator() (Shape *shape) {
+    bool operator() (Shape *shape) const {
         return shape->perimeter() <= _upperBound && shape->perimeter() >= _lowerBound;
     }
 
@@ -87,12 +87,8 @@ class ColorFilter {
 public:
     ColorFilter(string color): _color(color) {}
 
-    bool operator() (Shape *shape) {
-        try {
-            return shape->color() == _color;
-        }catch(string e) {}
-        
-        return false;
+    bool operator() (Shape *shape) const {
+        return shape->color() == _color;
     }
 
 private:
@@ -103,7 +99,7 @@ class TypeFilter {
 public:
     TypeFilter(string type):_type(type) {}
 
-    bool operator() (Shape *shape) {
+    bool operator() (Shape *shape) const {
         return shape->type() == _type;
     }
 
