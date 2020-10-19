@@ -25,11 +25,11 @@ public:
         ++_current;
     }
 
-    bool isDone() {
+    bool isDone() const {
       return _current == _end;
     }
 
-    Shape* currentItem() {
+    Shape* currentItem() const {
         if(isDone()){
             throw string("No current item!");
         }

@@ -76,8 +76,8 @@ class Iterator {
 public:
     virtual void first() = 0;
     virtual void next() = 0;
-    virtual bool isDone() = 0;
-    virtual Shape* currentItem() = 0;
+    virtual bool isDone() const = 0;
+    virtual Shape* currentItem() const = 0;
 };
 ```
 
@@ -93,11 +93,11 @@ public:
         // throw std::string "No child member!"
     }
     
-    bool isDone() {
+    bool isDone() const {
       // return true
     }
     
-    Shape* currentItem() {
+    Shape* currentItem() const {
         // throw std::string "No child member!"
     }
 };
@@ -120,11 +120,11 @@ public:
         // throw std::string "Moving past the end!" when iterator move over the range of the structure.
     }
     
-    bool isDone() {
+    bool isDone() const {
       // return true when iterator reach the end of the structure.
     }
     
-    Shape* currentItem() {
+    Shape* currentItem() const {
         // return the shape that iterator currently point at.
     }
 };

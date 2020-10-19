@@ -16,11 +16,11 @@ public:
         throw string("No child member!");
     }
 
-    bool isDone() {
+    bool isDone() const {
       return true;
     }
 
-    Shape* currentItem() {
+    Shape* currentItem() const {
         throw string("No child member!");
     }
 };
