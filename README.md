@@ -23,7 +23,7 @@
 
 ## **Requirement**  
 1. Add `type()` and `createIterator()` in `Shape`.  
-   this assigment you will practice to declare the `Shape` class in `shape.h` and implemtation in `shape.cpp`,  
+   For this assigment you will practice to declare the `Shape` class in `shape.h` and implemtation in `shape.cpp`,  
    and your `Shape` interface will be same as following.  
 ```
 class Shape {
