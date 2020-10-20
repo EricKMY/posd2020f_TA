@@ -2,6 +2,7 @@
 #define SHAPE_H
 
 #include <string>
+#include "visitor.h"
 
 class Iterator;
 
@@ -32,6 +33,8 @@ public:
         virtual Shape* getShapeById(string id) const;
         
         virtual Iterator* createIterator() const;
+        
+        virtual void accept(Visitor *visitor) = 0;
 
         virtual ~Shape();
 

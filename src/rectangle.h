@@ -34,6 +34,18 @@ public:
 		return "Rectangle";
 	}
 
+  void accept(Visitor* visitor) {
+		visitor->visit(this);
+	}
+
+  double length() {
+    return _length;
+  }
+
+  double width() {
+    return _width;
+  }
+
 private:
   double _length, _width;
 

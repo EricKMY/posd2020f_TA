@@ -50,6 +50,14 @@ public:
 		return "Triangle";
 	}
 
+  void accept(Visitor* visitor) {
+		visitor->visit(this);
+	}
+
+  vector<TwoDimensionalCoordinate*> coordinates() {
+    return _coordinates;
+  }
+
 private:
   vector<TwoDimensionalCoordinate*> _coordinates;
 

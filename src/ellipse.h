@@ -35,6 +35,18 @@ class Ellipse : public Shape {
 		return "Ellipse";
 	}
 
+	void accept(Visitor* visitor) {
+		visitor->visit(this);
+	}
+
+	double semiMajorAxes() {
+		return _semiMajorAxes;
+	}
+
+	double semiMinorAxes() {
+		return _semiMinorAxes;
+	}
+
 private:
 	double _semiMajorAxes, _semiMinorAxes;
 
