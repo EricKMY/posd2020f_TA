@@ -5,7 +5,6 @@
 #include "../src/ellipse.h"
 #include "../src/rectangle.h"
 #include "../src/triangle.h"
-#include "../src/move_visitor.h"
 
 using namespace std;
 
@@ -45,7 +44,3 @@ class MoveVisitorTestSuite: public testing::Test {
     Shape* triangle;
     Shape* compoundShape;
 };
-
-TEST_F(MoveVisitorTestSuite, temp) {
-
-}

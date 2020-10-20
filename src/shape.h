@@ -2,25 +2,20 @@
 #define SHAPE_H
 
 #include <string>
-#include <vector>
-#include "iterator.h"
-#include "null_iterator.h"
-#include "two_dimensional_coordinate.h"
-#include "visitor.h"
+
+class Iterator;
 
 using namespace std;
 
 class Shape{
 public:
-        Shape(string id, vector<TwoDimensionalCoordinate*> coordinates);
+        Shape(string id);
 
-        Shape(string id, vector<TwoDimensionalCoordinate*> coordinates, string color);
+        Shape(string id, string color);
 
-        virtual string id() const;
+        string id() const;
 
-        virtual vector<TwoDimensionalCoordinate*> coordinates() const;
-
-        virtual string color() const;
+        string color() const;
 
         virtual double area() const = 0;
 
@@ -30,24 +25,19 @@ public:
     
         virtual string type() const = 0;
 
-        // virtual void move(double x, double y) = 0;
-
-        virtual void accept(Visitor* v) = 0;
-
         virtual void addShape(Shape* shape);
 
         virtual void deleteShapeById(string id);
 
-        virtual Shape* getShapeById(string id);
+        virtual Shape* getShapeById(string id) const;
         
-        virtual Iterator* createIterator();
+        virtual Iterator* createIterator() const;
 
         virtual ~Shape();
 
 private:
         string _id;
         string _color;
-        vector<TwoDimensionalCoordinate*> _coordinates;
 };
 
 #endif

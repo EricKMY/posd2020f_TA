@@ -2,11 +2,14 @@
 #define UTILITY_H
 
 #include <string>
+#include <deque>
+#include "iterator.h"
+#include "shape.h"
 
 using namespace std;
 
 Shape* getShapeById(Shape* shape, string id) {
-    Iterator *it = shape->createIterator();
+    Iterator* it = shape->createIterator();
 
     try {
         it->first();
@@ -28,9 +31,9 @@ Shape* getShapeById(Shape* shape, string id) {
 }
 
 template <class Filter>
-vector<Shape*> filterShape(Shape *shape, Filter filter) {
-    vector<Shape*> results = {};
-    Iterator *it = shape->createIterator();
+deque<Shape*> filterShape(Shape *shape, Filter filter) {
+    deque<Shape*> results = {};
+    Iterator* it = shape->createIterator();
 
     try {
         it->first();
@@ -39,7 +42,7 @@ vector<Shape*> filterShape(Shape *shape, Filter filter) {
     }
 
     while(!it->isDone()) {
-        vector<Shape*> shapes = {};
+        deque<Shape*> shapes = {};
         if(filter(it->currentItem())) {
             results.push_back(it->currentItem());
         }
@@ -58,7 +61,7 @@ class AreaFilter {
 public:
     AreaFilter(double upperBound, double lowerBound): _upperBound(upperBound), _lowerBound(lowerBound) {}
 
-    bool operator() (Shape *shape) {
+    bool operator() (Shape *shape) const {
         return shape->area() <= _upperBound && shape->area() >= _lowerBound;
     }
 
@@ -71,7 +74,7 @@ class PerimeterFilter {
 public:
     PerimeterFilter(double upperBound, double lowerBound): _upperBound(upperBound), _lowerBound(lowerBound) {}
 
-    bool operator() (Shape *shape) {
+    bool operator() (Shape *shape) const {
         return shape->perimeter() <= _upperBound && shape->perimeter() >= _lowerBound;
     }
 
@@ -84,12 +87,8 @@ class ColorFilter {
 public:
     ColorFilter(string color): _color(color) {}
 
-    bool operator() (Shape *shape) {
-        try {
-            return shape->color() == _color;
-        }catch(string e) {}
-        
-        return false;
+    bool operator() (Shape *shape) const {
+        return shape->color() == _color;
     }
 
 private:
@@ -100,7 +99,7 @@ class TypeFilter {
 public:
     TypeFilter(string type):_type(type) {}
 
-    bool operator() (Shape *shape) {
+    bool operator() (Shape *shape) const {
         return shape->type() == _type;
     }
 

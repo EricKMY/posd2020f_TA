@@ -1,5 +1,5 @@
 .PHONY: clean  
-SRC = src/shape.h src/ellipse.h src/rectangle.h src/triangle.h src/two_dimensional_coordinate.h src/compound_shape.h src/utility.h src/iterator.h src/null_iterator.h
+SRC = src/shape.h src/ellipse.h src/rectangle.h src/triangle.h src/two_dimensional_coordinate.h src/compound_shape.h src/utility.h src/iterator.h src/null_iterator.h src/shape_iterator.h
 TEST = test/ut_ellipse.h test/ut_rectangle.h test/ut_triangle.h test/ut_compound_shape.h test/ut_iterator.h test/ut_utility.h
 
 all:directories bin/ut_main

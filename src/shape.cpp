@@ -1,17 +1,14 @@
+#include "null_iterator.h"
 #include "shape.h"
 
 using namespace std;
 
-Shape::Shape(string id , vector<TwoDimensionalCoordinate*> coordinates): _id(id), _coordinates(coordinates), _color("white") {}
+Shape::Shape(string id): _id(id), _color("white") {}
 
-Shape::Shape(string id, vector<TwoDimensionalCoordinate*> coordinates, string color): _id(id), _coordinates(coordinates), _color(color) {}
+Shape::Shape(string id, string color): _id(id), _color(color) {}
 
 string Shape::id() const {
     return _id;
-}
-
-vector<TwoDimensionalCoordinate*>  Shape::coordinates() const {
-    return _coordinates;
 }
 
 string Shape::color() const {
@@ -26,11 +23,11 @@ void Shape::deleteShapeById(string id) {
     throw string("Only compound shape can delete shape!");
 }
 
-Shape* Shape::getShapeById(string id) {
+Shape* Shape::getShapeById(string id) const {
     throw string("Only compound shape can get shape!");
 }
 
-Iterator* Shape::createIterator() {
+Iterator* Shape::createIterator() const {
     return new NullIterator();
 }
 

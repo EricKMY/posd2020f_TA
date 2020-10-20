@@ -1,60 +1,22 @@
-#ifndef COMPLEX_SHAPE_H
-#define COMPLEX_SHAPE_H
+#ifndef COMPOUND_SHAPE_H
+#define COMPOUND_SHAPE_H
 
 #include <string>
-#include <vector>
+#include <list>
 #include "shape.h"
+#include "shape_iterator.h"
 
 using namespace std;
 
 class CompoundShape : public Shape {
-  class CompoundShapeIterator : public Iterator {
-  public:
-    CompoundShapeIterator(CompoundShape *s): _s(s) {}
-
-    void first() {
-      _current = _s->_shapes->begin();
-    }
-
-    Shape * currentItem() {
-      if(isDone()){
-        throw std::string("No current item!");
-      }else{
-        return *_current;
-      }
-    }
-
-    void next() {
-      if(isDone()){
-        throw std::string("Moving past the end!");
-      }else{
-        ++_current;
-      }
-    }
-
-    bool isDone() {
-      return _current == _s->_shapes->end();
-    }
-
-  private:
-    CompoundShape *_s;
-    vector<Shape*>::iterator _current;
-  };
-
 public: 
-  CompoundShape(string id, vector<Shape*>* shapes): Shape(id, vector<TwoDimensionalCoordinate*>(), "transparent"), _shapes(shapes) {
+  CompoundShape(string id, list<Shape*> shapes): Shape(id, "transparent"), _shapes(shapes) {
     checkShapeIsValid();
-  }
-
-  void checkShapeIsValid() {
-    if(_shapes->empty()) {
-      throw string("This is not a compound shape!");
-    }
   }
 
   double area() const {
     double area = 0;
-    for(vector<Shape*>::iterator it = _shapes->begin(); it != _shapes->end(); ++it) {
+    for(list<Shape*>::const_iterator it = _shapes.begin(); it != _shapes.end(); ++it) {
       area += (*it)->area();
     }
     return area;
@@ -62,7 +24,7 @@ public:
 
   double perimeter() const {
     double perimeter = 0;
-    for(vector<Shape*>::iterator it = _shapes->begin(); it != _shapes->end(); ++it) {
+    for(list<Shape*>::const_iterator it = _shapes.begin(); it != _shapes.end(); ++it) {
       perimeter += (*it)->perimeter();
     }
     return perimeter;
@@ -70,7 +32,7 @@ public:
     
   string info() const {
     string info = "Compound Shape {";
-    for(vector<Shape*>::iterator it = _shapes->begin(); it != _shapes->end(); ++it) {
+    for(list<Shape*>::const_iterator it = _shapes.begin(); it != _shapes.end(); ++it) {
       info += (*it)->info() + ", ";
     }
     info.erase(info.end()-2, info.end());
@@ -82,45 +44,51 @@ public:
   }
 
   void addShape(Shape *shape) {
-    _shapes->push_back(shape);
+    _shapes.push_back(shape);
   }
 
   void deleteShapeById(string id) {
-    for(vector<Shape*>::iterator it = _shapes->begin(); it != _shapes->end(); ++it) {
+    for(list<Shape*>::iterator it = _shapes.begin(); it != _shapes.end(); ++it) {
       if((*it)->id() == id) {
-        _shapes->erase(it);
+        _shapes.erase(it);
         return;
       }
       try {
         (*it)->deleteShapeById(id);
         return;
-      }catch(string e) {}
+      }catch(string e) {
+        continue;
+      }
     }
     throw string("Expected delete shape but shape not found");
   }
 
-  Shape* getShapeById(string id) {
-    for(vector<Shape*>::iterator it = _shapes->begin(); it != _shapes->end(); ++it) {
+  Shape* getShapeById(string id) const {
+    for(list<Shape*>::const_iterator it = _shapes.begin(); it != _shapes.end(); ++it) {
         if((*it)->id() == id) {
           return *it;
         }
         try {
           return (*it)->getShapeById(id);
-        }catch(string e) {}
+        }catch(string e) {
+          continue;
+        }
     }
     throw string("Expected get shape but shape not found");
   }
 
-  Iterator * createIterator() {
-    return new CompoundShapeIterator(this);
+  Iterator * createIterator() const {
+    return new ShapeIterator<list<Shape*>::const_iterator>(_shapes.begin(), _shapes.end());
   }
 
-  void accept(Visitor* visitor) {
-		visitor->visit(this);
-	}
-
 private:
-  vector<Shape*>* _shapes;
+  list<Shape*> _shapes;
+
+  void checkShapeIsValid() {
+    if(_shapes.empty()) {
+      throw string("This is not a compound shape!");
+    }
+  }
 };
 
 #endif

@@ -22,17 +22,13 @@ protected:
     vector<TwoDimensionalCoordinate*> coordinates;
 };
 
-TEST(Triangle, no_exception_constructor_with_default_color){
+TEST(Triangle, no_exception_constructor){
     vector<TwoDimensionalCoordinate*> coordinates;
     coordinates.push_back(new TwoDimensionalCoordinate(0, 0));
     coordinates.push_back(new TwoDimensionalCoordinate(0, -3));
     coordinates.push_back(new TwoDimensionalCoordinate(-4, 0));
 
     ASSERT_NO_THROW(Triangle("1", coordinates));
-}
-
-TEST_F(TriangleTestSuite, no_exception_constructor_with_custom_color){
-    ASSERT_NO_THROW(Triangle("1",coordinates, "red"));
 }
 
 TEST_F(TriangleTestSuite, exception_for_coordinate_less_than_three){
@@ -55,21 +51,6 @@ TEST_F(TriangleTestSuite, exception_for_coordinate_more_than_three){
     }
 }
 
-TEST_F(TriangleTestSuite, id){
-    ASSERT_EQ("1", triangle->id());
-}
-
-TEST_F(TriangleTestSuite, coordinates){
-    EXPECT_EQ(0, triangle->coordinates()[0]->getX());
-    EXPECT_EQ(0, triangle->coordinates()[0]->getY());
-
-    EXPECT_EQ(0, triangle->coordinates()[1]->getX());
-    EXPECT_EQ(-3, triangle->coordinates()[1]->getY());
-
-    EXPECT_EQ(-4, triangle->coordinates()[2]->getX());
-    EXPECT_EQ(0, triangle->coordinates()[2]->getY());
-}
-
 TEST_F(TriangleTestSuite, default_color){
     ASSERT_EQ("white", triangle->color());
 }
@@ -77,6 +58,10 @@ TEST_F(TriangleTestSuite, default_color){
 TEST_F(TriangleTestSuite, custom_color){
     triangle = new Triangle("1",coordinates, "red");
     ASSERT_EQ("red", triangle->color());
+}
+
+TEST_F(TriangleTestSuite, id){
+    ASSERT_EQ("1", triangle->id());
 }
 
 TEST_F(TriangleTestSuite, area){

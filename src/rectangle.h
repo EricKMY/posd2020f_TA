@@ -2,48 +2,31 @@
 #define RECTANGLE_H
 
 #include <string>
-#include <vector>
-#include <math.h>
-#include "shape.h"
+#include "./shape.h"
 
 using namespace std;
 
 class Rectangle : public Shape {
 public: 
-  Rectangle(string id, vector<TwoDimensionalCoordinate*> coordinates): Shape(id, coordinates) {
+  Rectangle(string id, double length, double width): Shape(id), _length(length), _width(width) {
     checkShapeIsValid();
   }
 
-  Rectangle(string id, vector<TwoDimensionalCoordinate*> coordinates, string color): Shape(id, coordinates, color) {
+  Rectangle(string id, double length, double width, string color): Shape(id, color), _length(length), _width(width) {
     checkShapeIsValid();
   }
 
   double area() const {
-    return fabs(coordinates()[0]->getX() * coordinates()[1]->getY()
-              + coordinates()[1]->getX() * coordinates()[2]->getY()
-              + coordinates()[2]->getX() * coordinates()[3]->getY()
-              + coordinates()[3]->getX() * coordinates()[0]->getY()
-              - coordinates()[0]->getX() * coordinates()[3]->getY()
-              - coordinates()[1]->getX() * coordinates()[0]->getY() 
-              - coordinates()[2]->getX() * coordinates()[1]->getY()
-              - coordinates()[3]->getX() * coordinates()[2]->getY()) / 2;
+    return _length * _width;
   }
 
   double perimeter() const {
-    return  sqrt(pow(coordinates()[0]->getX() - coordinates()[1]->getX(), 2) + pow(coordinates()[0]->getY() - coordinates()[1]->getY(), 2))
-          + sqrt(pow(coordinates()[1]->getX() - coordinates()[2]->getX(), 2) + pow(coordinates()[1]->getY() - coordinates()[2]->getY(), 2)) 
-          + sqrt(pow(coordinates()[2]->getX() - coordinates()[3]->getX(), 2) + pow(coordinates()[2]->getY() - coordinates()[3]->getY(), 2))
-          + sqrt(pow(coordinates()[3]->getX() - coordinates()[0]->getX(), 2) + pow(coordinates()[3]->getY() - coordinates()[0]->getY(), 2));
-
+    return (_length + _width) * 2;
   }
   
   string info() const {
     char info[100];
-    sprintf(info, "Rectangle ([%.3f, %.3f], [%.3f, %.3f], [%.3f, %.3f], [%.3f, %.3f])",
-                                      coordinates()[0]->getX(), coordinates()[0]->getY(),
-                                      coordinates()[1]->getX(), coordinates()[1]->getY(),
-                                      coordinates()[2]->getX(), coordinates()[2]->getY(),
-                                      coordinates()[3]->getX(), coordinates()[3]->getY());
+    sprintf(info, "Rectangle (%.3f, %.3f)", _length, _width);
     return info;
   }
 
@@ -51,13 +34,11 @@ public:
 		return "Rectangle";
 	}
 
-  void accept(Visitor* visitor) {
-		visitor->visit(this);
-	}
-
 private:
+  double _length, _width;
+
   void checkShapeIsValid() {
-    if(coordinates().size() != 4) {
+    if(_length <= 0 || _width <= 0) {
       throw string("This is not a rectangle!");
     }
   }
