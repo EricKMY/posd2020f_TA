@@ -22,8 +22,9 @@
 [Const vs Regular iterators](https://www.geeksforgeeks.org/const-vs-regular-iterators-in-c-with-examples/)  
 
 ## **Requirement**  
-1. Add `type()` and `createIterator()` in `Shape`, `shape.h` should remain as pure interface, add the implementations in `shape.cpp`.  
-   Your `Shape` interface should be same as following.  
+1. Add `type()` and `createIterator()` in `Shape`.  
+   this assigment you will practice to declare the `Shape` class in `shape.h` and implemtation in `shape.cpp`,  
+   and your `Shape` interface will be same as following.  
 ```
 class Shape {
 public:
@@ -43,9 +44,9 @@ public:
     
         virtual std::string type() const = 0;
 
-        virtual void addShape(Shape* shape) ;
+        virtual void addShape(Shape* shape);
 
-        virtual void deleteShapeById(std::string id) ;
+        virtual void deleteShapeById(std::string id);
 
         virtual Shape* getShapeById(std::string id) const;
         
@@ -70,13 +71,16 @@ class CompoundShape {
 }
 ```
 
-3. Implement `Iterator` class interface in `iterator.h`.  
+3. Add `Iterator` class interface in `iterator.h`.  
 ```
 class Iterator {
 public:
     virtual void first() = 0;
+    
     virtual void next() = 0;
+    
     virtual bool isDone() const = 0;
+    
     virtual Shape* currentItem() const = 0;
 };
 ```
@@ -94,7 +98,7 @@ public:
     }
     
     bool isDone() const {
-      // return true
+        // return true
     }
     
     Shape* currentItem() const {
@@ -121,7 +125,7 @@ public:
     }
     
     bool isDone() const {
-      // return true when iterator reach the end of the structure.
+        // return true when iterator reach the end of the structure.
     }
     
     Shape* currentItem() const {
@@ -168,18 +172,22 @@ std::deque<Shape*> filterShape(Shape *shape, Filter filter) {
 
 class AreaFilter {
     AreaFilter(double upperBound, double lowerBound) {}
+    bool operator() (Shape* shape) const {}
 };
 
 class PerimeterFilter {
     PerimeterFilter(double upperBound, double lowerBound) {}
+    bool operator() (Shape* shape) const {}
 };
 
 class ColorFilter {
     ColorFilter(std::string color) {}
+    bool operator() (Shape* shape) const {}
 };
 
 class TypeFilter {
     TypeFilter(std::string type) {}
+    bool operator() (Shape* shape) const {}
 };
 ```
 * Example usage of `filterShape()` with the filter class:  
