@@ -6,11 +6,11 @@
 
 using namespace std;
 
-template<class RandomAccessIterator>
+template<class InputIterator>
 class ShapeIterator : public Iterator {
 public:
 
-    ShapeIterator(RandomAccessIterator begin, RandomAccessIterator end): _begin(begin), _end(end) {
+    ShapeIterator(InputIterator begin, InputIterator end): _begin(begin), _end(end) {
         first();
     }
 
@@ -37,9 +37,9 @@ public:
     }
 
 private:
-    RandomAccessIterator _begin;
-    RandomAccessIterator _end;
-    RandomAccessIterator _current;
+    InputIterator _begin;
+    InputIterator _end;
+    InputIterator _current;
 };
 
 #endif

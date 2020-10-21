@@ -109,9 +109,10 @@ public:
 
 5. Implement `ShapeIterator` class in `shape_iterator.h` and the corresponding unit test in `ut_iterator.h`.  
 ```
+template<class InputIterator>
 class ShapeIterator : public Iterator {
 public:
-    ShapeIterator(RandomAccessIterator begin, RandomAccessIterator end) {
+    ShapeIterator(InputIterator begin, InputIterator end) {
         // initialize iterator.
     }
     
