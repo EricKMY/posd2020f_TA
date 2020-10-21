@@ -112,7 +112,7 @@ public:
 template<class ForwardIterator>
 class ShapeIterator : public Iterator {
 public:
-    ShapeIterator(ForwardIterator begin, ForwardIteratorgi end) {
+    ShapeIterator(ForwardIterator begin, ForwardIterator end) {
         // initialize iterator.
     }
     
