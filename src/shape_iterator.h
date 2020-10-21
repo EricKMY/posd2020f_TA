@@ -6,11 +6,11 @@
 
 using namespace std;
 
-template<class InputIterator>
+template<class ForwardIterator>
 class ShapeIterator : public Iterator {
 public:
 
-    ShapeIterator(InputIterator begin, InputIterator end): _begin(begin), _end(end) {
+    ShapeIterator(ForwardIterator begin, ForwardIterator end): _begin(begin), _end(end) {
         first();
     }
 
@@ -37,9 +37,9 @@ public:
     }
 
 private:
-    InputIterator _begin;
-    InputIterator _end;
-    InputIterator _current;
+    ForwardIterator _begin;
+    ForwardIterator _end;
+    ForwardIterator _current;
 };
 
 #endif
