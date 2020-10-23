@@ -198,7 +198,7 @@ TEST_F(UtlilityTestSuite, compound_shape_filter_shape_by_color) {
 
     deque<Shape*> results = filterShape(compoundShape_7, ColorFilter("red"));
 
-    EXPECT_EQ(2, results.size());
+    ASSERT_EQ(2, results.size());
 
     EXPECT_EQ("1", results[0]->id());
     EXPECT_EQ("Ellipse (4.200, 3.700)", results[0]->info());
