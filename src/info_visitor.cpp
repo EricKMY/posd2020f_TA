@@ -42,4 +42,4 @@ void InfoVisitor::visit(CompoundShape* compoundShape){
     _info = info + "}";
 }
 
-std::string InfoVisitor::info() { return _info; }
+string InfoVisitor::result() const { return _info; }

@@ -18,16 +18,16 @@ protected:
     Shape* ellipse;
 };
 
-TEST(Ellipse, constructor_with_default_color){
-    ASSERT_NO_THROW(Ellipse("1", 1, 1));
+TEST(EllipseTest, constructor_with_default_color){
+    ASSERT_NO_THROW(Ellipse("1", 4.2, 3.7));
 }
 
-TEST_F(EllipseTestSuite, constructor_with_custom_color){
+TEST(EllipseTest, constructor_with_custom_color){
     ASSERT_NO_THROW(Ellipse("1", 1, 1, "red"));
 }
 
 
-TEST_F(EllipseTestSuite, exception_for_semi_major_axis_is_zero){
+TEST(EllipseTest, exception_for_semi_major_axis_is_zero){
     try {
         Ellipse("1", 0, 1);
         FAIL();
@@ -36,7 +36,7 @@ TEST_F(EllipseTestSuite, exception_for_semi_major_axis_is_zero){
     }
 }
 
-TEST_F(EllipseTestSuite, exception_for_semi_minor_axis_is_zero){
+TEST(EllipseTest, exception_for_semi_minor_axis_is_zero){
     try {
         Ellipse("1", 1, 0);
         FAIL();
@@ -45,7 +45,7 @@ TEST_F(EllipseTestSuite, exception_for_semi_minor_axis_is_zero){
     }
 }
 
-TEST_F(EllipseTestSuite, exception_for_semi_major_axis_less_than_zero){
+TEST(EllipseTest, exception_for_semi_major_axis_less_than_zero){
     try {
         Ellipse("1", -1, 1);
         FAIL();
@@ -54,7 +54,7 @@ TEST_F(EllipseTestSuite, exception_for_semi_major_axis_less_than_zero){
     }
 }
 
-TEST_F(EllipseTestSuite, exception_for_semi_minor_axis_less_than_zero){
+TEST(EllipseTest, exception_for_semi_minor_axis_less_than_zero){
     try {
         Ellipse("1", 1, -1);
         FAIL();

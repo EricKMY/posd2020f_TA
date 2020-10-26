@@ -58,25 +58,25 @@ protected:
 TEST_F(VisitorTestSuite, ellipse_area) {
     AreaVisitor *v = new AreaVisitor();
     ellipse_1->accept(v);
-    ASSERT_NEAR(37.699, v->area(), ABS);
+    ASSERT_EQ("37.699", v->result());
 }
 
 TEST_F(VisitorTestSuite, rectangle_area) {
     AreaVisitor *v = new AreaVisitor();
     rectangle_2->accept(v);
-    ASSERT_NEAR(12.000, v->area(), ABS);
+    ASSERT_EQ("12.000", v->result());
 }
 
 TEST_F(VisitorTestSuite, triangle_area) {
     AreaVisitor *v = new AreaVisitor();
     triangle_3->accept(v);
-    ASSERT_NEAR(6.000, v->area(), ABS);
+    ASSERT_EQ("6.000", v->result());
 }
 
 TEST_F(VisitorTestSuite, compound_shape_area) {
     AreaVisitor *v = new AreaVisitor();
     compoundShape_7->accept(v);
-    ASSERT_NEAR(55.699, v->area(), ABS);
+    ASSERT_EQ("55.699", v->result());
 }
 
 TEST_F(VisitorTestSuite, compound_shape_area_level_3_tree_structure) {
@@ -94,31 +94,31 @@ TEST_F(VisitorTestSuite, compound_shape_area_level_3_tree_structure) {
 
     AreaVisitor *v = new AreaVisitor();
     compoundShape_7->accept(v);
-    ASSERT_NEAR(126.059, v->area(), ABS);
+    ASSERT_EQ("126.059", v->result());
 }
 
 TEST_F(VisitorTestSuite, ellipse_info) {
     InfoVisitor *v = new InfoVisitor();
     ellipse_1->accept(v);
-    ASSERT_EQ("Ellipse (4.000, 3.000)", v->info());
+    ASSERT_EQ("Ellipse (4.000, 3.000)", v->result());
 }
 
 TEST_F(VisitorTestSuite, rectangle_info) {
     InfoVisitor *v = new InfoVisitor();
     rectangle_2->accept(v);
-    ASSERT_EQ("Rectangle (3.000, 4.000)", v->info());
+    ASSERT_EQ("Rectangle (3.000, 4.000)", v->result());
 }
 
 TEST_F(VisitorTestSuite, triangle_info) {
     InfoVisitor *v = new InfoVisitor();
     triangle_3->accept(v);
-    ASSERT_EQ("Triangle ([0.000, 0.000], [3.000, 0.000], [0.000, 4.000])", v->info());
+    ASSERT_EQ("Triangle ([0.000, 0.000], [3.000, 0.000], [0.000, 4.000])", v->result());
 }
 
 TEST_F(VisitorTestSuite, compound_shape_info) {
     InfoVisitor *v = new InfoVisitor();
     compoundShape_7->accept(v);
-    ASSERT_EQ("Compound Shape {Ellipse (4.000, 3.000), Rectangle (3.000, 4.000), Triangle ([0.000, 0.000], [3.000, 0.000], [0.000, 4.000])}", v->info());
+    ASSERT_EQ("Compound Shape {Ellipse (4.000, 3.000), Rectangle (3.000, 4.000), Triangle ([0.000, 0.000], [3.000, 0.000], [0.000, 4.000])}", v->result());
 }
 
 
@@ -137,5 +137,5 @@ TEST_F(VisitorTestSuite, compound_shape_info_level_3_tree_structure) {
 
     InfoVisitor *v = new InfoVisitor();
     compoundShape_7->accept(v);
-    ASSERT_EQ("Compound Shape {Ellipse (4.000, 3.000), Rectangle (3.000, 4.000), Triangle ([0.000, 0.000], [3.000, 0.000], [0.000, 4.000]), Compound Shape {Ellipse (4.200, 3.700), Compound Shape {Triangle ([0.000, 0.000], [3.000, 0.000], [0.000, 4.000]), Rectangle (3.700, 4.200)}}}", v->info());
+    ASSERT_EQ("Compound Shape {Ellipse (4.000, 3.000), Rectangle (3.000, 4.000), Triangle ([0.000, 0.000], [3.000, 0.000], [0.000, 4.000]), Compound Shape {Ellipse (4.200, 3.700), Compound Shape {Triangle ([0.000, 0.000], [3.000, 0.000], [0.000, 4.000]), Rectangle (3.700, 4.200)}}}", v->result());
 }

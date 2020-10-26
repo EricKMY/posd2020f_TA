@@ -4,13 +4,13 @@
 #include "triangle.h"
 #include "compound_shape.h"
 
-AreaVisitor::AreaVisitor():_area(0) {}
+AreaVisitor::AreaVisitor(): _area(0) {}
 
-void AreaVisitor::visit(Ellipse* ellipse){
+void AreaVisitor::visit(Ellipse* ellipse) {
     _area = ellipse->semiMajorAxes() * ellipse->semiMinorAxes() * M_PI;
 }
 
-void AreaVisitor::visit(Triangle* triangle){
+void AreaVisitor::visit(Triangle* triangle) {
     _area = fabs(
             triangle->coordinates()[0]->getX() * triangle->coordinates()[1]->getY()
               + triangle->coordinates()[1]->getX() * triangle->coordinates()[2]->getY() 
@@ -21,11 +21,11 @@ void AreaVisitor::visit(Triangle* triangle){
     
 }
 
-void AreaVisitor::visit(Rectangle* rectangle){
+void AreaVisitor::visit(Rectangle* rectangle) {
     _area = rectangle->length() * rectangle->width();
 }
 
-void AreaVisitor::visit(CompoundShape* compoundShape){
+void AreaVisitor::visit(CompoundShape* compoundShape) {
     double area = 0;
     Iterator *it = compoundShape->createIterator();
 
@@ -37,4 +37,8 @@ void AreaVisitor::visit(CompoundShape* compoundShape){
     _area = area;
 }
 
-double AreaVisitor::area() { return _area; }
+string AreaVisitor::result() const {
+    char result[100];
+    sprintf(result, "%.3f", _area);
+    return result;
+}
