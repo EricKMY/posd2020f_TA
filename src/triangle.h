@@ -4,9 +4,8 @@
 #include <math.h>
 #include <vector>
 #include <string>
-#include <stdio.h>
 #include "shape.h"
-#include "../src/two_dimensional_coordinate.h"
+#include "two_dimensional_coordinate.h"
 
 using namespace std;
 
@@ -50,11 +49,11 @@ public:
 		return "Triangle";
 	}
 
-  void accept(Visitor* visitor) {
+  void accept(Visitor* visitor) const {
 		visitor->visit(this);
 	}
 
-  vector<TwoDimensionalCoordinate*> coordinates() {
+  vector<TwoDimensionalCoordinate*> coordinates() const {
     return _coordinates;
   }
 

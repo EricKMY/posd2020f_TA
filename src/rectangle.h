@@ -1,10 +1,7 @@
 #ifndef RECTANGLE_H
 #define RECTANGLE_H
 
-#include <string>
-#include "./shape.h"
-
-using namespace std;
+#include "shape.h"
 
 class Rectangle : public Shape {
 public: 
@@ -34,22 +31,22 @@ public:
 		return "Rectangle";
 	}
 
-  void accept(Visitor* visitor) {
+  void accept(Visitor* visitor) const {
 		visitor->visit(this);
 	}
 
-  double length() {
+  double length() const {
     return _length;
   }
 
-  double width() {
+  double width() const {
     return _width;
   }
 
 private:
   double _length, _width;
 
-  void checkShapeIsValid() {
+  void checkShapeIsValid() const {
     if(_length <= 0 || _width <= 0) {
       throw string("This is not a rectangle!");
     }

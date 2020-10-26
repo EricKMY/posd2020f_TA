@@ -81,7 +81,7 @@ public:
     return new ShapeIterator<list<Shape*>::const_iterator>(_shapes.begin(), _shapes.end());
   }
 
-  void accept(Visitor* visitor) {
+  void accept(Visitor* visitor) const {
     visitor->visit(this);
   }
 

@@ -2,11 +2,7 @@
 #define ELLIPSE_H
 
 #include <math.h>
-#include <string>
-#include <stdio.h>
 #include "shape.h"
-
-using namespace std;
 
 class Ellipse : public Shape {
 	public:
@@ -36,22 +32,22 @@ class Ellipse : public Shape {
 		return "Ellipse";
 	}
 
-	void accept(Visitor* visitor) {
+	void accept(Visitor* visitor) const {
 		visitor->visit(this);
 	}
 
-	double semiMajorAxes() {
+	double semiMajorAxes() const {
 		return _semiMajorAxes;
 	}
 
-	double semiMinorAxes() {
+	double semiMinorAxes() const {
 		return _semiMinorAxes;
 	}
 
 private:
 	double _semiMajorAxes, _semiMinorAxes;
 
-	void checkShapeIsValid() {
+	void checkShapeIsValid() const {
 		if(_semiMajorAxes <= 0 || _semiMinorAxes <= 0 || _semiMajorAxes < _semiMinorAxes) {
 			throw string("This is not an ellipse!");
 		}

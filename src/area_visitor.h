@@ -7,15 +7,16 @@ class AreaVisitor : public Visitor {
 public:
     AreaVisitor();
 
-    void visit(Ellipse* ellipse);
+    void visit(const Ellipse* ellipse);
 
-    void visit(Triangle* triangle);
+    void visit(const Triangle* triangle);
 
-    void visit(Rectangle* rectangle);
+    void visit(const Rectangle* rectangle);
 
-    void visit(CompoundShape* compoundShape);
+    void visit(const CompoundShape* compoundShape);
 
     string result() const;
+
 private:
     double _area;
 };

@@ -6,13 +6,13 @@
 
 AreaVisitor::AreaVisitor(): _area(0) {}
 
-void AreaVisitor::visit(Ellipse* ellipse) {
+void AreaVisitor::visit(const Ellipse* ellipse) {
     _area = ellipse->semiMajorAxes() * ellipse->semiMinorAxes() * M_PI;
 }
 
-void AreaVisitor::visit(Triangle* triangle) {
+void AreaVisitor::visit(const Triangle* triangle) {
     _area = fabs(
-            triangle->coordinates()[0]->getX() * triangle->coordinates()[1]->getY()
+                triangle->coordinates()[0]->getX() * triangle->coordinates()[1]->getY()
               + triangle->coordinates()[1]->getX() * triangle->coordinates()[2]->getY() 
               + triangle->coordinates()[2]->getX() * triangle->coordinates()[0]->getY() 
               - triangle->coordinates()[0]->getX() * triangle->coordinates()[2]->getY() 
@@ -21,11 +21,11 @@ void AreaVisitor::visit(Triangle* triangle) {
     
 }
 
-void AreaVisitor::visit(Rectangle* rectangle) {
+void AreaVisitor::visit(const Rectangle* rectangle) {
     _area = rectangle->length() * rectangle->width();
 }
 
-void AreaVisitor::visit(CompoundShape* compoundShape) {
+void AreaVisitor::visit(const CompoundShape* compoundShape) {
     double area = 0;
     Iterator *it = compoundShape->createIterator();
 
