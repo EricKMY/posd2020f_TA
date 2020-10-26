@@ -23,7 +23,7 @@
 
 ## **Requirement**  
 1. Add `type()` and `createIterator()` in `Shape`.  
-   this assigment you will practice to declare the `Shape` class in `shape.h` and implemtation in `shape.cpp`,  
+   For this assigment you will practice to declare the `Shape` class in `shape.h` and implemtation in `shape.cpp`,  
    and your `Shape` interface will be same as following.  
 ```
 class Shape {
@@ -109,9 +109,10 @@ public:
 
 5. Implement `ShapeIterator` class in `shape_iterator.h` and the corresponding unit test in `ut_iterator.h`.  
 ```
+template<class ForwardIterator>
 class ShapeIterator : public Iterator {
 public:
-    ShapeIterator(RandomAccessIterator begin, RandomAccessIterator end) {
+    ShapeIterator(ForwardIterator begin, ForwardIterator end) {
         // initialize iterator.
     }
     

@@ -1,5 +1,6 @@
 #ifndef ELLIPSE_H
 #define ELLIPSE_H
+
 #include <math.h>
 #include <string>
 #include <stdio.h>
