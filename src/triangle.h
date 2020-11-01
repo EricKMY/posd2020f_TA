@@ -49,7 +49,7 @@ public:
 		return "Triangle";
 	}
 
-  void accept(Visitor* visitor) const {
+  void accept(Visitor* visitor) {
 		visitor->visit(this);
 	}
 

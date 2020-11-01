@@ -32,7 +32,7 @@ class Ellipse : public Shape {
 		return "Ellipse";
 	}
 
-	void accept(Visitor* visitor) const {
+	void accept(Visitor* visitor) {
 		visitor->visit(this);
 	}
 

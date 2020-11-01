@@ -12,15 +12,13 @@ using namespace std;
 
 class Visitor {
 public:
-    virtual void visit(const Ellipse* ellipse) = 0;
+    virtual void visit(Ellipse* ellipse) = 0;
 
-    virtual void visit(const Triangle* triangle) = 0;
+    virtual void visit(Triangle* triangle) = 0;
 
-    virtual void visit(const Rectangle* rectangle) = 0;
+    virtual void visit(Rectangle* rectangle) = 0;
 
-    virtual void visit(const CompoundShape* compoundShape) = 0;
-
-    virtual string result() const = 0;
+    virtual void visit(CompoundShape* compoundShape) = 0;
 };
 
 #endif

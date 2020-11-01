@@ -140,7 +140,7 @@ public:
 Shape* getShapeById(Shape* shape, std::string id) {
     // access the shape with iterator pattern.
     // DO NOT use Type Checking or Dynamic Type that would violate OCP to implement the function.
-    // return a shape under the input shape tree sturctur that matches the id.
+    // return a shape under the input shape tree sturcture that matches the id.
     // throw std::string "Only compound shape can get shape!" when the input shape is not iterable.
     // throw std::string "Expected get shape but shape not found" when no shape found with the given id.
 }
@@ -164,10 +164,10 @@ Shape* getShapeById(Shape* shape, std::string id) {
 7. Implement following funtion and class in `utility.h` and the corresponding unit test in `ut_utility.h`.  
 ```
 template <class Filter>
-std::deque<Shape*> filterShape(Shape *shape, Filter filter) {
+std::deque<Shape*> filterShape(Shape* shape, Filter filter) {
     // access the shape with iterator pattern.
     // DO NOT use Type Checking or Dynamic Type that would violate OCP to implement the function.
-    // return the shapes under the input shape tree sturctur that match the given filter.
+    // return the shapes under the input shape tree sturcture that match the given filter.
     // throw std::string "Only compound shape can filter shape!" when the input shape is not iterable.
 }
 
@@ -193,17 +193,17 @@ class TypeFilter {
 ```
 * Example usage of `filterShape()` with the filter class:  
 ```
-filterShape(compoundShape_0, AreaFilter(10, 5);
-// retrun shapes that area in range of 10 >= && 5 <=, but don't include compoundShape_0 itself.
+filterShape(compoundShape_0, AreaFilter(10, 5));
+// return shapes that area in range of 10 >= && 5 <=, but don't include compoundShape_0 itself.
 
-filterShape(compoundShape_0, PerimeterFilter(10, 5);
-// retrun shapes that perimeter in range 10 >= && 5 <=, but don't include compoundShape_0 itself.
+filterShape(compoundShape_0, PerimeterFilter(10, 5));
+// return shapes that perimeter in range 10 >= && 5 <=, but don't include compoundShape_0 itself.
 
-filterShape(compoundShape_0, ColorFilter("white");
-// retrun shapes that color match "white", but don't include compoundShape_0 itself.
+filterShape(compoundShape_0, ColorFilter("white"));
+// return shapes that color match "white", but don't include compoundShape_0 itself.
 
-filterShape(compoundShape_0, TypeFilter("Compound Shape");
-// retrun shapes that type match "Compound Shape", but don't include compoundShape_0 itself.
+filterShape(compoundShape_0, TypeFilter("Compound Shape"));
+// return shapes that type match "Compound Shape", but don't include compoundShape_0 itself.
 ```
 
 #### File structure:  
@@ -219,6 +219,7 @@ filterShape(compoundShape_0, TypeFilter("Compound Shape");
 │   ├── compound_shape.h
 │   ├── iterator.h
 │   ├── null_iterator.h
+│   ├── shape_iterator.h
 │   ├── utility.h
 │   └── two_dimensional_coordinate.h
 ├── test

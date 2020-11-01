@@ -8,7 +8,7 @@ class Iterator;
 
 using namespace std;
 
-class Shape{
+class Shape {
 public:
         Shape(string id);
 
@@ -34,7 +34,7 @@ public:
         
         virtual Iterator* createIterator() const;
         
-        virtual void accept(Visitor *visitor) const = 0;
+        virtual void accept(Visitor *visitor) = 0;
 
         virtual ~Shape();
 
