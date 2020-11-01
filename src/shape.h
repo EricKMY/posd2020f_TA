@@ -39,8 +39,7 @@ public:
         virtual ~Shape();
 
 private:
-        string _id;
-        string _color;
+        string _id, _color;
 };
 
 #endif

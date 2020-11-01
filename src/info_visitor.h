@@ -10,8 +10,6 @@
 
 class InfoVisitor : public Visitor {
 public:
-    InfoVisitor() {}
-
     void visit(Ellipse* ellipse) {
         char info[100];
         sprintf(info, "Ellipse (%.3f, %.3f)", ellipse->semiMajorAxes(), ellipse->semiMinorAxes());

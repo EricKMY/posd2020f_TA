@@ -10,8 +10,6 @@
 
 class AreaVisitor : public Visitor {
 public:
-    AreaVisitor() {}
-
     void visit(Ellipse* ellipse) {
         _area = ellipse->semiMajorAxes() * ellipse->semiMinorAxes() * M_PI;
     }
