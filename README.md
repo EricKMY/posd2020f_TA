@@ -40,24 +40,24 @@ public:
     void visit(Ellipse* ellipse) {
         // caculate the area of Ellipse.
         // DO NOT use ellipse->area() to get area directly.
-        // you may add public function for Ellipse to get it's member data.
+        // you may add public function for Ellipse to get it's data member.
     }
 
     void visit(Triangle* triangle) {
         // caculate the area of Triangle.
         // DO NOT use triangle->area() to get area directly.
-        // you may add public function for Triangle to get it's member data.
+        // you may add public function for Triangle to get it's data member.
     }
 
     void visit(Rectangle* rectangle) {
         // caculate the area of Rectangle.
         // DO NOT use rectangle->area() to get area directly.
-        // you may add public function for Rectangle to get it's member data.
+        // you may add public function for Rectangle to get it's data member.
 
     void visit(CompoundShape* compoundShape) {
         // caculate the area of CompoundShape.
         // DO NOT use compoundShape->area() to get area directly.
-        // you may add public function for CompoundShape to get it's member data.
+        // you may add public function for CompoundShape to get it's data member.
     }
 
     string area() const {
@@ -72,24 +72,24 @@ public:
     void visit(Ellipse* ellipse) {
         // create info of ellipse, same way as ellipse->info().
         // DO NOT use ellipse->info() to get info directly.
-        // you may add public function for Ellipse to get it's member data.
+        // you may add public function for Ellipse to get it's data member.
     }
 
     void visit(Triangle* triangle) {
         // create info of ellipse, same way as triangle->info().
         // DO NOT use triangle->info() to get info directly.
-        // you may add public function for Triangle to get it's member data.
+        // you may add public function for Triangle to get it's data member.
     }
 
     void visit(Rectangle* rectangle) {
         // create info of rectangle, same way as rectangle->info().
         // DO NOT use rectangle->info() to get info directly.
-        // you may add public function for Rectangle to get it's member data.
+        // you may add public function for Rectangle to get it's data member.
 
     void visit(CompoundShape* compoundShape) {
         // create info of compoundShape, same way as compoundShape->info().
         // DO NOT use compoundShape->info() to get info directly.
-        // you may add public function for CompoundShape to get it's member data.
+        // you may add public function for CompoundShape to get it's data member.
     }
 
     string info() const {
