@@ -1,9 +1,6 @@
 #define ABS 0.001
 
-#include <string>
-#include <vector>
 #include "../src/ellipse.h"
-using namespace std;
 
 using namespace std;
 

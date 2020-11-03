@@ -1,13 +1,10 @@
 #define ABS 0.001
 
 #include <gtest/gtest.h>
-#include <list>
-#include <vector>
-#include "../src/compound_shape.h"
 #include "../src/ellipse.h"
 #include "../src/rectangle.h"
 #include "../src/triangle.h"
-#include "../src/two_dimensional_coordinate.h"
+#include "../src/compound_shape.h"
 #include "../src/area_visitor.h"
 #include "../src/info_visitor.h"
 

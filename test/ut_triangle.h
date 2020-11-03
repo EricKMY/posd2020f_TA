@@ -1,7 +1,5 @@
 #define ABS 0.001
 
-#include <string>
-#include <vector>
 #include "../src/triangle.h"
 
 using namespace std;

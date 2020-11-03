@@ -1,12 +1,10 @@
 #define ABS 0.001
 
 #include <gtest/gtest.h>
-#include <list>
-#include <vector>
-#include "../src/compound_shape.h"
 #include "../src/ellipse.h"
 #include "../src/rectangle.h"
 #include "../src/triangle.h"
+#include "../src/compound_shape.h"
 
 class IteratorTestSuite: public testing::Test {
     protected:
