@@ -1,6 +1,7 @@
 #ifndef AREA_VISITOR_H
 #define AREA_VISITOR_H
 
+#include <math.h>
 #include "visitor.h"
 #include "iterator.h"
 #include "ellipse.h"
@@ -30,13 +31,12 @@ public:
 
     void visit(CompoundShape* compoundShape) {
         double area = 0;
-        Iterator *it = compoundShape->createIterator();
+        Iterator* it = compoundShape->createIterator();
 
         for(it->first(); !it->isDone(); it->next()) {
             it->currentItem()->accept(this);
             area += _area;
         }
-
         _area = area;
     }
 

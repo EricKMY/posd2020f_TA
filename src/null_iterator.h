@@ -1,7 +1,6 @@
 #ifndef NULL_ITERATOR_H
 #define NULL_ITERATOR_H
 
-#include <string>
 #include "iterator.h"
 
 using namespace std;

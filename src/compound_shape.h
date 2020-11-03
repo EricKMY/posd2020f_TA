@@ -1,7 +1,6 @@
 #ifndef COMPOUND_SHAPE_H
 #define COMPOUND_SHAPE_H
 
-#include <string>
 #include <list>
 #include "shape.h"
 #include "shape_iterator.h"

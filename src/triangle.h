@@ -3,7 +3,6 @@
 
 #include <math.h>
 #include <vector>
-#include <string>
 #include "shape.h"
 #include "two_dimensional_coordinate.h"
 

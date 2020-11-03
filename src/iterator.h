@@ -1,6 +1,8 @@
 #ifndef ITERATOR_H
 #define ITERATOR_H
 
+#include <string>
+
 class Shape;
 class Iterator {
     public:

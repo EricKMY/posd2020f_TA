@@ -1,6 +1,6 @@
 .PHONY: clean  
 
-SHAPE = src/shape.h src/ellipse.h src/rectangle.h src/triangle.h src/two_dimensional_coordinate.h src/compound_shape.h
+SHAPE = src/shape.h src/ellipse.h src/rectangle.h src/triangle.h src/compound_shape.h src/two_dimensional_coordinate.h
 ITERATOR = src/iterator.h src/null_iterator.h src/shape_iterator.h src/utility.h
 VISITOR = src/visitor.h src/area_visitor.h src/info_visitor.h 
 
@@ -14,12 +14,6 @@ bin/ut_main: test/ut_main.cpp $(TEST) $(SRC) $(OBJ)
 
 obj/shape.o: src/shape.cpp src/shape.h
 	g++ -std=c++11 -Wfatal-errors -c src/shape.cpp -o obj/shape.o
-
-# obj/info_visitor.o: src/info_visitor.cpp src/info_visitor.h
-# 	g++ -std=c++11 -Wfatal-errors -c src/info_visitor.cpp -o obj/info_visitor.o
-
-# obj/area_visitor.o: src/area_visitor.cpp src/area_visitor.h
-# 	g++ -std=c++11 -Wfatal-errors -c src/area_visitor.cpp -o obj/area_visitor.o
 
 directories:
 	mkdir -p bin

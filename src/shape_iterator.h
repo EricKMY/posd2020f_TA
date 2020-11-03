@@ -1,7 +1,6 @@
 #ifndef SHAPE_ITERATOR_H
 #define SHAPE_ITERATOR_H
 
-#include <string>
 #include "iterator.h"
 
 using namespace std;
