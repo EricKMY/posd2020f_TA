@@ -20,7 +20,7 @@ public:
     virtual void accept(Visitor* visitor) = 0;
 }
 ````
-2. Add interface class `Visitor` in `visitor.h`.  
+2. Add interface class `Visitor` with overloading function in `visitor.h`.  
 ```
 class Visitor {
 public:
