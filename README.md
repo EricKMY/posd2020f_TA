@@ -13,7 +13,7 @@
 [Visitor Pattern](https://refactoring.guru/design-patterns/visitor)  
 
 ## **Requirement**  
-1. Add function `accept()` in `Shap` as following.  
+1. Add function `accept()` in `Shape` as following.  
 ````
 class Shape {
 public:
