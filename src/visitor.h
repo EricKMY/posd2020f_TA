@@ -8,8 +8,6 @@ class Triangle;
 class Rectangle;
 class CompoundShape;
 
-using namespace std;
-
 class Visitor {
 public:
     virtual void visit(Ellipse* ellipse) = 0;

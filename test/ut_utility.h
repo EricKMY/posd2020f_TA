@@ -7,8 +7,6 @@
 #include "../src/compound_shape.h"
 #include "../src/utility.h"
 
-using namespace std;
-
 class UtlilityTestSuite: public testing::Test {
     protected:
     virtual void SetUp() {
@@ -16,7 +14,7 @@ class UtlilityTestSuite: public testing::Test {
         ellipse_1 = new Ellipse("1", 4.2, 3.7, "red");
         rectangle_2 = new Rectangle("2", 2, 2, "blue");
 
-        vector<TwoDimensionalCoordinate*> triangle_3_coordinates;
+        std::vector<TwoDimensionalCoordinate*> triangle_3_coordinates;
         triangle_3_coordinates.push_back(new TwoDimensionalCoordinate(0, 0));
         triangle_3_coordinates.push_back(new TwoDimensionalCoordinate(0, -3));
         triangle_3_coordinates.push_back(new TwoDimensionalCoordinate(-4, 0));
@@ -25,13 +23,13 @@ class UtlilityTestSuite: public testing::Test {
         ellipse_4 = new Ellipse("4", 4.2, 3.7, "yellow");
         rectangle_5 = new Rectangle("5", 2, 2, "blue");
 
-        vector<TwoDimensionalCoordinate*> triangle_6_coordinates;
+        std::vector<TwoDimensionalCoordinate*> triangle_6_coordinates;
         triangle_6_coordinates.push_back(new TwoDimensionalCoordinate(0, 0));
         triangle_6_coordinates.push_back(new TwoDimensionalCoordinate(0, -3));
         triangle_6_coordinates.push_back(new TwoDimensionalCoordinate(-4, 0));
         triangle_6 = new Triangle("6", triangle_6_coordinates, "red");
 
-        list<Shape*> shapes = {};
+        std::list<Shape*> shapes = {};
         shapes.push_back(ellipse_1);
         shapes.push_back(rectangle_2);
         shapes.push_back(triangle_3);
@@ -67,7 +65,7 @@ TEST_F(UtlilityTestSuite, exception_for_rectangle_get_shape_by_id) {
     try {
         getShapeById(rectangle_2, "1");
         FAIL();
-    }catch(string e) {
+    }catch(std::string e) {
         ASSERT_EQ("Only compound shape can get shape!", e);
     }
 }
@@ -76,7 +74,7 @@ TEST_F(UtlilityTestSuite, exception_for_rectangle_filter_shape) {
     try {
         filterShape(rectangle_2, AreaFilter(12, 1));
         FAIL();
-    }catch(string e) {
+    }catch(std::string e) {
         ASSERT_EQ("Only compound shape can filter shape!", e);
     }
 }
@@ -85,7 +83,7 @@ TEST_F(UtlilityTestSuite, exception_for_ellipse_get_shape_by_id) {
     try {
         getShapeById(ellipse_1, "1");
         FAIL();
-    }catch(string e) {
+    }catch(std::string e) {
         ASSERT_EQ("Only compound shape can get shape!", e);
     }
 }
@@ -94,7 +92,7 @@ TEST_F(UtlilityTestSuite, exception_for_ellipse_filter_shape) {
     try {
         filterShape(rectangle_2, AreaFilter(12, 1));
         FAIL();
-    }catch(string e) {
+    }catch(std::string e) {
         ASSERT_EQ("Only compound shape can filter shape!", e);
     }
 }
@@ -103,7 +101,7 @@ TEST_F(UtlilityTestSuite, exception_for_triangle_get_shape_by_id) {
     try {
         getShapeById(triangle_3, "1");
         FAIL();
-    }catch(string e) {
+    }catch(std::string e) {
         ASSERT_EQ("Only compound shape can get shape!", e);
     }
 }
@@ -112,7 +110,7 @@ TEST_F(UtlilityTestSuite, exception_for_triangle_filter_shape) {
     try {
         filterShape(triangle_3, ColorFilter("Yellow"));
         FAIL();
-    }catch(string e) {
+    }catch(std::string e) {
         ASSERT_EQ("Only compound shape can filter shape!", e);
     }
 }
@@ -145,7 +143,7 @@ TEST_F(UtlilityTestSuite, compound_shape_get_shape_by_id) {
 
 TEST_F(UtlilityTestSuite, compound_shape_filter_shape_by_area) {
 
-    deque<Shape*> results = filterShape(compoundShape_7, AreaFilter(20, 5));
+    std::deque<Shape*> results = filterShape(compoundShape_7, AreaFilter(20, 5));
 
     ASSERT_EQ(3, results.size());
 
@@ -163,7 +161,7 @@ TEST_F(UtlilityTestSuite, compound_shape_filter_shape_by_area) {
 }
 
 TEST_F(UtlilityTestSuite, compound_shape_filter_shape_by_perimeter) {
-    deque<Shape*> results = filterShape(compoundShape_7, PerimeterFilter(30, 15));
+    std::deque<Shape*> results = filterShape(compoundShape_7, PerimeterFilter(30, 15));
 
     ASSERT_EQ(3, results.size());
 
@@ -181,7 +179,7 @@ TEST_F(UtlilityTestSuite, compound_shape_filter_shape_by_perimeter) {
 }
 
 TEST_F(UtlilityTestSuite, compound_shape_filter_shape_by_type) {
-    deque<Shape*> results = filterShape(compoundShape_7, TypeFilter("Rectangle"));
+    std::deque<Shape*> results = filterShape(compoundShape_7, TypeFilter("Rectangle"));
 
     ASSERT_EQ(2, results.size());
 
@@ -194,7 +192,7 @@ TEST_F(UtlilityTestSuite, compound_shape_filter_shape_by_type) {
 
 TEST_F(UtlilityTestSuite, compound_shape_filter_shape_by_color) {
 
-    deque<Shape*> results = filterShape(compoundShape_7, ColorFilter("red"));
+    std::deque<Shape*> results = filterShape(compoundShape_7, ColorFilter("red"));
 
     ASSERT_EQ(2, results.size());
 

@@ -6,16 +6,14 @@
 #include "shape.h"
 #include "two_dimensional_coordinate.h"
 
-using namespace std;
-
 class Triangle : public Shape{
 public: 
 
-  Triangle(string id, vector<TwoDimensionalCoordinate*> coordinates): Shape(id), _coordinates(coordinates){
+  Triangle(std::string id, std::vector<TwoDimensionalCoordinate*> coordinates): Shape(id), _coordinates(coordinates){
       checkShapeIsValid();
   }
 
-  Triangle(string id, vector<TwoDimensionalCoordinate*> coordinates, string color): Shape(id, color), _coordinates(coordinates){
+  Triangle(std::string id, std::vector<TwoDimensionalCoordinate*> coordinates, std::string color): Shape(id, color), _coordinates(coordinates){
       checkShapeIsValid();
   }
   
@@ -35,7 +33,7 @@ public:
           + sqrt(pow(_coordinates[2]->getX() - _coordinates[1]->getX(), 2) + pow(_coordinates[2]->getY() - _coordinates[1]->getY(), 2));
   }
   
-  string info() const {
+  std::string info() const {
     char info[100];
     sprintf(info, "Triangle ([%.3f, %.3f], [%.3f, %.3f], [%.3f, %.3f])",
                               _coordinates[0]->getX(), _coordinates[0]->getY(),
@@ -44,7 +42,7 @@ public:
     return info;
   }
 
-  string type() const {
+  std::string type() const {
 		return "Triangle";
 	}
 
@@ -52,18 +50,18 @@ public:
 		visitor->visit(this);
 	}
 
-  vector<TwoDimensionalCoordinate*> coordinates() const {
+  std::vector<TwoDimensionalCoordinate*> coordinates() const {
     return _coordinates;
   }
 
 private:
-  vector<TwoDimensionalCoordinate*> _coordinates;
+  std::vector<TwoDimensionalCoordinate*> _coordinates;
 
   void checkShapeIsValid() {
     if(_coordinates.size() != 3) {
-      throw string("This is not a triangle!");
+      throw std::string("This is not a triangle!");
     }else if(area() <= 0) {
-      throw string("This is not a triangle!");
+      throw std::string("This is not a triangle!");
     }
   }
 };

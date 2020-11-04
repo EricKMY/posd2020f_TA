@@ -6,31 +6,29 @@
 
 class Iterator;
 
-using namespace std;
-
 class Shape {
 public:
-        Shape(string id);
+        Shape(std::string id);
 
-        Shape(string id, string color);
+        Shape(std::string id, std::string color);
 
-        string id() const;
+        std::string id() const;
 
-        string color() const;
+        std::string color() const;
 
         virtual double area() const = 0;
 
         virtual double perimeter() const = 0;
   
-        virtual string info() const = 0;
+        virtual std::string info() const = 0;
     
-        virtual string type() const = 0;
+        virtual std::string type() const = 0;
 
         virtual void addShape(Shape* shape);
 
-        virtual void deleteShapeById(string id);
+        virtual void deleteShapeById(std::string id);
 
-        virtual Shape* getShapeById(string id) const;
+        virtual Shape* getShapeById(std::string id) const;
         
         virtual Iterator* createIterator() const;
         
@@ -39,7 +37,7 @@ public:
         virtual ~Shape();
 
 private:
-        string _id, _color;
+        std::string _id, _color;
 };
 
 #endif

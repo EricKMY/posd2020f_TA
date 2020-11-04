@@ -3,16 +3,16 @@
 
 #include "iterator.h"
 
-using namespace std;
+
 
 class NullIterator : public Iterator {
 public:
     void first() {
-        throw string("No child member!");
+        throw std::string("No child member!");
     }
 
     void next() {
-        throw string("No child member!");
+        throw std::string("No child member!");
     }
 
     bool isDone() const {
@@ -20,7 +20,7 @@ public:
     }
 
     Shape* currentItem() const {
-        throw string("No child member!");
+        throw std::string("No child member!");
     }
 };
 

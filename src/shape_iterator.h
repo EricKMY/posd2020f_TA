@@ -3,8 +3,6 @@
 
 #include "iterator.h"
 
-using namespace std;
-
 template<class ForwardIterator>
 class ShapeIterator : public Iterator {
 public:
@@ -19,7 +17,7 @@ public:
 
     void next() {
         if(isDone()) {
-            throw string("Moving past the end!");
+            throw std::string("Moving past the end!");
         }
         ++_current;
     }
@@ -30,7 +28,7 @@ public:
 
     Shape* currentItem() const {
         if(isDone()){
-            throw string("No current item!");
+            throw std::string("No current item!");
         }
         return *_current;
     }

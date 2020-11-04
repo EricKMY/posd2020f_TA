@@ -1,30 +1,28 @@
 #include "null_iterator.h"
 #include "shape.h"
 
-using namespace std;
+Shape::Shape(std::string id): _id(id), _color("white") {}
 
-Shape::Shape(string id): _id(id), _color("white") {}
+Shape::Shape(std::string id, std::string color): _id(id), _color(color) {}
 
-Shape::Shape(string id, string color): _id(id), _color(color) {}
-
-string Shape::id() const {
+std::string Shape::id() const {
     return _id;
 }
 
-string Shape::color() const {
+std::string Shape::color() const {
     return _color;
 }
     
 void Shape::addShape(Shape *shape) {
-    throw string("Only compound shape can add shape!");
+    throw std::string("Only compound shape can add shape!");
 }
 
-void Shape::deleteShapeById(string id) {
-    throw string("Only compound shape can delete shape!");
+void Shape::deleteShapeById(std::string id) {
+    throw std::string("Only compound shape can delete shape!");
 }
 
-Shape* Shape::getShapeById(string id) const {
-    throw string("Only compound shape can get shape!");
+Shape* Shape::getShapeById(std::string id) const {
+    throw std::string("Only compound shape can get shape!");
 }
 
 Iterator* Shape::createIterator() const {

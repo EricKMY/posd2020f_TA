@@ -34,7 +34,7 @@ public:
     }
 
     void visit(CompoundShape* compoundShape) {
-        string info = "Compound Shape {";
+        std::string info = "Compound Shape {";
         Iterator *it = compoundShape->createIterator();
 
         for(it->first();!it->isDone();it->next()) {
@@ -46,12 +46,12 @@ public:
         _info = info + "}";
     }
 
-    string info() const {
+    std::string info() const {
         return _info;
     }
 
 private:
-    string _info;
+    std::string _info;
 };
 
 

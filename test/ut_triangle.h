@@ -2,8 +2,6 @@
 
 #include "../src/triangle.h"
 
-using namespace std;
-
 class TriangleTestSuite: public testing::Test {
 protected:
     virtual void SetUp() {
@@ -17,11 +15,11 @@ protected:
     virtual void TearDown() {}
 
     Shape* triangle;
-    vector<TwoDimensionalCoordinate*> coordinates;
+    std::vector<TwoDimensionalCoordinate*> coordinates;
 };
 
 TEST(Triangle, no_exception_constructor){
-    vector<TwoDimensionalCoordinate*> coordinates;
+    std::vector<TwoDimensionalCoordinate*> coordinates;
     coordinates.push_back(new TwoDimensionalCoordinate(0, 0));
     coordinates.push_back(new TwoDimensionalCoordinate(0, -3));
     coordinates.push_back(new TwoDimensionalCoordinate(-4, 0));
@@ -34,7 +32,7 @@ TEST_F(TriangleTestSuite, exception_for_coordinate_less_than_three){
     try {
         Triangle("1", coordinates);
         FAIL();
-    }catch(string e) {
+    }catch(std::string e) {
         ASSERT_EQ("This is not a triangle!", e);
     }
 }
@@ -44,7 +42,7 @@ TEST_F(TriangleTestSuite, exception_for_coordinate_more_than_three){
     try {
         Triangle("1", coordinates);
         FAIL();
-    }catch(string e) {
+    }catch(std::string e) {
         ASSERT_EQ("This is not a triangle!", e);
     }
 }
@@ -82,7 +80,7 @@ TEST_F(TriangleTestSuite, exception_for_add_shape){
     try {
         triangle->addShape(new Triangle("0",coordinates));
         FAIL();
-    }catch(string e) {
+    }catch(std::string e) {
         ASSERT_EQ("Only compound shape can add shape!", e);
     }
 }
@@ -91,7 +89,7 @@ TEST_F(TriangleTestSuite, exception_for_delete_shape){
     try {
         triangle->deleteShapeById("1");
         FAIL();
-    }catch(string e) {
+    }catch(std::string e) {
         ASSERT_EQ("Only compound shape can delete shape!", e);
     }
 }

@@ -8,13 +8,11 @@
 #include "../src/area_visitor.h"
 #include "../src/info_visitor.h"
 
-using namespace std;
-
 class VisitorTestSuite: public testing::Test {
 protected:
     virtual void SetUp() {
 
-        vector<TwoDimensionalCoordinate*> coordinates_1;
+        std::vector<TwoDimensionalCoordinate*> coordinates_1;
         coordinates_1.push_back(new TwoDimensionalCoordinate(0, 0));
         coordinates_1.push_back(new TwoDimensionalCoordinate(3, 0));
         coordinates_1.push_back(new TwoDimensionalCoordinate(0, 4));
@@ -28,7 +26,7 @@ protected:
         shapes.push_back(triangle_3);
         compoundShape_7 = new CompoundShape("7", shapes);
 
-        vector<TwoDimensionalCoordinate*> coordinates_2;
+        std::vector<TwoDimensionalCoordinate*> coordinates_2;
         coordinates_2.push_back(new TwoDimensionalCoordinate(0, 0));
         coordinates_2.push_back(new TwoDimensionalCoordinate(3, 0));
         coordinates_2.push_back(new TwoDimensionalCoordinate(0, 4));
@@ -40,7 +38,7 @@ protected:
 
     virtual void TearDown() {}
 
-    list<Shape*> shapes = {};
+    std::list<Shape*> shapes = {};
     Shape* ellipse_1;
     Shape* rectangle_2;
     Shape* triangle_3;
