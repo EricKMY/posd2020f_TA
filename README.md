@@ -60,7 +60,7 @@ public:
         // you may add public function for CompoundShape to get it's data members.
     }
 
-    std::string area() const {
+    double area() const {
         // return area;
     }
 };
