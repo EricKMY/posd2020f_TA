@@ -11,12 +11,14 @@
 
 class AreaVisitor : public Visitor {
 public:
+    AreaVisitor(): _area(0) {}
+
     void visit(Ellipse* ellipse) {
-        _area = ellipse->semiMajorAxes() * ellipse->semiMinorAxes() * M_PI;
+        _area += ellipse->semiMajorAxes() * ellipse->semiMinorAxes() * M_PI;
     }
 
     void visit(Triangle* triangle) {
-        _area = fabs(
+        _area += fabs(
                 triangle->coordinates()[0]->getX() * triangle->coordinates()[1]->getY()
               + triangle->coordinates()[1]->getX() * triangle->coordinates()[2]->getY() 
               + triangle->coordinates()[2]->getX() * triangle->coordinates()[0]->getY() 
@@ -26,18 +28,22 @@ public:
     }
 
     void visit(Rectangle* rectangle) {
-        _area = rectangle->length() * rectangle->width();
+        _area += fabs(
+                rectangle->coordinates()[0]->getX() * rectangle->coordinates()[1]->getY()
+              + rectangle->coordinates()[1]->getX() * rectangle->coordinates()[2]->getY()
+              + rectangle->coordinates()[2]->getX() * rectangle->coordinates()[3]->getY()
+              + rectangle->coordinates()[3]->getX() * rectangle->coordinates()[0]->getY()
+              - rectangle->coordinates()[0]->getX() * rectangle->coordinates()[3]->getY()
+              - rectangle->coordinates()[1]->getX() * rectangle->coordinates()[0]->getY()
+              - rectangle->coordinates()[2]->getX() * rectangle->coordinates()[1]->getY()
+              - rectangle->coordinates()[3]->getX() * rectangle->coordinates()[2]->getY()) / 2;
     }
 
     void visit(CompoundShape* compoundShape) {
-        double area = 0;
         Iterator* it = compoundShape->createIterator();
-
         for(it->first(); !it->isDone(); it->next()) {
             it->currentItem()->accept(this);
-            area += _area;
         }
-        _area = area;
     }
 
     double area() const {
