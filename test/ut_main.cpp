@@ -6,6 +6,7 @@
 #include "ut_iterator.h"
 #include "ut_utility.h"
 #include "ut_visitor.h"
+#include "ut_scanner.h"
 
 int main(int argc, char ** argv){
     testing::InitGoogleTest(&argc, argv);

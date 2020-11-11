@@ -1,11 +1,18 @@
 .PHONY: clean  
 
-SHAPE = src/shape.h src/ellipse.h src/rectangle.h src/triangle.h src/compound_shape.h src/two_dimensional_coordinate.h
+SHAPE = src/shape.h src/ellipse.h src/rectangle.h src/triangle.h \
+		src/compound_shape.h src/two_dimensional_coordinate.h
 ITERATOR = src/iterator.h src/null_iterator.h src/shape_iterator.h src/utility.h
 VISITOR = src/visitor.h src/area_visitor.h src/info_visitor.h 
 
-SRC = $(SHAPE) $(ITERATOR) $(VISITOR)
-TEST = test/ut_ellipse.h test/ut_rectangle.h test/ut_triangle.h test/ut_compound_shape.h test/ut_iterator.h test/ut_utility.h test/ut_visitor.h
+BUILDER = src/scanner.h
+
+SRC = $(SHAPE) $(ITERATOR) $(VISITOR) $(BUILDER)
+
+
+
+TEST = test/ut_ellipse.h test/ut_rectangle.h test/ut_triangle.h test/ut_compound_shape.h \
+		test/ut_iterator.h test/ut_utility.h test/ut_visitor.h test/ut_scanner.h
 OBJ = obj/shape.o
 all:directories bin/ut_main
 
