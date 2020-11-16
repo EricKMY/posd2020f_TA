@@ -1,6 +1,5 @@
 #define ABS 0.001
 
-#include <gtest/gtest.h>
 #include "../src/triangle.h"
 
 class TriangleTestSuite: public testing::Test {

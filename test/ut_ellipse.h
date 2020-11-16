@@ -1,39 +1,30 @@
 #define ABS 0.001
 
-#include <gtest/gtest.h>
 #include "../src/ellipse.h"
 
 class EllipseTestSuite: public testing::Test {
 protected:
     virtual void SetUp() {
-        _coordinates.push_back(new TwoDimensionalCoordinate(-1, 3.14));
-        ellipse = new Ellipse("1", _coordinates, 4.2, 3.7);
+        ellipse = new Ellipse("1", 4.2, 3.7);
     }
 
     virtual void TearDown() {}
     
-    std::vector<TwoDimensionalCoordinate*> _coordinates;
     Shape* ellipse;
 };
 
 TEST(EllipseTest, constructor_with_default_color){
-    std::vector<TwoDimensionalCoordinate*> coordinates;
-    coordinates.push_back(new TwoDimensionalCoordinate(1, 1));
-    ASSERT_NO_THROW(Ellipse("1", coordinates, 4.2, 3.7));
+    ASSERT_NO_THROW(Ellipse("1", 4.2, 3.7));
 }
 
 TEST(EllipseTest, constructor_with_custom_color){
-    std::vector<TwoDimensionalCoordinate*> coordinates;
-    coordinates.push_back(new TwoDimensionalCoordinate(1, 1));
-    ASSERT_NO_THROW(Ellipse("1", coordinates, 1, 1, "red"));
+    ASSERT_NO_THROW(Ellipse("1", 1, 1, "red"));
 }
 
 
 TEST(EllipseTest, exception_for_semi_major_axis_is_zero){
-    std::vector<TwoDimensionalCoordinate*> coordinates;
-    coordinates.push_back(new TwoDimensionalCoordinate(1, 1));
     try {
-        Ellipse("1", coordinates, 0, 1);
+        Ellipse("1", 0, 1);
         FAIL();
     }catch(std::string e) {
         ASSERT_EQ("This is not an ellipse!", e);
@@ -41,10 +32,8 @@ TEST(EllipseTest, exception_for_semi_major_axis_is_zero){
 }
 
 TEST(EllipseTest, exception_for_semi_minor_axis_is_zero){
-    std::vector<TwoDimensionalCoordinate*> coordinates;
-    coordinates.push_back(new TwoDimensionalCoordinate(1, 1));
     try {
-        Ellipse("1", coordinates, 1, 0);
+        Ellipse("1", 1, 0);
         FAIL();
     }catch(std::string e) {
         ASSERT_EQ("This is not an ellipse!", e);
@@ -52,10 +41,8 @@ TEST(EllipseTest, exception_for_semi_minor_axis_is_zero){
 }
 
 TEST(EllipseTest, exception_for_semi_major_axis_less_than_zero){
-    std::vector<TwoDimensionalCoordinate*> coordinates;
-    coordinates.push_back(new TwoDimensionalCoordinate(1, 1));
     try {
-        Ellipse("1", coordinates, -1, 1);
+        Ellipse("1", -1, 1);
         FAIL();
     }catch(std::string e) {
         ASSERT_EQ("This is not an ellipse!", e);
@@ -63,10 +50,8 @@ TEST(EllipseTest, exception_for_semi_major_axis_less_than_zero){
 }
 
 TEST(EllipseTest, exception_for_semi_minor_axis_less_than_zero){
-    std::vector<TwoDimensionalCoordinate*> coordinates;
-    coordinates.push_back(new TwoDimensionalCoordinate(1, 1));
     try {
-        Ellipse("1", coordinates, 1, -1);
+        Ellipse("1", 1, -1);
         FAIL();
     }catch(std::string e) {
         ASSERT_EQ("This is not an ellipse!", e);
@@ -82,7 +67,7 @@ TEST_F(EllipseTestSuite, default_color){
 }
 
 TEST_F(EllipseTestSuite, custom_color){
-    ellipse = new Ellipse("1", _coordinates, 1, 1, "red");
+    ellipse = new Ellipse("1", 1, 1, "red");
     ASSERT_EQ("red", ellipse->color());
 }
 
@@ -95,7 +80,7 @@ TEST_F(EllipseTestSuite, perimeter){
 }
 
 TEST_F(EllipseTestSuite, info){
-    ASSERT_EQ("Ellipse ([-1.000, 3.140], 4.200, 3.700)", ellipse->info());
+    ASSERT_EQ("Ellipse (4.200, 3.700)", ellipse->info());
 }
 
 TEST_F(EllipseTestSuite, type){
@@ -104,7 +89,7 @@ TEST_F(EllipseTestSuite, type){
 
 TEST_F(EllipseTestSuite, exception_for_add_shape){
     try {
-        ellipse->addShape(new Ellipse("0", _coordinates, 1, 1, "red"));
+        ellipse->addShape(new Ellipse("0", 1, 1, "red"));
         FAIL();
     }catch(std::string e) {
         ASSERT_EQ("Only compound shape can add shape!", e);

@@ -18,7 +18,8 @@ public:
   }
   
   double area() const {
-    return fabs(_coordinates[0]->getX() * _coordinates[1]->getY()
+    return fabs(
+            _coordinates[0]->getX() * _coordinates[1]->getY()
               + _coordinates[1]->getX() * _coordinates[2]->getY() 
               + _coordinates[2]->getX() * _coordinates[0]->getY() 
               - _coordinates[0]->getX() * _coordinates[2]->getY() 
@@ -27,9 +28,9 @@ public:
   }
 
   double perimeter() const {
-    return  sqrt(pow(_coordinates[0]->getX() - _coordinates[1]->getX(), 2) + pow(_coordinates[0]->getY() - _coordinates[1]->getY(), 2))
-          + sqrt(pow(_coordinates[1]->getX() - _coordinates[2]->getX(), 2) + pow(_coordinates[1]->getY() - _coordinates[2]->getY(), 2)) 
-          + sqrt(pow(_coordinates[2]->getX() - _coordinates[0]->getX(), 2) + pow(_coordinates[2]->getY() - _coordinates[0]->getY(), 2));
+    return sqrt(pow(_coordinates[0]->getX() - _coordinates[1]->getX(), 2) + pow(_coordinates[0]->getY() - _coordinates[1]->getY(), 2))
+          + sqrt(pow(_coordinates[0]->getX() - _coordinates[2]->getX(), 2) + pow(_coordinates[0]->getY() - _coordinates[2]->getY(), 2)) 
+          + sqrt(pow(_coordinates[2]->getX() - _coordinates[1]->getX(), 2) + pow(_coordinates[2]->getY() - _coordinates[1]->getY(), 2));
   }
   
   std::string info() const {
@@ -57,7 +58,9 @@ private:
   std::vector<TwoDimensionalCoordinate*> _coordinates;
 
   void checkShapeIsValid() {
-    if(_coordinates.size() != 3 || area() == 0) {
+    if(_coordinates.size() != 3) {
+      throw std::string("This is not a triangle!");
+    }else if(area() <= 0) {
       throw std::string("This is not a triangle!");
     }
   }

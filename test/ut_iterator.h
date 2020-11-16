@@ -5,29 +5,19 @@
 #include "../src/rectangle.h"
 #include "../src/triangle.h"
 #include "../src/compound_shape.h"
-#include "../src/iterator.h"
 
 class IteratorTestSuite: public testing::Test {
     protected:
     virtual void SetUp() {
 
-        std::vector<TwoDimensionalCoordinate*> elllipse_coordinate = {};
-        elllipse_coordinate.push_back(new TwoDimensionalCoordinate(-1, 3.14));
+        std::vector<TwoDimensionalCoordinate*> coordinates;
+        coordinates.push_back(new TwoDimensionalCoordinate(0, 0));
+        coordinates.push_back(new TwoDimensionalCoordinate(3, 0));
+        coordinates.push_back(new TwoDimensionalCoordinate(0, 4));
 
-        std::vector<TwoDimensionalCoordinate*> rectangle_coordinates = {};
-        rectangle_coordinates.push_back(new TwoDimensionalCoordinate(0, 0));
-        rectangle_coordinates.push_back(new TwoDimensionalCoordinate(-3, 0));
-        rectangle_coordinates.push_back(new TwoDimensionalCoordinate(-3, -4));
-        rectangle_coordinates.push_back(new TwoDimensionalCoordinate(0, -4));
-
-        std::vector<TwoDimensionalCoordinate*> triangle_coordinates = {};
-        triangle_coordinates.push_back(new TwoDimensionalCoordinate(0, 0));
-        triangle_coordinates.push_back(new TwoDimensionalCoordinate(3, 0));
-        triangle_coordinates.push_back(new TwoDimensionalCoordinate(0, 4));
-
-        ellipse = new Ellipse("1", elllipse_coordinate, 4, 3);
-        rectangle = new Rectangle("2", rectangle_coordinates);
-        triangle = new Triangle("3", triangle_coordinates);
+        ellipse = new Ellipse("1", 4, 3);
+        rectangle = new Rectangle("2", 3, 4);
+        triangle = new Triangle("3", coordinates);
 
         shapes.push_back(ellipse);
         shapes.push_back(rectangle);
@@ -168,7 +158,7 @@ TEST_F(IteratorTestSuite, compound_shape_iterate_current_item) {
     EXPECT_EQ("white", shape->color());
     EXPECT_NEAR(37.699, shape->area(), ABS);
     EXPECT_NEAR(22.849, shape->perimeter(), ABS);
-    EXPECT_EQ("Ellipse ([-1.000, 3.140], 4.000, 3.000)", shape->info());
+    EXPECT_EQ("Ellipse (4.000, 3.000)", shape->info());
 }
 
 TEST_F(IteratorTestSuite, compound_shape_iterate_current_next) {
@@ -181,7 +171,7 @@ TEST_F(IteratorTestSuite, compound_shape_iterate_current_next) {
     EXPECT_EQ("white", shape->color());
     EXPECT_NEAR(12, shape->area(), ABS);
     EXPECT_NEAR(14, shape->perimeter(), ABS);
-    EXPECT_EQ("Rectangle ([0.000, 0.000], [-3.000, 0.000], [-3.000, -4.000], [0.000, -4.000])", shape->info());
+    EXPECT_EQ("Rectangle (3.000, 4.000)", shape->info());
 
     ASSERT_NO_THROW(it->next());
 

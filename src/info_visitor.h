@@ -12,9 +12,7 @@ class InfoVisitor : public Visitor {
 public:
     void visit(Ellipse* ellipse) {
         char info[100];
-        sprintf(info, "Ellipse ([%.3f, %.3f], %.3f, %.3f)",
-         ellipse->coordinates()[0]->getX(), ellipse->coordinates()[0]->getY(),
-          ellipse->semiMajorAxes(), ellipse->semiMinorAxes());
+        sprintf(info, "Ellipse (%.3f, %.3f)", ellipse->semiMajorAxes(), ellipse->semiMinorAxes());
         _info = info;
     }
 
@@ -24,16 +22,14 @@ public:
             triangle->coordinates()[0]->getX(), triangle->coordinates()[0]->getY(),
             triangle->coordinates()[1]->getX(), triangle->coordinates()[1]->getY(),
             triangle->coordinates()[2]->getX(), triangle->coordinates()[2]->getY());
+
         _info = info;
     }
 
     void visit(Rectangle* rectangle) {
         char info[100];
-        sprintf(info, "Rectangle ([%.3f, %.3f], [%.3f, %.3f], [%.3f, %.3f], [%.3f, %.3f])",
-                rectangle->coordinates()[0]->getX(), rectangle->coordinates()[0]->getY(),
-                rectangle->coordinates()[1]->getX(), rectangle->coordinates()[1]->getY(),
-                rectangle->coordinates()[2]->getX(), rectangle->coordinates()[2]->getY(),
-                rectangle->coordinates()[3]->getX(), rectangle->coordinates()[3]->getY());
+        sprintf(info, "Rectangle (%.3f, %.3f)", rectangle->length(), rectangle->width());
+
         _info = info;
     }
 

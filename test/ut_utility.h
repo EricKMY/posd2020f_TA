@@ -11,61 +11,23 @@ class UtlilityTestSuite: public testing::Test {
     protected:
     virtual void SetUp() {
 
-        // ellipse_1 = new Ellipse("1", 4.2, 3.7, "red");
-        // rectangle_2 = new Rectangle("2", 2, 2, "blue");
+        ellipse_1 = new Ellipse("1", 4.2, 3.7, "red");
+        rectangle_2 = new Rectangle("2", 2, 2, "blue");
 
-        // std::vector<TwoDimensionalCoordinate*> triangle_3_coordinates;
-        // triangle_3_coordinates.push_back(new TwoDimensionalCoordinate(0, 0));
-        // triangle_3_coordinates.push_back(new TwoDimensionalCoordinate(0, -3));
-        // triangle_3_coordinates.push_back(new TwoDimensionalCoordinate(-4, 0));
-        // triangle_3 = new Triangle("3", triangle_3_coordinates, "yellow");
-
-        // ellipse_4 = new Ellipse("4", 4.2, 3.7, "yellow");
-        // rectangle_5 = new Rectangle("5", 2, 2, "blue");
-
-        // std::vector<TwoDimensionalCoordinate*> triangle_6_coordinates;
-        // triangle_6_coordinates.push_back(new TwoDimensionalCoordinate(0, 0));
-        // triangle_6_coordinates.push_back(new TwoDimensionalCoordinate(0, -3));
-        // triangle_6_coordinates.push_back(new TwoDimensionalCoordinate(-4, 0));
-        // triangle_6 = new Triangle("6", triangle_6_coordinates, "red");
-
-        std::vector<TwoDimensionalCoordinate*> elllipse_1_coordinate = {};
-        elllipse_1_coordinate.push_back(new TwoDimensionalCoordinate(-1, 3.14));
-
-        std::vector<TwoDimensionalCoordinate*> rectangle_2_coordinates = {};
-        rectangle_2_coordinates.push_back(new TwoDimensionalCoordinate(1, 1));
-        rectangle_2_coordinates.push_back(new TwoDimensionalCoordinate(-1, 1));
-        rectangle_2_coordinates.push_back(new TwoDimensionalCoordinate(-1, -1));
-        rectangle_2_coordinates.push_back(new TwoDimensionalCoordinate(1, -1));
-
-        std::vector<TwoDimensionalCoordinate*> triangle_3_coordinates = {};
+        std::vector<TwoDimensionalCoordinate*> triangle_3_coordinates;
         triangle_3_coordinates.push_back(new TwoDimensionalCoordinate(0, 0));
-        triangle_3_coordinates.push_back(new TwoDimensionalCoordinate(3, 0));
-        triangle_3_coordinates.push_back(new TwoDimensionalCoordinate(0, 4));
-
-        std::vector<TwoDimensionalCoordinate*> elllipse_4_coordinate = {};
-        elllipse_4_coordinate.push_back(new TwoDimensionalCoordinate(-1, 3.14));
-
-        std::vector<TwoDimensionalCoordinate*> rectangle_5_coordinates = {};
-        rectangle_5_coordinates.push_back(new TwoDimensionalCoordinate(1, 1));
-        rectangle_5_coordinates.push_back(new TwoDimensionalCoordinate(-1, 1));
-        rectangle_5_coordinates.push_back(new TwoDimensionalCoordinate(-1, -1));
-        rectangle_5_coordinates.push_back(new TwoDimensionalCoordinate(1, -1));
-
-        std::vector<TwoDimensionalCoordinate*> triangle_6_coordinates = {};
-        triangle_6_coordinates.push_back(new TwoDimensionalCoordinate(0, 0));
-        triangle_6_coordinates.push_back(new TwoDimensionalCoordinate(3, 0));
-        triangle_6_coordinates.push_back(new TwoDimensionalCoordinate(0, 4));
-
-        ellipse_1 = new Ellipse("1", elllipse_1_coordinate, 4.2, 3.7, "red");
-        rectangle_2 = new Rectangle("2", rectangle_2_coordinates, "blue");
+        triangle_3_coordinates.push_back(new TwoDimensionalCoordinate(0, -3));
+        triangle_3_coordinates.push_back(new TwoDimensionalCoordinate(-4, 0));
         triangle_3 = new Triangle("3", triangle_3_coordinates, "yellow");
 
-        ellipse_4 = new Ellipse("4", elllipse_4_coordinate, 4.2, 3.7, "yellow");
-        rectangle_5 = new Rectangle("5", rectangle_5_coordinates, "blue");
-        triangle_6 = new Triangle("6", triangle_6_coordinates, "red");
+        ellipse_4 = new Ellipse("4", 4.2, 3.7, "yellow");
+        rectangle_5 = new Rectangle("5", 2, 2, "blue");
 
-        
+        std::vector<TwoDimensionalCoordinate*> triangle_6_coordinates;
+        triangle_6_coordinates.push_back(new TwoDimensionalCoordinate(0, 0));
+        triangle_6_coordinates.push_back(new TwoDimensionalCoordinate(0, -3));
+        triangle_6_coordinates.push_back(new TwoDimensionalCoordinate(-4, 0));
+        triangle_6 = new Triangle("6", triangle_6_coordinates, "red");
 
         std::list<Shape*> shapes = {};
         shapes.push_back(ellipse_1);
@@ -160,7 +122,7 @@ TEST_F(UtlilityTestSuite, compound_shape_get_shape_by_id) {
     EXPECT_EQ("red", shape->color());
     EXPECT_NEAR(48.820, shape->area(), ABS);
     EXPECT_NEAR(25.247, shape->perimeter(), ABS);
-    EXPECT_EQ("Ellipse ([-1.000, 3.140], 4.200, 3.700)", shape->info());
+    EXPECT_EQ("Ellipse (4.200, 3.700)", shape->info());
 
     shape = getShapeById(compoundShape_7, "2");
     
@@ -168,7 +130,7 @@ TEST_F(UtlilityTestSuite, compound_shape_get_shape_by_id) {
     EXPECT_EQ("blue", shape->color());
     EXPECT_NEAR(4, shape->area(), ABS);
     EXPECT_NEAR(8, shape->perimeter(), ABS);
-    EXPECT_EQ("Rectangle ([1.000, 1.000], [-1.000, 1.000], [-1.000, -1.000], [1.000, -1.000])", shape->info());
+    EXPECT_EQ("Rectangle (2.000, 2.000)", shape->info());
 
     shape = getShapeById(compoundShape_7, "3");
 
@@ -176,7 +138,7 @@ TEST_F(UtlilityTestSuite, compound_shape_get_shape_by_id) {
     EXPECT_EQ("yellow", shape->color());
     EXPECT_NEAR(6, shape->area(), ABS);
     EXPECT_NEAR(12, shape->perimeter(), ABS);
-    EXPECT_EQ("Triangle ([0.000, 0.000], [3.000, 0.000], [0.000, 4.000])", shape->info());
+    EXPECT_EQ("Triangle ([0.000, 0.000], [0.000, -3.000], [-4.000, 0.000])", shape->info());
 }
 
 TEST_F(UtlilityTestSuite, compound_shape_filter_shape_by_area) {
@@ -186,15 +148,15 @@ TEST_F(UtlilityTestSuite, compound_shape_filter_shape_by_area) {
     ASSERT_EQ(3, results.size());
 
     EXPECT_EQ("3", results[0]->id());
-    EXPECT_EQ("Triangle ([0.000, 0.000], [3.000, 0.000], [0.000, 4.000])", results[0]->info());
+    EXPECT_EQ("Triangle ([0.000, 0.000], [0.000, -3.000], [-4.000, 0.000])", results[0]->info());
     EXPECT_NEAR(6, results[0]->area(), ABS);
 
     EXPECT_EQ("9", results[1]->id());
-    EXPECT_EQ("Compound Shape {Rectangle ([1.000, 1.000], [-1.000, 1.000], [-1.000, -1.000], [1.000, -1.000]), Triangle ([0.000, 0.000], [3.000, 0.000], [0.000, 4.000])}", results[1]->info());
+    EXPECT_EQ("Compound Shape {Rectangle (2.000, 2.000), Triangle ([0.000, 0.000], [0.000, -3.000], [-4.000, 0.000])}", results[1]->info());
     EXPECT_NEAR(10, results[1]->area(), ABS);
     
     EXPECT_EQ("6", results[2]->id());
-    EXPECT_EQ("Triangle ([0.000, 0.000], [3.000, 0.000], [0.000, 4.000])", results[2]->info());
+    EXPECT_EQ("Triangle ([0.000, 0.000], [0.000, -3.000], [-4.000, 0.000])", results[2]->info());
     EXPECT_NEAR(6, results[2]->area(), ABS);
 }
 
@@ -204,15 +166,15 @@ TEST_F(UtlilityTestSuite, compound_shape_filter_shape_by_perimeter) {
     ASSERT_EQ(3, results.size());
 
     EXPECT_EQ("1", results[0]->id());
-    EXPECT_EQ("Ellipse ([-1.000, 3.140], 4.200, 3.700)", results[0]->info());
+    EXPECT_EQ("Ellipse (4.200, 3.700)", results[0]->info());
     EXPECT_NEAR(25.247, results[0]->perimeter(), ABS);
 
     EXPECT_EQ("4", results[1]->id());
-    EXPECT_EQ("Ellipse ([-1.000, 3.140], 4.200, 3.700)", results[1]->info());
+    EXPECT_EQ("Ellipse (4.200, 3.700)", results[1]->info());
     EXPECT_NEAR(25.247, results[1]->perimeter(), ABS);
 
     EXPECT_EQ("9", results[2]->id());
-    EXPECT_EQ("Compound Shape {Rectangle ([1.000, 1.000], [-1.000, 1.000], [-1.000, -1.000], [1.000, -1.000]), Triangle ([0.000, 0.000], [3.000, 0.000], [0.000, 4.000])}", results[2]->info());
+    EXPECT_EQ("Compound Shape {Rectangle (2.000, 2.000), Triangle ([0.000, 0.000], [0.000, -3.000], [-4.000, 0.000])}", results[2]->info());
     EXPECT_NEAR(20, results[2]->perimeter(), ABS);
 }
 
@@ -222,10 +184,10 @@ TEST_F(UtlilityTestSuite, compound_shape_filter_shape_by_type) {
     ASSERT_EQ(2, results.size());
 
     EXPECT_EQ("2", results[0]->id());
-    EXPECT_EQ("Rectangle ([1.000, 1.000], [-1.000, 1.000], [-1.000, -1.000], [1.000, -1.000])", results[0]->info());
+    EXPECT_EQ("Rectangle (2.000, 2.000)", results[0]->info());
 
     EXPECT_EQ("5", results[1]->id());
-    EXPECT_EQ("Rectangle ([1.000, 1.000], [-1.000, 1.000], [-1.000, -1.000], [1.000, -1.000])", results[1]->info());
+    EXPECT_EQ("Rectangle (2.000, 2.000)", results[1]->info());
 }
 
 TEST_F(UtlilityTestSuite, compound_shape_filter_shape_by_color) {
@@ -235,10 +197,10 @@ TEST_F(UtlilityTestSuite, compound_shape_filter_shape_by_color) {
     ASSERT_EQ(2, results.size());
 
     EXPECT_EQ("1", results[0]->id());
-    EXPECT_EQ("Ellipse ([-1.000, 3.140], 4.200, 3.700)", results[0]->info());
+    EXPECT_EQ("Ellipse (4.200, 3.700)", results[0]->info());
     EXPECT_EQ("red", results[0]->color());
 
     EXPECT_EQ("6", results[1]->id());
-    EXPECT_EQ("Triangle ([0.000, 0.000], [3.000, 0.000], [0.000, 4.000])", results[1]->info());
+    EXPECT_EQ("Triangle ([0.000, 0.000], [0.000, -3.000], [-4.000, 0.000])", results[1]->info());
     EXPECT_EQ("red", results[1]->color());
 }

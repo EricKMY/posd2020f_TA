@@ -6,11 +6,11 @@
 
 class Ellipse : public Shape {
 	public:
-	Ellipse(std::string id, std::vector<TwoDimensionalCoordinate*> coordinates, double semiMajorAxes, double semiMinorAxes): Shape(id), _coordinates(coordinates), _semiMajorAxes(semiMajorAxes), _semiMinorAxes(semiMinorAxes) {
+	Ellipse(std::string id, double semiMajorAxes, double semiMinorAxes): Shape(id), _semiMajorAxes(semiMajorAxes), _semiMinorAxes(semiMinorAxes){
 		checkShapeIsValid();
 	}
 
-	Ellipse(std::string id, std::vector<TwoDimensionalCoordinate*> coordinates, double semiMajorAxes, double semiMinorAxes, std::string color): Shape(id, color), _coordinates(coordinates), _semiMajorAxes(semiMajorAxes), _semiMinorAxes(semiMinorAxes) {
+	Ellipse(std::string id, double semiMajorAxes, double semiMinorAxes, std::string color): Shape(id, color), _semiMajorAxes(semiMajorAxes), _semiMinorAxes(semiMinorAxes){
 		checkShapeIsValid();
 	}
 
@@ -24,7 +24,7 @@ class Ellipse : public Shape {
 
 	std::string info() const {
 		char info[100];
-		sprintf(info, "Ellipse ([%.3f, %.3f], %.3f, %.3f)", _coordinates[0]->getX(), _coordinates[0]->getY(), _semiMajorAxes, _semiMinorAxes);
+		sprintf(info, "Ellipse (%.3f, %.3f)", _semiMajorAxes, _semiMinorAxes);
 		return info;
 	}
 
@@ -36,10 +36,6 @@ class Ellipse : public Shape {
 		visitor->visit(this);
 	}
 
-	std::vector<TwoDimensionalCoordinate*> coordinates() {
-    return _coordinates;
-  	}
-
 	double semiMajorAxes() const {
 		return _semiMajorAxes;
 	}
@@ -50,10 +46,9 @@ class Ellipse : public Shape {
 
 private:
 	double _semiMajorAxes, _semiMinorAxes;
-	std::vector<TwoDimensionalCoordinate*> _coordinates;
 
 	void checkShapeIsValid() const {
-		if(_coordinates.size() != 1 || _semiMajorAxes <= 0 || _semiMinorAxes <= 0 || _semiMajorAxes < _semiMinorAxes) {
+		if(_semiMajorAxes <= 0 || _semiMinorAxes <= 0 || _semiMajorAxes < _semiMinorAxes) {
 			throw std::string("This is not an ellipse!");
 		}
     }

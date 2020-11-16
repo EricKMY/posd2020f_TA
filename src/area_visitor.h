@@ -28,15 +28,7 @@ public:
     }
 
     void visit(Rectangle* rectangle) {
-        _area += fabs(
-                rectangle->coordinates()[0]->getX() * rectangle->coordinates()[1]->getY()
-              + rectangle->coordinates()[1]->getX() * rectangle->coordinates()[2]->getY()
-              + rectangle->coordinates()[2]->getX() * rectangle->coordinates()[3]->getY()
-              + rectangle->coordinates()[3]->getX() * rectangle->coordinates()[0]->getY()
-              - rectangle->coordinates()[0]->getX() * rectangle->coordinates()[3]->getY()
-              - rectangle->coordinates()[1]->getX() * rectangle->coordinates()[0]->getY()
-              - rectangle->coordinates()[2]->getX() * rectangle->coordinates()[1]->getY()
-              - rectangle->coordinates()[3]->getX() * rectangle->coordinates()[2]->getY()) / 2;
+        _area += rectangle->length() * rectangle->width();
     }
 
     void visit(CompoundShape* compoundShape) {
