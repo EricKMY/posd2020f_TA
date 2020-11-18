@@ -32,7 +32,9 @@ public:
     for(std::list<Shape*>::const_iterator it = _shapes.begin(); it != _shapes.end(); ++it) {
       info += (*it)->info() + ", ";
     }
-    info.erase(info.end()-2, info.end());
+    if(_shapes.size() != 0) {
+      info.erase(info.end()-2, info.end());
+    }
     return info + "}";
   }
 

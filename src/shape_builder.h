@@ -25,6 +25,14 @@ public:
         _results.push(new Triangle(id, coordinates));
     }
 
+    void buildCompundShapeStart() {
+    }
+
+    void buildCompundShapeEnd(std::string id) {
+
+        
+    }
+
     std::stack<Shape*> getResult() {
         return _results;
     }
