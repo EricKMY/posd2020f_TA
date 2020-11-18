@@ -5,14 +5,14 @@ SHAPE = src/shape.h src/ellipse.h src/rectangle.h src/triangle.h \
 ITERATOR = src/iterator.h src/null_iterator.h src/shape_iterator.h src/utility.h
 VISITOR = src/visitor.h src/area_visitor.h src/info_visitor.h 
 
-BUILDER = src/scanner.h
+BUILDER = src/scanner.h src/shape_builder.h
 
 SRC = $(SHAPE) $(ITERATOR) $(VISITOR) $(BUILDER)
 
 
 
 TEST = test/ut_ellipse.h test/ut_rectangle.h test/ut_triangle.h test/ut_compound_shape.h \
-		test/ut_iterator.h test/ut_utility.h test/ut_visitor.h test/ut_scanner.h
+		test/ut_iterator.h test/ut_utility.h test/ut_visitor.h test/ut_scanner.h test/ut_shape_builder.h
 OBJ = obj/shape.o
 all:directories bin/ut_main
 
