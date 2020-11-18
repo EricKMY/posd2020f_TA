@@ -30,6 +30,7 @@ public:
                             case '}':
                             case '[':
                             case ']':
+                                _tokenType = {c};
                                 return {c};
                             default:
                             break;
@@ -47,6 +48,7 @@ public:
                         _bufferStr = "";
 
                         if (isShape(compare_str)) {
+                            _tokenType = "SHAPE";
                             return compare_str;
                         }
                     }
@@ -61,6 +63,7 @@ public:
                         std::string number = _bufferStr;
 
                         _bufferStr = "";
+                        _tokenType = "NUMBER";
                         return number;
                     }
                 break;
@@ -70,11 +73,16 @@ public:
         return _bufferStr;
     }
 
+    std::string tokenType() {
+        return _tokenType;
+    }
+
 private:
     std::string _input;
     std::string _bufferStr;
     int _currPos;
     int _currState;
+    std::string _tokenType;
 
     char nextChar() {
         if(_currPos >= _input.size()) {
