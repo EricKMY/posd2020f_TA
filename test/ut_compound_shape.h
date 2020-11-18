@@ -61,15 +61,6 @@ TEST(CompoundShape, no_exception_for_constructor) {
     ASSERT_NO_THROW(CompoundShape("4", shapes));
 }
 
-TEST(CompoundShape, exception_for_constructor_with_empty_shapes) {
-    try {
-        CompoundShape("7", {});
-        FAIL();
-    }catch(std::string e) {
-        ASSERT_EQ("This is not a compound shape!", e);
-    }
-}
-
 TEST_F(CompoundShapeTestSuite, area) {
     ASSERT_NEAR(55.699, compoundShape_7->area(), ABS);
 }

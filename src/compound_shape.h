@@ -8,7 +8,7 @@
 class CompoundShape : public Shape {
 public: 
   CompoundShape(std::string id, std::list<Shape*> shapes): Shape(id, "transparent"), _shapes(shapes) {
-    checkShapeIsValid();
+    // checkShapeIsValid();
   }
 
   double area() const {
