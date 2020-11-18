@@ -12,47 +12,56 @@ public:
     std::string nextToken() {
         while(true) {
             char c = nextChar(); // if no char throw exception "next char doesn't exist."
-            //can use state pattern after scanner finished.
             switch(_currState) {
                 case START_STATE:
-                    if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z')) {
+                    if (isLetter(c)) {
                         //change state;
                         _bufferStr += {c};
-                        _currState = IDENTIFIER_STATE;
+                        _currState = IDENTIFIER_SHAPE_STATE;
+                    }else if(isNumber(c)) {
+                        _bufferStr += {c};
+                        _currState = IDENTIFIER_NUMBER_STATE;
                     }else {
                         switch(c) {
+                            case '(':
+                            case ')':
+                            case ',':
                             case '{':
-                                return {c};
                             case '}':
+                            case '[':
+                            case ']':
                                 return {c};
                             default:
                             break;
                         }
                     }
                 break;
-                case IDENTIFIER_STATE:
-                    if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z')) {
+                case IDENTIFIER_SHAPE_STATE:
+                    if (isLetter(c)) {
                         _bufferStr += {c};
                     }else {
                         //change state;
                         _currPos--; //retract.
                         _currState = START_STATE;
+                        std::string compare_str = _bufferStr;
+                        _bufferStr = "";
 
-                        if(_bufferStr == "CompoundShape") {
-                            _bufferStr = "";
-                            return "CompoundShape";
-                        }else if(_bufferStr == "Ellipse") {
-                            _bufferStr = "";
-                            return "Ellipse";
-                        }else if(_bufferStr == "Rectangle") {
-                            _bufferStr = "";
-                            return "Rectangle";
-                        }else if(_bufferStr == "Triangle") {
-                            _bufferStr = "";
-                            return "Triangle";
+                        if (isShape(compare_str)) {
+                            return compare_str;
                         }
+                    }
+                break;
+
+                case IDENTIFIER_NUMBER_STATE:
+                    if(isNumber(c)) {
+                        _bufferStr += {c};
+                    }else {
+                        _currPos--; //retract.
+                        _currState = START_STATE;
+                        std::string number = _bufferStr;
 
                         _bufferStr = "";
+                        return number;
                     }
                 break;
             }
@@ -77,8 +86,21 @@ private:
     }
 
 
+    bool isLetter(char c) {
+        return (c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z');
+    }
+
+    bool isNumber(char c) {
+        return (c >= '0' && c <= '9') || c =='.' || c == '-';
+    }
+
+    bool isShape(std::string s) {
+        return s == "CompoundShape" || s == "Ellipse" || s == "Rectangle" || s == "Triangle";
+    }
+
     static const int START_STATE  = 0;
-    static const int IDENTIFIER_STATE = 1;
+    static const int IDENTIFIER_SHAPE_STATE = 1;
+    static const int IDENTIFIER_NUMBER_STATE = 2;
 };
 
 #endif
