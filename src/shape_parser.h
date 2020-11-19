@@ -12,216 +12,151 @@ public:
     }
 
     void parser() {
-        std::vector<double> arg;
         while(true) {
             std::string token;
+
             try {
                 token = sc->nextToken();
             }catch(std::string s) {
                 return;
             }
             
-            if(token == "Ellipse") {  //Ellipse (4.000, 3.000)
-                bool isVaild = true;
-                for(int i = 0; i < 5 && isVaild; i++) {
-                    try {
-                        token = sc->nextToken();
-                    }catch(std::string s) {
-                        return;
-                    }
-
-                    switch(i) {
-                        case 0:
-                            if(sc->tokenType() != "(")
-                                isVaild = false;
-                        break;
-                        case 1:
-                            if(sc->tokenType() != "NUMBER")
-                                isVaild = false;
-                            arg.push_back(std::stod(token.c_str())); // number
-                        break;
-                        case 2:
-                            if(sc->tokenType() != ",")
-                                isVaild = false;
-                        break;
-                        case 3:
-                            if(sc->tokenType() != "NUMBER")
-                                isVaild = false;
-                            arg.push_back(std::stod(token.c_str())); // number
-                        break;
-                        case 4:
-                            if(sc->tokenType() != ")")
-                                isVaild = false;
-                        break;
-                    }
-                }
-
-                if(isVaild) {
-                    buildEllipse(arg[0], arg[1]);
-                }
-
-                arg.clear();
-            }else if(token == "Rectangle") {//Rectangle (3.000, 4.000)
-                bool isVaild = true;
-                for(int i = 0; i < 5 && isVaild; i++) {
-                    try {
-                        token = sc->nextToken();
-                    }catch(std::string s) {
-                        return;
-                    }
-
-                    switch(i) {
-                        case 0:
-                            if(sc->tokenType() != "(")
-                                isVaild = false;
-                        break;
-                        case 1:
-                            if(sc->tokenType() != "NUMBER")
-                                isVaild = false;
-                            arg.push_back(std::stod(token.c_str())); // number
-                        break;
-                        case 2:
-                            if(sc->tokenType() != ",")
-                                isVaild = false;
-                        break;
-                        case 3:
-                            if(sc->tokenType() != "NUMBER")
-                                isVaild = false;
-                            arg.push_back(std::stod(token.c_str())); // number
-                        break;
-                        case 4:
-                            if(sc->tokenType() != ")")
-                                isVaild = false;
-                        break;
-                    }
-                }
-
-                if(isVaild) {
-                    buildRectangle(arg[0], arg[1]);
-                }
-
-                arg.clear();
-            }else if(token == "Triangle") {//Triangle ([0.000, 0.000], [3.000, 0.000], [0.000, 4.000])
-                bool isVaild = true;
-                for(int i = 0; i < 19 && isVaild; i++) {
-                    try {
-                        token = sc->nextToken();
-                    }catch(std::string s) {
-                        return;
-                    }
-
-                    // too long!
-                    switch(i) {
-                        case 0:
-                            if(sc->tokenType() != "(")
-                                isVaild = false;
-                        break;
-                        case 1:
-                            if(sc->tokenType() != "[")
-                                isVaild = false;
-                        break;
-                        case 2:
-                            if(sc->tokenType() != "NUMBER")
-                                isVaild = false;
-                            arg.push_back(std::stod(token.c_str())); // number
-                        break;
-                        case 3:
-                            if(sc->tokenType() != ",")
-                                isVaild = false;
-                        break;
-                        case 4:
-                            if(sc->tokenType() != "NUMBER")
-                                isVaild = false;
-                            arg.push_back(std::stod(token.c_str())); // number
-                        break;
-                        case 5:
-                            if(sc->tokenType() != "]")
-                                isVaild = false;
-                        break;
-                        case 6:
-                            if(sc->tokenType() != ",")
-                                isVaild = false;
-                        break;
-                        case 7:
-                            if(sc->tokenType() != "[")
-                                isVaild = false;
-                        break;
-                        case 8:
-                            if(sc->tokenType() != "NUMBER")
-                                isVaild = false;
-                            arg.push_back(std::stod(token.c_str())); // number
-                        break;
-                        case 9:
-                            if(sc->tokenType() != ",")
-                                isVaild = false;
-                        break;
-                        case 10:
-                            if(sc->tokenType() != "NUMBER")
-                                isVaild = false;
-                            arg.push_back(std::stod(token.c_str())); // number
-                        break;
-                        case 11:
-                            if(sc->tokenType() != "]")
-                                isVaild = false;
-                        break;
-                        case 12:
-                            if(sc->tokenType() != ",")
-                                isVaild = false;
-                        break;
-                        case 13:
-                            if(sc->tokenType() != "[")
-                                isVaild = false;
-                        break;
-                        case 14:
-                            if(sc->tokenType() != "NUMBER")
-                                isVaild = false;
-                            arg.push_back(std::stod(token.c_str())); // number
-                        break;
-                        case 15:
-                            if(sc->tokenType() != ",")
-                                isVaild = false;
-                        break;
-                        case 16:
-                            if(sc->tokenType() != "NUMBER")
-                                isVaild = false;
-                            arg.push_back(std::stod(token.c_str())); // number
-                        break;
-                        case 17:
-                            if(sc->tokenType() != "]")
-                                isVaild = false;
-                        break;
-                        case 18:
-                            if(sc->tokenType() != ")")
-                                isVaild = false;
-                        break;
-                    }
-                }
-
-                if(isVaild) {
-                    buildTriangle(arg[0], arg[1], arg[2], arg[3], arg[4], arg[5]);
-                }
-
-                arg.clear();
-            }else if(token == "CompoundShape") {  //CompoundShape {Ellipse (4.000, 3.000)}
-                // call buildCompoundShapeBegin();
-                buildCompoundShapeBegin();
-            }else if(token == "}") { // compoundShapeEnd;
-                buildCompoundShapeEnd();
-            }
-
+            parseShape(token);
         }
     }
 
-    std::vector<std::string> getResult() {
-
-        return _result;
+    void parseShape(std::string token) {
+        _arg.clear();
+        if(checkEllipseVaild(token)) {
+            buildEllipse(_arg[0], _arg[1]);
+        }else if(checkRectangleVaild(token)) {
+            buildRectangle(_arg[0], _arg[1]);
+        }else if(checkTriangleVaild(token)) {
+            buildTriangle(_arg[0], _arg[1], _arg[2], _arg[3], _arg[4], _arg[5]);
+        }else if(checkCompoundShapeVaild(token)) {
+            buildCompoundShapeEnd();
+        }
     }
 
+    bool checkEllipseVaild(std::string token) {
+        if(token == "Ellipse") {
+            if(checkArgVaild()) {
+                return true;
+            }
+        }
+        return false;
+    }
 
+    bool checkRectangleVaild(std::string token) {
+        if(token == "Rectangle") {
+            if(checkArgVaild()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    bool checkTriangleVaild(std::string token) {
+        if(token == "Triangle") {
+            if(checkTriangleArgVaild()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    bool checkCompoundShapeVaild(std::string token) {
+        if(token == "CompoundShape") {
+            buildCompoundShapeBegin();
+
+            token = sc->nextToken();
+            if(token != "{") return false;
+
+            token = sc->nextToken();
+            while(token != "}") {
+                parseShape(token);
+                token = sc->nextToken();
+            }
+            return true;
+        }
+        
+        return false;
+    }
+
+    bool checkArgVaild() {
+        std::string token;
+        bool isVaild = true;
+
+        for(int i = 0; i < 5 && isVaild; i++) {
+            try {
+                token = sc->nextToken();
+            }catch(std::string s) {
+                return false;//?
+            }
+
+            switch(i) {
+                case 0:
+                    isVaild = token == "(" ? true : false;
+                    break;
+                case 1:
+                    if(!checkIsNumber(token)) isVaild = false;
+                    break;
+                case 2:
+                    isVaild = token == "," ? true : false;
+                    break;
+                case 3:
+                    if(!checkIsNumber(token)) isVaild = false;
+                    break;
+                case 4:
+                    isVaild = token == ")" ? true : false;
+                    break;
+            }
+        }
+
+        return isVaild;
+    }
+
+    bool checkTriangleArgVaild() {
+        std::string token;
+        bool isVaild = true;
+
+        token = sc->nextToken();
+        if(token != "[") return false;
+        if(!checkArgVaild()) return false;
+        
+        token = sc->nextToken();
+        if(token != ",") return false;
+        if(!checkArgVaild()) return false;
+
+        token = sc->nextToken();
+        if(token != ",") return false;
+        if(!checkArgVaild()) return false;
+
+        token = sc->nextToken();
+        if(token != "]") return false;
+
+        return true;
+    }
+
+    bool checkIsNumber(std::string token) {
+        double d;
+        try {
+            d = std::stod(token.c_str());
+        }catch(std::string s) {
+            return false;
+        }        
+        _arg.push_back(d);
+        return true;
+    }
+
+    std::vector<std::string> getResult() {
+        return _result;
+    }
+    
 private:
     Scanner *sc;
     std::vector<std::string> _result;
-    std::stack<std::string> _stack;
+    std::vector<double> _arg;
 
     void buildRectangle(double w, double l) {
         //use builder
@@ -239,10 +174,10 @@ private:
         _result.push_back(ss.str());
     }
 
-    void buildTriangle(double c1, double c2, double c3, double c4, double c5, double c6) {
+    void buildTriangle(double x1, double y1, double x2, double y2, double x3, double y3) {
         //use builder
         std::stringstream ss;
-        ss << "Triangle " << c1 << " " << c2 << " " << c3 << " " << c4 << " " << c5 << " " << c6 << "\n";
+        ss << "Triangle " << x1 << " " << y1 << " " << x2 << " " << y2 << " " << x3 << " " << y3 << "\n";
 
         _result.push_back(ss.str());
     }
