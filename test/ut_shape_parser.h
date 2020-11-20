@@ -20,7 +20,7 @@ TEST(ShapeParser, parser_rectangle) {
 }
 
 TEST(ShapeParser, parser_triangle) {
-    std::string input = "Triangle [(0.000, 0.000), (3.000, 0.000), (0.000, 4.000)]";
+    std::string input = "Triangle (0.000, 0.000, 3.000, 0.000, 0.000, 4.000)";
     ShapeParser *sp = new ShapeParser(input);
     sp->parser();
 
@@ -51,7 +51,7 @@ TEST(ShapeParser, parser_compound_shape_contains_rectangle) {
 } 
 
 TEST(ShapeParser, parser_compound_shape_contains_triangle) {
-    std::string input = "CompoundShape {Triangle [(0.000, 0.000), (3.000, 0.000), (0.000, 4.000)]}";
+    std::string input = "CompoundShape {Triangle (0.000, 0.000, 3.000, 0.000, 0.000, 4.000)}";
     ShapeParser *sp = new ShapeParser(input);
     sp->parser();
 
@@ -62,7 +62,7 @@ TEST(ShapeParser, parser_compound_shape_contains_triangle) {
 } 
 
 TEST(ShapeParser, parser_compound_shape_structure_1) {
-    std::string input = "CompoundShape {Rectangle (3.000, 4.000), CompoundShape {Ellipse (4.000, 3.000), Rectangle (3.000, 4.000), Triangle [(0.000, 0.000), (3.000, 0.000), (0.000, 4.000)]}}";
+    std::string input = "CompoundShape {Rectangle (3.000, 4.000), CompoundShape {Ellipse (4.000, 3.000), Rectangle (3.000, 4.000), Triangle (0.000, 0.000, 3.000, 0.000, 0.000, 4.000)}}";
     ShapeParser *sp = new ShapeParser(input);
     sp->parser();
 
@@ -80,7 +80,7 @@ TEST(ShapeParser, parser_compound_shape_structure_1) {
 
 
 TEST(ShapeParser, parser_compound_shape_structure_2) {
-    std::string input = "CompoundShape {Rectangle (3.000, 4.000), CompoundShape {Ellipse (4.000, 3.000), CompoundShape {Triangle [(0.000, 0.000), (3.000, 0.000), (0.000, 4.000)]}}}";
+    std::string input = "CompoundShape {Rectangle (3.000, 4.000), CompoundShape {Ellipse (4.000, 3.000), CompoundShape {Triangle (0.000, 0.000, 3.000, 0.000, 0.000, 4.000)}}}";
     ShapeParser *sp = new ShapeParser(input);
     sp->parser();
 

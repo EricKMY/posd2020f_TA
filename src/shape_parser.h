@@ -85,55 +85,52 @@ public:
 
     bool checkArgVaild() {
         std::string token;
-        bool isVaild = true;
 
-        for(int i = 0; i < 5 && isVaild; i++) {
-            try {
-                token = sc->nextToken();
-            }catch(std::string s) {
-                return false;//?
-            }
+        token = sc->nextToken();
+        if(token != "(") return false;
 
-            switch(i) {
-                case 0:
-                    isVaild = token == "(" ? true : false;
-                    break;
-                case 1:
-                    if(!checkIsNumber(token)) isVaild = false;
-                    break;
-                case 2:
-                    isVaild = token == "," ? true : false;
-                    break;
-                case 3:
-                    if(!checkIsNumber(token)) isVaild = false;
-                    break;
-                case 4:
-                    isVaild = token == ")" ? true : false;
-                    break;
-            }
-        }
+        if(!checkNumberPairVaild()) return false;
 
-        return isVaild;
+        token = sc->nextToken();
+        if(token != ")") return false;
+
+        return true;
     }
 
     bool checkTriangleArgVaild() {
         std::string token;
-        bool isVaild = true;
 
         token = sc->nextToken();
-        if(token != "[") return false;
-        if(!checkArgVaild()) return false;
-        
-        token = sc->nextToken();
-        if(token != ",") return false;
-        if(!checkArgVaild()) return false;
+        if(token != "(") return false;
+
+        if(!checkNumberPairVaild()) return false;
 
         token = sc->nextToken();
         if(token != ",") return false;
-        if(!checkArgVaild()) return false;
+
+        if(!checkNumberPairVaild()) return false;
 
         token = sc->nextToken();
-        if(token != "]") return false;
+        if(token != ",") return false;
+
+        if(!checkNumberPairVaild()) return false;
+
+        token = sc->nextToken();
+        if(token != ")") return false;
+
+        return true;
+    }
+
+    bool checkNumberPairVaild() {
+        std::string token;
+        token = sc->nextToken();
+        if(!checkIsNumber(token)) return false;
+
+        token = sc->nextToken();
+        if(token != ",") return false;
+
+        token = sc->nextToken();
+        if(!checkIsNumber(token)) return false;
 
         return true;
     }
