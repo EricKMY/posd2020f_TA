@@ -4,11 +4,15 @@
 #include <string>
 #include <stack>
 #include "scanner.h"
+#include "shape_builder.h"
+
+class Shape;
 
 class ShapeParser {
 public:
     ShapeParser(std::string input) {
         sc = new Scanner(input);
+        sp = new ShapeBuilder();
     }
 
     void parser() {
@@ -28,13 +32,13 @@ public:
     void parseShape(std::string token) {
         _arg.clear();
         if(checkEllipseVaild(token)) {
-            buildEllipse(_arg[0], _arg[1]);
+            sp->buildEllipse(_arg[0], _arg[1]);
         }else if(checkRectangleVaild(token)) {
-            buildRectangle(_arg[0], _arg[1]);
+            sp->buildRectangle(_arg[0], _arg[1]);
         }else if(checkTriangleVaild(token)) {
-            buildTriangle(_arg[0], _arg[1], _arg[2], _arg[3], _arg[4], _arg[5]);
+            sp->buildTriangle(_arg[0], _arg[1], _arg[2], _arg[3], _arg[4], _arg[5]);
         }else if(checkCompoundShapeVaild(token)) {
-            buildCompoundShapeEnd();
+            sp->buildCompoundShapeEnd();
         }
     }
 
@@ -67,7 +71,7 @@ public:
 
     bool checkCompoundShapeVaild(std::string token) {
         if(token == "CompoundShape") {
-            buildCompoundShapeBegin();
+            sp->buildCompoundShapeBegin();
 
             token = sc->nextToken();
             if(token != "{") return false;
@@ -146,53 +150,54 @@ public:
         return true;
     }
 
-    std::vector<std::string> getResult() {
-        return _result;
+    std::stack<Shape*> getResult() {
+        return sp->getResult();
     }
     
 private:
     Scanner *sc;
+    ShapeBuilder* sp;
     std::vector<std::string> _result;
     std::vector<double> _arg;
 
-    void buildRectangle(double w, double l) {
-        //use builder
-        std::stringstream ss;
-        ss << "Rectangle " << w << " " << l << "\n";
+    // void buildRectangle(double w, double l) {
+    //     //use builder
+    //     std::stringstream ss;
+    //     ss << "Rectangle " << w << " " << l << "\n";
 
-        _result.push_back(ss.str());
-    }
+    //     _result.push_back(ss.str());
+    // }
 
-    void buildEllipse(double semiMajorAxes, double semiMinorAxes) {
-        //use builder
-        std::stringstream ss;
-        ss << "Ellipse " << semiMajorAxes << " " << semiMinorAxes << "\n";
+    // void buildEllipse(double semiMajorAxes, double semiMinorAxes) {
+    //     //use builder
+    //     std::stringstream ss;
+    //     ss << "Ellipse " << semiMajorAxes << " " << semiMinorAxes << "\n";
 
-        _result.push_back(ss.str());
-    }
+    //     _result.push_back(ss.str());
+    // }
 
-    void buildTriangle(double x1, double y1, double x2, double y2, double x3, double y3) {
-        //use builder
-        std::stringstream ss;
-        ss << "Triangle " << x1 << " " << y1 << " " << x2 << " " << y2 << " " << x3 << " " << y3 << "\n";
+    // void buildTriangle(double x1, double y1, double x2, double y2, double x3, double y3) {
+    //     //use builder
+    //     std::stringstream ss;
+    //     ss << "Triangle " << x1 << " " << y1 << " " << x2 << " " << y2 << " " << x3 << " " << y3 << "\n";
 
-        _result.push_back(ss.str());
-    }
+    //     _result.push_back(ss.str());
+    // }
 
-    void buildCompoundShapeBegin() {
-        //use builder
-        std::stringstream ss;
-        ss << "CompoundShape {\n" ;
-        _result.push_back(ss.str());
-    }
+    // void buildCompoundShapeBegin() {
+    //     //use builder
+    //     std::stringstream ss;
+    //     ss << "CompoundShape {\n" ;
+    //     _result.push_back(ss.str());
+    // }
 
-    void buildCompoundShapeEnd() {
-        //use builder
-        std::stringstream ss;
-        ss << "}\n" ;
+    // void buildCompoundShapeEnd() {
+    //     //use builder
+    //     std::stringstream ss;
+    //     ss << "}\n" ;
 
-        _result.push_back(ss.str());
-    }
+    //     _result.push_back(ss.str());
+    // }
 };
 
 #endif
