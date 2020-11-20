@@ -33,28 +33,28 @@ TEST(Scanner, rectangle) {
 } 
 
 TEST(Scanner, triangle) {
-    std::string input = "Triangle ([0.000, 0.000], [3.000, 0.000], [0.000, 4.000])";
+    std::string input = "Triangle (0.000, 0.000, 3.000, 0.000, 0.000, 4.000)";
     Scanner *scn = new Scanner(input);
 
     ASSERT_EQ("Triangle", scn->nextToken());
     ASSERT_EQ("(", scn->nextToken());
-    ASSERT_EQ("[", scn->nextToken());
+
     ASSERT_EQ("0.000", scn->nextToken());
     ASSERT_EQ(",", scn->nextToken());
     ASSERT_EQ("0.000", scn->nextToken());
-    ASSERT_EQ("]", scn->nextToken());
+
     ASSERT_EQ(",", scn->nextToken());
-    ASSERT_EQ("[", scn->nextToken());
+
     ASSERT_EQ("3.000", scn->nextToken());
     ASSERT_EQ(",", scn->nextToken());
     ASSERT_EQ("0.000", scn->nextToken());
-    ASSERT_EQ("]", scn->nextToken());
+
     ASSERT_EQ(",", scn->nextToken());
-    ASSERT_EQ("[", scn->nextToken());
+
     ASSERT_EQ("0.000", scn->nextToken());
     ASSERT_EQ(",", scn->nextToken());
     ASSERT_EQ("4.000", scn->nextToken());
-    ASSERT_EQ("]", scn->nextToken());
+
     ASSERT_EQ(")", scn->nextToken());
 } 
 
@@ -113,7 +113,7 @@ TEST(Scanner, compound_shape_contains_rectangle) {
 } 
 
 TEST(Scanner, compound_shape_contains_triangle) {
-    std::string input = "CompoundShape {Triangle ([0.000, 0.000], [3.000, 0.000], [0.000, 4.000])}";
+    std::string input = "CompoundShape {Triangle (0.000, 0.000, 3.000, 0.000, 0.000, 4.000)}";
     Scanner *scn = new Scanner(input);
 
     ASSERT_EQ("CompoundShape", scn->nextToken());
@@ -121,23 +121,23 @@ TEST(Scanner, compound_shape_contains_triangle) {
 
     ASSERT_EQ("Triangle", scn->nextToken());
     ASSERT_EQ("(", scn->nextToken());
-    ASSERT_EQ("[", scn->nextToken());
+
     ASSERT_EQ("0.000", scn->nextToken());
     ASSERT_EQ(",", scn->nextToken());
     ASSERT_EQ("0.000", scn->nextToken());
-    ASSERT_EQ("]", scn->nextToken());
+
     ASSERT_EQ(",", scn->nextToken());
-    ASSERT_EQ("[", scn->nextToken());
+
     ASSERT_EQ("3.000", scn->nextToken());
     ASSERT_EQ(",", scn->nextToken());
     ASSERT_EQ("0.000", scn->nextToken());
-    ASSERT_EQ("]", scn->nextToken());
+
     ASSERT_EQ(",", scn->nextToken());
-    ASSERT_EQ("[", scn->nextToken());
+
     ASSERT_EQ("0.000", scn->nextToken());
     ASSERT_EQ(",", scn->nextToken());
     ASSERT_EQ("4.000", scn->nextToken());
-    ASSERT_EQ("]", scn->nextToken());
+
     ASSERT_EQ(")", scn->nextToken());
 
     ASSERT_EQ("}", scn->nextToken());
@@ -145,7 +145,7 @@ TEST(Scanner, compound_shape_contains_triangle) {
 
 
 TEST(Scanner, compound_shape_contains_compound_shape) {
-    std::string input = "CompoundShape {Rectangle (3.000, 4.000), CompoundShape {Ellipse (4.000, 3.000), Rectangle (3.000, 4.000), Triangle ([0.000, 0.000], [3.000, 0.000], [0.000, 4.000])}}";
+    std::string input = "CompoundShape {Rectangle (3.000, 4.000), CompoundShape {Ellipse (4.000, 3.000), Rectangle (3.000, 4.000), Triangle (0.000, 0.000, 3.000, 0.000, 0.000, 4.000)}}";
     Scanner *scn = new Scanner(input);
 
     ASSERT_EQ("CompoundShape", scn->nextToken());
@@ -183,23 +183,23 @@ TEST(Scanner, compound_shape_contains_compound_shape) {
 
     ASSERT_EQ("Triangle", scn->nextToken());
     ASSERT_EQ("(", scn->nextToken());
-    ASSERT_EQ("[", scn->nextToken());
+
     ASSERT_EQ("0.000", scn->nextToken());
     ASSERT_EQ(",", scn->nextToken());
     ASSERT_EQ("0.000", scn->nextToken());
-    ASSERT_EQ("]", scn->nextToken());
+
     ASSERT_EQ(",", scn->nextToken());
-    ASSERT_EQ("[", scn->nextToken());
+
     ASSERT_EQ("3.000", scn->nextToken());
     ASSERT_EQ(",", scn->nextToken());
     ASSERT_EQ("0.000", scn->nextToken());
-    ASSERT_EQ("]", scn->nextToken());
+
     ASSERT_EQ(",", scn->nextToken());
-    ASSERT_EQ("[", scn->nextToken());
+
     ASSERT_EQ("0.000", scn->nextToken());
     ASSERT_EQ(",", scn->nextToken());
     ASSERT_EQ("4.000", scn->nextToken());
-    ASSERT_EQ("]", scn->nextToken());
+
     ASSERT_EQ(")", scn->nextToken());
 
     ASSERT_EQ("}", scn->nextToken());
