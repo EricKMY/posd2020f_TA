@@ -2,6 +2,7 @@
 
 #include <stack>
 #include <vector>
+#include <deque>
 #include "../src/ellipse.h"
 #include "../src/rectangle.h"
 #include "../src/triangle.h"
@@ -25,12 +26,20 @@ public:
         _results.push(new Triangle(id, coordinates));
     }
 
-    void buildCompundShapeStart() {
+    void buildCompundShapeStart(std::string id) {
+        Shape* s = new CompoundShape(id, {});
+        _results.push(s);
     }
 
-    void buildCompundShapeEnd(std::string id) {
-
-        
+    void buildCompundShapeEnd() {
+        Shape* s = _results.top();
+        if(isEmptyCompoundShape(s)) {
+            while(_results.size() != 0) {
+                _results.pop();
+                s->addShape(_results.top());
+            }
+        }
+        _results.push(s);
     }
 
     std::stack<Shape*> getResult() {
@@ -39,4 +48,8 @@ public:
 
 private:
     std::stack<Shape*> _results;
+
+    bool isEmptyCompoundShape(Shape* s) {
+        return dynamic_cast<CompoundShape*>(s) && s->createIterator()->isDone();
+    }
 };
