@@ -1,7 +1,7 @@
-# **Pattern Oriented Software Design 2020 Fall Assignment 6**  
+# **Pattern Oriented Software Design 2020 Fall Assignment 7**  
 
 ## **Notice**  
-* **Due on Tuesday November 10 2020, 23:59.**  
+* **Due on Tuesday December 1 2020, 23:59.**  
 * **If your code fails to compile on jenkins server, you'll get no point for the assignment.**  
 * **You should add unit test for each requirment under corresponding ut_file.**  
 
@@ -10,90 +10,66 @@
 2. Unit tests written by TA: 60%.  
 
 ## **Useful Reference**  
-[Visitor Pattern](https://refactoring.guru/design-patterns/visitor)  
+[Builder Pattern](https://refactoring.guru/design-patterns/builder)  
 
 ## **Requirement**  
-1. Add function `accept()` in `Shape` as following.  
-````
-class Shape {
-public:
-    virtual void accept(Visitor* visitor) = 0;
-}
-````
-2. Add interface class `Visitor` with overloading function in `visitor.h`.  
+1. Add class `Scanner` in `scanner.h` and corresponding unit test in `ut_scanner.h`.  
 ```
-class Visitor {
+class Scanner {
 public:
-    virtual void visit(Ellipse* ellipse) = 0;
-
-    virtual void visit(Triangle* triangle) = 0;
-
-    virtual void visit(Rectangle* rectangle) = 0;
-
-    virtual void visit(CompoundShape* compoundShape) = 0;
+    Scanner(std::string input) {}
+    
+    std::string nextToken() {}
 };
 ```
-3. Implement `AreaVisitor` in `area_visitor.h` and write the unit test in `ut_visitor.h`.  
+2. Add class `ShapeBuilder` in `shape_builder.h` and corresponding unit test in `ut_shape_builder.h`.  
 ```
-class AreaVisitor : public Visitor {
+class ShapeBuilder {
 public:
-    void visit(Ellipse* ellipse) {
-        // caculate the area of Ellipse.
-        // DO NOT use ellipse->area() to get area directly.
-        // you may add public function for Ellipse to get it's data members.
+    ShapeBuilder() {}
+    
+    void buildRectangle(double length, double width) {
+        // build a rectangle with an unique id and push in a result stack.
     }
-
-    void visit(Triangle* triangle) {
-        // caculate the area of Triangle.
-        // DO NOT use triangle->area() to get area directly.
-        // you may add public function for Triangle to get it's data members.
+    
+    void buildEllipse(double semiMajorAxes, double semiMinorAxes) {
+        // build a ellipse with an unique id and push in a result stack.
     }
-
-    void visit(Rectangle* rectangle) {
-        // caculate the area of Rectangle.
-        // DO NOT use rectangle->area() to get area directly.
-        // you may add public function for Rectangle to get it's data members.
-
-    void visit(CompoundShape* compoundShape) {
-        // caculate the area of CompoundShape.
-        // DO NOT use compoundShape->area() to get area directly.
-        // you may add public function for CompoundShape to get it's data members.
+    
+    void buildTriangle(double x1, double y1, double x2, double y2, double x3, double y3) {
+        // build a triangle with an unique id and push in a result stack.
     }
-
-    double area() const {
-        // return area;
+    
+    void buildCompoundShapeBegin() {
+        // for notifing beginning of a Compound Shape.
+    }
+    
+    void buildCompoundShapeEnd() {
+        // for notifing ending of a Compound Shape.
+    }
+    
+    std::stack<Shape*> getResult() {
+        // return result stack.
     }
 };
 ```
-4. Implement `InfoVisitor` in `info_visitor.h` and write the unit test in `ut_visitor.h`.  
+3. Add class `ShapeParser` in `shape_parser.h` and corresponding unit test in `ut_shape_parser.h`.  
 ```
-class InfoVisitor : public Visitor {
+class ShapeParser {
 public:
-    void visit(Ellipse* ellipse) {
-        // create info of ellipse, same way as ellipse->info().
-        // DO NOT use ellipse->info() to get info directly.
-        // you may add public function for Ellipse to get it's data members.
+    ShapeParser(std::string input) {
+        // initialize a scanner for handling input.
+        // initialize a shape builder for handling building shape.
     }
-
-    void visit(Triangle* triangle) {
-        // create info of ellipse, same way as triangle->info().
-        // DO NOT use triangle->info() to get info directly.
-        // you may add public function for Triangle to get it's data members.
+    
+    void parser() {
+        // using Scanner::nextToken() to get all information to determine what to build,
+        // and provid the argument the shape needed.
+        // use functions in ShapeBuilder to build out the shape.
     }
-
-    void visit(Rectangle* rectangle) {
-        // create info of rectangle, same way as rectangle->info().
-        // DO NOT use rectangle->info() to get info directly.
-        // you may add public function for Rectangle to get it's data members.
-
-    void visit(CompoundShape* compoundShape) {
-        // create info of compoundShape, same way as compoundShape->info().
-        // DO NOT use compoundShape->info() to get info directly.
-        // you may add public function for CompoundShape to get it's data members.
-    }
-
-    std::string info() const {
-        // return info;
+    
+    std::stack<Shape*> getResult() {
+        // reutrn result stack.
     }
 };
 ```
@@ -116,6 +92,9 @@ public:
 │   ├── visitor.h
 │   ├── area_visitor.h
 │   ├── info_visitor.h
+│   ├── scanner.h
+│   ├── shape_builder.h
+│   ├── shape_parser.h
 │   └── two_dimensional_coordinate.h
 ├── test
 │   ├── ut_main.cpp
@@ -125,7 +104,10 @@ public:
 │   ├── ut_compound_shape.h
 │   ├── ut_iterator.h
 │   ├── ut_utility.h
-│   └── ut_visitor.h
+│   ├── ut_visitor.h
+│   ├── ut_scanner.h
+│   ├── ut_shape_builder.h
+│   └── ut_shape_parser.h
 └── makefile
 
 ```
