@@ -1,17 +1,16 @@
 #define ABS 0.001
 
 #include <gtest/gtest.h>
-#include <deque>
-#include "../src/compound_shape.h"
 #include "../src/ellipse.h"
 #include "../src/rectangle.h"
 #include "../src/triangle.h"
+#include "../src/compound_shape.h"
 
 class IteratorTestSuite: public testing::Test {
     protected:
     virtual void SetUp() {
 
-        deque<TwoDimensionalCoordinate*> coordinates;
+        std::vector<TwoDimensionalCoordinate*> coordinates;
         coordinates.push_back(new TwoDimensionalCoordinate(0, 0));
         coordinates.push_back(new TwoDimensionalCoordinate(3, 0));
         coordinates.push_back(new TwoDimensionalCoordinate(0, 4));
@@ -20,21 +19,16 @@ class IteratorTestSuite: public testing::Test {
         rectangle = new Rectangle("2", 3, 4);
         triangle = new Triangle("3", coordinates);
 
-        shapes->push_back(ellipse);
-        shapes->push_back(rectangle);
-        shapes->push_back(triangle);
+        shapes.push_back(ellipse);
+        shapes.push_back(rectangle);
+        shapes.push_back(triangle);
 
         compoundShape = new CompoundShape("4", shapes);
     }
 
-    virtual void TearDown() {
-        shapes->clear();
-        delete ellipse;
-        delete rectangle;
-        delete triangle;
-    }
+    virtual void TearDown() {}
 
-    deque<Shape*> *shapes = new deque<Shape*>();
+    std::list<Shape*> shapes = {};
 
     Shape* ellipse;
     Shape* rectangle;
@@ -47,7 +41,7 @@ TEST_F(IteratorTestSuite, exception_for_rectangle_iterate_first){
     try {
         it->first();
         FAIL();
-    }catch(string e) {
+    }catch(std::string e) {
         ASSERT_EQ("No child member!", e);
     }
 }
@@ -57,7 +51,7 @@ TEST_F(IteratorTestSuite, exception_for_rectangle_iterate_current_item){
     try {
         it->currentItem();
         FAIL();
-    }catch(string e) {
+    }catch(std::string e) {
         ASSERT_EQ("No child member!", e);
     }
 }
@@ -67,7 +61,7 @@ TEST_F(IteratorTestSuite, exception_for_rectangle_iterate_next){
     try {
         it->next();
         FAIL();
-    }catch(string e) {
+    }catch(std::string e) {
         ASSERT_EQ("No child member!", e);
     }
 }
@@ -83,7 +77,7 @@ TEST_F(IteratorTestSuite, exception_for_ellipse_iterate_first){
     try {
         it->first();
         FAIL();
-    }catch(string e) {
+    }catch(std::string e) {
         ASSERT_EQ("No child member!", e);
     }
 }
@@ -93,7 +87,7 @@ TEST_F(IteratorTestSuite, exception_for_ellipse_iterate_current_item){
     try {
         it->currentItem();
         FAIL();
-    }catch(string e) {
+    }catch(std::string e) {
         ASSERT_EQ("No child member!", e);
     }
 }
@@ -103,7 +97,7 @@ TEST_F(IteratorTestSuite, exception_for_ellipse_iterate_next){
     try {
         it->next();
         FAIL();
-    }catch(string e) {
+    }catch(std::string e) {
         ASSERT_EQ("No child member!", e);
     }
 }
@@ -118,7 +112,7 @@ TEST_F(IteratorTestSuite, exception_for_triangle_iterate_first){
     try {
         it->first();
         FAIL();
-    }catch(string e) {
+    }catch(std::string e) {
         ASSERT_EQ("No child member!", e);
     }
 }
@@ -128,7 +122,7 @@ TEST_F(IteratorTestSuite, exception_for_triangle_iterate_current_item){
     try {
         it->currentItem();
         FAIL();
-    }catch(string e) {
+    }catch(std::string e) {
         ASSERT_EQ("No child member!", e);
     }
 }
@@ -138,7 +132,7 @@ TEST_F(IteratorTestSuite, exception_for_triangle_iterate_next){
     try {
         it->next();
         FAIL();
-    }catch(string e) {
+    }catch(std::string e) {
         ASSERT_EQ("No child member!", e);
     }
 }
@@ -199,7 +193,7 @@ TEST_F(IteratorTestSuite, exception_for_compound_shape_iterate_next_out_of_range
     try {
         it->next();
         FAIL();
-    }catch(string e) {
+    }catch(std::string e) {
         EXPECT_EQ("Moving past the end!", e);
     }
 }

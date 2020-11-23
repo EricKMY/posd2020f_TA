@@ -1,19 +1,16 @@
 #define ABS 0.001
 
 #include <gtest/gtest.h>
-#include "../src/compound_shape.h"
 #include "../src/ellipse.h"
 #include "../src/rectangle.h"
 #include "../src/triangle.h"
-#include "../src/two_dimensional_coordinate.h"
-
-using namespace std;
+#include "../src/compound_shape.h"
 
 class CompoundShapeTestSuite: public testing::Test {
-    protected:
+protected:
     virtual void SetUp() {
 
-        deque<TwoDimensionalCoordinate*> coordinates_1;
+        std::vector<TwoDimensionalCoordinate*> coordinates_1;
         coordinates_1.push_back(new TwoDimensionalCoordinate(0, 0));
         coordinates_1.push_back(new TwoDimensionalCoordinate(3, 0));
         coordinates_1.push_back(new TwoDimensionalCoordinate(0, 4));
@@ -22,12 +19,12 @@ class CompoundShapeTestSuite: public testing::Test {
         rectangle_2 = new Rectangle("2", 3, 4);
         triangle_3 = new Triangle("3", coordinates_1);
 
-        shapes->push_back(ellipse_1);
-        shapes->push_back(rectangle_2);
-        shapes->push_back(triangle_3);
+        shapes.push_back(ellipse_1);
+        shapes.push_back(rectangle_2);
+        shapes.push_back(triangle_3);
         compoundShape_7 = new CompoundShape("7", shapes);
 
-        deque<TwoDimensionalCoordinate*> coordinates_2;
+        std::vector<TwoDimensionalCoordinate*> coordinates_2;
         coordinates_2.push_back(new TwoDimensionalCoordinate(0, 0));
         coordinates_2.push_back(new TwoDimensionalCoordinate(3, 0));
         coordinates_2.push_back(new TwoDimensionalCoordinate(0, 4));
@@ -39,7 +36,7 @@ class CompoundShapeTestSuite: public testing::Test {
 
     virtual void TearDown() {}
 
-    deque<Shape*> *shapes = new deque<Shape*>();
+    std::list<Shape*> shapes = {};
     Shape* ellipse_1;
     Shape* rectangle_2;
     Shape* triangle_3;
@@ -50,27 +47,18 @@ class CompoundShapeTestSuite: public testing::Test {
 };
 
 TEST(CompoundShape, no_exception_for_constructor) {
-    deque<TwoDimensionalCoordinate*> coordinates;
+    std::vector<TwoDimensionalCoordinate*> coordinates;
     coordinates.push_back(new TwoDimensionalCoordinate(0, 0));
     coordinates.push_back(new TwoDimensionalCoordinate(3, 0));
     coordinates.push_back(new TwoDimensionalCoordinate(0, 4));
 
-    deque<Shape*> *shapes = new deque<Shape*>();
+    std::list<Shape*> shapes = {};
 
-    shapes->push_back(new Ellipse("1", 4, 3));
-    shapes->push_back(new Rectangle("2", 3, 4));
-    shapes->push_back(new Triangle("3", coordinates));
+    shapes.push_back(new Ellipse("1", 4, 3));
+    shapes.push_back(new Rectangle("2", 3, 4));
+    shapes.push_back(new Triangle("3", coordinates));
 
     ASSERT_NO_THROW(CompoundShape("4", shapes));
-}
-
-TEST(CompoundShape, exception_for_constructor_with_empty_shapes) {
-    try {
-        CompoundShape("7", new deque<Shape*>());
-        FAIL();
-    }catch(string e) {
-        ASSERT_EQ("This is not a compound shape!", e);
-    }
 }
 
 TEST_F(CompoundShapeTestSuite, area) {
@@ -90,8 +78,8 @@ TEST_F(CompoundShapeTestSuite, color){
 }
 
 TEST_F(CompoundShapeTestSuite, add_shape) {
-    shapes->clear();
-    shapes->push_back(ellipse_1);
+    shapes.clear();
+    shapes.push_back(ellipse_1);
 
     compoundShape_7 = new CompoundShape("7", shapes);
     compoundShape_7->addShape(rectangle_2);
@@ -114,7 +102,7 @@ TEST_F(CompoundShapeTestSuite, exception_for_delete_shape_by_id){
     try {
         compoundShape_7->deleteShapeById("-1");
         FAIL();
-    }catch(string e) {
+    }catch(std::string e) {
         ASSERT_EQ("Expected delete shape but shape not found", e);
     }
 }
@@ -132,19 +120,19 @@ TEST_F(CompoundShapeTestSuite, exception_for_get_shape_by_id){
     try {
         compoundShape_7->getShapeById("-1");
         FAIL();
-    }catch(string e) {
+    }catch(std::string e) {
         ASSERT_EQ("Expected get shape but shape not found", e);
     }
 }
 
 TEST_F(CompoundShapeTestSuite, get_shape_by_id_level_3_tree_structure) {
-    shapes = new deque<Shape*>();
-    shapes->push_back(ellipse_4);
+    shapes = {};
+    shapes.push_back(ellipse_4);
     Shape* compoundShape_8 = new CompoundShape("8", shapes);
 
-    shapes = new deque<Shape*>();
-    shapes->push_back(triangle_6);
-    shapes->push_back(rectangle_5);
+    shapes = {};
+    shapes.push_back(triangle_6);
+    shapes.push_back(rectangle_5);
     Shape* compoundShape_9 = new CompoundShape("9", shapes);
 
     compoundShape_8->addShape(compoundShape_9);
@@ -174,13 +162,13 @@ TEST_F(CompoundShapeTestSuite, get_shape_by_id_level_3_tree_structure) {
 }
 
 TEST_F(CompoundShapeTestSuite, delete_shape_by_id_level_3_tree_structure){
-    shapes = new deque<Shape*>();
-    shapes->push_back(ellipse_4);
+    shapes = {};
+    shapes.push_back(ellipse_4);
     Shape* compoundShape_8 = new CompoundShape("8", shapes);
 
-    shapes = new deque<Shape*>();
-    shapes->push_back(triangle_6);
-    shapes->push_back(rectangle_5);
+    shapes = {};
+    shapes.push_back(triangle_6);
+    shapes.push_back(rectangle_5);
     Shape* compoundShape_9 = new CompoundShape("9", shapes);
 
     compoundShape_8->addShape(compoundShape_9);
@@ -202,13 +190,13 @@ TEST_F(CompoundShapeTestSuite, delete_shape_by_id_level_3_tree_structure){
 }
 
 TEST_F(CompoundShapeTestSuite, exception_for_get_shape_by_id_tree_structure){
-    shapes = new deque<Shape*>();
-    shapes->push_back(ellipse_4);
+    shapes = {};
+    shapes.push_back(ellipse_4);
     Shape* compoundShape_8 = new CompoundShape("8", shapes);
 
-    shapes = new deque<Shape*>();
-    shapes->push_back(triangle_6);
-    shapes->push_back(rectangle_5);
+    shapes = {};
+    shapes.push_back(triangle_6);
+    shapes.push_back(rectangle_5);
     Shape* compoundShape_9 = new CompoundShape("9", shapes);
 
     compoundShape_8->addShape(compoundShape_9);
@@ -219,33 +207,33 @@ TEST_F(CompoundShapeTestSuite, exception_for_get_shape_by_id_tree_structure){
     try {
         compoundShape_7->deleteShapeById("7");
         FAIL();
-    }catch(string e) {
+    }catch(std::string e) {
         ASSERT_EQ("Expected delete shape but shape not found", e);
     }
 
     try {
         compoundShape_8->deleteShapeById("1");
         FAIL();
-    }catch(string e) {
+    }catch(std::string e) {
         ASSERT_EQ("Expected delete shape but shape not found", e);
     }
 
     try {
         compoundShape_9->deleteShapeById("4");
         FAIL();
-    }catch(string e) {
+    }catch(std::string e) {
         ASSERT_EQ("Expected delete shape but shape not found", e);
     }
 }
 
 TEST_F(CompoundShapeTestSuite, exception_for_delete_shape_by_id_tree_structure){
-    shapes = new deque<Shape*>();
-    shapes->push_back(ellipse_4);
+    shapes = {};
+    shapes.push_back(ellipse_4);
     Shape* compoundShape_8 = new CompoundShape("8", shapes);
 
-    shapes = new deque<Shape*>();
-    shapes->push_back(triangle_6);
-    shapes->push_back(rectangle_5);
+    shapes.clear();
+    shapes.push_back(triangle_6);
+    shapes.push_back(rectangle_5);
     Shape* compoundShape_9 = new CompoundShape("9", shapes);
 
     compoundShape_8->addShape(compoundShape_9);
@@ -256,21 +244,21 @@ TEST_F(CompoundShapeTestSuite, exception_for_delete_shape_by_id_tree_structure){
     try {
         compoundShape_7->getShapeById("7");
         FAIL();
-    }catch(string e) {
+    }catch(std::string e) {
         ASSERT_EQ("Expected get shape but shape not found", e);
     }
 
     try {
         compoundShape_8->getShapeById("1");
         FAIL();
-    }catch(string e) {
+    }catch(std::string e) {
         ASSERT_EQ("Expected get shape but shape not found", e);
     }
 
     try {
         compoundShape_9->getShapeById("4");
         FAIL();
-    }catch(string e) {
+    }catch(std::string e) {
         ASSERT_EQ("Expected get shape but shape not found", e);
     }
 }

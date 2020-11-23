@@ -1,18 +1,15 @@
 #ifndef RECTANGLE_H
 #define RECTANGLE_H
 
-#include <string>
-#include "./shape.h"
-
-using namespace std;
+#include "shape.h"
 
 class Rectangle : public Shape {
 public: 
-  Rectangle(string id, double length, double width): Shape(id), _length(length), _width(width) {
+  Rectangle(std::string id, double length, double width): Shape(id), _length(length), _width(width) {
     checkShapeIsValid();
   }
 
-  Rectangle(string id, double length, double width, string color): Shape(id, color), _length(length), _width(width) {
+  Rectangle(std::string id, double length, double width, std::string color): Shape(id, color), _length(length), _width(width) {
     checkShapeIsValid();
   }
 
@@ -24,22 +21,34 @@ public:
     return (_length + _width) * 2;
   }
   
-  string info() const {
+  std::string info() const {
     char info[100];
     sprintf(info, "Rectangle (%.3f, %.3f)", _length, _width);
     return info;
   }
 
-  string type() const {
+  std::string type() const {
 		return "Rectangle";
 	}
+
+  void accept(Visitor* visitor) {
+		visitor->visit(this);
+	}
+
+  double length() const {
+    return _length;
+  }
+
+  double width() const {
+    return _width;
+  }
 
 private:
   double _length, _width;
 
-  void checkShapeIsValid() {
+  void checkShapeIsValid() const {
     if(_length <= 0 || _width <= 0) {
-      throw string("This is not a rectangle!");
+      throw std::string("This is not a rectangle!");
     }
   }
 };

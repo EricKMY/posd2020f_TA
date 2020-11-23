@@ -1,152 +1,77 @@
-# **Pattern Oriented Software Design 2020 Fall Assignment 5**  
+# **Pattern Oriented Software Design 2020 Fall Assignment 7**  
 
 ## **Notice**  
-* **Due on Tuesday October 27 2020, 23:59.**  
+* **Due on Tuesday December 1 2020, 23:59.**  
 * **If your code fails to compile on jenkins server, you'll get no point for the assignment.**  
 * **You should add unit test for each requirment under corresponding ut_file.**  
-* **DO NOT use any Type Checking or Dynamic Type that would violet OCP to implement Composite pattern and Iterator pattern, -40 point if you do so.**  
 
 ## **Score**  
 1. Source Code(Implementation + unit test): 40%.  
 2. Unit tests written by TA: 60%.  
 
 ## **Useful Reference**  
-[Composite Pattern](https://refactoring.guru/design-patterns/composite)  
-[Iterator Pattern](https://refactoring.guru/design-patterns/iterator)  
-[std::deque](http://www.cplusplus.com/reference/deque/deque/)  
-[Deque vs Vector in C++ STL](https://www.geeksforgeeks.org/deque-vs-vector-in-c-stl/)  
+[Builder Pattern](https://refactoring.guru/design-patterns/builder)  
 
 ## **Requirement**  
-1. Replace all `std::vector<type>` into `std::deque<type>`.  
-
-2. Add the following function in `Shape`, `shape.h` should remain as pure interface, add the implementations in `shape.cpp`.  
+1. Add class `Scanner` in `scanner.h` and corresponding unit test in `ut_scanner.h`.  
 ```
-class Shape {
-    virtual std::string type() const = 0;
-    virtual Iterator* createIterator() const;
-}
-```
-* `type()`: type of shape is "Ellipse", "Rectangle", "Triangle", "Compound Shape".  
-
-3. Implement `Iterator` class interface in `iterator.h`.  
-```
-class Iterator {
+class Scanner {
 public:
-    virtual void first() = 0;
-    virtual void next() = 0;
-    virtual bool isDone() = 0;
-    virtual Shape* currentItem() = 0;
+    Scanner(std::string input) {}
+    
+    std::string nextToken() {}
 };
 ```
-
-4. Implement `NullIterator` class in `null_iterator.h` and the corresponding unit test in `ut_iterator.h`.  
+2. Add class `ShapeBuilder` in `shape_builder.h` and corresponding unit test in `ut_shape_builder.h`.  
 ```
-class NullIterator : public Iterator {
+class ShapeBuilder {
 public:
-    void first() {
-        // throw std::string "No child member!"
-    }
-
-    void next() {
-        // throw std::string "No child member!"
+    ShapeBuilder() {}
+    
+    void buildRectangle(double length, double width) {
+        // build a rectangle with an unique id and push in a result stack.
     }
     
-    bool isDone(){
-      // return true
+    void buildEllipse(double semiMajorAxes, double semiMinorAxes) {
+        // build a ellipse with an unique id and push in a result stack.
     }
     
-    Shape* currentItem(){
-        // throw std::string "No child member!"
+    void buildTriangle(double x1, double y1, double x2, double y2, double x3, double y3) {
+        // build a triangle with an unique id and push in a result stack.
+    }
+    
+    void buildCompoundShapeBegin() {
+        // for notifing beginning of a Compound Shape.
+    }
+    
+    void buildCompoundShapeEnd() {
+        // for notifing ending of a Compound Shape.
+    }
+    
+    std::stack<Shape*> getResult() {
+        // return result stack.
     }
 };
 ```
-
-5. Implement `ShapeIterator` class in `shape_iterator.h` and the corresponding unit test in `ut_iterator.h`.  
+3. Add class `ShapeParser` in `shape_parser.h` and corresponding unit test in `ut_shape_parser.h`.  
 ```
-class ShapeIterator : public Iterator {
+class ShapeParser {
 public:
-    ShapeIterator(RandomAccessIterator begin, RandomAccessIterator end) {
-        // initialize iterator.
+    ShapeParser(std::string input) {
+        // initialize a scanner for handling input.
+        // initialize a shape builder for handling building shape.
     }
     
-    void first() {
-        // initialize iterator.
+    void parser() {
+        // using Scanner::nextToken() to get all information to determine what to build,
+        // and provid the argument the shape needed.
+        // use functions in ShapeBuilder to build out the shape.
     }
     
-    void next() {
-        // move iterator to next position,
-        // throw std::string "Moving past the end!" when iterator move over the range of the structure.
-    }
-    
-    bool isDone(){
-      // return true when iterator reach the end of the structure.
-    }
-    
-    Shape* currentItem(){
-        // return the shape iterator currently point to.
+    std::stack<Shape*> getResult() {
+        // reutrn result stack.
     }
 };
-```
-
-6. Implement following function in `utility.h` and the corresponding unit test in `ut_utility.h`.  
-```
-Shape* getShapeById(Shape* shape, std::string id) {}
-
-template <class Filter>
-std::deque<Shape*> filterShape(Shape *shape, Filter filter) {}
-```
-* `getShapeById()`: Return a shape under the input shape tree sturctur that matches the id.  
-  Example:  
-```
-  getShapeById(compoundShape_0, 2);
-  
-  CompoundShape(id:0)
-  │
-  ├── CompoundShape(id:1)
-  │    │
-  │    └── Triangle(id:2) <=== return this
-  │
-  ├── Ellipse(id:3)
-  │
-  └── Rectangle(id:4)
-```
-* `getShapeById()`: Should throw std::string "Only compound shape can get shape!" when the input shape is not iterable.  
-* `getShapeById()`: Should throw std::string "Expected get shape but shape not found" when no shape found with the given id.   
-
-* `filterShape()`: Return the shapes under the input shape tree sturctur that match the given filter.  
-* `filterShape()`: Should throw std::string "Only compound shape can filter shape!" when the input shape is not iterable.  
-
-7. Implement following class in `utility.h` and the corresponding unit test in `ut_utility.h`.  
-```
-class AreaFilter {
-    AreaFilter(double upperBound, double lowerBound) {}
-};
-
-class PerimeterFilter {
-    PerimeterFilter(double upperBound, double lowerBound) {}
-};
-
-class ColorFilter {
-    ColorFilter(std::string color) {}
-};
-
-class TypeFilter {
-    TypeFilter(std::string type) {}
-};
-```
-* Example usage of `filterShape()` with the filter class:  
-```
-filterShape(compoundShape_0, AreaFilter(10, 5);
-// retrun shapes area 10 >= and 5 <=, but don't include compoundShape_0 itself.
-
-filterShape(compoundShape_0, PerimeterFilter(10, 5);
-// retrun shapes perimeter 10 >= and 5 <=, but don't include compoundShape_0 itself.
-
-filterShape(compoundShape_0, ColorFilter("white");
-// retrun shapes that match "white", but don't include compoundShape_0 itself.
-
-filterShape(compoundShape_0, TypeFilter("Compound Shape");
-// retrun shapes that match "Compound Shape", but don't include compoundShape_0 itself.
 ```
 
 #### File structure:  
@@ -162,16 +87,27 @@ filterShape(compoundShape_0, TypeFilter("Compound Shape");
 │   ├── compound_shape.h
 │   ├── iterator.h
 │   ├── null_iterator.h
+│   ├── shape_iterator.h
 │   ├── utility.h
+│   ├── visitor.h
+│   ├── area_visitor.h
+│   ├── info_visitor.h
+│   ├── scanner.h
+│   ├── shape_builder.h
+│   ├── shape_parser.h
 │   └── two_dimensional_coordinate.h
 ├── test
 │   ├── ut_main.cpp
 │   ├── ut_ellipse.h
 │   ├── ut_rectangle.h
 │   ├── ut_triangle.h
+│   ├── ut_compound_shape.h
 │   ├── ut_iterator.h
 │   ├── ut_utility.h
-│   └── ut_compound_shape.h
+│   ├── ut_visitor.h
+│   ├── ut_scanner.h
+│   ├── ut_shape_builder.h
+│   └── ut_shape_parser.h
 └── makefile
 
 ```

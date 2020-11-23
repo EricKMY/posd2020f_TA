@@ -1,16 +1,13 @@
 #ifndef SHAPE_ITERATOR_H
 #define SHAPE_ITERATOR_H
 
-#include <string>
 #include "iterator.h"
 
-using namespace std;
-
-template<class RandomAccessIterator>
+template<class ForwardIterator>
 class ShapeIterator : public Iterator {
 public:
 
-    ShapeIterator(RandomAccessIterator begin, RandomAccessIterator end): _begin(begin), _end(end) {
+    ShapeIterator(ForwardIterator begin, ForwardIterator end): _begin(begin), _end(end) {
         first();
     }
 
@@ -18,28 +15,28 @@ public:
         _current = _begin;
     }
 
-    Shape* currentItem(){
-        if(isDone()){
-            throw string("No current item!");
-        }
-        return *_current;
-    }
-
     void next() {
-        if(isDone()){
-            throw string("Moving past the end!");
+        if(isDone()) {
+            throw std::string("Moving past the end!");
         }
         ++_current;
     }
 
-    bool isDone(){
+    bool isDone() const {
       return _current == _end;
     }
 
+    Shape* currentItem() const {
+        if(isDone()){
+            throw std::string("No current item!");
+        }
+        return *_current;
+    }
+
 private:
-    RandomAccessIterator _begin;
-    RandomAccessIterator _end;
-    RandomAccessIterator _current;
+    ForwardIterator _begin;
+    ForwardIterator _end;
+    ForwardIterator _current;
 };
 
 #endif

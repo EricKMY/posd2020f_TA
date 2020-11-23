@@ -6,15 +6,13 @@
 #include "iterator.h"
 #include "shape.h"
 
-using namespace std;
-
-Shape* getShapeById(Shape* shape, string id) {
+Shape* getShapeById(Shape* shape, std::string id) {
     Iterator* it = shape->createIterator();
 
     try {
         it->first();
-    }catch(string e) {
-        throw string("Only compound shape can get shape!");
+    }catch(std::string e) {
+        throw std::string("Only compound shape can get shape!");
     }
 
     while(!it->isDone()) {
@@ -23,32 +21,32 @@ Shape* getShapeById(Shape* shape, string id) {
         }
         try{
             return getShapeById(it->currentItem(), id);
-        }catch(string e) {}
+        }catch(std::string e) {}
         it->next();
     }
 
-    throw string("Expected get shape but shape not found");
+    throw std::string("Expected get shape but shape not found");
 }
 
 template <class Filter>
-deque<Shape*> filterShape(Shape *shape, Filter filter) {
-    deque<Shape*> results = {};
+std::deque<Shape*> filterShape(Shape *shape, Filter filter) {
+    std::deque<Shape*> results = {};
     Iterator* it = shape->createIterator();
 
     try {
         it->first();
-    }catch(string e) {
-        throw string("Only compound shape can filter shape!");
+    }catch(std::string e) {
+        throw std::string("Only compound shape can filter shape!");
     }
 
     while(!it->isDone()) {
-        deque<Shape*> shapes = {};
+        std::deque<Shape*> shapes = {};
         if(filter(it->currentItem())) {
             results.push_back(it->currentItem());
         }
         try {
             shapes = filterShape(it->currentItem(), filter);
-        }catch(string e) {}
+        }catch(std::string e) {}
 
         results.insert(results.end(), shapes.begin(), shapes.end());
         it->next();
@@ -61,7 +59,7 @@ class AreaFilter {
 public:
     AreaFilter(double upperBound, double lowerBound): _upperBound(upperBound), _lowerBound(lowerBound) {}
 
-    bool operator() (Shape *shape) {
+    bool operator() (Shape *shape) const {
         return shape->area() <= _upperBound && shape->area() >= _lowerBound;
     }
 
@@ -74,7 +72,7 @@ class PerimeterFilter {
 public:
     PerimeterFilter(double upperBound, double lowerBound): _upperBound(upperBound), _lowerBound(lowerBound) {}
 
-    bool operator() (Shape *shape) {
+    bool operator() (Shape *shape) const {
         return shape->perimeter() <= _upperBound && shape->perimeter() >= _lowerBound;
     }
 
@@ -85,30 +83,26 @@ private:
 
 class ColorFilter {
 public:
-    ColorFilter(string color): _color(color) {}
+    ColorFilter(std::string color): _color(color) {}
 
-    bool operator() (Shape *shape) {
-        try {
-            return shape->color() == _color;
-        }catch(string e) {}
-        
-        return false;
+    bool operator() (Shape *shape) const {
+        return shape->color() == _color;
     }
 
 private:
-    string _color;
+    std::string _color;
 };
 
 class TypeFilter {
 public:
-    TypeFilter(string type):_type(type) {}
+    TypeFilter(std::string type):_type(type) {}
 
-    bool operator() (Shape *shape) {
+    bool operator() (Shape *shape) const {
         return shape->type() == _type;
     }
 
 private:
-    string _type;
+    std::string _type;
 };
 
 #endif
