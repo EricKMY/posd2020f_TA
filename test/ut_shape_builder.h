@@ -80,7 +80,6 @@ TEST(ShapeBuilderTest, build_empty_compoundShape) {
     EXPECT_EQ("Compound Shape", results.top()->type());
     EXPECT_EQ("1", results.top()->id());
     EXPECT_EQ("Compound Shape {}", results.top()->info());
-
 }
 
 TEST(ShapeBuilderTest, build_compoundShape_that_contains_rectangle) {
