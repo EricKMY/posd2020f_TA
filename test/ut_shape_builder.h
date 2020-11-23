@@ -11,10 +11,7 @@ TEST(ShapeBuilderTest, build_rectangle) {
     std::stack<Shape*> results = sb.getResult();
 
     ASSERT_EQ(1, results.size());
-
-    EXPECT_EQ("Rectangle", results.top()->type());
-    EXPECT_EQ("1", results.top()->id());
-    EXPECT_EQ("Rectangle (3.000, 4.000)", results.top()->info());
+    ASSERT_EQ("Rectangle (3.000, 4.000)", results.top()->info());
 }
 
 TEST(ShapeBuilderTest, build_ellipse) {
@@ -23,10 +20,7 @@ TEST(ShapeBuilderTest, build_ellipse) {
     std::stack<Shape*> results = sb.getResult();
 
     ASSERT_EQ(1, results.size());
-
-    EXPECT_EQ("Ellipse", results.top()->type());
-    EXPECT_EQ("1", results.top()->id());
-    EXPECT_EQ("Ellipse (4.200, 3.700)", results.top()->info());
+    ASSERT_EQ("Ellipse (4.200, 3.700)", results.top()->info());
 }
 
 TEST(ShapeBuilderTest, build_triangle) {
@@ -35,10 +29,7 @@ TEST(ShapeBuilderTest, build_triangle) {
     std::stack<Shape*> results = sb.getResult();
 
     ASSERT_EQ(1, results.size());
-
-    EXPECT_EQ("Triangle", results.top()->type());
-    EXPECT_EQ("1", results.top()->id());
-    EXPECT_EQ("Triangle ([0.000, 0.000], [0.000, -3.000], [-4.000, 0.000])", results.top()->info());
+    ASSERT_EQ("Triangle ([0.000, 0.000], [0.000, -3.000], [-4.000, 0.000])", results.top()->info());
 }
 
 TEST(ShapeBuilderTest, build_multi_simple_shapes) {
@@ -51,20 +42,14 @@ TEST(ShapeBuilderTest, build_multi_simple_shapes) {
 
     ASSERT_EQ(3, results.size());
 
-    EXPECT_EQ("Triangle", results.top()->type());
-    EXPECT_EQ("3", results.top()->id());
     EXPECT_EQ("Triangle ([0.000, 0.000], [0.000, -3.000], [-4.000, 0.000])", results.top()->info());
 
     results.pop();
 
-    EXPECT_EQ("Ellipse", results.top()->type());
-    EXPECT_EQ("2", results.top()->id());
     EXPECT_EQ("Ellipse (4.200, 3.700)", results.top()->info());
 
     results.pop();
 
-    EXPECT_EQ("Rectangle", results.top()->type());
-    EXPECT_EQ("1", results.top()->id());
     EXPECT_EQ("Rectangle (3.000, 4.000)", results.top()->info());
 }
 
@@ -76,9 +61,6 @@ TEST(ShapeBuilderTest, build_empty_compoundShape) {
     std::stack<Shape*> results = sb.getResult();
 
     ASSERT_EQ(1, results.size());
-
-    EXPECT_EQ("Compound Shape", results.top()->type());
-    EXPECT_EQ("1", results.top()->id());
     EXPECT_EQ("Compound Shape {}", results.top()->info());
 }
 
@@ -91,9 +73,6 @@ TEST(ShapeBuilderTest, build_compoundShape_that_contains_rectangle) {
     std::stack<Shape*> results = sb.getResult();
 
     ASSERT_EQ(1, results.size());
-
-    EXPECT_EQ("Compound Shape", results.top()->type());
-    EXPECT_EQ("2", results.top()->id());
     EXPECT_EQ("Compound Shape {Rectangle (3.000, 4.000)}", results.top()->info());
 }
 
@@ -106,10 +85,7 @@ TEST(ShapeBuilderTest, build_compoundShape_that_contains_ellipse) {
     std::stack<Shape*> results = sb.getResult();
 
     ASSERT_EQ(1, results.size());
-
-    EXPECT_EQ("Compound Shape", results.top()->type());
-    EXPECT_EQ("2", results.top()->id());
-    EXPECT_EQ("Compound Shape {Ellipse (4.200, 3.700)}", results.top()->info());
+    ASSERT_EQ("Compound Shape {Ellipse (4.200, 3.700)}", results.top()->info());
 }
 
 TEST(ShapeBuilderTest, build_compoundShape_that_contains_trinalge) {
@@ -121,10 +97,7 @@ TEST(ShapeBuilderTest, build_compoundShape_that_contains_trinalge) {
     std::stack<Shape*> results = sb.getResult();
 
     ASSERT_EQ(1, results.size());
-
-    EXPECT_EQ("Compound Shape", results.top()->type());
-    EXPECT_EQ("2", results.top()->id());
-    EXPECT_EQ("Compound Shape {Triangle ([0.000, 0.000], [0.000, -3.000], [-4.000, 0.000])}", results.top()->info());
+    ASSERT_EQ("Compound Shape {Triangle ([0.000, 0.000], [0.000, -3.000], [-4.000, 0.000])}", results.top()->info());
 }
 
 TEST(ShapeBuilderTest, build_compoundShape_that_contains_multi_simple_shapes) {
@@ -138,10 +111,7 @@ TEST(ShapeBuilderTest, build_compoundShape_that_contains_multi_simple_shapes) {
     std::stack<Shape*> results = sb.getResult();
 
     ASSERT_EQ(1, results.size());
-
-    EXPECT_EQ("Compound Shape", results.top()->type());
-    EXPECT_EQ("4", results.top()->id());
-    EXPECT_EQ("Compound Shape {Triangle ([0.000, 0.000], [0.000, -3.000], [-4.000, 0.000]), Ellipse (4.200, 3.700), Rectangle (3.000, 4.000)}", results.top()->info());
+    ASSERT_EQ("Compound Shape {Triangle ([0.000, 0.000], [0.000, -3.000], [-4.000, 0.000]), Ellipse (4.200, 3.700), Rectangle (3.000, 4.000)}", results.top()->info());
 }
 
 TEST(ShapeBuilderTest, build_compoundShape_that_contains_a_empty_compoundShape) {
@@ -154,10 +124,7 @@ TEST(ShapeBuilderTest, build_compoundShape_that_contains_a_empty_compoundShape) 
     std::stack<Shape*> results = sb.getResult();
 
     ASSERT_EQ(1, results.size());
-
-    EXPECT_EQ("Compound Shape", results.top()->type());
-    EXPECT_EQ("2", results.top()->id());
-    EXPECT_EQ("Compound Shape {Compound Shape {}}", results.top()->info());
+    ASSERT_EQ("Compound Shape {Compound Shape {}}", results.top()->info());
 }
 
 TEST(ShapeBuilderTest, build_compoundShape_that_contains_multi_simple_shapes_and_a_empty_compoundShape) {
@@ -173,10 +140,7 @@ TEST(ShapeBuilderTest, build_compoundShape_that_contains_multi_simple_shapes_and
     std::stack<Shape*> results = sb.getResult();
 
     ASSERT_EQ(1, results.size());
-
-    EXPECT_EQ("Compound Shape", results.top()->type());
-    EXPECT_EQ("5", results.top()->id());
-    EXPECT_EQ("Compound Shape {Compound Shape {}, Triangle ([0.000, 0.000], [0.000, -3.000], [-4.000, 0.000]), Ellipse (4.200, 3.700), Rectangle (3.000, 4.000)}", results.top()->info());
+    ASSERT_EQ("Compound Shape {Compound Shape {}, Triangle ([0.000, 0.000], [0.000, -3.000], [-4.000, 0.000]), Ellipse (4.200, 3.700), Rectangle (3.000, 4.000)}", results.top()->info());
 }
 
 TEST(ShapeBuilderTest, build_compoundShape_and_multi_shapes_at_same_time) {
@@ -201,32 +165,22 @@ TEST(ShapeBuilderTest, build_compoundShape_and_multi_shapes_at_same_time) {
 
     ASSERT_EQ(5, results.size());
 
-    EXPECT_EQ("Ellipse", results.top()->type());
-    EXPECT_EQ("8", results.top()->id());
     EXPECT_EQ("Ellipse (4.200, 3.700)", results.top()->info());
 
     results.pop();
 
-    EXPECT_EQ("Compound Shape", results.top()->type());
-    EXPECT_EQ("7", results.top()->id());
     EXPECT_EQ("Compound Shape {}", results.top()->info());
 
     results.pop();
 
-    EXPECT_EQ("Rectangle", results.top()->type());
-    EXPECT_EQ("6", results.top()->id());
     EXPECT_EQ("Rectangle (3.000, 4.000)", results.top()->info());
 
     results.pop();
 
-    EXPECT_EQ("Compound Shape", results.top()->type());
-    EXPECT_EQ("5", results.top()->id());
     EXPECT_EQ("Compound Shape {Triangle ([0.000, 0.000], [0.000, -3.000], [-4.000, 0.000]), Ellipse (4.200, 3.700), Rectangle (3.000, 4.000)}", results.top()->info());
 
     results.pop();
 
-    EXPECT_EQ("Triangle", results.top()->type());
-    EXPECT_EQ("1", results.top()->id());
     EXPECT_EQ("Triangle ([0.000, 0.000], [0.000, -3.000], [-4.000, 0.000])", results.top()->info());
 }
 
@@ -256,31 +210,21 @@ TEST(ShapeBuilderTest, build_level_3_compoundShape_and_multi_shapes_at_same_time
 
     ASSERT_EQ(5, results.size());
 
-    EXPECT_EQ("Ellipse", results.top()->type());
-    EXPECT_EQ("11", results.top()->id());
     EXPECT_EQ("Ellipse (4.200, 3.700)", results.top()->info());
 
     results.pop();
 
-    EXPECT_EQ("Compound Shape", results.top()->type());
-    EXPECT_EQ("10", results.top()->id());
     EXPECT_EQ("Compound Shape {}", results.top()->info());
 
     results.pop();
 
-    EXPECT_EQ("Rectangle", results.top()->type());
-    EXPECT_EQ("9", results.top()->id());
     EXPECT_EQ("Rectangle (3.000, 4.000)", results.top()->info());
 
     results.pop();
 
-    EXPECT_EQ("Compound Shape", results.top()->type());
-    EXPECT_EQ("8", results.top()->id());
     EXPECT_EQ("Compound Shape {Compound Shape {Triangle ([0.000, 0.000], [0.000, -3.000], [-4.000, 0.000]), Ellipse (4.200, 3.700)}, Triangle ([0.000, 0.000], [0.000, -3.000], [-4.000, 0.000]), Ellipse (4.200, 3.700), Rectangle (3.000, 4.000)}", results.top()->info());
 
     results.pop();
 
-    EXPECT_EQ("Triangle", results.top()->type());
-    EXPECT_EQ("1", results.top()->id());
     EXPECT_EQ("Triangle ([0.000, 0.000], [0.000, -3.000], [-4.000, 0.000])", results.top()->info());
 }
