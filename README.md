@@ -6,14 +6,18 @@
 * **You should add unit test for each requirment under corresponding ut_file.**  
 
 ## **Score**  
-1. Source Code(Implementation + unit test): 40%.  
-2. Unit tests written by TA: 60%.  
+1. `Scanner` (source code + TA test): 20%.  
+2. `ShapeBuilder` (source code + TA test): 50%.  
+3. `ShapeParser` (source code + TA test): 30.  
+4. -5% for each fail TA unit test.  
 
 ## **Useful Reference**  
 [Builder Pattern](https://refactoring.guru/design-patterns/builder)  
 
 ## **Requirement**  
-1. Add class `Scanner` in `scanner.h` and corresponding unit test in `ut_scanner.h`.  
+1. Modify `Compound Shape` constructor, now it's available to accpet empty std::list<Shape*> without throwing exception.  
+
+2. Add class `Scanner` in `scanner.h` and corresponding unit test in `ut_scanner.h`.  
 ```
 class Scanner {
 public:
@@ -22,7 +26,15 @@ public:
     std::string nextToken() {}
 };
 ```
-2. Add class `ShapeBuilder` in `shape_builder.h` and corresponding unit test in `ut_shape_builder.h`.  
+* Purpose of the scanner is to scan through the input and able to send out each token by nextToken().  
+* Ignore the token which is illegal.  
+* For input of `Ellipse` it should be in form of `Ellipse (%.3f, %.3f)`.  
+* For input of `Rectangle` it should be in form of `Triangle (%.3f, %.3f)`.  
+* For input of `Triangle` it should be in form of `Triangle (%.3f, %.3f, %.3f, %.3f, %.3f, %.3f)`.  
+* For input of `Compound Shape` it should be in form of `CompoundShape {}`.  
+* Each Shape should be separate with `,`.  
+
+3. Add class `ShapeBuilder` in `shape_builder.h` and corresponding unit test in `ut_shape_builder.h`.  
 ```
 class ShapeBuilder {
 public:
@@ -53,7 +65,7 @@ public:
     }
 };
 ```
-3. Add class `ShapeParser` in `shape_parser.h` and corresponding unit test in `ut_shape_parser.h`.  
+4. Add class `ShapeParser` in `shape_parser.h` and corresponding unit test in `ut_shape_parser.h`.  
 ```
 class ShapeParser {
 public:
