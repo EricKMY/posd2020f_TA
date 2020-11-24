@@ -3,10 +3,12 @@
 #include <string>
 #include <stack>
 #include <list>
+#include <deque>
 #include "ellipse.h"
 #include "rectangle.h"
 #include "triangle.h"
 #include "compound_shape.h"
+#include <iostream>
 
 class ShapeBuilder {
 public:
@@ -44,8 +46,13 @@ public:
         _results.push(new CompoundShape(std::to_string(++_id), contents));
     }
 
-    std::stack<Shape*> getResult() {
-        return _results;
+    std::deque<Shape*> getResult() {
+        std::deque<Shape*> results = {};
+        while(_results.size() != 0) {
+            results.push_back(_results.top());
+            _results.pop();
+        }
+        return results;
     }
 
 private:

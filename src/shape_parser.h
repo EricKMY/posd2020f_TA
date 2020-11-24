@@ -3,8 +3,10 @@
 
 #include <string>
 #include <stack>
+#include <deque>
 #include "scanner.h"
 #include "shape_builder.h"
+#include <iostream>
 
 class Shape;
 
@@ -27,7 +29,7 @@ public:
         }
     }
 
-    std::stack<Shape*> getResult() {
+    std::deque<Shape*> getResult() {
         return sp->getResult();
     }
     
