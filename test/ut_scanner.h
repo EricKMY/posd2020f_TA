@@ -1,4 +1,4 @@
-#include <string>
+#include <gtest/gtest.h>
 #include "../src/scanner.h"
 
 TEST(Scanner, ellipse) {
