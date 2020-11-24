@@ -3,7 +3,7 @@
 
 class Scanner {
 public:
-    Scanner(std::string input):_input(input) {
+    Scanner(std::string input): _input(input) {
         _currPos = 0;
         _bufferStr = "";
         _currState = START_STATE;
@@ -57,16 +57,12 @@ public:
                         _currPos--; //retract.
                         _currState = START_STATE;
                         std::string number = _bufferStr;
-
-                        
-
                         _bufferStr = "";
                         return number;
                     }
                 break;
             }
         }
-
         return _bufferStr;
     }
 
@@ -84,7 +80,6 @@ private:
             return _input.c_str()[_currPos++];
         }
     }
-
 
     bool isLetter(char c) {
         return (c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z');
